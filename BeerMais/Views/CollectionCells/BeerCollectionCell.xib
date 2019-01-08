@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Oux-1R-Slh" customClass="BeerCollectionViewCell" customModule="BeerMais" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="170" height="115"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="170" height="115"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1L-6n-fnA">
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="115"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-beer-bottle-100" translatesAutoresizingMaskIntoConstraints="NO" id="MhT-f5-qt8">
+                                <rect key="frame" x="8" y="37" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HDF-Z0-C7i"/>
+                                    <constraint firstAttribute="width" constant="50" id="hcE-Pu-tSF"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="350ml" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWn-NX-1ah">
+                                <rect key="frame" x="8" y="87" width="50" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="qOs-iL-i8s"/>
+                                    <constraint firstAttribute="width" constant="50" id="ucU-ml-4up"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R$ 00,00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="pZo-FJ-n0K">
+                                <rect key="frame" x="66" y="61" width="96" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="6Td-wz-hfA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brand 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Dbv-Bl-f9V">
+                                <rect key="frame" x="8" y="8" width="154" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="G7R-nL-Tw1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pZo-FJ-n0K" firstAttribute="leading" secondItem="XWn-NX-1ah" secondAttribute="trailing" constant="8" id="2GX-5k-NWE"/>
+                            <constraint firstItem="XWn-NX-1ah" firstAttribute="leading" secondItem="Z1L-6n-fnA" secondAttribute="leading" constant="8" id="EZn-Zz-dQh"/>
+                            <constraint firstItem="Dbv-Bl-f9V" firstAttribute="top" secondItem="Z1L-6n-fnA" secondAttribute="top" constant="8" id="GCu-cY-GAF"/>
+                            <constraint firstItem="XWn-NX-1ah" firstAttribute="top" secondItem="MhT-f5-qt8" secondAttribute="bottom" id="KIr-Pv-iVi"/>
+                            <constraint firstItem="MhT-f5-qt8" firstAttribute="top" secondItem="Dbv-Bl-f9V" secondAttribute="bottom" constant="8" id="Yxd-dT-A1j"/>
+                            <constraint firstItem="Dbv-Bl-f9V" firstAttribute="leading" secondItem="Z1L-6n-fnA" secondAttribute="leading" constant="8" id="eC2-Vn-N58"/>
+                            <constraint firstAttribute="trailing" secondItem="Dbv-Bl-f9V" secondAttribute="trailing" constant="8" id="iOJ-b4-1PR"/>
+                            <constraint firstItem="MhT-f5-qt8" firstAttribute="leading" secondItem="Z1L-6n-fnA" secondAttribute="leading" constant="8" id="ntM-rh-QoS"/>
+                            <constraint firstAttribute="bottom" secondItem="pZo-FJ-n0K" secondAttribute="bottom" constant="29" id="r13-ie-e3d"/>
+                            <constraint firstAttribute="trailing" secondItem="pZo-FJ-n0K" secondAttribute="trailing" constant="8" id="ujR-L5-SRI"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Z1L-6n-fnA" firstAttribute="centerY" secondItem="ST4-ZM-i83" secondAttribute="centerY" id="7lI-SS-XsO"/>
+                <constraint firstItem="Z1L-6n-fnA" firstAttribute="height" secondItem="Oux-1R-Slh" secondAttribute="height" id="cnJ-cJ-2bz"/>
+                <constraint firstItem="Z1L-6n-fnA" firstAttribute="width" secondItem="Oux-1R-Slh" secondAttribute="width" id="mBE-dy-v14"/>
+                <constraint firstItem="Z1L-6n-fnA" firstAttribute="centerX" secondItem="ST4-ZM-i83" secondAttribute="centerX" id="qOQ-8H-5nH"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ST4-ZM-i83"/>
+            <size key="customSize" width="50" height="5"/>
+            <connections>
+                <outlet property="amountLabel" destination="XWn-NX-1ah" id="DTP-Ej-7gX"/>
+                <outlet property="beerImageView" destination="MhT-f5-qt8" id="Usy-SG-KqW"/>
+                <outlet property="brandLabel" destination="Dbv-Bl-f9V" id="7Zg-qk-RGg"/>
+                <outlet property="valueLabel" destination="pZo-FJ-n0K" id="wK6-hn-dzR"/>
+            </connections>
+            <point key="canvasLocation" x="217.59999999999999" y="-25.637181409295355"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="icons8-beer-bottle-100" width="180" height="180"/>
+    </resources>
+</document>
