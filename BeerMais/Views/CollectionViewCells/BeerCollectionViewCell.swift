@@ -15,7 +15,13 @@ class BeerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var valueLabel: UILabel!
     
     func setAmount(amount: Int16) {
-        self.amountLabel.text = "\(amount)ml"
+        var amountText = "\(amount)ml"
+        
+        if (amount >= 1000) {
+            amountText = "\(amount / 1000)L"
+        }
+        
+        self.amountLabel.text = amountText
     }
     
     func setBrand(brand: String) {
