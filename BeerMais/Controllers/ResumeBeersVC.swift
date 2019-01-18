@@ -112,6 +112,8 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     private func setRank() {
         if (self.beers.count < 2) {
             self.rankBrandLabel.text = "Marca"
+            self.rankBeerImageView.image = UIImage(named: "icons8-beer-can-100")
+            self.rankAmountLabel.text = "350ml"
             self.rankValueLabel.text = "RS 0,00"
             self.rankEconomyLabel.text = "R$ 0,00/L"
             return
