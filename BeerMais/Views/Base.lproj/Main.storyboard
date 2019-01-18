@@ -37,7 +37,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bvz-d9-adY">
                                 <rect key="frame" x="16" y="16" width="343" height="125"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brand 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vUf-Pg-JPK">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marca" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vUf-Pg-JPK">
                                         <rect key="frame" x="8" y="8" width="327" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Ujl-31-vLf"/>
@@ -64,7 +64,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R$ 2,59" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="WTQ-Zx-ZiK">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R$ 0,00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="WTQ-Zx-ZiK">
                                         <rect key="frame" x="74" y="71" width="100" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="9OR-ae-CWD"/>
@@ -83,7 +83,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R$ -0,57 / L" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="GwH-3W-hXa">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R$ 0,00 / L" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="GwH-3W-hXa">
                                         <rect key="frame" x="182" y="78" width="153" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="UTI-cn-hO9"/>
@@ -138,6 +138,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="BeerMais" id="Wyh-dV-dP9">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="VKE-Kl-hqq">
+                            <connections>
+                                <action selector="deleteBeersAction:" destination="BYZ-38-t0r" id="Kpf-y0-bR7"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="rP9-ED-EUQ">
                             <connections>
                                 <action selector="newBeerAction:" destination="BYZ-38-t0r" id="sd2-3h-eFY"/>
@@ -150,6 +155,7 @@
                         <outlet property="rankBeerImageView" destination="rvx-ys-BeC" id="x0E-y8-oQ9"/>
                         <outlet property="rankBrandLabel" destination="vUf-Pg-JPK" id="ejm-J4-6p1"/>
                         <outlet property="rankEconomyLabel" destination="GwH-3W-hXa" id="1GO-kx-vt9"/>
+                        <outlet property="rankValueLabel" destination="WTQ-Zx-ZiK" id="phC-Uo-suL"/>
                         <outlet property="rankView" destination="Bvz-d9-adY" id="oz8-gM-5ZY"/>
                     </connections>
                 </viewController>

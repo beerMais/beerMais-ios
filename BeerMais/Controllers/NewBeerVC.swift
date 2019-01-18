@@ -32,7 +32,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         var beer = [String: Any]()
         beer["amount"] = Int16(self.amountTextField.text ?? "")
         beer["brand"] = self.brandTextField.text
-        beer["value"] = Float(self.valueTextField.text ?? "")
+        beer["value"] = BeerPresenter().formatValue(value: self.valueTextField.text ?? "")
         beer["type"] = Int16(1)
         _ = BeerPresenter().create(data: beer)
         

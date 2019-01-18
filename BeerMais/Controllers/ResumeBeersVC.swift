@@ -17,6 +17,7 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     @IBOutlet weak var rankView: UIView!
     @IBOutlet weak var rankBrandLabel: UILabel!
     @IBOutlet weak var rankBeerImageView: UIImageView!
+    @IBOutlet weak var rankValueLabel: UILabel!
     @IBOutlet weak var rankAmountLabel: UILabel!
     @IBOutlet weak var rankEconomyLabel: UILabel!
     @IBOutlet weak var beersCollectionView: UICollectionView!
@@ -48,6 +49,18 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         viewController.attachResumeBeersDelegate(delegate: self)
         
         self.present(viewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func deleteBeersAction(_ sender: Any) {
+        let deleteAlert = UIAlertController(title: "Deseja apagar todas as cervejas?", message: nil, preferredStyle: UIAlertController.Style.alert)
+        
+        deleteAlert.addAction(UIAlertAction(title: "Apagar", style: .default, handler: { (action: UIAlertAction!) in
+            self.deleteBeers()
+        }))
+        
+        deleteAlert.addAction(UIAlertAction(title: "Voltar", style: .cancel, handler: nil))
+        
+        self.present(deleteAlert, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -98,6 +111,9 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     
     private func setRank() {
         if (self.beers.count < 2) {
+            self.rankBrandLabel.text = "Marca"
+            self.rankValueLabel.text = "RS 0,00"
+            self.rankEconomyLabel.text = "R$ 0,00/L"
             return
         }
         
@@ -124,9 +140,17 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         
         self.rankBeerImageView.image = UIImage(named: imageName)
         
+        self.rankValueLabel.text = "RS \(beer.value)"
+        
         let economy = self.beerPresenter.getEconomy(beer1: beer, beer2: self.beers[1])
         let economyFormated = String(format: "%.2f", economy)
         self.rankEconomyLabel.text = "R$ \(economyFormated)/L"
+    }
+    
+    private func deleteBeers() {
+        self.setBeers(beers: [])
+        self.beersCollectionView.reloadData()
+        self.beerPresenter.deleteBeers()
     }
     
 }

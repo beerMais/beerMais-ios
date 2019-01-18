@@ -50,6 +50,18 @@ class BeerPresenter {
         return (value2 - value1) * 1000
     }
     
+    func deleteBeers() {
+        CoreDataPresenter().deleteData(entityName: self.entityName)
+    }
+    
+    func formatValue(value: String) -> Float {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        let number = numberFormatter.number(from: value)!
+        return number.floatValue
+    }
+    
     private func getValuePerML(value: Float, amount: Int16) -> Float {
         return value / Float(amount)
     }
