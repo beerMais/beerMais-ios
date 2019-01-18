@@ -25,7 +25,7 @@ class BeerCollectionViewCell: UICollectionViewCell {
     }
     
     func setBrand(brand: String) {
-        self.brandLabel.text = brand.capitalized
+        self.brandLabel.text = brand
     }
     
     func setValue(value: Float) {
