@@ -97,6 +97,10 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     }
     
     private func setRank() {
+        if (self.beers.count < 2) {
+            return
+        }
+        
         let beer = self.beers[0]
         
         self.rankBrandLabel.text = beer.brand
