@@ -91,9 +91,9 @@
 			children = (
 				2D17012C21D2DBFA0009A316 /* CollectionCells */,
 				2D17012F21D2DD190009A316 /* CollectionViewCells */,
-				2D17012221D2B3CF0009A316 /* LaunchScreen.storyboard */,
 				2D17011A21D2B3CE0009A316 /* Main.storyboard */,
 				2D17014621D455730009A316 /* NewBeer.storyboard */,
+				2D17012221D2B3CF0009A316 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -15,6 +15,10 @@ protocol ResumeBeersVCDelegate: class {
 
 class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var rankView: UIView!
+    @IBOutlet weak var rankBrandLabel: UILabel!
+    @IBOutlet weak var rankBeerImageView: UIImageView!
+    @IBOutlet weak var rankAmountLabel: UILabel!
+    @IBOutlet weak var rankEconomyLabel: UILabel!
     @IBOutlet weak var beersCollectionView: UICollectionView!
     
     var beers = [Beer]()
@@ -82,10 +86,45 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     
     private func getBeers() {
         self.beerPresenter.getBeers() { beers in
-            self.beers = beers
+            self.setBeers(beers: beers)
             self.beersCollectionView.reloadData()
         }
     }
+    
+    private func setBeers(beers: [Beer]) {
+        self.beers = self.beerPresenter.calculateMostValuable(beers: beers)
+        self.setRank()
+    }
+    
+    private func setRank() {
+        let beer = self.beers[0]
+        
+        self.rankBrandLabel.text = beer.brand
+        
+        var amountText = "\(beer.amount)ml"
+        
+        if (beer.amount >= 1000) {
+            amountText = "\(beer.amount / 1000)L"
+        }
+        self.rankAmountLabel.text = amountText
+        
+        var imageName = ""
+        switch beer.type {
+        case 1:
+            imageName = "icons8-beer-can-100"
+        case 2:
+            imageName = "icons8-beer-bottle-100"
+        default:
+            imageName = "icons8-beer-can-100"
+        }
+        
+        self.rankBeerImageView.image = UIImage(named: imageName)
+        
+        let economy = self.beerPresenter.getEconomy(beer1: beer, beer2: self.beers[1])
+        let economyFormated = String(format: "%.2f", economy)
+        self.rankEconomyLabel.text = "R$ \(economyFormated)/L"
+    }
+    
 }
 
 extension ResumeBeersVC: ResumeBeersVCDelegate {

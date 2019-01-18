@@ -38,4 +38,19 @@ class BeerPresenter {
             completion(data)
         }
     }
+    
+    func calculateMostValuable(beers: [Beer]) -> [Beer] {
+        return beers.sorted(by: { self.getValuePerML(value: $0.value, amount: $0.amount) < self.getValuePerML(value: $1.value, amount: $1.amount) })
+    }
+    
+    func getEconomy(beer1: Beer, beer2: Beer) -> Float {
+        let value1 = self.getValuePerML(value: beer1.value, amount: beer1.amount)
+        let value2 = self.getValuePerML(value: beer2.value, amount: beer2.amount)
+        
+        return (value2 - value1) * 1000
+    }
+    
+    private func getValuePerML(value: Float, amount: Int16) -> Float {
+        return value / Float(amount)
+    }
 }
