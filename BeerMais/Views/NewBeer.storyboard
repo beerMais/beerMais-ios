@@ -47,7 +47,7 @@
                                             <constraint firstAttribute="height" constant="30" id="duf-74-zy5"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" backgroundImage="icons8-cancel-50"/>
+                                        <state key="normal" backgroundImage="icons8-cancel-48"/>
                                         <connections>
                                             <action selector="closeAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="jqv-OO-ros"/>
                                         </connections>
@@ -146,6 +146,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-cancel-50" width="37.5" height="37.5"/>
+        <image name="icons8-cancel-48" width="181.89472961425781" height="181.89472961425781"/>
     </resources>
 </document>
