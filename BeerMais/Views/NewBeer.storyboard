@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qm5-hC-Lcb">
-                                <rect key="frame" x="37.666666666666657" y="241" width="300" height="330"/>
+                                <rect key="frame" x="37.666666666666657" y="281" width="300" height="250"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marca:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T25-6p-eEA">
                                         <rect key="frame" x="16" y="20" width="268" height="21"/>
@@ -79,7 +79,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="tob-Y2-FYF" secondAttribute="trailing" constant="16" id="35z-VB-31c"/>
                                     <constraint firstItem="pin-vl-t6Z" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="3rz-xD-KFU"/>
-                                    <constraint firstAttribute="height" constant="330" id="Cil-vY-b5S"/>
+                                    <constraint firstAttribute="height" constant="250" id="Cil-vY-b5S"/>
                                     <constraint firstAttribute="trailing" secondItem="No5-Qj-AFn" secondAttribute="trailing" constant="16" id="FFA-G9-Bsl"/>
                                     <constraint firstItem="tob-Y2-FYF" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="FfJ-gb-bgH"/>
                                     <constraint firstItem="T25-6p-eEA" firstAttribute="top" secondItem="qm5-hC-Lcb" secondAttribute="top" constant="20" id="Gb6-1P-cCa"/>
@@ -112,7 +112,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptZ-Uf-ugK">
-                                <rect key="frame" x="137.66666666666666" y="587" width="100" height="30"/>
+                                <rect key="frame" x="137.66666666666666" y="547" width="100" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="FJK-bR-d3w"/>
@@ -124,7 +124,7 @@
                                 </connections>
                             </button>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="8pE-Fs-S06">
-                                <rect key="frame" x="37.666666666666657" y="587" width="300" height="30"/>
+                                <rect key="frame" x="37.666666666666657" y="547" width="300" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nq5-tE-XgI">
                                         <rect key="frame" x="0.0" y="0.0" width="135" height="30"/>
