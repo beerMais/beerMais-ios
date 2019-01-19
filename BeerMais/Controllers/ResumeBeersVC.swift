@@ -28,10 +28,8 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "background"))
         self.rankView.layer.cornerRadius = 15
-        self.rankView.layer.borderColor = UIColor.lightGray.cgColor
-        self.rankView.layer.borderWidth = 0.5
+        self.setBorderToRank()
         
         self.beersCollectionView.register(UINib(nibName: "BeerCollectionCell", bundle: nil), forCellWithReuseIdentifier: "beerCollectionCell")
         
@@ -71,9 +69,9 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         let beer = self.beers[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "beerCollectionCell", for: indexPath) as! BeerCollectionViewCell
         
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.orange.cgColor
         cell.layer.cornerRadius = 8
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.layer.borderWidth = 0.5
         
         cell.setAmount(amount: beer.amount)
         cell.setBrand(brand: beer.brand ?? "")
@@ -124,6 +122,8 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     }
     
     private func setRank() {
+        self.setBorderToRank()
+        
         if (self.beers.count < 2) {
             self.rankBrandLabel.text = "Marca"
             self.rankBeerImageView.image = UIImage(named: "icons8-beer-can-100")
@@ -168,6 +168,19 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         self.setBeers(beers: [])
         self.beersCollectionView.reloadData()
         self.beerPresenter.deleteBeers()
+    }
+    
+    private func setBorderToRank() {
+        var borderColor = UIColor.lightGray
+        var borderWidth = 0.5
+    
+        if (self.beers.count > 1) {
+            borderColor = UIColor(red: 0.00, green: 0.78, blue: 0.33, alpha: 1.0)
+            borderWidth = 1
+        }
+        
+        self.rankView.layer.borderColor = borderColor.cgColor
+        self.rankView.layer.borderWidth = CGFloat(borderWidth)
     }
     
 }
