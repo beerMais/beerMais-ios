@@ -25,12 +25,16 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     
     private var resumeBeers: ResumeBeersVCDelegate!
     private var beer: Beer!
+    private var beerPresenter: BeerPresenter!
     
     var brandController: MDCTextInputControllerOutlined?
     var valueController: MDCTextInputControllerOutlined?
     var amountController: MDCTextInputControllerOutlined?
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.beerPresenter = BeerPresenter()
         
         self.modalView.layer.cornerRadius = 10
         self.addStyleToFields()
@@ -52,7 +56,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func addAction(_ sender: Any) {
-        _ = BeerPresenter().create(data: self.getBeerArray())
+        _ = self.beerPresenter.create(data: self.getBeerArray())
         
         self.resumeBeers.reloadBeers()
         self.dismiss(animated: true, completion: nil)
@@ -64,7 +68,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
             return
         }
         
-        BeerPresenter().delete(beer: self.beer)
+        self.beerPresenter.delete(beer: self.beer)
         self.resumeBeers.reloadBeers()
         self.dismiss(animated: true, completion: nil)
     }
@@ -75,7 +79,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
             return
         }
         
-        BeerPresenter().edit(beer: self.beer, data: self.getBeerArray())
+        self.beerPresenter.edit(beer: self.beer, data: self.getBeerArray())
         self.resumeBeers.reloadBeers()
         self.dismiss(animated: true, completion: nil)
     }
@@ -140,7 +144,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.editMode(isEditMode: true)
         
         self.brandTextField.text = self.beer.brand
-        self.valueTextField.text = String(self.beer.value)
+        self.valueTextField.text = self.beerPresenter.formatValueToShow(value: self.beer.value)
         self.amountTextField.text = String(self.beer.amount)
     }
     

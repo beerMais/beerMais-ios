@@ -156,10 +156,11 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         
         self.rankBeerImageView.image = UIImage(named: imageName)
         
-        self.rankValueLabel.text = "R$ \(beer.value)"
+        let valueString = self.beerPresenter.formatValueToShow(value: beer.value)
+        self.rankValueLabel.text = "R$ \(valueString)"
         
         let economy = self.beerPresenter.getEconomy(beer1: beer, beer2: self.beers[1])
-        let economyFormated = String(format: "%.2f", economy)
+        let economyFormated = self.beerPresenter.formatValueToShow(value: economy)
         self.rankEconomyLabel.text = "R$ \(economyFormated)/L"
     }
     

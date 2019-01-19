@@ -58,6 +58,11 @@ class BeerPresenter {
         return number.floatValue
     }
     
+    func formatValueToShow(value: Float) -> String {
+        let valueString = String(format: "%.2f", value)
+        return valueString.replacingOccurrences(of: ".", with: ",")
+    }
+    
     func delete(beer: Beer) {
         CoreDataPresenter().context.delete(beer)
     }

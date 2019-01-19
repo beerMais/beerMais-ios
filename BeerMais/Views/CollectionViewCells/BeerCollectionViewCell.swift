@@ -29,7 +29,8 @@ class BeerCollectionViewCell: UICollectionViewCell {
     }
     
     func setValue(value: Float) {
-        self.valueLabel.text = "R$ \(value)"
+        let valueString = BeerPresenter().formatValueToShow(value: value)
+        self.valueLabel.text = "R$ \(valueString)"
     }
     
     func setType(type: Int16) {
