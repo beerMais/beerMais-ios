@@ -92,6 +92,20 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         return UIEdgeInsets(top: 0, left: edgeInsets, bottom: 0, right: edgeInsets);
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let beer = self.beers[indexPath.row]
+        
+        let storyboard = UIStoryboard(name: "NewBeer", bundle: nil)
+        
+        let viewController = storyboard.instantiateViewController(withIdentifier: "NewBeerVCID") as! NewBeerVC
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.attachResumeBeersDelegate(delegate: self)
+        viewController.setBeer(beer: beer)
+        
+        self.present(viewController, animated: true, completion: nil)
+        
+    }
+    
     private func addDelegate() {
         self.beersCollectionView.delegate = self
         self.beersCollectionView.dataSource = self

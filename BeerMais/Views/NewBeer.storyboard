@@ -123,6 +123,37 @@
                                     <action selector="addAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="Tnp-IE-Ssi"/>
                                 </connections>
                             </button>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="8pE-Fs-S06">
+                                <rect key="frame" x="37.666666666666657" y="587" width="300" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nq5-tE-XgI">
+                                        <rect key="frame" x="0.0" y="0.0" width="135" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Xd0-dl-w8m"/>
+                                        </constraints>
+                                        <state key="normal" title="Deletar"/>
+                                        <connections>
+                                            <action selector="addAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="83v-JP-ZUn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ky-oe-mk4">
+                                        <rect key="frame" x="165" y="0.0" width="135" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="0dI-HZ-N3m"/>
+                                        </constraints>
+                                        <state key="normal" title="Salvar"/>
+                                        <connections>
+                                            <action selector="addAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="RQL-8K-jlH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="AQt-CE-vdd"/>
+                                    <constraint firstAttribute="width" constant="300" id="bzC-fK-ZFC"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -131,20 +162,24 @@
                             <constraint firstItem="gdM-VC-qF3" firstAttribute="centerX" secondItem="cRO-J6-Mep" secondAttribute="centerX" id="dHJ-c0-bUX"/>
                             <constraint firstItem="KQg-Pq-nAj" firstAttribute="bottom" secondItem="gdM-VC-qF3" secondAttribute="bottomMargin" constant="16" id="hNB-ei-Y15"/>
                             <constraint firstItem="qm5-hC-Lcb" firstAttribute="centerX" secondItem="cRO-J6-Mep" secondAttribute="centerX" id="kaf-ML-XQT"/>
+                            <constraint firstItem="8pE-Fs-S06" firstAttribute="top" secondItem="qm5-hC-Lcb" secondAttribute="bottom" constant="16" id="mcv-5U-eWa"/>
                             <constraint firstItem="ptZ-Uf-ugK" firstAttribute="centerX" secondItem="cRO-J6-Mep" secondAttribute="centerX" id="os3-2a-Al5"/>
+                            <constraint firstItem="8pE-Fs-S06" firstAttribute="centerX" secondItem="cRO-J6-Mep" secondAttribute="centerX" id="wOR-wd-cYX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KQg-Pq-nAj"/>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="ptZ-Uf-ugK" id="Yvd-Re-5Pv"/>
                         <outlet property="amountTextField" destination="No5-Qj-AFn" id="9p0-D6-s6k"/>
                         <outlet property="brandTextField" destination="pin-vl-t6Z" id="vtB-rM-IVH"/>
+                        <outlet property="editStackView" destination="8pE-Fs-S06" id="WaO-Dp-3MD"/>
                         <outlet property="modalView" destination="qm5-hC-Lcb" id="ifN-fC-GhE"/>
                         <outlet property="valueTextField" destination="GCE-MG-BMj" id="5mp-0j-TQW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wd5-C2-GnY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-140" y="84"/>
+            <point key="canvasLocation" x="-140" y="83.497536945812811"/>
         </scene>
     </scenes>
 </document>
