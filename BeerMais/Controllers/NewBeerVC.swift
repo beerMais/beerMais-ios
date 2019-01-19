@@ -10,12 +10,13 @@ import UIKit
 import MaterialComponents.MaterialButtons
 import MaterialComponents.MaterialButtons_ButtonThemer
 import MaterialComponents.MaterialButtons_ColorThemer
+import MaterialComponents.MaterialTextFields
 
 class NewBeerVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var modalView: UIView!
-    @IBOutlet weak var brandTextField: UITextField!
-    @IBOutlet weak var valueTextField: UITextField!
-    @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var brandTextField: MDCTextField!
+    @IBOutlet weak var valueTextField: MDCTextField!
+    @IBOutlet weak var amountTextField: MDCTextField!
     @IBOutlet weak var addButton: MDCButton!
     @IBOutlet weak var editStackView: UIStackView!
     @IBOutlet weak var closeButton: MDCButton!
@@ -25,11 +26,15 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     private var resumeBeers: ResumeBeersVCDelegate!
     private var beer: Beer!
     
+    var brandController: MDCTextInputControllerOutlined?
+    var valueController: MDCTextInputControllerOutlined?
+    var amountController: MDCTextInputControllerOutlined?
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
         
         self.modalView.layer.cornerRadius = 15
-        self.addStyleToButton()
+        self.addStyleToFields()
+        self.addStyleToButtons()
         
         self.addDelegates()
         self.populateBeer()
@@ -85,7 +90,13 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.beer = beer
     }
     
-    private func addStyleToButton() {
+    private func addStyleToFields() {
+        self.brandController = MDCTextInputControllerOutlined(textInput: self.brandTextField)
+        self.valueController = MDCTextInputControllerOutlined(textInput: self.valueTextField)
+        self.amountController = MDCTextInputControllerOutlined(textInput: self.amountTextField)
+    }
+    
+    private func addStyleToButtons() {
         self.addButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
         self.saveButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
         self.deleteButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
@@ -99,12 +110,12 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.closeButton.shapeGenerator = shapeGenerator
         
         let positiveColorScheme = MDCSemanticColorScheme()
-        positiveColorScheme.primaryColor = UIColor(red:0.04, green:0.69, blue:0.00, alpha:1.0)
+        positiveColorScheme.primaryColor = UIColor(red: 0.04, green: 0.69, blue: 0.00, alpha: 1.0)
         MDCContainedButtonColorThemer.applySemanticColorScheme(positiveColorScheme, to: self.addButton)
         MDCContainedButtonColorThemer.applySemanticColorScheme(positiveColorScheme, to: self.saveButton)
         
         let negativeColorScheme = MDCSemanticColorScheme()
-        negativeColorScheme.primaryColor = UIColor(red:0.96, green:0.26, blue:0.21, alpha:1.0)
+        negativeColorScheme.primaryColor = UIColor(red: 0.96, green: 0.26, blue: 0.21, alpha: 1.0)
         MDCContainedButtonColorThemer.applySemanticColorScheme(negativeColorScheme, to: self.deleteButton)
     }
     
