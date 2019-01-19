@@ -156,7 +156,7 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         
         self.rankBeerImageView.image = UIImage(named: imageName)
         
-        self.rankValueLabel.text = "RS \(beer.value)"
+        self.rankValueLabel.text = "R$ \(beer.value)"
         
         let economy = self.beerPresenter.getEconomy(beer1: beer, beer2: self.beers[1])
         let economyFormated = String(format: "%.2f", economy)
