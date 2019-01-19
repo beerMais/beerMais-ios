@@ -144,6 +144,9 @@
                                             <constraint firstAttribute="height" constant="30" id="0dI-HZ-N3m"/>
                                         </constraints>
                                         <state key="normal" title="Salvar"/>
+                                        <connections>
+                                            <action selector="editAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="6qB-1k-fob"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

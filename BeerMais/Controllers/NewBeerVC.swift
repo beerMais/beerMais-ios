@@ -33,12 +33,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func addAction(_ sender: Any) {
-        var beer = [String: Any]()
-        beer["amount"] = Int16(self.amountTextField.text ?? "")
-        beer["brand"] = self.brandTextField.text
-        beer["value"] = BeerPresenter().formatValue(value: self.valueTextField.text ?? "")
-        beer["type"] = Int16(1)
-        _ = BeerPresenter().create(data: beer)
+        _ = BeerPresenter().create(data: self.getBeerArray())
         
         self.resumeBeers.reloadBeers()
         self.dismiss(animated: true, completion: nil)
@@ -51,6 +46,17 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         }
         
         BeerPresenter().delete(beer: self.beer)
+        self.resumeBeers.reloadBeers()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func editAction(_ sender: Any) {
+        if (self.beer == nil) {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        BeerPresenter().edit(beer: self.beer, data: self.getBeerArray())
         self.resumeBeers.reloadBeers()
         self.dismiss(animated: true, completion: nil)
     }
@@ -94,5 +100,15 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     private func editMode(isEditMode: Bool) {
         self.addButton.isHidden = isEditMode
         self.editStackView.isHidden = !isEditMode
+    }
+    
+    private func getBeerArray() -> [String: Any]{
+        var beer = [String: Any]()
+        beer["amount"] = Int16(self.amountTextField.text ?? "")
+        beer["brand"] = self.brandTextField.text
+        beer["value"] = BeerPresenter().formatValue(value: self.valueTextField.text ?? "")
+        beer["type"] = Int16(1)
+        
+        return beer
     }
 }

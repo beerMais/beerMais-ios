@@ -15,15 +15,11 @@ class BeerPresenter {
         if let context = CoreDataPresenter().context {
             
             do {
-                let model = Beer(context: context)
-                model.amount = data["amount"] as! Int16
-                model.brand = data["brand"] as? String
-                model.value = Float(truncating: data["value"] as! NSNumber)
-                model.type = data["type"] as! Int16
+                let beer = self.setBeerData(beer: Beer(context: context), data: data)
                 
                 try context.save()
                 
-                return model
+                return beer
             } catch let error {
                 print("Could not save. \(error), \(String(describing: error._userInfo))")
                 return nil
@@ -66,7 +62,20 @@ class BeerPresenter {
         CoreDataPresenter().context.delete(beer)
     }
     
+    func edit(beer: Beer, data: [String: Any]) {
+        _ = self.setBeerData(beer: beer, data: data)
+    }
+    
     private func getValuePerML(value: Float, amount: Int16) -> Float {
         return value / Float(amount)
+    }
+    
+    private func setBeerData(beer: Beer, data: [String: Any]) -> Beer {
+        beer.amount = data["amount"] as! Int16
+        beer.brand = data["brand"] as? String
+        beer.value = Float(truncating: data["value"] as! NSNumber)
+        beer.type = data["type"] as! Int16
+        
+        return beer
     }
 }
