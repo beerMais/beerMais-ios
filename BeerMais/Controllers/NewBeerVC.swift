@@ -88,6 +88,14 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.animateViewMoving(up: true, moveValue: 100)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.animateViewMoving(up: false, moveValue: 100)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -161,5 +169,18 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         beer["type"] = Int16(1)
         
         return beer
+    }
+    
+    private func animateViewMoving (up: Bool, moveValue: CGFloat){
+        let movementDuration:TimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        
+        UIView.commitAnimations()
     }
 }
