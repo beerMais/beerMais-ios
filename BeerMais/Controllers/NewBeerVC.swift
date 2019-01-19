@@ -42,6 +42,13 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+        
+        let touch = touches.first
+        guard let location = touch?.location(in: self.view) else { return }
+        
+        if !self.modalView.frame.contains(location) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func addAction(_ sender: Any) {
