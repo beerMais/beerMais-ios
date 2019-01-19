@@ -62,6 +62,10 @@ class BeerPresenter {
         return number.floatValue
     }
     
+    func delete(beer: Beer) {
+        CoreDataPresenter().context.delete(beer)
+    }
+    
     private func getValuePerML(value: Float, amount: Int16) -> Float {
         return value / Float(amount)
     }

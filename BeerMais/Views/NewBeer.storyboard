@@ -134,7 +134,7 @@
                                         </constraints>
                                         <state key="normal" title="Deletar"/>
                                         <connections>
-                                            <action selector="addAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="83v-JP-ZUn"/>
+                                            <action selector="deleteAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="egA-s7-EWc"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ky-oe-mk4">
@@ -144,9 +144,6 @@
                                             <constraint firstAttribute="height" constant="30" id="0dI-HZ-N3m"/>
                                         </constraints>
                                         <state key="normal" title="Salvar"/>
-                                        <connections>
-                                            <action selector="addAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="RQL-8K-jlH"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

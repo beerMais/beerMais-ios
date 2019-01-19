@@ -44,6 +44,17 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func deleteAction(_ sender: Any) {
+        if (self.beer == nil) {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        BeerPresenter().delete(beer: self.beer)
+        self.resumeBeers.reloadBeers()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func closeAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
