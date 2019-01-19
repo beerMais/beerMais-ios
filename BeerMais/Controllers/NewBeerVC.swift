@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import MaterialComponents.MaterialButtons
+import MaterialComponents.MaterialButtons_ButtonThemer
+import MaterialComponents.MaterialButtons_ColorThemer
 
 class NewBeerVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var modalView: UIView!
     @IBOutlet weak var brandTextField: UITextField!
     @IBOutlet weak var valueTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addButton: MDCButton!
     @IBOutlet weak var editStackView: UIStackView!
+    @IBOutlet weak var closeButton: MDCButton!
+    @IBOutlet weak var deleteButton: MDCButton!
+    @IBOutlet weak var saveButton: MDCButton!
     
     private var resumeBeers: ResumeBeersVCDelegate!
     private var beer: Beer!
@@ -23,6 +29,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         self.modalView.layer.cornerRadius = 15
+        self.addStyleToButton()
         
         self.addDelegates()
         self.populateBeer()
@@ -76,6 +83,29 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     
     func setBeer(beer: Beer) {
         self.beer = beer
+    }
+    
+    private func addStyleToButton() {
+        self.addButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        self.saveButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        self.deleteButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        self.closeButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        
+        let shapeGenerator = MDCCurvedRectShapeGenerator()
+        shapeGenerator.cornerSize = CGSize(width: 6, height: 6)
+        self.addButton.shapeGenerator = shapeGenerator
+        self.saveButton.shapeGenerator = shapeGenerator
+        self.deleteButton.shapeGenerator = shapeGenerator
+        self.closeButton.shapeGenerator = shapeGenerator
+        
+        let positiveColorScheme = MDCSemanticColorScheme()
+        positiveColorScheme.primaryColor = UIColor(red:0.04, green:0.69, blue:0.00, alpha:1.0)
+        MDCContainedButtonColorThemer.applySemanticColorScheme(positiveColorScheme, to: self.addButton)
+        MDCContainedButtonColorThemer.applySemanticColorScheme(positiveColorScheme, to: self.saveButton)
+        
+        let negativeColorScheme = MDCSemanticColorScheme()
+        negativeColorScheme.primaryColor = UIColor(red:0.96, green:0.26, blue:0.21, alpha:1.0)
+        MDCContainedButtonColorThemer.applySemanticColorScheme(negativeColorScheme, to: self.deleteButton)
     }
     
     private func addDelegates() {

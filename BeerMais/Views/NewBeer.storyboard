@@ -99,50 +99,56 @@
                                     <constraint firstAttribute="trailing" secondItem="T25-6p-eEA" secondAttribute="trailing" constant="16" id="uv7-Ld-FUL"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdM-VC-qF3">
-                                <rect key="frame" x="162.66666666666666" y="740" width="50" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdM-VC-qF3" customClass="MDCButton">
+                                <rect key="frame" x="137.66666666666666" y="735" width="100" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="794-Tr-z1s"/>
-                                    <constraint firstAttribute="height" constant="30" id="duf-74-zy5"/>
+                                    <constraint firstAttribute="width" constant="100" id="794-Tr-z1s"/>
+                                    <constraint firstAttribute="height" constant="35" id="duf-74-zy5"/>
                                 </constraints>
-                                <state key="normal" title="Fechar"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <state key="normal" title="Fechar">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="closeAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="jqv-OO-ros"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptZ-Uf-ugK">
-                                <rect key="frame" x="137.66666666666666" y="547" width="100" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptZ-Uf-ugK" customClass="MDCButton">
+                                <rect key="frame" x="132.66666666666666" y="547" width="110" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="FJK-bR-d3w"/>
-                                    <constraint firstAttribute="height" constant="30" id="b1r-k8-zfU"/>
+                                    <constraint firstAttribute="width" constant="110" id="FJK-bR-d3w"/>
+                                    <constraint firstAttribute="height" constant="35" id="b1r-k8-zfU"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="Adicionar"/>
                                 <connections>
                                     <action selector="addAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="Tnp-IE-Ssi"/>
                                 </connections>
                             </button>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="8pE-Fs-S06">
-                                <rect key="frame" x="37.666666666666657" y="547" width="300" height="30"/>
+                                <rect key="frame" x="37.666666666666657" y="547" width="300" height="35"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nq5-tE-XgI">
-                                        <rect key="frame" x="0.0" y="0.0" width="135" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nq5-tE-XgI" customClass="MDCButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="135" height="35"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Xd0-dl-w8m"/>
+                                            <constraint firstAttribute="height" constant="35" id="Xd0-dl-w8m"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <state key="normal" title="Deletar"/>
                                         <connections>
                                             <action selector="deleteAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="egA-s7-EWc"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ky-oe-mk4">
-                                        <rect key="frame" x="165" y="0.0" width="135" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ky-oe-mk4" customClass="MDCButton">
+                                        <rect key="frame" x="165" y="0.0" width="135" height="35"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="0dI-HZ-N3m"/>
+                                            <constraint firstAttribute="height" constant="35" id="0dI-HZ-N3m"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <state key="normal" title="Salvar"/>
                                         <connections>
                                             <action selector="editAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="6qB-1k-fob"/>
@@ -150,7 +156,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="AQt-CE-vdd"/>
+                                    <constraint firstAttribute="height" constant="35" id="AQt-CE-vdd"/>
                                     <constraint firstAttribute="width" constant="300" id="bzC-fK-ZFC"/>
                                 </constraints>
                             </stackView>
@@ -172,8 +178,11 @@
                         <outlet property="addButton" destination="ptZ-Uf-ugK" id="Yvd-Re-5Pv"/>
                         <outlet property="amountTextField" destination="No5-Qj-AFn" id="9p0-D6-s6k"/>
                         <outlet property="brandTextField" destination="pin-vl-t6Z" id="vtB-rM-IVH"/>
+                        <outlet property="closeButton" destination="gdM-VC-qF3" id="b4W-KS-boH"/>
+                        <outlet property="deleteButton" destination="Nq5-tE-XgI" id="R9z-ht-hjI"/>
                         <outlet property="editStackView" destination="8pE-Fs-S06" id="WaO-Dp-3MD"/>
                         <outlet property="modalView" destination="qm5-hC-Lcb" id="ifN-fC-GhE"/>
+                        <outlet property="saveButton" destination="9Ky-oe-mk4" id="41h-9s-oVv"/>
                         <outlet property="valueTextField" destination="GCE-MG-BMj" id="5mp-0j-TQW"/>
                     </connections>
                 </viewController>

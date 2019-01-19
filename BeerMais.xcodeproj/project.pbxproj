@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012B75CE86973E8C7434F44C /* Pods_BeerMais.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFE121324E806718F08C921 /* Pods_BeerMais.framework */; };
 		2D17011721D2B3CE0009A316 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17011621D2B3CE0009A316 /* AppDelegate.swift */; };
 		2D17011C21D2B3CE0009A316 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D17011A21D2B3CE0009A316 /* Main.storyboard */; };
 		2D17011F21D2B3CE0009A316 /* BeerMais.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D17011D21D2B3CE0009A316 /* BeerMais.xcdatamodeld */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0CFE121324E806718F08C921 /* Pods_BeerMais.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeerMais.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D17011321D2B3CD0009A316 /* BeerMais.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeerMais.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D17011621D2B3CE0009A316 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D17011B21D2B3CE0009A316 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -42,6 +44,8 @@
 		2D17014121D442480009A316 /* AppPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresenter.swift; sourceTree = "<group>"; };
 		2D17014621D455730009A316 /* NewBeer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewBeer.storyboard; sourceTree = "<group>"; };
 		2D17014821D45BAF0009A316 /* NewBeerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBeerVC.swift; sourceTree = "<group>"; };
+		4CAD80BE8F41E3785D399150 /* Pods-BeerMais.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerMais.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeerMais/Pods-BeerMais.debug.xcconfig"; sourceTree = "<group>"; };
+		FFC1C103850E5C657AB2D231 /* Pods-BeerMais.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerMais.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeerMais/Pods-BeerMais.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				012B75CE86973E8C7434F44C /* Pods_BeerMais.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +65,8 @@
 			children = (
 				2D17011521D2B3CD0009A316 /* BeerMais */,
 				2D17011421D2B3CD0009A316 /* Products */,
+				41FC4D063EF1832B205E9912 /* Pods */,
+				540576969A604AB673A2D23F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,6 +149,23 @@
 			path = Presenters;
 			sourceTree = "<group>";
 		};
+		41FC4D063EF1832B205E9912 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4CAD80BE8F41E3785D399150 /* Pods-BeerMais.debug.xcconfig */,
+				FFC1C103850E5C657AB2D231 /* Pods-BeerMais.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		540576969A604AB673A2D23F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CFE121324E806718F08C921 /* Pods_BeerMais.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,9 +173,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D17012821D2B3CF0009A316 /* Build configuration list for PBXNativeTarget "BeerMais" */;
 			buildPhases = (
+				9FC2088166DCDD9C1D6BD4AE /* [CP] Check Pods Manifest.lock */,
 				2D17010F21D2B3CD0009A316 /* Sources */,
 				2D17011021D2B3CD0009A316 /* Frameworks */,
 				2D17011121D2B3CD0009A316 /* Resources */,
+				35FBFBA2E0627C80EB944DF4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -209,6 +235,57 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		35FBFBA2E0627C80EB944DF4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BeerMais/Pods-BeerMais-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
+				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BeerMais/Pods-BeerMais-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FC2088166DCDD9C1D6BD4AE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BeerMais-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2D17010F21D2B3CD0009A316 /* Sources */ = {
@@ -368,6 +445,7 @@
 		};
 		2D17012921D2B3CF0009A316 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CAD80BE8F41E3785D399150 /* Pods-BeerMais.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -387,6 +465,7 @@
 		};
 		2D17012A21D2B3CF0009A316 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFC1C103850E5C657AB2D231 /* Pods-BeerMais.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
