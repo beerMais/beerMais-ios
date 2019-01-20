@@ -1,4 +1,5 @@
 PODS:
+  - Google-Mobile-Ads-SDK (7.37.0)
   - MaterialComponents/AnimationTiming (73.0.0)
   - MaterialComponents/Buttons (73.0.0):
     - MaterialComponents/Ink
@@ -55,6 +56,7 @@ PODS:
   - MDFTextAccessibility (2.0.0)
 
 DEPENDENCIES:
+  - Google-Mobile-Ads-SDK
   - MaterialComponents/Buttons
   - "MaterialComponents/Buttons+ButtonThemer"
   - "MaterialComponents/Buttons+ColorThemer"
@@ -62,15 +64,17 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Google-Mobile-Ads-SDK
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
 
 SPEC CHECKSUMS:
+  Google-Mobile-Ads-SDK: d028682d7450749a1955679da050eaf70d997b3e
   MaterialComponents: 5ee94fadd206902ffa318ba5adfd3c9c8c799000
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
 
-PODFILE CHECKSUM: 9c29b2e55d9a752e985bee46fa6dc6f11468725c
+PODFILE CHECKSUM: 6d98c867a0732d168d8b8feec00034184e6ead1c
 
 COCOAPODS: 1.5.3

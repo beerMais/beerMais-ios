@@ -120,11 +120,21 @@
                                     <constraint firstItem="8pE-Fs-S06" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="y8h-Oo-PIh"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIw-tn-C13" customClass="GADBannerView">
+                                <rect key="frame" x="27.666666666666657" y="678" width="320" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="G3n-yX-wV1"/>
+                                    <constraint firstAttribute="width" constant="320" id="HxH-W7-4zH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="xIw-tn-C13" firstAttribute="bottom" secondItem="KQg-Pq-nAj" secondAttribute="bottom" id="FJ7-e5-d3D"/>
                             <constraint firstItem="qm5-hC-Lcb" firstAttribute="centerY" secondItem="cRO-J6-Mep" secondAttribute="centerY" id="Hyo-nC-K2B"/>
+                            <constraint firstItem="xIw-tn-C13" firstAttribute="centerX" secondItem="cRO-J6-Mep" secondAttribute="centerX" id="d7N-vg-GxF"/>
                             <constraint firstItem="qm5-hC-Lcb" firstAttribute="centerX" secondItem="cRO-J6-Mep" secondAttribute="centerX" id="kaf-ML-XQT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KQg-Pq-nAj"/>
@@ -132,6 +142,7 @@
                     <connections>
                         <outlet property="addButton" destination="ptZ-Uf-ugK" id="Yvd-Re-5Pv"/>
                         <outlet property="amountTextField" destination="No5-Qj-AFn" id="9p0-D6-s6k"/>
+                        <outlet property="bannerView" destination="xIw-tn-C13" id="AYU-r2-7gY"/>
                         <outlet property="brandTextField" destination="pin-vl-t6Z" id="vtB-rM-IVH"/>
                         <outlet property="closeButton" destination="gdM-VC-qF3" id="b4W-KS-boH"/>
                         <outlet property="deleteButton" destination="Nq5-tE-XgI" id="R9z-ht-hjI"/>

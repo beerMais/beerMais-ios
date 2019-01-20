@@ -6,6 +6,7 @@ target 'BeerMais' do
   use_frameworks!
 
   # Pods for BeerMais
+  pod 'Google-Mobile-Ads-SDK'
   pod 'MaterialComponents/Buttons'
   pod 'MaterialComponents/Buttons+ButtonThemer'
   pod 'MaterialComponents/Buttons+ColorThemer'

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 import MaterialComponents.MaterialButtons
 import MaterialComponents.MaterialButtons_ButtonThemer
 import MaterialComponents.MaterialButtons_ColorThemer
@@ -22,6 +23,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var closeButton: MDCFloatingButton!
     @IBOutlet weak var deleteButton: MDCButton!
     @IBOutlet weak var saveButton: MDCButton!
+    @IBOutlet weak var bannerView: GADBannerView!
     
     private var resumeBeers: ResumeBeersVCDelegate!
     private var beer: Beer!
@@ -33,6 +35,8 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.addBannerView()
         
         self.beerPresenter = BeerPresenter()
         
@@ -182,5 +186,11 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
         
         UIView.commitAnimations()
+    }
+    
+    private func addBannerView() {
+        self.bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        self.bannerView.rootViewController = self
+        self.bannerView.load(GADRequest())
     }
 }
