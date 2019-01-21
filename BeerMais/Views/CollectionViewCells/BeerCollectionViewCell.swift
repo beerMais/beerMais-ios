@@ -13,6 +13,15 @@ class BeerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var brandLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var cellView: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.layer.cornerRadius = 8
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 0.5
+    }
     
     func setAmount(amount: Int16) {
         var amountText = "\(amount)ml"
@@ -45,5 +54,9 @@ class BeerCollectionViewCell: UICollectionViewCell {
         }
         
         self.beerImageView.image = UIImage(named: imageName)
+    }
+    
+    func setBackgroudColor(color: UIColor) {
+        self.cellView.backgroundColor = color
     }
 }

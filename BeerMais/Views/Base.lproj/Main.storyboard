@@ -49,7 +49,7 @@
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-beer-can-100" translatesAutoresizingMaskIntoConstraints="NO" id="rvx-ys-BeC">
                                         <rect key="frame" x="8" y="45" width="50" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="ZP8-KK-GAY"/>
                                             <constraint firstAttribute="height" constant="50" id="y3o-Vu-PBa"/>

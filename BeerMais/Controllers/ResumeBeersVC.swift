@@ -69,10 +69,6 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         let beer = self.beers[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "beerCollectionCell", for: indexPath) as! BeerCollectionViewCell
         
-        cell.layer.cornerRadius = 8
-        cell.layer.borderColor = UIColor.lightGray.cgColor
-        cell.layer.borderWidth = 0.5
-        
         cell.setAmount(amount: beer.amount)
         cell.setBrand(brand: beer.brand ?? "")
         cell.setValue(value: beer.value)
@@ -173,14 +169,17 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     private func setBorderToRank() {
         var borderColor = UIColor.lightGray
         var borderWidth = 0.5
+        var backgroundColor = UIColor.white
     
         if (self.beers.count > 1) {
             borderColor = UIColor(red: 0.00, green: 0.78, blue: 0.33, alpha: 1.0)
-            borderWidth = 1
+            borderWidth = 2
+            backgroundColor = UIColor(red: 0.95, green: 0.99, blue: 0.89, alpha: 1.0)
         }
         
         self.rankView.layer.borderColor = borderColor.cgColor
         self.rankView.layer.borderWidth = CGFloat(borderWidth)
+        self.rankView.backgroundColor = backgroundColor
     }
     
 }
