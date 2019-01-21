@@ -51,10 +51,14 @@ class BeerPresenter {
     }
     
     func formatValue(value: String) -> Float {
+        if (value.count == 0) {
+            return 0
+        }
+        
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
-        let number = numberFormatter.number(from: value)!
+        let number = numberFormatter.number(from: value.replacingOccurrences(of: ",", with: "."))!
         return number.floatValue
     }
     

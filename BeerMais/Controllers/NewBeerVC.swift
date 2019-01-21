@@ -29,9 +29,9 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     private var beer: Beer!
     private var beerPresenter: BeerPresenter!
     
-    var brandController: MDCTextInputControllerOutlined?
-    var valueController: MDCTextInputControllerOutlined?
-    var amountController: MDCTextInputControllerOutlined?
+    private var brandController: MDCTextInputControllerOutlined?
+    private var valueController: MDCTextInputControllerOutlined?
+    private var amountController: MDCTextInputControllerOutlined?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +60,9 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func addAction(_ sender: Any) {
+        if (!self.isValidBeer()) {
+            return
+        }
         _ = self.beerPresenter.create(data: self.getBeerArray())
         
         self.resumeBeers.reloadBeers()
@@ -80,6 +83,10 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     @IBAction func editAction(_ sender: Any) {
         if (self.beer == nil) {
             self.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        if (!self.isValidBeer()) {
             return
         }
         
@@ -196,5 +203,31 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         self.bannerView.rootViewController = self
         self.bannerView.load(GADRequest())
+    }
+    
+    private func isValidBeer() -> Bool {
+        let isValidAmount = Int16(self.amountTextField.text ?? "") ?? 0 > 0
+        let isValidBrand = self.brandTextField.text?.count ?? 0 > 0
+        let isValidValue = BeerPresenter().formatValue(value: self.valueTextField.text ?? "") > 0
+        
+        if (!isValidAmount) {
+            self.amountController?.setErrorText("Digite um Tamanho", errorAccessibilityValue: nil)
+        } else {
+            self.amountController?.setErrorText(nil, errorAccessibilityValue: nil)
+        }
+        
+        if (!isValidBrand) {
+            self.brandController?.setErrorText("Digite um Nome", errorAccessibilityValue: nil)
+        } else {
+            self.brandController?.setErrorText(nil, errorAccessibilityValue: nil)
+        }
+        
+        if (!isValidValue) {
+            self.valueController?.setErrorText("Digite um Valor", errorAccessibilityValue: nil)
+        } else {
+            self.valueController?.setErrorText(nil, errorAccessibilityValue: nil)
+        }
+        
+        return isValidAmount && isValidBrand && isValidValue
     }
 }
