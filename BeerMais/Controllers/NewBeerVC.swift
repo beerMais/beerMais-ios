@@ -170,7 +170,11 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         beer["amount"] = Int16(self.amountTextField.text ?? "")
         beer["brand"] = self.brandTextField.text
         beer["value"] = BeerPresenter().formatValue(value: self.valueTextField.text ?? "")
-        beer["type"] = Int16(1)
+        
+        var type: Int16 {
+            return Int(self.amountTextField.text ?? "") ?? 0 >= 1000 ? 2 : 1
+        }
+        beer["type"] = type
         
         return beer
     }
