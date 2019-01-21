@@ -200,7 +200,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     }
     
     private func addBannerView() {
-        self.bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        self.bannerView.adUnitID = SettingsP().getAdMobBeerBannerID()
         self.bannerView.rootViewController = self
         self.bannerView.load(GADRequest())
     }
