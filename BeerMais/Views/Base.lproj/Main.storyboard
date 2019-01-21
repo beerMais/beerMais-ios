@@ -114,7 +114,7 @@
                                     <constraint firstItem="Mwr-Oy-gfg" firstAttribute="leading" secondItem="Bvz-d9-adY" secondAttribute="leading" constant="8" id="vt3-Em-NYr"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ql0-LZ-g0v">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ql0-LZ-g0v">
                                 <rect key="frame" x="0.0" y="157" width="375" height="567"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jKA-5C-MsJ">
