@@ -23,6 +23,7 @@
 		2D17014221D442480009A316 /* AppPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17014121D442480009A316 /* AppPresenter.swift */; };
 		2D17014721D455730009A316 /* NewBeer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D17014621D455730009A316 /* NewBeer.storyboard */; };
 		2D17014921D45BAF0009A316 /* NewBeerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17014821D45BAF0009A316 /* NewBeerVC.swift */; };
+		2D1D3E3D21F66B16008F51AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D1D3E3C21F66B16008F51AC /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		2D17014121D442480009A316 /* AppPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresenter.swift; sourceTree = "<group>"; };
 		2D17014621D455730009A316 /* NewBeer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewBeer.storyboard; sourceTree = "<group>"; };
 		2D17014821D45BAF0009A316 /* NewBeerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBeerVC.swift; sourceTree = "<group>"; };
+		2D1D3E3C21F66B16008F51AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4CAD80BE8F41E3785D399150 /* Pods-BeerMais.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerMais.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeerMais/Pods-BeerMais.debug.xcconfig"; sourceTree = "<group>"; };
 		FFC1C103850E5C657AB2D231 /* Pods-BeerMais.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerMais.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeerMais/Pods-BeerMais.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +86,7 @@
 				2D17013221D2DDF10009A316 /* Controllers */,
 				2D17013521D32AD20009A316 /* Entities */,
 				2D17013A21D32DC90009A316 /* Presenters */,
+				2D1D3E3A21F66ADD008F51AC /* Property lists */,
 				2D17012B21D2DBDA0009A316 /* Views */,
 				2D17011621D2B3CE0009A316 /* AppDelegate.swift */,
 				2D17012021D2B3CF0009A316 /* Assets.xcassets */,
@@ -147,6 +150,22 @@
 				2D17013B21D32E030009A316 /* CoreDataPresenter.swift */,
 			);
 			path = Presenters;
+			sourceTree = "<group>";
+		};
+		2D1D3E3A21F66ADD008F51AC /* Property lists */ = {
+			isa = PBXGroup;
+			children = (
+				2D1D3E3B21F66AE9008F51AC /* Prod */,
+			);
+			path = "Property lists";
+			sourceTree = "<group>";
+		};
+		2D1D3E3B21F66AE9008F51AC /* Prod */ = {
+			isa = PBXGroup;
+			children = (
+				2D1D3E3C21F66B16008F51AC /* GoogleService-Info.plist */,
+			);
+			path = Prod;
 			sourceTree = "<group>";
 		};
 		41FC4D063EF1832B205E9912 /* Pods */ = {
@@ -231,6 +250,7 @@
 				2D17012E21D2DCB50009A316 /* BeerCollectionCell.xib in Resources */,
 				2D17012121D2B3CF0009A316 /* Assets.xcassets in Resources */,
 				2D17011C21D2B3CE0009A316 /* Main.storyboard in Resources */,
+				2D1D3E3D21F66B16008F51AC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,17 +266,21 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BeerMais/Pods-BeerMais-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -456,7 +480,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.joseneves.BeerMais;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.joseneves.BeerMais.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -476,7 +500,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.joseneves.BeerMais;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.joseneves.BeerMais.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

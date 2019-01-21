@@ -11,5 +11,6 @@ target 'BeerMais' do
   pod 'MaterialComponents/Buttons+ButtonThemer'
   pod 'MaterialComponents/Buttons+ColorThemer'
   pod 'MaterialComponents/TextFields'
+  pod 'Firebase/Core'
 
 end
