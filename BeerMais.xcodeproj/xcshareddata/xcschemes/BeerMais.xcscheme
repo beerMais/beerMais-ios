@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2D17011221D2B3CD0009A316"
-               BuildableName = "BeerMais Dev.app"
-               BlueprintName = "BeerMais Dev"
+               BlueprintIdentifier = "2D1D3E4321F670C9008F51AC"
+               BuildableName = "BeerMais.app"
+               BlueprintName = "BeerMais"
                ReferencedContainer = "container:BeerMais.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D17011221D2B3CD0009A316"
-            BuildableName = "BeerMais Dev.app"
-            BlueprintName = "BeerMais Dev"
+            BlueprintIdentifier = "2D1D3E4321F670C9008F51AC"
+            BuildableName = "BeerMais.app"
+            BlueprintName = "BeerMais"
             ReferencedContainer = "container:BeerMais.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D17011221D2B3CD0009A316"
-            BuildableName = "BeerMais Dev.app"
-            BlueprintName = "BeerMais Dev"
+            BlueprintIdentifier = "2D1D3E4321F670C9008F51AC"
+            BuildableName = "BeerMais.app"
+            BlueprintName = "BeerMais"
             ReferencedContainer = "container:BeerMais.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D17011221D2B3CD0009A316"
-            BuildableName = "BeerMais Dev.app"
-            BlueprintName = "BeerMais Dev"
+            BlueprintIdentifier = "2D1D3E4321F670C9008F51AC"
+            BuildableName = "BeerMais.app"
+            BlueprintName = "BeerMais"
             ReferencedContainer = "container:BeerMais.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

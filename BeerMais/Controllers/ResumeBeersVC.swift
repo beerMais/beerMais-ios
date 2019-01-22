@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 protocol ResumeBeersVCDelegate: class {
     func reloadBeers()
 }
@@ -50,15 +49,19 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     }
     
     @IBAction func deleteBeersAction(_ sender: Any) {
-        let deleteAlert = UIAlertController(title: "Deseja apagar todas as cervejas?", message: nil, preferredStyle: UIAlertController.Style.alert)
+        let storyboard = UIStoryboard(name: "Alert", bundle: nil)
         
-        deleteAlert.addAction(UIAlertAction(title: "Apagar", style: .default, handler: { (action: UIAlertAction!) in
+        let viewController = storyboard.instantiateViewController(withIdentifier: "AlertVCID") as! AlertVC
+        viewController.modalPresentationStyle = .overCurrentContext
+        
+        self.present(viewController, animated: true, completion: nil)
+        
+        viewController.setTitle(title: "Apagar?")
+        viewController.setBody(body: "Deseja apagar todas as cervejas? Essa ação não terá volta.")
+        viewController.setNegativeAction(text: "Voltar")
+        viewController.setPositiveAction({
             self.deleteBeers()
-        }))
-        
-        deleteAlert.addAction(UIAlertAction(title: "Voltar", style: .cancel, handler: nil))
-        
-        self.present(deleteAlert, animated: true, completion: nil)
+        }, text: "Apagar")
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
