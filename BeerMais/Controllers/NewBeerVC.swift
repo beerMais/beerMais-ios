@@ -127,9 +127,6 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     }
     
     private func addStyleToButtons() {
-        self.addButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
-        self.saveButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
-        self.deleteButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
         self.closeButton.setElevation(ShadowElevation(rawValue: 0), for: .normal)
         
         let shapeGenerator = MDCCurvedRectShapeGenerator()
