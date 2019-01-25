@@ -73,7 +73,21 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.beers.count
+        let lines = self.beers.count
+        var backgroundView = UIView()
+        
+        if (lines == 0) {
+            let message = UILabel()
+            message.textColor = UIColor.darkGray
+            message.text = "Clique em + para adicionar uma bebida"
+            message.textAlignment = .center
+            message.numberOfLines = 2
+            
+            backgroundView = message
+        }
+        
+        self.beersCollectionView.backgroundView = backgroundView
+        return lines
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
