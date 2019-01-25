@@ -19,7 +19,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="KYw-qv-zcW"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Sobre" image="icons8-about-36" id="fdP-rv-kPT"/>
+                    <tabBarItem key="tabBarItem" title="Sobre" image="icons8-about-50" id="fdP-rv-kPT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v84-1Q-3bM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -27,6 +27,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-about-36" width="27" height="27"/>
+        <image name="icons8-about-50" width="37.5" height="37.5"/>
     </resources>
 </document>

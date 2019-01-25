@@ -34,7 +34,7 @@
         <scene sceneID="Vk0-Bm-ePe">
             <objects>
                 <navigationController id="euJ-K7-nkS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Calculadora" image="icons8-math-36" id="lxG-0w-4Zx"/>
+                    <tabBarItem key="tabBarItem" title="Calculadora" image="icons8-math-50" id="lxG-0w-4Zx"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="adb-XG-vKh">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -196,20 +196,6 @@
             </objects>
             <point key="canvasLocation" x="-1587" y="580"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="5Rl-2v-qas">
-            <objects>
-                <viewController id="yFL-67-cvf" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yvO-dG-FNq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="vS2-fd-TdO"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mLG-v2-zy0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
         <!--About-->
         <scene sceneID="l9K-eb-TSv">
             <objects>
@@ -223,6 +209,6 @@
     </scenes>
     <resources>
         <image name="icons8-beer-can-100" width="180" height="180"/>
-        <image name="icons8-math-36" width="27" height="27"/>
+        <image name="icons8-math-50" width="37.5" height="37.5"/>
     </resources>
 </document>
