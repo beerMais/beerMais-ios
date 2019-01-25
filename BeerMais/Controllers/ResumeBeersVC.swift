@@ -45,7 +45,11 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         viewController.modalPresentationStyle = .overCurrentContext
         viewController.attachResumeBeersDelegate(delegate: self)
         
-        self.present(viewController, animated: true, completion: nil)
+        if self.tabBarController != nil {
+            self.tabBarController?.present(viewController, animated: true, completion: nil)
+        } else {
+            self.present(viewController, animated: true, completion: nil)
+        }
     }
     
     @IBAction func deleteBeersAction(_ sender: Any) {
@@ -54,7 +58,11 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         let viewController = storyboard.instantiateViewController(withIdentifier: "AlertVCID") as! AlertVC
         viewController.modalPresentationStyle = .overCurrentContext
         
-        self.present(viewController, animated: true, completion: nil)
+        if self.tabBarController != nil {
+            self.tabBarController?.present(viewController, animated: true, completion: nil)
+        } else {
+            self.present(viewController, animated: true, completion: nil)
+        }
         
         viewController.setTitle(title: "Apagar?")
         viewController.setBody(body: "Deseja apagar todas as cervejas? Essa ação não terá volta.")
@@ -99,8 +107,11 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         viewController.attachResumeBeersDelegate(delegate: self)
         viewController.setBeer(beer: beer)
         
-        self.present(viewController, animated: true, completion: nil)
-        
+        if self.tabBarController != nil {
+            self.tabBarController?.present(viewController, animated: true, completion: nil)
+        } else {
+            self.present(viewController, animated: true, completion: nil)
+        }
     }
     
     private func addDelegate() {
