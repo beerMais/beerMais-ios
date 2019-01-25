@@ -20,7 +20,6 @@
 		2D145C8B21F7DFE700B223E5 /* Beer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013621D32AE80009A316 /* Beer+CoreDataClass.swift */; };
 		2D145C8C21F7DFE700B223E5 /* NewBeerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17014821D45BAF0009A316 /* NewBeerVC.swift */; };
 		2D145C8E21F7DFE700B223E5 /* Pods_BeerMais.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFE121324E806718F08C921 /* Pods_BeerMais.framework */; };
-		2D145C8F21F7DFE700B223E5 /* Pods_BeerMais.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D895C9F21F7DCDF0005CFA6 /* Pods_BeerMais.framework */; };
 		2D145C9121F7DFE700B223E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D17012221D2B3CF0009A316 /* LaunchScreen.storyboard */; };
 		2D145C9221F7DFE700B223E5 /* NewBeer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D17014621D455730009A316 /* NewBeer.storyboard */; };
 		2D145C9321F7DFE700B223E5 /* BeerCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D17012D21D2DCB50009A316 /* BeerCollectionCell.xib */; };
@@ -54,7 +53,6 @@
 		2DB4AB7E21FABDAF007F977B /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DB4AB7D21FABDAF007F977B /* About.storyboard */; };
 		2DB4AB7F21FABDAF007F977B /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DB4AB7D21FABDAF007F977B /* About.storyboard */; };
 		2DD7E2B621F6737E0084E17F /* SettingsP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7E2B421F6737D0084E17F /* SettingsP.swift */; };
-		6055B9A0D2E19AD6CD98754F /* Pods_BeerMais.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D895C9F21F7DCDF0005CFA6 /* Pods_BeerMais.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,7 +96,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D145C8E21F7DFE700B223E5 /* Pods_BeerMais.framework in Frameworks */,
-				2D145C8F21F7DFE700B223E5 /* Pods_BeerMais.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +104,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D1D3E5121F670C9008F51AC /* Pods_BeerMais.framework in Frameworks */,
-				6055B9A0D2E19AD6CD98754F /* Pods_BeerMais.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
