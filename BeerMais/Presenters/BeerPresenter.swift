@@ -58,8 +58,13 @@ class BeerPresenter {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
-        let number = numberFormatter.number(from: value.replacingOccurrences(of: ",", with: "."))!
-        return number.floatValue
+        if let number = numberFormatter.number(from: value) {
+            return number.floatValue
+        } else if let number = numberFormatter.number(from: value.replacingOccurrences(of: ",", with: ".")) {
+            return number.floatValue
+        }
+        
+        return 0
     }
     
     func formatValueToShow(value: Float) -> String {
