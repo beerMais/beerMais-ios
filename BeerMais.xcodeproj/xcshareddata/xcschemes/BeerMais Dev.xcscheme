@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2D145C7E21F7DFE700B223E5"
+               BlueprintIdentifier = "2D79BB0722288A8200799BC6"
                BuildableName = "BeerMais Dev.app"
                BlueprintName = "BeerMais Dev"
                ReferencedContainer = "container:BeerMais.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D145C7E21F7DFE700B223E5"
+            BlueprintIdentifier = "2D79BB0722288A8200799BC6"
             BuildableName = "BeerMais Dev.app"
             BlueprintName = "BeerMais Dev"
             ReferencedContainer = "container:BeerMais.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D145C7E21F7DFE700B223E5"
+            BlueprintIdentifier = "2D79BB0722288A8200799BC6"
             BuildableName = "BeerMais Dev.app"
             BlueprintName = "BeerMais Dev"
             ReferencedContainer = "container:BeerMais.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D145C7E21F7DFE700B223E5"
+            BlueprintIdentifier = "2D79BB0722288A8200799BC6"
             BuildableName = "BeerMais Dev.app"
             BlueprintName = "BeerMais Dev"
             ReferencedContainer = "container:BeerMais.xcodeproj">
