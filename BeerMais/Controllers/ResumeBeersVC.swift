@@ -22,7 +22,7 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     @IBOutlet weak var beersCollectionView: UICollectionView!
     
     var beers = [Beer]()
-    var beerPresenter: BeerPresenter!
+    var beerP: BeerP!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         
         self.beersCollectionView.register(UINib(nibName: "BeerCollectionCell", bundle: nil), forCellWithReuseIdentifier: "beerCollectionCell")
         
-        self.beerPresenter = BeerPresenter()
+        self.beerP = BeerP()
         self.getBeers()
         
         self.addDelegate()
@@ -134,14 +134,14 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     }
     
     private func getBeers() {
-        self.beerPresenter.getBeers() { beers in
+        self.beerP.getBeers() { beers in
             self.setBeers(beers: beers)
             self.beersCollectionView.reloadData()
         }
     }
     
     private func setBeers(beers: [Beer]) {
-        self.beers = self.beerPresenter.calculateMostValuable(beers: beers)
+        self.beers = self.beerP.calculateMostValuable(beers: beers)
         self.setRank()
     }
     
@@ -180,18 +180,18 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         
         self.rankBeerImageView.image = UIImage(named: imageName)
         
-        let valueString = self.beerPresenter.formatValueToShow(value: beer.value)
+        let valueString = self.beerP.formatValueToShow(value: beer.value)
         self.rankValueLabel.text = "R$ \(valueString)"
         
-        let economy = self.beerPresenter.getEconomy(beer1: beer, beer2: self.beers[1])
-        let economyFormated = self.beerPresenter.formatValueToShow(value: economy)
+        let economy = self.beerP.getEconomy(beer1: beer, beer2: self.beers[1])
+        let economyFormated = self.beerP.formatValueToShow(value: economy)
         self.rankEconomyLabel.text = "R$ \(economyFormated)/L"
     }
     
     private func deleteBeers() {
         self.setBeers(beers: [])
         self.beersCollectionView.reloadData()
-        self.beerPresenter.deleteBeers()
+        self.beerP.deleteBeers()
     }
     
     private func setBorderToRank() {

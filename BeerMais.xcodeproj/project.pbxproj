@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		2D1D3E4621F670C9008F51AC /* BeerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013021D2DD320009A316 /* BeerCollectionViewCell.swift */; };
 		2D1D3E4721F670C9008F51AC /* ResumeBeersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013321D2DECE0009A316 /* ResumeBeersVC.swift */; };
-		2D1D3E4821F670C9008F51AC /* CoreDataPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013B21D32E030009A316 /* CoreDataPresenter.swift */; };
+		2D1D3E4821F670C9008F51AC /* CoreDataP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013B21D32E030009A316 /* CoreDataP.swift */; };
 		2D1D3E4921F670C9008F51AC /* BeerMais.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D17011D21D2B3CE0009A316 /* BeerMais.xcdatamodeld */; };
-		2D1D3E4A21F670C9008F51AC /* BeerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013D21D32EBC0009A316 /* BeerPresenter.swift */; };
-		2D1D3E4B21F670C9008F51AC /* AppPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17014121D442480009A316 /* AppPresenter.swift */; };
+		2D1D3E4A21F670C9008F51AC /* BeerP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013D21D32EBC0009A316 /* BeerP.swift */; };
+		2D1D3E4B21F670C9008F51AC /* AppP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17014121D442480009A316 /* AppP.swift */; };
 		2D1D3E4C21F670C9008F51AC /* Beer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013721D32AE80009A316 /* Beer+CoreDataProperties.swift */; };
 		2D1D3E4D21F670C9008F51AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17011621D2B3CE0009A316 /* AppDelegate.swift */; };
 		2D1D3E4E21F670C9008F51AC /* Beer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013621D32AE80009A316 /* Beer+CoreDataClass.swift */; };
@@ -30,10 +30,10 @@
 		2D79BB0A22288A8200799BC6 /* BeerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013021D2DD320009A316 /* BeerCollectionViewCell.swift */; };
 		2D79BB0B22288A8200799BC6 /* SettingsP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7E2B421F6737D0084E17F /* SettingsP.swift */; };
 		2D79BB0C22288A8200799BC6 /* ResumeBeersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013321D2DECE0009A316 /* ResumeBeersVC.swift */; };
-		2D79BB0D22288A8200799BC6 /* CoreDataPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013B21D32E030009A316 /* CoreDataPresenter.swift */; };
+		2D79BB0D22288A8200799BC6 /* CoreDataP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013B21D32E030009A316 /* CoreDataP.swift */; };
 		2D79BB0E22288A8200799BC6 /* BeerMais.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D17011D21D2B3CE0009A316 /* BeerMais.xcdatamodeld */; };
-		2D79BB0F22288A8200799BC6 /* BeerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013D21D32EBC0009A316 /* BeerPresenter.swift */; };
-		2D79BB1022288A8200799BC6 /* AppPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17014121D442480009A316 /* AppPresenter.swift */; };
+		2D79BB0F22288A8200799BC6 /* BeerP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013D21D32EBC0009A316 /* BeerP.swift */; };
+		2D79BB1022288A8200799BC6 /* AppP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17014121D442480009A316 /* AppP.swift */; };
 		2D79BB1122288A8200799BC6 /* Beer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013721D32AE80009A316 /* Beer+CoreDataProperties.swift */; };
 		2D79BB1222288A8200799BC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17011621D2B3CE0009A316 /* AppDelegate.swift */; };
 		2D79BB1322288A8200799BC6 /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6FB1F821F7868E00407BC9 /* AlertVC.swift */; };
@@ -69,9 +69,9 @@
 		2D17013321D2DECE0009A316 /* ResumeBeersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeBeersVC.swift; sourceTree = "<group>"; };
 		2D17013621D32AE80009A316 /* Beer+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Beer+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2D17013721D32AE80009A316 /* Beer+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Beer+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		2D17013B21D32E030009A316 /* CoreDataPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPresenter.swift; sourceTree = "<group>"; };
-		2D17013D21D32EBC0009A316 /* BeerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerPresenter.swift; sourceTree = "<group>"; };
-		2D17014121D442480009A316 /* AppPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresenter.swift; sourceTree = "<group>"; };
+		2D17013B21D32E030009A316 /* CoreDataP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataP.swift; sourceTree = "<group>"; };
+		2D17013D21D32EBC0009A316 /* BeerP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerP.swift; sourceTree = "<group>"; };
+		2D17014121D442480009A316 /* AppP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppP.swift; sourceTree = "<group>"; };
 		2D17014621D455730009A316 /* NewBeer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewBeer.storyboard; sourceTree = "<group>"; };
 		2D17014821D45BAF0009A316 /* NewBeerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBeerVC.swift; sourceTree = "<group>"; };
 		2D1D3E3C21F66B16008F51AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -198,9 +198,9 @@
 		2D17013A21D32DC90009A316 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
-				2D17014121D442480009A316 /* AppPresenter.swift */,
-				2D17013D21D32EBC0009A316 /* BeerPresenter.swift */,
-				2D17013B21D32E030009A316 /* CoreDataPresenter.swift */,
+				2D17014121D442480009A316 /* AppP.swift */,
+				2D17013D21D32EBC0009A316 /* BeerP.swift */,
+				2D17013B21D32E030009A316 /* CoreDataP.swift */,
 				2DD7E2B421F6737D0084E17F /* SettingsP.swift */,
 			);
 			path = Presenters;
@@ -474,10 +474,10 @@
 				2D1D3E4621F670C9008F51AC /* BeerCollectionViewCell.swift in Sources */,
 				2DD7E2B621F6737E0084E17F /* SettingsP.swift in Sources */,
 				2D1D3E4721F670C9008F51AC /* ResumeBeersVC.swift in Sources */,
-				2D1D3E4821F670C9008F51AC /* CoreDataPresenter.swift in Sources */,
+				2D1D3E4821F670C9008F51AC /* CoreDataP.swift in Sources */,
 				2D1D3E4921F670C9008F51AC /* BeerMais.xcdatamodeld in Sources */,
-				2D1D3E4A21F670C9008F51AC /* BeerPresenter.swift in Sources */,
-				2D1D3E4B21F670C9008F51AC /* AppPresenter.swift in Sources */,
+				2D1D3E4A21F670C9008F51AC /* BeerP.swift in Sources */,
+				2D1D3E4B21F670C9008F51AC /* AppP.swift in Sources */,
 				2D1D3E4C21F670C9008F51AC /* Beer+CoreDataProperties.swift in Sources */,
 				2D1D3E4D21F670C9008F51AC /* AppDelegate.swift in Sources */,
 				2D6FB1F921F7868E00407BC9 /* AlertVC.swift in Sources */,
@@ -493,10 +493,10 @@
 				2D79BB0A22288A8200799BC6 /* BeerCollectionViewCell.swift in Sources */,
 				2D79BB0B22288A8200799BC6 /* SettingsP.swift in Sources */,
 				2D79BB0C22288A8200799BC6 /* ResumeBeersVC.swift in Sources */,
-				2D79BB0D22288A8200799BC6 /* CoreDataPresenter.swift in Sources */,
+				2D79BB0D22288A8200799BC6 /* CoreDataP.swift in Sources */,
 				2D79BB0E22288A8200799BC6 /* BeerMais.xcdatamodeld in Sources */,
-				2D79BB0F22288A8200799BC6 /* BeerPresenter.swift in Sources */,
-				2D79BB1022288A8200799BC6 /* AppPresenter.swift in Sources */,
+				2D79BB0F22288A8200799BC6 /* BeerP.swift in Sources */,
+				2D79BB1022288A8200799BC6 /* AppP.swift in Sources */,
 				2D79BB1122288A8200799BC6 /* Beer+CoreDataProperties.swift in Sources */,
 				2D79BB1222288A8200799BC6 /* AppDelegate.swift in Sources */,
 				2D79BB1322288A8200799BC6 /* AlertVC.swift in Sources */,

@@ -8,11 +8,11 @@
 
 import Foundation
 
-class BeerPresenter {
+class BeerP {
     private let entityName = "Beer"
     
     func create(data: [String: Any]) -> Beer? {
-        if let context = CoreDataPresenter().context {
+        if let context = CoreDataP().context {
             
             do {
                 let beer = self.setBeerData(beer: Beer(context: context), data: data)
@@ -30,7 +30,7 @@ class BeerPresenter {
     }
     
     func getBeers(completion: @escaping([Beer]) -> Void) {
-        if let data = CoreDataPresenter().getData(entityName: self.entityName) as? [Beer] {
+        if let data = CoreDataP().getData(entityName: self.entityName) as? [Beer] {
             completion(data)
         }
     }
@@ -47,7 +47,7 @@ class BeerPresenter {
     }
     
     func deleteBeers() {
-        CoreDataPresenter().deleteData(entityName: self.entityName)
+        CoreDataP().deleteData(entityName: self.entityName)
     }
     
     func formatValue(value: String) -> Float {
@@ -73,7 +73,7 @@ class BeerPresenter {
     }
     
     func delete(beer: Beer) {
-        CoreDataPresenter().context.delete(beer)
+        CoreDataP().context.delete(beer)
     }
     
     func edit(beer: Beer, data: [String: Any]) {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AppPresenter {
+class AppP {
     private static let hasBeenLaunchedBeforeFlag = "hasBeenLaunchedBeforeFlag"
     
     static func launch() {
@@ -28,7 +28,7 @@ class AppPresenter {
     }
     
     static private func setInitialData() {
-        let beerPresenter = BeerPresenter()
+        let beerPresenter = BeerP()
         
         var beer1 = [String: Any]()
         beer1["amount"] = Int16(350)

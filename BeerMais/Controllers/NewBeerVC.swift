@@ -27,7 +27,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     
     private var resumeBeers: ResumeBeersVCDelegate!
     private var beer: Beer!
-    private var beerPresenter: BeerPresenter!
+    private var beerP: BeerP!
     
     private var brandController: MDCTextInputControllerOutlined?
     private var valueController: MDCTextInputControllerOutlined?
@@ -38,7 +38,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         
         self.addBannerView()
         
-        self.beerPresenter = BeerPresenter()
+        self.beerP = BeerP()
         
         self.modalView.layer.cornerRadius = 10
         self.addStyleToFields()
@@ -63,7 +63,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         if (!self.isValidBeer()) {
             return
         }
-        _ = self.beerPresenter.create(data: self.getBeerArray())
+        _ = self.beerP.create(data: self.getBeerArray())
         
         self.resumeBeers.reloadBeers()
         self.dismiss(animated: true, completion: nil)
@@ -75,7 +75,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
             return
         }
         
-        self.beerPresenter.delete(beer: self.beer)
+        self.beerP.delete(beer: self.beer)
         self.resumeBeers.reloadBeers()
         self.dismiss(animated: true, completion: nil)
     }
@@ -90,7 +90,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
             return
         }
         
-        self.beerPresenter.edit(beer: self.beer, data: self.getBeerArray())
+        self.beerP.edit(beer: self.beer, data: self.getBeerArray())
         self.resumeBeers.reloadBeers()
         self.dismiss(animated: true, completion: nil)
     }
@@ -160,7 +160,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.editMode(isEditMode: true)
         
         self.brandTextField.text = self.beer.brand
-        self.valueTextField.text = self.beerPresenter.formatValueToShow(value: self.beer.value)
+        self.valueTextField.text = self.beerP.formatValueToShow(value: self.beer.value)
         self.amountTextField.text = String(self.beer.amount)
     }
     
@@ -173,7 +173,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         var beer = [String: Any]()
         beer["amount"] = Int16(self.amountTextField.text ?? "")
         beer["brand"] = self.brandTextField.text
-        beer["value"] = BeerPresenter().formatValue(value: self.valueTextField.text ?? "")
+        beer["value"] = BeerP().formatValue(value: self.valueTextField.text ?? "")
         
         var type: Int16 {
             return Int(self.amountTextField.text ?? "") ?? 0 >= 1000 ? 2 : 1
@@ -187,7 +187,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         let movementDuration:TimeInterval = 0.3
         let movement:CGFloat = ( up ? -moveValue : moveValue)
         
-        UIView.beginAnimations( "animateView", context: nil)
+        UIView.beginAnimations("animateView", context: nil)
         UIView.setAnimationBeginsFromCurrentState(true)
         UIView.setAnimationDuration(movementDuration )
         
@@ -205,7 +205,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     private func isValidBeer() -> Bool {
         let isValidAmount = Int16(self.amountTextField.text ?? "") ?? 0 > 0
         let isValidBrand = self.brandTextField.text?.count ?? 0 > 0
-        let isValidValue = BeerPresenter().formatValue(value: self.valueTextField.text ?? "") > 0
+        let isValidValue = BeerP().formatValue(value: self.valueTextField.text ?? "") > 0
         
         if (!isValidAmount) {
             self.amountController?.setErrorText("Digite um Tamanho", errorAccessibilityValue: nil)
