@@ -14,7 +14,7 @@ class AppPresenter {
     static func launch() {
         if (!self.isFirstLaunch()) {
             self.setFirstLaunch()
-            self.setInitialData()
+//            self.setInitialData()
         }
     }
     
@@ -29,7 +29,6 @@ class AppPresenter {
     
     static private func setInitialData() {
         let beerPresenter = BeerPresenter()
-        
         
         var beer1 = [String: Any]()
         beer1["amount"] = Int16(350)

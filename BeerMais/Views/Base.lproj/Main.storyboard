@@ -48,7 +48,7 @@
             </objects>
             <point key="canvasLocation" x="-639" y="122"/>
         </scene>
-        <!--BeerMais-->
+        <!--Beer Mais-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ResumeBeersVC" customModule="BeerMais" customModuleProvider="target" sceneMemberID="viewController">
@@ -159,7 +159,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="BeerMais" id="Wyh-dV-dP9">
+                    <navigationItem key="navigationItem" title="Beer Mais" id="Wyh-dV-dP9">
                         <barButtonItem key="leftBarButtonItem" systemItem="trash" id="VKE-Kl-hqq">
                             <connections>
                                 <action selector="deleteBeersAction:" destination="BYZ-38-t0r" id="Kpf-y0-bR7"/>
