@@ -11,6 +11,7 @@ def global_pods
     pod 'MaterialComponents/TextFields'
     pod 'Firebase/Core'
     pod 'Firebase/AdMob'
+    pod 'Firebase/Messaging'
 end
 
 target 'BeerMais' do

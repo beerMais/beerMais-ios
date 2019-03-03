@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 import GoogleMobileAds
 import Firebase
 
@@ -21,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppP.launch()
         FirebaseApp.configure()
         GADMobileAds.configure(withApplicationID: SettingsP().getAdMobId())
+        Messaging.messaging().delegate = self
+        
+        self.requestNotificationAuthorization(application: application)
+        application.registerForRemoteNotifications()
+        
         return true
     }
 
@@ -92,6 +98,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    private func requestNotificationAuthorization(application: UIApplication) {
+        UNUserNotificationCenter.current().delegate = self
+        
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in })
+    }
 
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+}
+
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+    }
+}
