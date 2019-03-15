@@ -56,11 +56,13 @@ class BeerP {
         }
         
         let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale(identifier: "pt_BR")
+        numberFormatter.decimalSeparator = ","
         numberFormatter.numberStyle = .decimal
         
         if let number = numberFormatter.number(from: value) {
             return number.floatValue
-        } else if let number = numberFormatter.number(from: value.replacingOccurrences(of: ",", with: ".")) {
+        } else if let number = numberFormatter.number(from: value.replacingOccurrences(of: ".", with: ",")) {
             return number.floatValue
         }
         
