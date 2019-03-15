@@ -27,7 +27,13 @@ class BeerCollectionViewCell: UICollectionViewCell {
         var amountText = "\(amount)ml"
         
         if (amount >= 1000) {
-            amountText = "\(amount / 1000)L"
+            amountText = "1 L"
+            
+            if (amount >= 1010) {
+                var amountString = String(format: "%.2f", Float(amount) / 1000)
+                amountString = amountString.replacingOccurrences(of: ".", with: ",")
+                amountText = "\(amountString) L"
+            }
         }
         
         self.amountLabel.text = amountText

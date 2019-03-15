@@ -164,7 +164,13 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         var amountText = "\(beer.amount)ml"
         
         if (beer.amount >= 1000) {
-            amountText = "\(beer.amount / 1000)L"
+            amountText = "1 L"
+            
+            if (beer.amount >= 1010) {
+                var amountString = String(format: "%.2f", Float(beer.amount) / 1000)
+                amountString = amountString.replacingOccurrences(of: ".", with: ",")
+                amountText = "\(amountString) L"
+            }
         }
         self.rankAmountLabel.text = amountText
         
