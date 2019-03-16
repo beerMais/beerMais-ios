@@ -214,7 +214,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         }
         
         if (!isValidBrand) {
-            self.brandController?.setErrorText("Digite um Nome", errorAccessibilityValue: nil)
+            self.brandController?.setErrorText("Digite uma Marca", errorAccessibilityValue: nil)
         } else {
             self.brandController?.setErrorText(nil, errorAccessibilityValue: nil)
         }
