@@ -53,7 +53,6 @@
 		2DB4AB7B21FABD43007F977B /* Help.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DB4AB7A21FABD43007F977B /* Help.storyboard */; };
 		2DB4AB7E21FABDAF007F977B /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DB4AB7D21FABDAF007F977B /* About.storyboard */; };
 		2DD7E2B621F6737E0084E17F /* SettingsP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7E2B421F6737D0084E17F /* SettingsP.swift */; };
-		2DD8D82E224FCA4D004EE31C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD8D82D224FCA4D004EE31C /* Info.plist */; };
 		BAC457B46A8740B98C7DE1B8 /* Pods_BeerMais.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D145C7C21F7DDE600B223E5 /* Pods_BeerMais.framework */; };
 /* End PBXBuildFile section */
 
@@ -368,7 +367,6 @@
 				2D1D3E5921F670C9008F51AC /* Main.storyboard in Resources */,
 				2DB4AB7E21FABDAF007F977B /* About.storyboard in Resources */,
 				2DB4AB7B21FABD43007F977B /* Help.storyboard in Resources */,
-				2DD8D82E224FCA4D004EE31C /* Info.plist in Resources */,
 				2D1D3E5A21F670C9008F51AC /* GoogleService-Info.plist in Resources */,
 				2D6FB1FC21F786D400407BC9 /* Alert.storyboard in Resources */,
 			);
@@ -689,7 +687,7 @@
 				CODE_SIGN_ENTITLEMENTS = BeerMais/BeerMais.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
-				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Property lists/Prod/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -710,7 +708,7 @@
 				CODE_SIGN_ENTITLEMENTS = BeerMais/BeerMais.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
-				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Property lists/Prod/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
