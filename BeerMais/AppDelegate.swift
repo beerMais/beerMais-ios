@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         AppP.launch()
         FirebaseApp.configure()
-        GADMobileAds.configure(withApplicationID: SettingsP().getAdMobId())
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         Messaging.messaging().delegate = self
         
         self.requestNotificationAuthorization(application: application)

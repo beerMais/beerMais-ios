@@ -53,6 +53,8 @@
 		2DB4AB7B21FABD43007F977B /* Help.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DB4AB7A21FABD43007F977B /* Help.storyboard */; };
 		2DB4AB7E21FABDAF007F977B /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DB4AB7D21FABDAF007F977B /* About.storyboard */; };
 		2DD7E2B621F6737E0084E17F /* SettingsP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7E2B421F6737D0084E17F /* SettingsP.swift */; };
+		2DD8D82E224FCA4D004EE31C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD8D82D224FCA4D004EE31C /* Info.plist */; };
+		BAC457B46A8740B98C7DE1B8 /* Pods_BeerMais.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D145C7C21F7DDE600B223E5 /* Pods_BeerMais.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +65,6 @@
 		2D17011E21D2B3CE0009A316 /* BeerMais.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeerMais.xcdatamodel; sourceTree = "<group>"; };
 		2D17012021D2B3CF0009A316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D17012321D2B3CF0009A316 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2D17012521D2B3CF0009A316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D17012D21D2DCB50009A316 /* BeerCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BeerCollectionCell.xib; sourceTree = "<group>"; };
 		2D17013021D2DD320009A316 /* BeerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerCollectionViewCell.swift; sourceTree = "<group>"; };
 		2D17013321D2DECE0009A316 /* ResumeBeersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeBeersVC.swift; sourceTree = "<group>"; };
@@ -88,6 +89,8 @@
 		2DB4AB7D21FABDAF007F977B /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		2DD7E2B421F6737D0084E17F /* SettingsP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsP.swift; sourceTree = "<group>"; };
 		2DD7E2B721F6754A0084E17F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2DD8D82D224FCA4D004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2DD8D82F224FCA6C004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82B1FAFB7A8FFA718A1A519F /* Pods_BeerMais_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeerMais_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9D54898E6844B416745B1A /* Pods-BeerMais Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerMais Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeerMais Dev/Pods-BeerMais Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		C4D251C75BAE389492831CA7 /* Pods-BeerMais.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerMais.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeerMais/Pods-BeerMais.debug.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D1D3E5121F670C9008F51AC /* Pods_BeerMais.framework in Frameworks */,
+				BAC457B46A8740B98C7DE1B8 /* Pods_BeerMais.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +150,6 @@
 				2D17012B21D2DBDA0009A316 /* Views */,
 				2D17011621D2B3CE0009A316 /* AppDelegate.swift */,
 				2D17012021D2B3CF0009A316 /* Assets.xcassets */,
-				2D17012521D2B3CF0009A316 /* Info.plist */,
 				2D17011D21D2B3CE0009A316 /* BeerMais.xcdatamodeld */,
 			);
 			path = BeerMais;
@@ -225,6 +228,7 @@
 		2D1D3E3B21F66AE9008F51AC /* Prod */ = {
 			isa = PBXGroup;
 			children = (
+				2DD8D82D224FCA4D004EE31C /* Info.plist */,
 				2D1D3E3E21F66E4D008F51AC /* Settings.plist */,
 				2D1D3E3C21F66B16008F51AC /* GoogleService-Info.plist */,
 			);
@@ -234,6 +238,7 @@
 		2D1D3E4021F66EC0008F51AC /* Dev */ = {
 			isa = PBXGroup;
 			children = (
+				2DD8D82F224FCA6C004EE31C /* Info.plist */,
 				2D1D3E6221F67183008F51AC /* Settings.plist */,
 				2DD7E2B721F6754A0084E17F /* GoogleService-Info.plist */,
 			);
@@ -363,6 +368,7 @@
 				2D1D3E5921F670C9008F51AC /* Main.storyboard in Resources */,
 				2DB4AB7E21FABDAF007F977B /* About.storyboard in Resources */,
 				2DB4AB7B21FABD43007F977B /* Help.storyboard in Resources */,
+				2DD8D82E224FCA4D004EE31C /* Info.plist in Resources */,
 				2D1D3E5A21F670C9008F51AC /* GoogleService-Info.plist in Resources */,
 				2D6FB1FC21F786D400407BC9 /* Alert.storyboard in Resources */,
 			);
@@ -725,7 +731,7 @@
 				CODE_SIGN_ENTITLEMENTS = "BeerMais Dev.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
-				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Property lists/Dev/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -746,7 +752,7 @@
 				CODE_SIGN_ENTITLEMENTS = "BeerMais Dev.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
-				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Property lists/Dev/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
