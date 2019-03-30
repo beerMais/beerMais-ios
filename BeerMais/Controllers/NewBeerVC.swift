@@ -124,6 +124,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.brandController = MDCTextInputControllerOutlined(textInput: self.brandTextField)
         self.valueController = MDCTextInputControllerOutlined(textInput: self.valueTextField)
         self.amountController = MDCTextInputControllerOutlined(textInput: self.amountTextField)
+        self.amountController?.helperText = "Em ml"
     }
     
     private func addStyleToButtons() {
