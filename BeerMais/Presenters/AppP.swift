@@ -7,15 +7,19 @@
 //
 
 import Foundation
+import StoreKit
 
 class AppP {
     private static let hasBeenLaunchedBeforeFlag = "hasBeenLaunchedBeforeFlag"
+    private static let APP_OPEN_COUNT = "APP_OPEN_COUNT"
     
     static func launch() {
         if (!self.isFirstLaunch()) {
             self.setFirstLaunch()
 //            self.setInitialData()
         }
+        
+        self.incrementAppOpenedCount()
     }
     
     static func isFirstLaunch() -> Bool {
@@ -64,5 +68,36 @@ class AppP {
         beer5["value"] = 10.99
         beer5["type"] = Int16(2)
         _ = beerPresenter.create(data: beer5)
+    }
+    
+    static func incrementAppOpenedCount() {
+        guard var appOpenCount = UserDefaults.standard.value(forKey: self.APP_OPEN_COUNT) as? Int else {
+            UserDefaults.standard.set(1, forKey: self.APP_OPEN_COUNT)
+            return
+        }
+        appOpenCount += 1
+        UserDefaults.standard.set(appOpenCount, forKey: self.APP_OPEN_COUNT)
+        self.checkAndAskForReview()
+    }
+    
+    static func checkAndAskForReview() {
+        guard let appOpenCount = UserDefaults.standard.value(forKey: self.APP_OPEN_COUNT) as? Int else {
+            UserDefaults.standard.set(1, forKey: self.APP_OPEN_COUNT)
+            return
+        }
+        
+        switch appOpenCount {
+        case 10,50:
+            AppP().requestReview()
+        case _ where appOpenCount%100 == 0 :
+            AppP().requestReview()
+        default:
+            break;
+        }
+        
+    }
+    
+    func requestReview() {
+        SKStoreReviewController.requestReview()
     }
 }
