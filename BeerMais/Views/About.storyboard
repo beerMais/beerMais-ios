@@ -37,7 +37,7 @@ https://www.flaticon.com</string>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1Te-Le-2ha">
                                 <rect key="frame" x="110" y="36" width="155" height="50"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="e80-2f-Ux5">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_rounded" translatesAutoresizingMaskIntoConstraints="NO" id="e80-2f-Ux5">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="tya-Bs-a7A"/>
@@ -97,7 +97,7 @@ https://www.flaticon.com</string>
         </scene>
     </scenes>
     <resources>
-        <image name="icon" width="1024" height="1024"/>
+        <image name="icon_rounded" width="1024" height="1024"/>
         <image name="icons8-about-50" width="25" height="25"/>
     </resources>
 </document>
