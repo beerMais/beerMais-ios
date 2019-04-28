@@ -168,6 +168,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.brandTextField.text = self.beer.brand
         self.valueTextField.text = self.beerP.formatValueToShow(value: self.beer.value)
         self.amountTextField.text = String(self.beer.amount)
+        self.alcoholicTextField.text = self.beerP.formatValueToShow(value: self.beer.alcoholic)
     }
     
     private func editMode(isEditMode: Bool) {
@@ -180,6 +181,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         beer["amount"] = Int16(self.amountTextField.text ?? "")
         beer["brand"] = self.brandTextField.text
         beer["value"] = BeerP().formatValue(value: self.valueTextField.text ?? "")
+        beer["alcoholic"] = BeerP().formatValue(value: self.alcoholicTextField.text ?? "")
         
         var type: Int16 {
             return Int(self.amountTextField.text ?? "") ?? 0 >= 1000 ? 2 : 1

@@ -91,6 +91,7 @@ class BeerP {
         beer.brand = data["brand"] as? String
         beer.value = Float(truncating: data["value"] as! NSNumber)
         beer.type = data["type"] as! Int16
+        beer.alcoholic = Float(truncating: data["alcoholic"] as! NSNumber)
         
         return beer
     }

@@ -21,5 +21,6 @@ extension Beer {
     @NSManaged public var value: Float
     @NSManaged public var amount: Int16
     @NSManaged public var type: Int16
+    @NSManaged public var alcoholic: Float
 
 }
