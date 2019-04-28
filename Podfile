@@ -9,6 +9,7 @@ def global_pods
     pod 'MaterialComponents/Buttons+ButtonThemer'
     pod 'MaterialComponents/Buttons+ColorThemer'
     pod 'MaterialComponents/TextFields'
+    pod 'MaterialComponents/Chips'
     pod 'Firebase/Core'
     pod 'Firebase/AdMob'
     pod 'Firebase/Messaging'

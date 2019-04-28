@@ -87,6 +87,16 @@ PODS:
   - "MaterialComponents/Buttons+TypographyThemer (83.0.1)":
     - MaterialComponents/Buttons
     - MaterialComponents/schemes/Typography
+  - MaterialComponents/Chips (83.0.1):
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+    - MaterialComponents/TextFields
+    - MaterialComponents/Typography
+    - MDFInternationalization
   - MaterialComponents/Ink (83.0.1):
     - MaterialComponents/private/Math
   - MaterialComponents/Palettes (83.0.1)
@@ -136,6 +146,7 @@ DEPENDENCIES:
   - MaterialComponents/Buttons
   - "MaterialComponents/Buttons+ButtonThemer"
   - "MaterialComponents/Buttons+ColorThemer"
+  - MaterialComponents/Chips
   - MaterialComponents/TextFields
 
 SPEC REPOS:
@@ -171,6 +182,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
 
-PODFILE CHECKSUM: d531807d80c16bae0a03e3023a6fa51e512f8118
+PODFILE CHECKSUM: 28458e1771ec173b220a8d3938ad0eb95995b051
 
 COCOAPODS: 1.5.3
