@@ -34,10 +34,16 @@
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tamanho" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="No5-Qj-AFn" customClass="MDCTextField">
-                                        <rect key="frame" x="16" y="44" width="268" height="17"/>
+                                        <rect key="frame" x="16" y="44" width="126" height="17"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Teor Alcoólico" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YXQ-NR-aZr" customClass="MDCTextField">
+                                        <rect key="frame" x="158" y="44" width="126" height="17"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdM-VC-qF3" customClass="MDCFloatingButton">
                                         <rect key="frame" x="-11.999999999999996" y="-12" width="30" height="30"/>
@@ -102,8 +108,9 @@
                                 <constraints>
                                     <constraint firstItem="gdM-VC-qF3" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="-12" id="2h9-SY-3aV"/>
                                     <constraint firstItem="pin-vl-t6Z" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="3rz-xD-KFU"/>
+                                    <constraint firstItem="YXQ-NR-aZr" firstAttribute="top" secondItem="GCE-MG-BMj" secondAttribute="bottom" id="4zE-fL-i8d"/>
+                                    <constraint firstItem="No5-Qj-AFn" firstAttribute="width" secondItem="YXQ-NR-aZr" secondAttribute="width" id="8bC-3w-JtI"/>
                                     <constraint firstAttribute="height" constant="306" id="Cil-vY-b5S"/>
-                                    <constraint firstAttribute="trailing" secondItem="No5-Qj-AFn" secondAttribute="trailing" constant="16" id="FFA-G9-Bsl"/>
                                     <constraint firstAttribute="trailing" secondItem="8pE-Fs-S06" secondAttribute="trailing" constant="16" id="SMg-SN-gff"/>
                                     <constraint firstAttribute="bottom" secondItem="8pE-Fs-S06" secondAttribute="bottom" constant="14" id="X3R-jp-qmK"/>
                                     <constraint firstItem="No5-Qj-AFn" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="Y1I-0F-BTe"/>
@@ -112,7 +119,9 @@
                                     <constraint firstAttribute="bottom" secondItem="ptZ-Uf-ugK" secondAttribute="bottom" constant="14" id="cl2-b2-6zI"/>
                                     <constraint firstItem="gdM-VC-qF3" firstAttribute="top" secondItem="qm5-hC-Lcb" secondAttribute="top" constant="-12" id="f6n-SO-QAb"/>
                                     <constraint firstItem="GCE-MG-BMj" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="fWb-Ch-e81"/>
+                                    <constraint firstAttribute="trailing" secondItem="YXQ-NR-aZr" secondAttribute="trailing" constant="16" id="hbq-du-7C5"/>
                                     <constraint firstItem="No5-Qj-AFn" firstAttribute="top" secondItem="GCE-MG-BMj" secondAttribute="bottom" id="iiW-zS-J6N"/>
+                                    <constraint firstItem="YXQ-NR-aZr" firstAttribute="leading" secondItem="No5-Qj-AFn" secondAttribute="trailing" constant="16" id="mFW-vP-Lsn"/>
                                     <constraint firstItem="pin-vl-t6Z" firstAttribute="top" secondItem="qm5-hC-Lcb" secondAttribute="top" constant="10" id="prd-t1-0S3"/>
                                     <constraint firstItem="ptZ-Uf-ugK" firstAttribute="centerX" secondItem="qm5-hC-Lcb" secondAttribute="centerX" constant="5" id="pwg-Gp-kmz"/>
                                     <constraint firstAttribute="trailing" secondItem="pin-vl-t6Z" secondAttribute="trailing" constant="16" id="qyB-NS-yyQ"/>
@@ -141,6 +150,7 @@
                     </view>
                     <connections>
                         <outlet property="addButton" destination="ptZ-Uf-ugK" id="Yvd-Re-5Pv"/>
+                        <outlet property="alcoholicTextField" destination="YXQ-NR-aZr" id="VbZ-lx-JJa"/>
                         <outlet property="amountTextField" destination="No5-Qj-AFn" id="9p0-D6-s6k"/>
                         <outlet property="bannerView" destination="xIw-tn-C13" id="AYU-r2-7gY"/>
                         <outlet property="brandTextField" destination="pin-vl-t6Z" id="vtB-rM-IVH"/>

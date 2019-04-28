@@ -18,6 +18,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var brandTextField: MDCTextField!
     @IBOutlet weak var valueTextField: MDCTextField!
     @IBOutlet weak var amountTextField: MDCTextField!
+    @IBOutlet weak var alcoholicTextField: MDCTextField!
     @IBOutlet weak var addButton: MDCButton!
     @IBOutlet weak var editStackView: UIStackView!
     @IBOutlet weak var closeButton: MDCFloatingButton!
@@ -32,6 +33,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     private var brandController: MDCTextInputControllerOutlined?
     private var valueController: MDCTextInputControllerOutlined?
     private var amountController: MDCTextInputControllerOutlined?
+    private var alcoholicController: MDCTextInputControllerOutlined?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,6 +127,8 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.valueController = MDCTextInputControllerOutlined(textInput: self.valueTextField)
         self.amountController = MDCTextInputControllerOutlined(textInput: self.amountTextField)
         self.amountController?.helperText = "Em ml"
+        self.alcoholicController = MDCTextInputControllerOutlined(textInput: self.alcoholicTextField)
+        self.alcoholicController?.helperText = "Em %"
     }
     
     private func addStyleToButtons() {
@@ -150,6 +154,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.brandTextField.delegate = self
         self.valueTextField.delegate = self
         self.amountTextField.delegate = self
+        self.alcoholicTextField.delegate = self
     }
     
     private func populateBeer() {
