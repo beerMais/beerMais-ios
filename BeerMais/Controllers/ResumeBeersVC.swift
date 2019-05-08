@@ -100,13 +100,23 @@ class ResumeBeersVC: UIViewController {
     
     private func getBeers() {
         self.beerP.getBeers() { beers in
-            self.setBeers(beers: beers)
+            
+            if (self.selectedFilter == 0) {
+                self.setBeers(beers: beers)
+            } else {
+                self.setBeersByAlcohol(beers: beers)
+            }
             self.beersCollectionView.reloadData()
         }
     }
     
     private func setBeers(beers: [Beer]) {
         self.beers = self.beerP.calculateMostValuable(beers: beers)
+        self.setRank()
+    }
+    
+    private func setBeersByAlcohol(beers: [Beer]) {
+        self.beers = self.beerP.calculateMostValuableByAlcohol(beers: beers)
         self.setRank()
     }
     
@@ -244,7 +254,8 @@ class ResumeBeersVC: UIViewController {
     
     private func selectFilter(row: Int) {
         self.selectedFilter = row
-        self.filterCollectionView.reloadData()
+        self.getBeers()
+//        self.filterCollectionView.reloadData()
     }
 }
 

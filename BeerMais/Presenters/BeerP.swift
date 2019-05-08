@@ -36,12 +36,17 @@ class BeerP {
     }
     
     func calculateMostValuable(beers: [Beer]) -> [Beer] {
-        return beers.sorted(by: { self.getValuePerML(value: $0.value, amount: $0.amount) < self.getValuePerML(value: $1.value, amount: $1.amount) })
+        return beers.sorted(by: { self.getValuePerML($0) < self.getValuePerML($1) })
+    }
+    
+    func calculateMostValuableByAlcohol(beers: [Beer]) -> [Beer] {
+        return beers.filter { $0.alcoholic > 0 }
+                    .sorted(by: { self.getValuePerML($0) * $0.alcoholic > self.getValuePerML($1) * $1.alcoholic })
     }
     
     func getEconomy(beer1: Beer, beer2: Beer) -> Float {
-        let value1 = self.getValuePerML(value: beer1.value, amount: beer1.amount)
-        let value2 = self.getValuePerML(value: beer2.value, amount: beer2.amount)
+        let value1 = self.getValuePerML(beer1)
+        let value2 = self.getValuePerML(beer2)
         
         return (value2 - value1) * 1000
     }
@@ -82,8 +87,8 @@ class BeerP {
         _ = self.setBeerData(beer: beer, data: data)
     }
     
-    private func getValuePerML(value: Float, amount: Int16) -> Float {
-        return value / Float(amount)
+    private func getValuePerML(_ beer: Beer) -> Float {
+        return beer.value / Float(beer.amount)
     }
     
     private func setBeerData(beer: Beer, data: [String: Any]) -> Beer {
