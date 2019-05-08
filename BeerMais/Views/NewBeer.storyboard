@@ -28,13 +28,13 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Valor" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GCE-MG-BMj" customClass="MDCTextField">
-                                        <rect key="frame" x="16" y="27" width="126" height="17"/>
+                                        <rect key="frame" x="16" y="27" width="268" height="17"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tamanho" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="No5-Qj-AFn" customClass="MDCTextField">
-                                        <rect key="frame" x="16" y="44" width="268" height="17"/>
+                                        <rect key="frame" x="16" y="44" width="126" height="17"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -97,8 +97,8 @@
                                             <constraint firstAttribute="height" constant="35" id="AQt-CE-vdd"/>
                                         </constraints>
                                     </stackView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Teor Alcoólico" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YXQ-NR-aZr" customClass="MDCTextField">
-                                        <rect key="frame" x="158" y="27" width="126" height="17"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0,00" placeholder="Teor Alcoólico" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YXQ-NR-aZr" customClass="MDCTextField">
+                                        <rect key="frame" x="158" y="44" width="126" height="17"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -110,23 +110,23 @@
                                     <constraint firstItem="pin-vl-t6Z" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="3rz-xD-KFU"/>
                                     <constraint firstAttribute="height" constant="306" id="Cil-vY-b5S"/>
                                     <constraint firstAttribute="trailing" secondItem="8pE-Fs-S06" secondAttribute="trailing" constant="16" id="SMg-SN-gff"/>
-                                    <constraint firstAttribute="trailing" secondItem="No5-Qj-AFn" secondAttribute="trailing" constant="16" id="TJS-hP-jrv"/>
-                                    <constraint firstItem="YXQ-NR-aZr" firstAttribute="width" secondItem="GCE-MG-BMj" secondAttribute="width" id="UUU-RN-by0"/>
                                     <constraint firstAttribute="bottom" secondItem="8pE-Fs-S06" secondAttribute="bottom" constant="14" id="X3R-jp-qmK"/>
                                     <constraint firstItem="No5-Qj-AFn" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="Y1I-0F-BTe"/>
+                                    <constraint firstItem="YXQ-NR-aZr" firstAttribute="width" secondItem="No5-Qj-AFn" secondAttribute="width" id="Y2O-xg-r39"/>
                                     <constraint firstItem="GCE-MG-BMj" firstAttribute="top" secondItem="pin-vl-t6Z" secondAttribute="bottom" id="a5W-YT-gwa"/>
                                     <constraint firstAttribute="width" constant="300" id="asE-Hq-0VD"/>
                                     <constraint firstAttribute="bottom" secondItem="ptZ-Uf-ugK" secondAttribute="bottom" constant="14" id="cl2-b2-6zI"/>
+                                    <constraint firstItem="YXQ-NR-aZr" firstAttribute="top" secondItem="GCE-MG-BMj" secondAttribute="bottom" id="coo-o9-vag"/>
                                     <constraint firstItem="gdM-VC-qF3" firstAttribute="top" secondItem="qm5-hC-Lcb" secondAttribute="top" constant="-12" id="f6n-SO-QAb"/>
+                                    <constraint firstAttribute="trailing" secondItem="GCE-MG-BMj" secondAttribute="trailing" constant="16" id="f8f-AI-BKa"/>
                                     <constraint firstItem="GCE-MG-BMj" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="fWb-Ch-e81"/>
+                                    <constraint firstItem="YXQ-NR-aZr" firstAttribute="leading" secondItem="No5-Qj-AFn" secondAttribute="trailing" constant="16" id="gwl-TK-wix"/>
                                     <constraint firstAttribute="trailing" secondItem="YXQ-NR-aZr" secondAttribute="trailing" constant="16" id="hbq-du-7C5"/>
                                     <constraint firstItem="No5-Qj-AFn" firstAttribute="top" secondItem="GCE-MG-BMj" secondAttribute="bottom" id="iiW-zS-J6N"/>
-                                    <constraint firstItem="YXQ-NR-aZr" firstAttribute="leading" secondItem="GCE-MG-BMj" secondAttribute="trailing" constant="16" id="o2v-bu-nFm"/>
                                     <constraint firstItem="pin-vl-t6Z" firstAttribute="top" secondItem="qm5-hC-Lcb" secondAttribute="top" constant="10" id="prd-t1-0S3"/>
                                     <constraint firstItem="ptZ-Uf-ugK" firstAttribute="centerX" secondItem="qm5-hC-Lcb" secondAttribute="centerX" constant="5" id="pwg-Gp-kmz"/>
                                     <constraint firstAttribute="trailing" secondItem="pin-vl-t6Z" secondAttribute="trailing" constant="16" id="qyB-NS-yyQ"/>
                                     <constraint firstItem="8pE-Fs-S06" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="y8h-Oo-PIh"/>
-                                    <constraint firstItem="YXQ-NR-aZr" firstAttribute="top" secondItem="pin-vl-t6Z" secondAttribute="bottom" id="ylF-bo-Jnd"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIw-tn-C13" customClass="GADBannerView">
