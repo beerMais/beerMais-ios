@@ -22,10 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppP.launch()
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        Messaging.messaging().delegate = self
         
         self.requestNotificationAuthorization(application: application)
         application.registerForRemoteNotifications()
+        
+        
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert, .badge, .sound],
+            completionHandler: {_, _ in })
         
         return true
     }
@@ -111,10 +115,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
-}
-
-extension AppDelegate: MessagingDelegate {
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("Firebase registration token: \(fcmToken)")
-    }
 }
