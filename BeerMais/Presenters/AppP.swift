@@ -39,6 +39,7 @@ class AppP {
         beer1["brand"] = "Budweiser"
         beer1["value"] = 2.59
         beer1["type"] = Int16(1)
+        beer1["alcoholic"] = 0.0
         _ = beerPresenter.create(data: beer1)
         
         var beer2 = [String: Any]()
@@ -46,6 +47,7 @@ class AppP {
         beer2["brand"] = "Heineken"
         beer2["value"] = 2.79
         beer2["type"] = Int16(1)
+        beer2["alcoholic"] = 0.0
         _ = beerPresenter.create(data: beer2)
         
         var beer3 = [String: Any]()
@@ -53,6 +55,7 @@ class AppP {
         beer3["brand"] = "Budweiser"
         beer3["value"] = 2.10
         beer3["type"] = Int16(1)
+        beer3["alcoholic"] = 0.0
         _ = beerPresenter.create(data: beer3)
         
         var beer4 = [String: Any]()
@@ -60,6 +63,7 @@ class AppP {
         beer4["brand"] = "Stella Artois"
         beer4["value"] = 2.35
         beer4["type"] = Int16(1)
+        beer4["alcoholic"] = 0.0
         _ = beerPresenter.create(data: beer4)
         
         var beer5 = [String: Any]()
@@ -67,6 +71,7 @@ class AppP {
         beer5["brand"] = "Original"
         beer5["value"] = 10.99
         beer5["type"] = Int16(2)
+        beer5["alcoholic"] = 0.0
         _ = beerPresenter.create(data: beer5)
     }
     
