@@ -221,6 +221,7 @@ class ResumeBeersVC: UIViewController {
         cell.setBrand(brand: beer.brand ?? "")
         cell.setValue(value: beer.value)
         cell.setType(type: beer.type)
+        cell.setCounter(counter: indexPath.row + 1)
         
         return cell
     }

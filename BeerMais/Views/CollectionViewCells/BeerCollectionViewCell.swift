@@ -14,6 +14,7 @@ class BeerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var brandLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var cellView: UIView!
+    @IBOutlet weak var counterLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -64,5 +65,9 @@ class BeerCollectionViewCell: UICollectionViewCell {
     
     func setBackgroudColor(color: UIColor) {
         self.cellView.backgroundColor = color
+    }
+    
+    func setCounter(counter: Int) {
+        self.counterLabel.text = String(counter)
     }
 }
