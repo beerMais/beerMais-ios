@@ -39,7 +39,7 @@ class AppP {
         beer1["brand"] = "Budweiser"
         beer1["value"] = 2.59
         beer1["type"] = Int16(1)
-        beer1["alcoholic"] = 0.0
+        beer1["alcoholic"] = 5.0
         _ = beerPresenter.create(data: beer1)
         
         var beer2 = [String: Any]()
@@ -55,7 +55,7 @@ class AppP {
         beer3["brand"] = "Budweiser"
         beer3["value"] = 2.10
         beer3["type"] = Int16(1)
-        beer3["alcoholic"] = 0.0
+        beer3["alcoholic"] = 5.0
         _ = beerPresenter.create(data: beer3)
         
         var beer4 = [String: Any]()
@@ -73,6 +73,14 @@ class AppP {
         beer5["type"] = Int16(2)
         beer5["alcoholic"] = 0.0
         _ = beerPresenter.create(data: beer5)
+        
+        var beer6 = [String: Any]()
+        beer6["amount"] = Int16(1000)
+        beer6["brand"] = "Vodka Absolut"
+        beer6["value"] = 60.99
+        beer6["type"] = Int16(2)
+        beer6["alcoholic"] = 40.0
+        _ = beerPresenter.create(data: beer6)
     }
     
     static func incrementAppOpenedCount() {

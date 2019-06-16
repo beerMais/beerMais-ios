@@ -41,7 +41,7 @@ class BeerP {
     
     func calculateMostValuableByAlcohol(beers: [Beer]) -> [Beer] {
         return beers.filter { $0.alcoholic > 0 }
-                    .sorted(by: { self.getValuePerML($0) * $0.alcoholic > self.getValuePerML($1) * $1.alcoholic })
+                    .sorted(by: { self.getValuePerAlcohol($0) < self.getValuePerAlcohol($1) })
     }
     
     func getEconomy(beer1: Beer, beer2: Beer) -> Float {
@@ -99,5 +99,9 @@ class BeerP {
         beer.alcoholic = Float(truncating: data["alcoholic"] as! NSNumber)
         
         return beer
+    }
+    
+    private func getValuePerAlcohol(_ beer: Beer) -> Float {
+        return beer.value / ( Float(beer.amount) * beer.alcoholic)
     }
 }
