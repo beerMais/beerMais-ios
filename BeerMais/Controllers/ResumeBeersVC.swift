@@ -256,7 +256,7 @@ class ResumeBeersVC: UIViewController {
     private func selectFilter(row: Int) {
         self.selectedFilter = row
         self.getBeers()
-//        self.filterCollectionView.reloadData()
+        self.filterCollectionView.reloadData()
     }
 }
 
