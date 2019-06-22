@@ -121,7 +121,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Economia de:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="x3G-Gu-oS5">
-                                                        <rect key="frame" x="182" y="45" width="165" height="25"/>
+                                                        <rect key="frame" x="182" y="42" width="165" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="sBC-uD-IbU"/>
                                                         </constraints>
@@ -129,7 +129,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R$ 0,00/L" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="xat-a7-KPh">
-                                                        <rect key="frame" x="182" y="78" width="165" height="25"/>
+                                                        <rect key="frame" x="182" y="71" width="165" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="tY0-ai-hyx"/>
                                                         </constraints>
@@ -137,22 +137,33 @@
                                                         <color key="textColor" red="0.0" green="0.7843137255" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*entre bebidas 1 e 2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="C94-0Z-9L3">
+                                                        <rect key="frame" x="244" y="109" width="97" height="14"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="14" id="sg3-Bc-Ci7"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" name="economyBackground"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="WoV-fQ-JTX" secondAttribute="bottom" constant="29" id="6LN-Qy-EKB"/>
                                                     <constraint firstItem="WoV-fQ-JTX" firstAttribute="leading" secondItem="qcS-y3-wY3" secondAttribute="trailing" constant="16" id="6cv-sl-JgS"/>
                                                     <constraint firstItem="xat-a7-KPh" firstAttribute="width" secondItem="x3G-Gu-oS5" secondAttribute="width" id="AVA-c4-85L"/>
                                                     <constraint firstAttribute="trailing" secondItem="x3G-Gu-oS5" secondAttribute="trailing" constant="8" id="KY6-CP-ohR"/>
+                                                    <constraint firstAttribute="bottom" secondItem="C94-0Z-9L3" secondAttribute="bottom" constant="2" id="M8Z-48-8rM"/>
                                                     <constraint firstItem="qcS-y3-wY3" firstAttribute="top" secondItem="yYh-GJ-jkK" secondAttribute="bottom" constant="16" id="QGN-p2-BcW"/>
                                                     <constraint firstAttribute="trailing" secondItem="xat-a7-KPh" secondAttribute="trailing" constant="8" id="S6n-fv-009"/>
-                                                    <constraint firstItem="xat-a7-KPh" firstAttribute="top" secondItem="x3G-Gu-oS5" secondAttribute="bottom" constant="8" id="WxY-mT-ai4"/>
+                                                    <constraint firstItem="xat-a7-KPh" firstAttribute="top" secondItem="x3G-Gu-oS5" secondAttribute="bottom" constant="4" id="WxY-mT-ai4"/>
                                                     <constraint firstItem="qcS-y3-wY3" firstAttribute="leading" secondItem="MXE-68-N29" secondAttribute="leading" constant="8" id="XuE-nU-TUQ"/>
                                                     <constraint firstItem="0EI-Le-adp" firstAttribute="leading" secondItem="MXE-68-N29" secondAttribute="leading" constant="8" id="b5P-P9-O1L"/>
                                                     <constraint firstItem="yYh-GJ-jkK" firstAttribute="leading" secondItem="MXE-68-N29" secondAttribute="leading" constant="8" id="cyi-1h-aK1"/>
+                                                    <constraint firstAttribute="trailing" secondItem="C94-0Z-9L3" secondAttribute="trailing" constant="14" id="fTE-GG-rvn"/>
                                                     <constraint firstAttribute="trailing" secondItem="yYh-GJ-jkK" secondAttribute="trailing" constant="8" id="gm2-Rc-EeJ"/>
                                                     <constraint firstItem="x3G-Gu-oS5" firstAttribute="leading" secondItem="WoV-fQ-JTX" secondAttribute="trailing" constant="8" id="iD1-U1-xRT"/>
-                                                    <constraint firstItem="x3G-Gu-oS5" firstAttribute="top" secondItem="yYh-GJ-jkK" secondAttribute="bottom" constant="16" id="lt3-Zr-Ekb"/>
+                                                    <constraint firstItem="x3G-Gu-oS5" firstAttribute="top" secondItem="yYh-GJ-jkK" secondAttribute="bottom" constant="13" id="lt3-Zr-Ekb"/>
                                                     <constraint firstAttribute="height" constant="125" id="mtq-ee-xFU"/>
                                                     <constraint firstItem="0EI-Le-adp" firstAttribute="top" secondItem="qcS-y3-wY3" secondAttribute="bottom" id="oZr-an-OOT"/>
                                                     <constraint firstItem="yYh-GJ-jkK" firstAttribute="top" secondItem="MXE-68-N29" secondAttribute="top" constant="8" id="zIa-bd-W7l"/>
@@ -232,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jRY-50-e1X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="318" y="122"/>
+            <point key="canvasLocation" x="317.60000000000002" y="121.92118226600985"/>
         </scene>
         <!--Help-->
         <scene sceneID="sj0-gF-gQs">
@@ -260,6 +271,9 @@
         <image name="icons8-math-50" width="25" height="25"/>
         <namedColor name="black-white">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="economyBackground">
+            <color red="0.94999998807907104" green="0.99000000953674316" blue="0.88999998569488525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="primary">
             <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
