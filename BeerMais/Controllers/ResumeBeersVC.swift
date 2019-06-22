@@ -237,6 +237,13 @@ class ResumeBeersVC: UIViewController {
         cell.chipView.isSelected = self.selectedFilter == indexPath.row
         cell.chipView.setBorderWidth(1.0, for: .selected)
         
+        if #available(iOS 13.0, *) {
+            cell.chipView.backgroundColor = UIColor.tertiarySystemBackground
+            cell.chipView.setBorderColor(UIColor.gray, for: .selected)
+            cell.chipView.setTitleColor(UIColor.lightGray, for: .normal)
+            cell.chipView.setTitleColor(UIColor.white, for: .selected)
+        }
+        
         return cell
     }
     
