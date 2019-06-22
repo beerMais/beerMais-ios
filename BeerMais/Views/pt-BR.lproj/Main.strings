@@ -1,0 +1,30 @@
+
+/* Class = "UILabel"; text = "350ml"; ObjectID = "0EI-Le-adp"; */
+"0EI-Le-adp.text" = "350ml";
+
+/* Class = "UIViewController"; title = "Resume Beers"; ObjectID = "Bnc-FK-zQt"; */
+"Bnc-FK-zQt.title" = "Resume Beers";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "HV8-eX-Qh4"; */
+"HV8-eX-Qh4.title" = "Item";
+
+/* Class = "UILabel"; text = "R$ 0,00"; ObjectID = "WoV-fQ-JTX"; */
+"WoV-fQ-JTX.text" = "R$ 0,00";
+
+/* Class = "UINavigationItem"; title = "Beer Mais"; ObjectID = "Wyh-dV-dP9"; */
+"Wyh-dV-dP9.title" = "Beer Mais";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "gG7-dY-UMS"; */
+"gG7-dY-UMS.title" = "Item";
+
+/* Class = "UITabBarItem"; title = "Calculadora"; ObjectID = "lxG-0w-4Zx"; */
+"lxG-0w-4Zx.title" = "Calculadora";
+
+/* Class = "UILabel"; text = "Economia de:"; ObjectID = "x3G-Gu-oS5"; */
+"x3G-Gu-oS5.text" = "Economia de:";
+
+/* Class = "UILabel"; text = "R$ 0,00/L"; ObjectID = "xat-a7-KPh"; */
+"xat-a7-KPh.text" = "R$ 0,00/L";
+
+/* Class = "UILabel"; text = "Marca"; ObjectID = "yYh-GJ-jkK"; */
+"yYh-GJ-jkK.text" = "Marca";
