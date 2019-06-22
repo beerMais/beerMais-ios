@@ -129,6 +129,34 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.amountController?.helperText = "Em ml"
         self.alcoholicController = MDCTextInputControllerOutlined(textInput: self.alcoholicTextField)
         self.alcoholicController?.helperText = "Em %"
+        
+        if #available(iOS 13.0, *) {
+            self.addDarkModeToFields()
+        }
+    }
+    
+    private func addDarkModeToFields() {
+        if #available(iOS 13.0, *) {
+            self.brandController?.inlinePlaceholderColor =  UIColor(named: "black-white")
+            self.brandController?.floatingPlaceholderNormalColor =  UIColor(named: "black-white")
+            self.brandController?.leadingUnderlineLabelTextColor =  UIColor(named: "black-white")
+            self.brandController?.textInput?.textColor =  UIColor(named: "black-white")
+            
+            self.valueController?.inlinePlaceholderColor =  UIColor(named: "black-white")
+            self.valueController?.floatingPlaceholderNormalColor =  UIColor(named: "black-white")
+            self.valueController?.leadingUnderlineLabelTextColor =  UIColor(named: "black-white")
+            self.valueController?.textInput?.textColor =  UIColor(named: "black-white")
+            
+            self.amountController?.inlinePlaceholderColor =  UIColor(named: "black-white")
+            self.amountController?.floatingPlaceholderNormalColor =  UIColor(named: "black-white")
+            self.amountController?.leadingUnderlineLabelTextColor =  UIColor(named: "black-white")
+            self.amountController?.textInput?.textColor =  UIColor(named: "black-white")
+            
+            self.alcoholicController?.inlinePlaceholderColor =  UIColor(named: "black-white")
+            self.alcoholicController?.floatingPlaceholderNormalColor =  UIColor(named: "black-white")
+            self.alcoholicController?.leadingUnderlineLabelTextColor =  UIColor(named: "black-white")
+            self.alcoholicController?.textInput?.textColor =  UIColor(named: "black-white")
+        }
     }
     
     private func addStyleToButtons() {
