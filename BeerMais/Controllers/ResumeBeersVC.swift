@@ -90,6 +90,14 @@ class ResumeBeersVC: UIViewController {
         }, text: "Apagar")
     }
     
+    @IBAction func swipeLeftGesture(_ sender: Any) {
+        self.selectFilter(row: 0)
+    }
+    
+    @IBAction func swipeRightGesture(_ sender: Any) {
+        self.selectFilter(row: 1)
+    }
+    
     private func addDelegate() {
         self.beersCollectionView.delegate = self
         self.beersCollectionView.dataSource = self
