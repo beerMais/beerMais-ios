@@ -164,7 +164,7 @@ class ResumeBeersVC: UIViewController {
         let valueString = self.beerP.formatValueToShow(value: beer.value)
         self.rankValueLabel.text = "R$ \(valueString)"
         
-        let economy = self.beerP.getEconomy(beer1: beer, beer2: self.beers[1])
+        let economy = self.beerP.getEconomy(beer1: beer, beer2: self.beers[1], option: selectedFilter)
         let economyFormated = self.beerP.formatValueToShow(value: economy)
         self.rankEconomyLabel.text = "R$ \(economyFormated)/L"
     }

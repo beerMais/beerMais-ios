@@ -44,9 +44,9 @@ class BeerP {
                     .sorted(by: { self.getValuePerAlcohol($0) < self.getValuePerAlcohol($1) })
     }
     
-    func getEconomy(beer1: Beer, beer2: Beer) -> Float {
-        let value1 = self.getValuePerML(beer1)
-        let value2 = self.getValuePerML(beer2)
+    func getEconomy(beer1: Beer, beer2: Beer, option: Int) -> Float {
+        let value1 = (option == 0) ? self.getValuePerML(beer1) : self.getValuePerAlcohol(beer1)
+        let value2 = (option == 0) ? self.getValuePerML(beer2) : self.getValuePerAlcohol(beer2)
         
         return (value2 - value1) * 1000
     }
