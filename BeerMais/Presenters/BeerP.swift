@@ -87,6 +87,14 @@ class BeerP {
         _ = self.setBeerData(beer: beer, data: data)
     }
     
+    func countBeersWithAlcohol(beers: [Beer]) -> Int {
+        let beersWithAlcohol = beers.filter { beer in
+            beer.alcoholic > 0
+        }
+        
+        return beersWithAlcohol.count
+    }
+    
     private func getValuePerML(_ beer: Beer) -> Float {
         return beer.value / Float(beer.amount)
     }

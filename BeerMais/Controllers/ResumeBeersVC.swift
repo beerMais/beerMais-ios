@@ -123,12 +123,11 @@ class ResumeBeersVC: UIViewController {
     private func setRank() {
         self.setBorderToRank()
         
-        if (self.beers.count < 2) {
-            self.rankBrandLabel.text = "Marca"
-            self.rankBeerImageView.image = UIImage(named: "icons8-beer-can-100")
-            self.rankAmountLabel.text = "350ml"
-            self.rankValueLabel.text = "RS 0,00"
-            self.rankEconomyLabel.text = "R$ 0,00/L"
+        let isEmptyBeers = self.selectedFilter == 0 && self.beers.count < 2
+        let isEmptyBeersWithAlcohol = self.selectedFilter == 1 && self.beerP.countBeersWithAlcohol(beers: self.beers) < 2
+        
+        if (isEmptyBeers || isEmptyBeersWithAlcohol) {
+            self.setDefaultRank()
             return
         }
         
@@ -167,6 +166,14 @@ class ResumeBeersVC: UIViewController {
         let economy = self.beerP.getEconomy(beer1: beer, beer2: self.beers[1], option: selectedFilter)
         let economyFormated = self.beerP.formatValueToShow(value: economy)
         self.rankEconomyLabel.text = "R$ \(economyFormated)/L"
+    }
+    
+    private func setDefaultRank() {
+        self.rankBrandLabel.text = "Marca"
+        self.rankBeerImageView.image = UIImage(named: "icons8-beer-can-100")
+        self.rankAmountLabel.text = "350ml"
+        self.rankValueLabel.text = "RS 0,00"
+        self.rankEconomyLabel.text = "R$ 0,00/L"
     }
     
     private func deleteBeers() {
