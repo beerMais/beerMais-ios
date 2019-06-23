@@ -256,7 +256,7 @@ class ResumeBeersVC: UIViewController {
             cell.chipView.backgroundColor = UIColor.tertiarySystemBackground
             cell.chipView.setBorderColor(UIColor.gray, for: .selected)
             cell.chipView.setTitleColor(UIColor.lightGray, for: .normal)
-            cell.chipView.setTitleColor(UIColor.white, for: .selected)
+            cell.chipView.setTitleColor(UIColor.label, for: .selected)
         }
         
         return cell
