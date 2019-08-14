@@ -346,10 +346,11 @@
 				};
 			};
 			buildConfigurationList = 2D17010E21D2B3CD0009A316 /* Build configuration list for PBXProject "BeerMais" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				en,
 				Base,
 				"pt-BR",
 			);
