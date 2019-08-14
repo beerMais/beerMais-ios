@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -57,14 +57,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnV-1H-NGP">
+                                <rect key="frame" x="159" y="97" width="5" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pZo-FJ-n0K" firstAttribute="leading" secondItem="XWn-NX-1ah" secondAttribute="trailing" constant="8" id="2GX-5k-NWE"/>
                             <constraint firstItem="XWn-NX-1ah" firstAttribute="leading" secondItem="Z1L-6n-fnA" secondAttribute="leading" constant="8" id="EZn-Zz-dQh"/>
                             <constraint firstItem="Dbv-Bl-f9V" firstAttribute="top" secondItem="Z1L-6n-fnA" secondAttribute="top" constant="8" id="GCu-cY-GAF"/>
+                            <constraint firstAttribute="trailing" secondItem="nnV-1H-NGP" secondAttribute="trailing" constant="6" id="JXO-nb-3O5"/>
                             <constraint firstItem="XWn-NX-1ah" firstAttribute="top" secondItem="MhT-f5-qt8" secondAttribute="bottom" id="KIr-Pv-iVi"/>
                             <constraint firstItem="MhT-f5-qt8" firstAttribute="top" secondItem="Dbv-Bl-f9V" secondAttribute="bottom" constant="8" id="Yxd-dT-A1j"/>
+                            <constraint firstAttribute="bottom" secondItem="nnV-1H-NGP" secondAttribute="bottom" constant="6" id="dOh-L3-wa0"/>
                             <constraint firstItem="Dbv-Bl-f9V" firstAttribute="leading" secondItem="Z1L-6n-fnA" secondAttribute="leading" constant="8" id="eC2-Vn-N58"/>
                             <constraint firstAttribute="trailing" secondItem="Dbv-Bl-f9V" secondAttribute="trailing" constant="8" id="iOJ-b4-1PR"/>
                             <constraint firstItem="MhT-f5-qt8" firstAttribute="leading" secondItem="Z1L-6n-fnA" secondAttribute="leading" constant="8" id="ntM-rh-QoS"/>
@@ -87,12 +95,13 @@
                 <outlet property="beerImageView" destination="MhT-f5-qt8" id="Usy-SG-KqW"/>
                 <outlet property="brandLabel" destination="Dbv-Bl-f9V" id="7Zg-qk-RGg"/>
                 <outlet property="cellView" destination="Z1L-6n-fnA" id="gYo-Oo-0pp"/>
+                <outlet property="counterLabel" destination="nnV-1H-NGP" id="Ogb-Cy-VKY"/>
                 <outlet property="valueLabel" destination="pZo-FJ-n0K" id="wK6-hn-dzR"/>
             </connections>
             <point key="canvasLocation" x="217.59999999999999" y="-25.637181409295355"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="icons8-beer-bottle-100" width="180" height="180"/>
+        <image name="icons8-beer-bottle-100" width="50" height="50"/>
     </resources>
 </document>
