@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  BeerMais
+
+  Created by José Neves on 25/08/19.
+  Copyright © 2019 joseneves. All rights reserved.
+*/
+
+"helpBeerText" = "Tap + to add a drink";
+"brand" = "Brand";
+"addSize" = "Enter a Size";
+"addBrand" = "Enter a Brand";
+"addPrice" = "Enter a Price";
+"sizeDesc" = "In mL";
