@@ -1,0 +1,21 @@
+
+/* Class = "UIButton"; normalTitle = "Salvar"; ObjectID = "9Ky-oe-mk4"; */
+"9Ky-oe-mk4.normalTitle" = "Salvar";
+
+/* Class = "UITextField"; placeholder = "Valor"; ObjectID = "GCE-MG-BMj"; */
+"GCE-MG-BMj.placeholder" = "Valor";
+
+/* Class = "UIViewController"; title = "New Beer"; ObjectID = "LnT-MB-8eB"; */
+"LnT-MB-8eB.title" = "New Beer";
+
+/* Class = "UITextField"; placeholder = "Tamanho"; ObjectID = "No5-Qj-AFn"; */
+"No5-Qj-AFn.placeholder" = "Tamanho";
+
+/* Class = "UIButton"; normalTitle = "Deletar"; ObjectID = "Nq5-tE-XgI"; */
+"Nq5-tE-XgI.normalTitle" = "Deletar";
+
+/* Class = "UITextField"; placeholder = "Marca"; ObjectID = "pin-vl-t6Z"; */
+"pin-vl-t6Z.placeholder" = "Marca";
+
+/* Class = "UIButton"; normalTitle = "Adicionar"; ObjectID = "ptZ-Uf-ugK"; */
+"ptZ-Uf-ugK.normalTitle" = "Adicionar";

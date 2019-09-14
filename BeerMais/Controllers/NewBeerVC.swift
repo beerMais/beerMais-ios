@@ -124,7 +124,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.brandController = MDCTextInputControllerOutlined(textInput: self.brandTextField)
         self.valueController = MDCTextInputControllerOutlined(textInput: self.valueTextField)
         self.amountController = MDCTextInputControllerOutlined(textInput: self.amountTextField)
-        self.amountController?.helperText = "Em ml"
+        self.amountController?.helperText = "sizeDesc".localized
     }
     
     private func addStyleToButtons() {
@@ -209,19 +209,19 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         let isValidValue = BeerP().formatValue(value: self.valueTextField.text ?? "") > 0
         
         if (!isValidAmount) {
-            self.amountController?.setErrorText("Digite um Tamanho", errorAccessibilityValue: nil)
+            self.amountController?.setErrorText("addSize".localized, errorAccessibilityValue: nil)
         } else {
             self.amountController?.setErrorText(nil, errorAccessibilityValue: nil)
         }
         
         if (!isValidBrand) {
-            self.brandController?.setErrorText("Digite uma Marca", errorAccessibilityValue: nil)
+            self.brandController?.setErrorText("addBrand".localized, errorAccessibilityValue: nil)
         } else {
             self.brandController?.setErrorText(nil, errorAccessibilityValue: nil)
         }
         
         if (!isValidValue) {
-            self.valueController?.setErrorText("Digite um Valor", errorAccessibilityValue: nil)
+            self.valueController?.setErrorText("addPrice".localized, errorAccessibilityValue: nil)
         } else {
             self.valueController?.setErrorText(nil, errorAccessibilityValue: nil)
         }

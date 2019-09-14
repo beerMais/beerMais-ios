@@ -79,7 +79,7 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         if (lines == 0) {
             let message = UILabel()
             message.textColor = UIColor.darkGray
-            message.text = "Clique em + para adicionar uma bebida"
+            message.text = "helpBeerText".localized
             message.textAlignment = .center
             message.numberOfLines = 2
             
@@ -98,6 +98,7 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         cell.setBrand(brand: beer.brand ?? "")
         cell.setValue(value: beer.value)
         cell.setType(type: beer.type)
+        cell.setCounter(counter: indexPath.row + 1)
         
         return cell
     }
@@ -149,7 +150,7 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         self.setBorderToRank()
         
         if (self.beers.count < 2) {
-            self.rankBrandLabel.text = "Marca"
+            self.rankBrandLabel.text = "brand".localized
             self.rankBeerImageView.image = UIImage(named: "icons8-beer-can-100")
             self.rankAmountLabel.text = "350ml"
             self.rankValueLabel.text = "RS 0,00"
