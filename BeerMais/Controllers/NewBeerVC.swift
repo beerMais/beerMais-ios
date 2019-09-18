@@ -125,6 +125,27 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.valueController = MDCTextInputControllerOutlined(textInput: self.valueTextField)
         self.amountController = MDCTextInputControllerOutlined(textInput: self.amountTextField)
         self.amountController?.helperText = "sizeDesc".localized
+        
+        if #available(iOS 13.0, *) {
+            self.addDarkModeToFields()
+        }
+    }
+    
+    private func addDarkModeToFields() {
+        self.brandController?.inlinePlaceholderColor =  UIColor(named: "black-white")
+        self.brandController?.floatingPlaceholderNormalColor =  UIColor(named: "black-white")
+        self.brandController?.leadingUnderlineLabelTextColor =  UIColor(named: "black-white")
+        self.brandController?.textInput?.textColor =  UIColor(named: "black-white")
+        
+        self.valueController?.inlinePlaceholderColor =  UIColor(named: "black-white")
+        self.valueController?.floatingPlaceholderNormalColor =  UIColor(named: "black-white")
+        self.valueController?.leadingUnderlineLabelTextColor =  UIColor(named: "black-white")
+        self.valueController?.textInput?.textColor =  UIColor(named: "black-white")
+        
+        self.amountController?.inlinePlaceholderColor =  UIColor(named: "black-white")
+        self.amountController?.floatingPlaceholderNormalColor =  UIColor(named: "black-white")
+        self.amountController?.leadingUnderlineLabelTextColor =  UIColor(named: "black-white")
+        self.amountController?.textInput?.textColor =  UIColor(named: "black-white")
     }
     
     private func addStyleToButtons() {

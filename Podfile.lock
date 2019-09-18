@@ -44,7 +44,7 @@ PODS:
     - GoogleUtilities/Reachability (~> 6.2)
     - GoogleUtilities/UserDefaults (~> 6.2)
     - Protobuf (~> 3.1)
-  - Google-Mobile-Ads-SDK (7.49.0):
+  - Google-Mobile-Ads-SDK (7.50.0):
     - GoogleAppMeasurement (~> 6.0)
   - GoogleAppMeasurement (6.1.1):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
@@ -56,26 +56,26 @@ PODS:
   - GoogleDataTransportCCTSupport (1.0.4):
     - GoogleDataTransport (~> 1.2)
     - nanopb
-  - GoogleUtilities/AppDelegateSwizzler (6.2.5):
+  - GoogleUtilities/AppDelegateSwizzler (6.3.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.2.5)
-  - GoogleUtilities/Logger (6.2.5):
+  - GoogleUtilities/Environment (6.3.0)
+  - GoogleUtilities/Logger (6.3.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.2.5):
+  - GoogleUtilities/MethodSwizzler (6.3.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.2.5):
+  - GoogleUtilities/Network (6.3.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.2.5)"
-  - GoogleUtilities/Reachability (6.2.5):
+  - "GoogleUtilities/NSData+zlib (6.3.0)"
+  - GoogleUtilities/Reachability (6.3.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (6.2.5):
+  - GoogleUtilities/UserDefaults (6.3.0):
     - GoogleUtilities/Logger
-  - MaterialComponents/AnimationTiming (89.0.0)
-  - MaterialComponents/Buttons (89.0.0):
+  - MaterialComponents/AnimationTiming (90.0.0)
+  - MaterialComponents/Buttons (90.0.0):
     - MaterialComponents/Elevation
     - MaterialComponents/Ink
     - MaterialComponents/private/Math
@@ -86,60 +86,62 @@ PODS:
     - MaterialComponents/Typography
     - MDFInternationalization
     - MDFTextAccessibility
-  - "MaterialComponents/Buttons+ButtonThemer (89.0.0)":
+  - "MaterialComponents/Buttons+ButtonThemer (90.0.0)":
     - MaterialComponents/Buttons
     - "MaterialComponents/Buttons+ColorThemer"
     - "MaterialComponents/Buttons+ShapeThemer"
     - "MaterialComponents/Buttons+TypographyThemer"
     - MaterialComponents/Palettes
-  - "MaterialComponents/Buttons+ColorThemer (89.0.0)":
+  - "MaterialComponents/Buttons+ColorThemer (90.0.0)":
     - MaterialComponents/Buttons
     - MaterialComponents/schemes/Color
-  - "MaterialComponents/Buttons+ShapeThemer (89.0.0)":
+  - "MaterialComponents/Buttons+ShapeThemer (90.0.0)":
     - MaterialComponents/Buttons
     - MaterialComponents/schemes/Shape
-  - "MaterialComponents/Buttons+TypographyThemer (89.0.0)":
+  - "MaterialComponents/Buttons+TypographyThemer (90.0.0)":
     - MaterialComponents/Buttons
     - MaterialComponents/schemes/Typography
-  - MaterialComponents/Elevation (89.0.0):
+  - MaterialComponents/Elevation (90.0.0):
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/Ink (89.0.0):
+  - MaterialComponents/Ink (90.0.0):
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/Palettes (89.0.0)
-  - MaterialComponents/private/Application (89.0.0)
-  - MaterialComponents/private/Color (89.0.0)
-  - MaterialComponents/private/Math (89.0.0)
-  - MaterialComponents/Ripple (89.0.0):
+  - MaterialComponents/Palettes (90.0.0)
+  - MaterialComponents/private/Application (90.0.0)
+  - MaterialComponents/private/Color (90.0.0)
+  - MaterialComponents/private/Math (90.0.0)
+  - MaterialComponents/Ripple (90.0.0):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/schemes/Color (89.0.0):
+  - MaterialComponents/schemes/Color (90.0.0):
     - MaterialComponents/private/Color
-  - MaterialComponents/schemes/Shape (89.0.0):
+  - MaterialComponents/schemes/Shape (90.0.0):
     - MaterialComponents/ShapeLibrary
     - MaterialComponents/Shapes
-  - MaterialComponents/schemes/Typography (89.0.0):
+  - MaterialComponents/schemes/Typography (90.0.0):
+    - "MaterialComponents/schemes/Typography+BasicFontScheme"
     - MaterialComponents/Typography
-  - MaterialComponents/ShadowElevations (89.0.0)
-  - MaterialComponents/ShadowLayer (89.0.0):
+  - "MaterialComponents/schemes/Typography+BasicFontScheme (90.0.0)"
+  - MaterialComponents/ShadowElevations (90.0.0)
+  - MaterialComponents/ShadowLayer (90.0.0):
     - MaterialComponents/ShadowElevations
-  - MaterialComponents/ShapeLibrary (89.0.0):
+  - MaterialComponents/ShapeLibrary (90.0.0):
     - MaterialComponents/private/Math
     - MaterialComponents/Shapes
-  - MaterialComponents/Shapes (89.0.0):
+  - MaterialComponents/Shapes (90.0.0):
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
     - MaterialComponents/ShadowLayer
-  - MaterialComponents/TextFields (89.0.0):
+  - MaterialComponents/TextFields (90.0.0):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Elevation
     - MaterialComponents/Palettes
     - MaterialComponents/private/Math
     - MaterialComponents/Typography
     - MDFInternationalization
-  - MaterialComponents/Typography (89.0.0):
+  - MaterialComponents/Typography (90.0.0):
     - MaterialComponents/private/Application
     - MaterialComponents/private/Math
   - MDFInternationalization (2.0.0)
@@ -191,12 +193,12 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
   FirebaseInstanceID: 550df9be1f99f751d8fcde3ac342a1e21a0e6c42
   FirebaseMessaging: 9483ac438b7b223c09dad8712310e9ee7d562c99
-  Google-Mobile-Ads-SDK: df315e371b29cf935f7ea872e7bdec39462a100e
+  Google-Mobile-Ads-SDK: d48dbaf5bae1ab7a94a9786f493c26c454bc6f16
   GoogleAppMeasurement: 86a82f0e1f20b8eedf8e20326530138fd71409de
   GoogleDataTransport: 8f9897b8e073687f24ca8d3c3a8013dec7d2d1cc
   GoogleDataTransportCCTSupport: 7455d07b98851aa63e4c05a34dad356ca588479e
-  GoogleUtilities: e7dc37039b19df7fe543479d3e4a02ac8d11bb69
-  MaterialComponents: 82a817165f3ca2df0e3f321a9d05d08bb152c7f8
+  GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
+  MaterialComponents: 2d4ab59f2da5ae6ea615b136dbbad86cdcd91c7f
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
