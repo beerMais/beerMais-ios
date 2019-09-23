@@ -205,11 +205,15 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         var borderColor = UIColor.lightGray
         var borderWidth = 0.5
         var backgroundColor = UIColor.white
+        
+        if #available(iOS 13.0, *) {
+            backgroundColor = UIColor.tertiarySystemBackground
+        }
     
         if (self.beers.count > 1) {
             borderColor = UIColor(red: 0.00, green: 0.78, blue: 0.33, alpha: 1.0)
             borderWidth = 2
-            backgroundColor = UIColor(red: 0.95, green: 0.99, blue: 0.89, alpha: 1.0)
+            backgroundColor = UIColor(named: "economyBackground")!
         }
         
         self.rankView.layer.borderColor = borderColor.cgColor
