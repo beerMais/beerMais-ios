@@ -74,8 +74,8 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.3.0):
     - GoogleUtilities/Logger
-  - MaterialComponents/AnimationTiming (90.0.0)
-  - MaterialComponents/Buttons (90.0.0):
+  - MaterialComponents/AnimationTiming (91.0.0)
+  - MaterialComponents/Buttons (91.0.0):
     - MaterialComponents/Elevation
     - MaterialComponents/Ink
     - MaterialComponents/private/Math
@@ -86,62 +86,62 @@ PODS:
     - MaterialComponents/Typography
     - MDFInternationalization
     - MDFTextAccessibility
-  - "MaterialComponents/Buttons+ButtonThemer (90.0.0)":
+  - "MaterialComponents/Buttons+ButtonThemer (91.0.0)":
     - MaterialComponents/Buttons
     - "MaterialComponents/Buttons+ColorThemer"
     - "MaterialComponents/Buttons+ShapeThemer"
     - "MaterialComponents/Buttons+TypographyThemer"
     - MaterialComponents/Palettes
-  - "MaterialComponents/Buttons+ColorThemer (90.0.0)":
+  - "MaterialComponents/Buttons+ColorThemer (91.0.0)":
     - MaterialComponents/Buttons
     - MaterialComponents/schemes/Color
-  - "MaterialComponents/Buttons+ShapeThemer (90.0.0)":
+  - "MaterialComponents/Buttons+ShapeThemer (91.0.0)":
     - MaterialComponents/Buttons
     - MaterialComponents/schemes/Shape
-  - "MaterialComponents/Buttons+TypographyThemer (90.0.0)":
+  - "MaterialComponents/Buttons+TypographyThemer (91.0.0)":
     - MaterialComponents/Buttons
     - MaterialComponents/schemes/Typography
-  - MaterialComponents/Elevation (90.0.0):
+  - MaterialComponents/Elevation (91.0.0):
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/Ink (90.0.0):
+  - MaterialComponents/Ink (91.0.0):
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/Palettes (90.0.0)
-  - MaterialComponents/private/Application (90.0.0)
-  - MaterialComponents/private/Color (90.0.0)
-  - MaterialComponents/private/Math (90.0.0)
-  - MaterialComponents/Ripple (90.0.0):
+  - MaterialComponents/Palettes (91.0.0)
+  - MaterialComponents/private/Application (91.0.0)
+  - MaterialComponents/private/Color (91.0.0)
+  - MaterialComponents/private/Math (91.0.0)
+  - MaterialComponents/Ripple (91.0.0):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
-  - MaterialComponents/schemes/Color (90.0.0):
+  - MaterialComponents/schemes/Color (91.0.0):
     - MaterialComponents/private/Color
-  - MaterialComponents/schemes/Shape (90.0.0):
+  - MaterialComponents/schemes/Shape (91.0.0):
     - MaterialComponents/ShapeLibrary
     - MaterialComponents/Shapes
-  - MaterialComponents/schemes/Typography (90.0.0):
+  - MaterialComponents/schemes/Typography (91.0.0):
     - "MaterialComponents/schemes/Typography+BasicFontScheme"
     - MaterialComponents/Typography
-  - "MaterialComponents/schemes/Typography+BasicFontScheme (90.0.0)"
-  - MaterialComponents/ShadowElevations (90.0.0)
-  - MaterialComponents/ShadowLayer (90.0.0):
+  - "MaterialComponents/schemes/Typography+BasicFontScheme (91.0.0)"
+  - MaterialComponents/ShadowElevations (91.0.0)
+  - MaterialComponents/ShadowLayer (91.0.0):
     - MaterialComponents/ShadowElevations
-  - MaterialComponents/ShapeLibrary (90.0.0):
+  - MaterialComponents/ShapeLibrary (91.0.0):
     - MaterialComponents/private/Math
     - MaterialComponents/Shapes
-  - MaterialComponents/Shapes (90.0.0):
+  - MaterialComponents/Shapes (91.0.0):
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
     - MaterialComponents/ShadowLayer
-  - MaterialComponents/TextFields (90.0.0):
+  - MaterialComponents/TextFields (91.0.0):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Elevation
     - MaterialComponents/Palettes
     - MaterialComponents/private/Math
     - MaterialComponents/Typography
     - MDFInternationalization
-  - MaterialComponents/Typography (90.0.0):
+  - MaterialComponents/Typography (91.0.0):
     - MaterialComponents/private/Application
     - MaterialComponents/private/Math
   - MDFInternationalization (2.0.0)
@@ -198,7 +198,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 8f9897b8e073687f24ca8d3c3a8013dec7d2d1cc
   GoogleDataTransportCCTSupport: 7455d07b98851aa63e4c05a34dad356ca588479e
   GoogleUtilities: 9c2c544202301110b29f7974a82e77fdcf12bf51
-  MaterialComponents: 2d4ab59f2da5ae6ea615b136dbbad86cdcd91c7f
+  MaterialComponents: 9b634b0dedadff0f5936267db4eb6bd6b642f7fc
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
