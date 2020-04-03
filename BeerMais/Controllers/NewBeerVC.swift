@@ -159,12 +159,18 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         
         let positiveColorScheme = MDCSemanticColorScheme()
         positiveColorScheme.primaryColor = UIColor(red: 0.04, green: 0.69, blue: 0.00, alpha: 1.0)
-        MDCContainedButtonColorThemer.applySemanticColorScheme(positiveColorScheme, to: self.addButton)
-        MDCContainedButtonColorThemer.applySemanticColorScheme(positiveColorScheme, to: self.saveButton)
+        
+        let positiveCS = MDCContainerScheme()
+        positiveCS.colorScheme = positiveColorScheme
+        self.addButton.applyContainedTheme(withScheme: positiveCS)
+        self.saveButton.applyContainedTheme(withScheme: positiveCS)
         
         let negativeColorScheme = MDCSemanticColorScheme()
         negativeColorScheme.primaryColor = UIColor(red: 0.96, green: 0.26, blue: 0.21, alpha: 1.0)
-        MDCContainedButtonColorThemer.applySemanticColorScheme(negativeColorScheme, to: self.deleteButton)
+        
+        let negativeCS = MDCContainerScheme()
+        negativeCS.colorScheme = negativeColorScheme
+        self.deleteButton.applyContainedTheme(withScheme: negativeCS)
     }
     
     private func addDelegates() {

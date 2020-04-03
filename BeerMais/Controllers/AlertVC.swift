@@ -95,6 +95,9 @@ class AlertVC: UIViewController {
         
         let positiveColorScheme = MDCSemanticColorScheme()
         positiveColorScheme.primaryColor = UIColor(red: 0.04, green: 0.69, blue: 0.00, alpha: 1.0)
-        MDCContainedButtonColorThemer.applySemanticColorScheme(positiveColorScheme, to: self.positiveButton)
+        
+        let positiveCS = MDCContainerScheme()
+        positiveCS.colorScheme = positiveColorScheme
+        self.positiveButton.applyContainedTheme(withScheme: positiveCS)
     }
 }

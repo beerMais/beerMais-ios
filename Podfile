@@ -8,6 +8,7 @@ def global_pods
     pod 'MaterialComponents/Buttons'
     pod 'MaterialComponents/Buttons+ButtonThemer'
     pod 'MaterialComponents/Buttons+ColorThemer'
+    pod 'MaterialComponents/Buttons+Theming'
     pod 'MaterialComponents/TextFields'
     pod 'Firebase/Core'
     pod 'Firebase/AdMob'
