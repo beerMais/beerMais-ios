@@ -15,6 +15,10 @@ class BeerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var counterLabel: UILabel!
+    @IBOutlet weak var perLiterLabel: UILabel!
+    
+    private var amount: Int16 = 0
+    private var value: Float = 0.0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,6 +42,9 @@ class BeerCollectionViewCell: UICollectionViewCell {
         }
         
         self.amountLabel.text = amountText
+        
+        self.amount = amount
+        self.calculatePerLiter()
     }
     
     func setBrand(brand: String) {
@@ -47,6 +54,9 @@ class BeerCollectionViewCell: UICollectionViewCell {
     func setValue(value: Float) {
         let valueString = BeerP().formatValueToShow(value: value)
         self.valueLabel.text = "R$ \(valueString)"
+        
+        self.value = value
+        self.calculatePerLiter()
     }
     
     func setType(type: Int16) {
@@ -69,5 +79,15 @@ class BeerCollectionViewCell: UICollectionViewCell {
     
     func setCounter(counter: Int) {
         self.counterLabel.text = String(counter)
+    }
+    
+    private func calculatePerLiter() {
+        if amount == 0 && value == 0 {
+            return
+        }
+        
+        let beerP = BeerP()
+        let perLiter = beerP.getValuePerML(value: value, amount: amount) * 1000
+        self.perLiterLabel.text = "R$ \(beerP.formatValueToShow(value: perLiter))/L"
     }
 }

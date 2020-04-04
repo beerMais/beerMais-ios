@@ -82,7 +82,7 @@ class BeerP {
         _ = self.setBeerData(beer: beer, data: data)
     }
     
-    private func getValuePerML(value: Float, amount: Int16) -> Float {
+    func getValuePerML(value: Float, amount: Int16) -> Float {
         return value / Float(amount)
     }
     
