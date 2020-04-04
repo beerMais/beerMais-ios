@@ -16,7 +16,10 @@ class AppP {
     static func launch() {
         if (!self.isFirstLaunch()) {
             self.setFirstLaunch()
-//            self.setInitialData()
+            
+            #if DEBUG
+                self.setInitialData()
+            #endif
         }
         
         self.incrementAppOpenedCount()
