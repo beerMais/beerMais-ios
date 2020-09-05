@@ -99,5 +99,7 @@ class AlertVC: UIViewController {
         let positiveCS = MDCContainerScheme()
         positiveCS.colorScheme = positiveColorScheme
         self.positiveButton.applyContainedTheme(withScheme: positiveCS)
+        
+        self.positiveButton.setElevation(ShadowElevation(1), for: .normal)
     }
 }

@@ -149,7 +149,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     }
     
     private func addStyleToButtons() {
-        self.closeButton.setElevation(ShadowElevation(rawValue: 0), for: .normal)
+        self.closeButton.setElevation(ShadowElevation(0), for: .normal)
         
         let shapeGenerator = MDCCurvedRectShapeGenerator()
         shapeGenerator.cornerSize = CGSize(width: 6, height: 6)
@@ -171,6 +171,10 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         let negativeCS = MDCContainerScheme()
         negativeCS.colorScheme = negativeColorScheme
         self.deleteButton.applyContainedTheme(withScheme: negativeCS)
+        
+        self.addButton.setElevation(ShadowElevation(1), for: .normal)
+        self.saveButton.setElevation(ShadowElevation(1), for: .normal)
+        self.deleteButton.setElevation(ShadowElevation(1), for: .normal)
     }
     
     private func addDelegates() {
