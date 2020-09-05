@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17124"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,23 +22,23 @@
                                 <rect key="frame" x="37.666666666666657" y="253" width="300" height="306"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Marca" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pin-vl-t6Z" customClass="MDCTextField">
-                                        <rect key="frame" x="16" y="10" width="268" height="17"/>
+                                        <rect key="frame" x="16" y="10.000000000000002" width="268" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Valor" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GCE-MG-BMj" customClass="MDCTextField">
-                                        <rect key="frame" x="16" y="27" width="268" height="17"/>
+                                        <rect key="frame" x="16" y="28.666666666666686" width="268" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tamanho" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="No5-Qj-AFn" customClass="MDCTextField">
-                                        <rect key="frame" x="16" y="44" width="268" height="17"/>
+                                        <rect key="frame" x="16" y="47.333333333333314" width="268" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdM-VC-qF3" customClass="MDCFloatingButton">
                                         <rect key="frame" x="-11.999999999999996" y="-12" width="30" height="30"/>
-                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="794-Tr-z1s"/>
                                             <constraint firstAttribute="height" constant="30" id="duf-74-zy5"/>
@@ -47,7 +49,7 @@
                                             <action selector="closeAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="jqv-OO-ros"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptZ-Uf-ugK" customClass="MDCButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptZ-Uf-ugK" customClass="MDCButton">
                                         <rect key="frame" x="100" y="257" width="110" height="35"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -55,6 +57,7 @@
                                             <constraint firstAttribute="height" constant="35" id="b1r-k8-zfU"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <color key="tintColor" name="white-black"/>
                                         <state key="normal" title="Adicionar"/>
                                         <connections>
                                             <action selector="addAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="Tnp-IE-Ssi"/>
@@ -63,25 +66,27 @@
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="8pE-Fs-S06">
                                         <rect key="frame" x="16" y="257" width="268" height="35"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nq5-tE-XgI" customClass="MDCButton">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nq5-tE-XgI" customClass="MDCButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="126" height="35"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="Xd0-dl-w8m"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="tintColor" name="white-black"/>
                                                 <state key="normal" title="Deletar"/>
                                                 <connections>
                                                     <action selector="deleteAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="egA-s7-EWc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ky-oe-mk4" customClass="MDCButton">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ky-oe-mk4" customClass="MDCButton">
                                                 <rect key="frame" x="142" y="0.0" width="126" height="35"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="0dI-HZ-N3m"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="tintColor" name="white-black"/>
                                                 <state key="normal" title="Salvar"/>
                                                 <connections>
                                                     <action selector="editAction:" destination="LnT-MB-8eB" eventType="touchUpInside" id="6qB-1k-fob"/>
@@ -93,7 +98,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="gdM-VC-qF3" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="-12" id="2h9-SY-3aV"/>
                                     <constraint firstItem="pin-vl-t6Z" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="3rz-xD-KFU"/>
@@ -124,6 +129,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="KQg-Pq-nAj"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
@@ -132,7 +138,6 @@
                             <constraint firstItem="xIw-tn-C13" firstAttribute="centerX" secondItem="cRO-J6-Mep" secondAttribute="centerX" id="d7N-vg-GxF"/>
                             <constraint firstItem="qm5-hC-Lcb" firstAttribute="centerX" secondItem="cRO-J6-Mep" secondAttribute="centerX" id="kaf-ML-XQT"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="KQg-Pq-nAj"/>
                     </view>
                     <connections>
                         <outlet property="addButton" destination="ptZ-Uf-ugK" id="Yvd-Re-5Pv"/>
@@ -154,5 +159,11 @@
     </scenes>
     <resources>
         <image name="icons8-cancel-48" width="48" height="48"/>
+        <namedColor name="white-black">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
