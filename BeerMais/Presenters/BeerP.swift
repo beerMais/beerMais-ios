@@ -50,25 +50,6 @@ class BeerP {
         CoreDataP().deleteData(entityName: self.entityName)
     }
     
-    func formatValue(value: String) -> Float {
-        if (value.count == 0) {
-            return 0
-        }
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.locale = Locale(identifier: "pt_BR")
-        numberFormatter.decimalSeparator = ","
-        numberFormatter.numberStyle = .decimal
-        
-        if let number = numberFormatter.number(from: value) {
-            return number.floatValue
-        } else if let number = numberFormatter.number(from: value.replacingOccurrences(of: ".", with: ",")) {
-            return number.floatValue
-        }
-        
-        return 0
-    }
-    
     func formatValueToShow(value: Float) -> String {
         let valueString = String(format: "%.2f", value)
         return valueString.replacingOccurrences(of: ".", with: ",")
@@ -84,6 +65,19 @@ class BeerP {
     
     func getValuePerML(value: Float, amount: Int16) -> Float {
         return value / Float(amount)
+    }
+    
+    static func getValueFromString(value: String) -> Float {
+        var amountWithPrefix = value
+        // remove from String: "$", ".", ","
+        let regex = try! NSRegularExpression(pattern: "[^0-9]", options: .caseInsensitive)
+        amountWithPrefix = regex.stringByReplacingMatches(in: amountWithPrefix,
+                                                          options: NSRegularExpression.MatchingOptions(rawValue: 0),
+                                                          range: NSMakeRange(0, amountWithPrefix.count),
+                                                          withTemplate: "")
+
+        let floatValue = (amountWithPrefix as NSString).floatValue
+        return NSNumber(value: (floatValue / 100)).floatValue
     }
     
     private func setBeerData(beer: Beer, data: [String: Any]) -> Beer {

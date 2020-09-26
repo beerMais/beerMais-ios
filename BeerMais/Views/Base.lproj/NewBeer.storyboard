@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17124"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,23 +19,50 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qm5-hC-Lcb">
-                                <rect key="frame" x="37.666666666666657" y="253" width="300" height="306"/>
+                                <rect key="frame" x="37.666666666666657" y="256" width="300" height="300"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Marca" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pin-vl-t6Z" customClass="MDCTextField">
                                         <rect key="frame" x="16" y="10.000000000000002" width="268" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Valor" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GCE-MG-BMj" customClass="MDCTextField">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="m9I-4i-Hfz">
                                         <rect key="frame" x="16" y="28.666666666666686" width="268" height="18.666666666666671"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tamanho" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="No5-Qj-AFn" customClass="MDCTextField">
-                                        <rect key="frame" x="16" y="47.333333333333314" width="268" height="18.666666666666671"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                    </textField>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Valor" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GCE-MG-BMj" customClass="MDCTextField">
+                                                <rect key="frame" x="0.0" y="0.0" width="126" height="18.666666666666668"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <connections>
+                                                    <action selector="valueEditingChanged:" destination="LnT-MB-8eB" eventType="editingChanged" id="PLu-qF-UOe"/>
+                                                </connections>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tamanho" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="No5-Qj-AFn" customClass="MDCTextField">
+                                                <rect key="frame" x="142" y="0.0" width="126" height="18.666666666666668"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <connections>
+                                                    <action selector="amountEditingChanged:" destination="LnT-MB-8eB" eventType="editingChanged" id="tIH-h8-FfT"/>
+                                                    <action selector="amountEditingDidBegin:" destination="LnT-MB-8eB" eventType="editingDidBegin" id="574-jm-A83"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="26l-TD-VWW">
+                                        <rect key="frame" x="16" y="51.333333333333314" width="268" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="um9-na-UF0"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="269ml"/>
+                                            <segment title="350ml"/>
+                                            <segment title="600ml"/>
+                                            <segment title="1L"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="amountSegmentChanged:" destination="LnT-MB-8eB" eventType="valueChanged" id="Oqp-8l-har"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdM-VC-qF3" customClass="MDCFloatingButton">
                                         <rect key="frame" x="-11.999999999999996" y="-12" width="30" height="30"/>
                                         <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
@@ -50,7 +77,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptZ-Uf-ugK" customClass="MDCButton">
-                                        <rect key="frame" x="100" y="257" width="110" height="35"/>
+                                        <rect key="frame" x="100" y="251" width="110" height="35"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="110" id="FJK-bR-d3w"/>
@@ -64,7 +91,7 @@
                                         </connections>
                                     </button>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="8pE-Fs-S06">
-                                        <rect key="frame" x="16" y="257" width="268" height="35"/>
+                                        <rect key="frame" x="16" y="251" width="268" height="35"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nq5-tE-XgI" customClass="MDCButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="126" height="35"/>
@@ -102,21 +129,21 @@
                                 <constraints>
                                     <constraint firstItem="gdM-VC-qF3" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="-12" id="2h9-SY-3aV"/>
                                     <constraint firstItem="pin-vl-t6Z" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="3rz-xD-KFU"/>
-                                    <constraint firstAttribute="height" constant="306" id="Cil-vY-b5S"/>
-                                    <constraint firstAttribute="trailing" secondItem="No5-Qj-AFn" secondAttribute="trailing" constant="16" id="FFA-G9-Bsl"/>
+                                    <constraint firstItem="m9I-4i-Hfz" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="ATJ-gr-jct"/>
+                                    <constraint firstAttribute="height" constant="300" id="Cil-vY-b5S"/>
+                                    <constraint firstItem="26l-TD-VWW" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="QF0-D7-z01"/>
                                     <constraint firstAttribute="trailing" secondItem="8pE-Fs-S06" secondAttribute="trailing" constant="16" id="SMg-SN-gff"/>
                                     <constraint firstAttribute="bottom" secondItem="8pE-Fs-S06" secondAttribute="bottom" constant="14" id="X3R-jp-qmK"/>
-                                    <constraint firstItem="No5-Qj-AFn" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="Y1I-0F-BTe"/>
-                                    <constraint firstItem="GCE-MG-BMj" firstAttribute="top" secondItem="pin-vl-t6Z" secondAttribute="bottom" id="a5W-YT-gwa"/>
+                                    <constraint firstAttribute="trailing" secondItem="26l-TD-VWW" secondAttribute="trailing" constant="16" id="Zv6-f8-Ry1"/>
                                     <constraint firstAttribute="width" constant="300" id="asE-Hq-0VD"/>
                                     <constraint firstAttribute="bottom" secondItem="ptZ-Uf-ugK" secondAttribute="bottom" constant="14" id="cl2-b2-6zI"/>
                                     <constraint firstItem="gdM-VC-qF3" firstAttribute="top" secondItem="qm5-hC-Lcb" secondAttribute="top" constant="-12" id="f6n-SO-QAb"/>
-                                    <constraint firstItem="GCE-MG-BMj" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="fWb-Ch-e81"/>
-                                    <constraint firstItem="No5-Qj-AFn" firstAttribute="top" secondItem="GCE-MG-BMj" secondAttribute="bottom" id="iiW-zS-J6N"/>
+                                    <constraint firstAttribute="trailing" secondItem="m9I-4i-Hfz" secondAttribute="trailing" constant="16" id="l0F-10-Ctu"/>
+                                    <constraint firstItem="26l-TD-VWW" firstAttribute="top" secondItem="m9I-4i-Hfz" secondAttribute="bottom" constant="4" id="oKp-gb-Dqs"/>
+                                    <constraint firstItem="m9I-4i-Hfz" firstAttribute="top" secondItem="pin-vl-t6Z" secondAttribute="bottom" id="p0g-PZ-BwB"/>
                                     <constraint firstItem="pin-vl-t6Z" firstAttribute="top" secondItem="qm5-hC-Lcb" secondAttribute="top" constant="10" id="prd-t1-0S3"/>
                                     <constraint firstItem="ptZ-Uf-ugK" firstAttribute="centerX" secondItem="qm5-hC-Lcb" secondAttribute="centerX" constant="5" id="pwg-Gp-kmz"/>
                                     <constraint firstAttribute="trailing" secondItem="pin-vl-t6Z" secondAttribute="trailing" constant="16" id="qyB-NS-yyQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="GCE-MG-BMj" secondAttribute="trailing" constant="16" id="sJH-Jy-sJv"/>
                                     <constraint firstItem="8pE-Fs-S06" firstAttribute="leading" secondItem="qm5-hC-Lcb" secondAttribute="leading" constant="16" id="y8h-Oo-PIh"/>
                                 </constraints>
                             </view>
@@ -141,6 +168,7 @@
                     </view>
                     <connections>
                         <outlet property="addButton" destination="ptZ-Uf-ugK" id="Yvd-Re-5Pv"/>
+                        <outlet property="amountSegment" destination="26l-TD-VWW" id="ZsP-1J-zch"/>
                         <outlet property="amountTextField" destination="No5-Qj-AFn" id="9p0-D6-s6k"/>
                         <outlet property="bannerView" destination="xIw-tn-C13" id="AYU-r2-7gY"/>
                         <outlet property="brandTextField" destination="pin-vl-t6Z" id="vtB-rM-IVH"/>

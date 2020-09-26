@@ -13,7 +13,7 @@ import MaterialComponents.MaterialButtons_ButtonThemer
 import MaterialComponents.MaterialButtons_ColorThemer
 import MaterialComponents.MaterialTextFields
 
-class NewBeerVC: UIViewController, UITextFieldDelegate {
+class NewBeerVC: UIViewController {
     @IBOutlet weak var modalView: UIView!
     @IBOutlet weak var brandTextField: MDCTextField!
     @IBOutlet weak var valueTextField: MDCTextField!
@@ -24,6 +24,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var deleteButton: MDCButton!
     @IBOutlet weak var saveButton: MDCButton!
     @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var amountSegment: UISegmentedControl!
     
     private var resumeBeers: ResumeBeersVCDelegate!
     private var beer: Beer!
@@ -99,17 +100,35 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.animateViewMoving(up: true, moveValue: 100)
+    @IBAction func amountSegmentChanged(_ sender: UISegmentedControl) {
+        switch (sender.selectedSegmentIndex) {
+        case 0:
+            amountTextField.text = "269"
+            break
+        case 1:
+            amountTextField.text = "350"
+            break
+        case 2:
+            amountTextField.text = "600"
+            break
+        case 3:
+            amountTextField.text = "1000"
+            break
+        default:
+            break
+        }
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.animateViewMoving(up: false, moveValue: 100)
+    @IBAction func amountEditingDidBegin(_ sender: Any) {
+        parseAmountToFillSegment()
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    @IBAction func amountEditingChanged(_ sender: Any) {
+        parseAmountToFillSegment()
+    }
+    
+    @IBAction func valueEditingChanged(_ sender: Any) {
+        setValue(NSNumber(value: BeerP.getValueFromString(value: valueTextField.text ?? "")))
     }
     
     func attachResumeBeersDelegate(delegate: ResumeBeersVCDelegate) {
@@ -192,8 +211,9 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         self.editMode(isEditMode: true)
         
         self.brandTextField.text = self.beer.brand
-        self.valueTextField.text = self.beerP.formatValueToShow(value: self.beer.value)
+        setValue(NSNumber(value: beer.value))
         self.amountTextField.text = String(self.beer.amount)
+        parseAmountToFillSegment()
     }
     
     private func editMode(isEditMode: Bool) {
@@ -205,7 +225,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         var beer = [String: Any]()
         beer["amount"] = Int16(self.amountTextField.text ?? "")
         beer["brand"] = self.brandTextField.text
-        beer["value"] = BeerP().formatValue(value: self.valueTextField.text ?? "")
+        beer["value"] = BeerP.getValueFromString(value: valueTextField.text ?? "")
         
         var type: Int16 {
             return Int(self.amountTextField.text ?? "") ?? 0 >= 1000 ? 2 : 1
@@ -237,7 +257,7 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
     private func isValidBeer() -> Bool {
         let isValidAmount = Int16(self.amountTextField.text ?? "") ?? 0 > 0
         let isValidBrand = self.brandTextField.text?.count ?? 0 > 0
-        let isValidValue = BeerP().formatValue(value: self.valueTextField.text ?? "") > 0
+        let isValidValue = BeerP.getValueFromString(value: valueTextField.text ?? "") > 0
         
         if (!isValidAmount) {
             self.amountController?.setErrorText("addSize".localized, errorAccessibilityValue: nil)
@@ -258,5 +278,58 @@ class NewBeerVC: UIViewController, UITextFieldDelegate {
         }
         
         return isValidAmount && isValidBrand && isValidValue
+    }
+    
+    private func parseAmountToFillSegment() {
+        switch (amountTextField.text) {
+        case "269":
+            amountSegment.selectedSegmentIndex = 0
+            break
+        case "350":
+            amountSegment.selectedSegmentIndex = 1
+            break
+        case "600":
+            amountSegment.selectedSegmentIndex = 2
+            break
+        case "1000":
+            amountSegment.selectedSegmentIndex = 3
+            break
+        default:
+            amountSegment.selectedSegmentIndex = -1
+            break
+        }
+    }
+    
+    private func setValue(_ value: NSNumber) {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currencyAccounting
+        formatter.locale = Locale(identifier: "pt_BR")
+        formatter.decimalSeparator = ","
+        formatter.currencySymbol = "R$"
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+
+        if value.intValue == 0  {
+            valueTextField.text = ""
+        }
+
+        valueTextField.text = formatter.string(from: value)!
+    }
+}
+
+extension NewBeerVC: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.animateViewMoving(up: true, moveValue: 100)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.animateViewMoving(up: false, moveValue: 100)
+        parseAmountToFillSegment()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
