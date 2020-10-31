@@ -30,6 +30,13 @@ class NewBeerVC: UIViewController {
     private var beer: Beer!
     private var beerP: BeerP!
     
+    private var amountValues: [Int: String] = [
+        0: "269",
+        1: "350",
+        2: "473",
+        3: "1000"
+    ]
+    
     private var brandController: MDCTextInputControllerOutlined?
     private var valueController: MDCTextInputControllerOutlined?
     private var amountController: MDCTextInputControllerOutlined?
@@ -101,22 +108,7 @@ class NewBeerVC: UIViewController {
     }
     
     @IBAction func amountSegmentChanged(_ sender: UISegmentedControl) {
-        switch (sender.selectedSegmentIndex) {
-        case 0:
-            amountTextField.text = "269"
-            break
-        case 1:
-            amountTextField.text = "350"
-            break
-        case 2:
-            amountTextField.text = "600"
-            break
-        case 3:
-            amountTextField.text = "1000"
-            break
-        default:
-            break
-        }
+        amountTextField.text = amountValues[sender.selectedSegmentIndex]
     }
     
     @IBAction func amountEditingDidBegin(_ sender: Any) {
@@ -281,22 +273,14 @@ class NewBeerVC: UIViewController {
     }
     
     private func parseAmountToFillSegment() {
-        switch (amountTextField.text) {
-        case "269":
-            amountSegment.selectedSegmentIndex = 0
-            break
-        case "350":
-            amountSegment.selectedSegmentIndex = 1
-            break
-        case "600":
-            amountSegment.selectedSegmentIndex = 2
-            break
-        case "1000":
-            amountSegment.selectedSegmentIndex = 3
-            break
-        default:
+        let amountValue = amountValues.filter {
+            $0.value == amountTextField.text
+        }
+        
+        if amountValue.count > 0 {
+            amountSegment.selectedSegmentIndex = amountValue.first?.key ?? -1
+        } else {
             amountSegment.selectedSegmentIndex = -1
-            break
         }
     }
     
