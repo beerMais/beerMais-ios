@@ -13,6 +13,7 @@ import MaterialComponents.MaterialButtons_ButtonThemer
 import MaterialComponents.MaterialButtons_ColorThemer
 import MaterialComponents.MaterialTextFields
 
+
 class NewBeerVC: UIViewController {
     @IBOutlet weak var modalView: UIView!
     @IBOutlet weak var brandTextField: MDCTextField!
@@ -84,6 +85,7 @@ class NewBeerVC: UIViewController {
         }
         
         self.beerP.delete(beer: self.beer)
+        
         self.resumeBeers.reloadBeers()
         self.dismiss(animated: true, completion: nil)
     }
@@ -99,6 +101,7 @@ class NewBeerVC: UIViewController {
         }
         
         self.beerP.edit(beer: self.beer, data: self.getBeerArray())
+        
         self.resumeBeers.reloadBeers()
         self.dismiss(animated: true, completion: nil)
     }

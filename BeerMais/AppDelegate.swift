@@ -11,6 +11,7 @@ import CoreData
 import UserNotifications
 import GoogleMobileAds
 import Firebase
+import FirebaseMessaging
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -114,7 +115,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 }
 
 extension AppDelegate: MessagingDelegate {
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("Firebase registration token: \(fcmToken)")
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        #if DEBUG
+        print("Firebase registration token: \(fcmToken ?? "")")
+        #endif
     }
 }
