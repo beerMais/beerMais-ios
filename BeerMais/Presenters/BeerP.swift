@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import FirebaseAnalytics
+
 
 class BeerP {
     private let entityName = "Beer"
@@ -18,6 +20,8 @@ class BeerP {
                 let beer = self.setBeerData(beer: Beer(context: context), data: data)
                 
                 try context.save()
+                
+                Analytics.logEvent("beer_created", parameters: beerToAnalyticsParameters(beer))
                 
                 return beer
             } catch let error {
@@ -48,6 +52,8 @@ class BeerP {
     
     func deleteBeers() {
         CoreDataP().deleteData(entityName: self.entityName)
+        
+        Analytics.logEvent("all_beers_deleted", parameters: nil)
     }
     
     func formatValueToShow(value: Float) -> String {
@@ -57,10 +63,14 @@ class BeerP {
     
     func delete(beer: Beer) {
         CoreDataP().context.delete(beer)
+        
+        Analytics.logEvent("beer_deleted", parameters: beerToAnalyticsParameters(beer))
     }
     
     func edit(beer: Beer, data: [String: Any]) {
         _ = self.setBeerData(beer: beer, data: data)
+        
+        Analytics.logEvent("beer_updated", parameters: beerToAnalyticsParameters(beer))
     }
     
     func getValuePerML(value: Float, amount: Int16) -> Float {
@@ -87,5 +97,14 @@ class BeerP {
         beer.type = data["type"] as! Int16
         
         return beer
+    }
+    
+    private func beerToAnalyticsParameters(_ beer: Beer) -> [String: NSObject] {
+        var parameters = [String: NSObject]()
+        parameters["brand"] = beer.brand as NSObject?
+        parameters["amount"] = beer.amount as NSObject?
+        parameters["value"] = beer.value as NSObject?
+        
+        return parameters
     }
 }
