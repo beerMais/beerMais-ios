@@ -23,3 +23,7 @@ end
 target 'BeerMais Dev' do
     global_pods
 end
+
+target 'BeerMais widgetExtension' do
+    global_pods
+end

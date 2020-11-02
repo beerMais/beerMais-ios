@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WidgetKit
 
 protocol ResumeBeersVCDelegate: class {
     func reloadBeers()
@@ -23,6 +24,8 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
     
     var beers = [Beer]()
     var beerP: BeerP!
+    
+    private var rankBeerType = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,6 +158,10 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
             self.rankAmountLabel.text = "350ml"
             self.rankValueLabel.text = "RS 0,00"
             self.rankEconomyLabel.text = "R$ 0,00/L"
+            
+            rankBeerType = 1
+            setWidgetBeer()
+            
             return
         }
         
@@ -175,6 +182,7 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         }
         self.rankAmountLabel.text = amountText
         
+        rankBeerType = Int(beer.type)
         var imageName = ""
         switch beer.type {
         case 1:
@@ -193,6 +201,8 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         let economy = self.beerP.getEconomy(beer1: beer, beer2: self.beers[1])
         let economyFormated = self.beerP.formatValueToShow(value: economy)
         self.rankEconomyLabel.text = "R$ \(economyFormated)/L"
+        
+        setWidgetBeer()
     }
     
     private func deleteBeers() {
@@ -221,10 +231,25 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
         self.rankView.backgroundColor = backgroundColor
     }
     
+    private func setWidgetBeer() {
+        if #available(iOS 14.0, *) {
+            let defaults = UserDefaults(suiteName: "group.beerMais")
+            
+            defaults?.set(rankBrandLabel.text, forKey: "BRAND")
+            defaults?.set(rankAmountLabel.text, forKey: "AMOUNT")
+            defaults?.set(rankValueLabel.text, forKey: "VALUE")
+            defaults?.set(rankBeerType, forKey: "TYPE")
+            defaults?.set(rankEconomyLabel.text, forKey: "ECONOMY")
+        }
+    }
 }
 
 extension ResumeBeersVC: ResumeBeersVCDelegate {
     internal func reloadBeers() {
         self.getBeers()
+        
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        } 
     }
 }
