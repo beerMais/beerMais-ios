@@ -18,29 +18,34 @@ struct Provider: IntentTimelineProvider {
                     value: nil,
                     type: nil,
                     economy: nil,
+                    count: 0,
                     configuration: ConfigurationIntent())
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    func getSnapshot(for configuration: ConfigurationIntent,
+                     in context: Context,
+                     completion: @escaping (SimpleEntry) -> ()) {
         let entry = SimpleEntry(date: Date(),
                                 brand: nil,
                                 amount: nil,
                                 value: nil,
                                 type: nil,
                                 economy: nil,
+                                count: 0,
                                 configuration: ConfigurationIntent())
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        
+    func getTimeline(for configuration: ConfigurationIntent,
+                     in context: Context,
+                     completion: @escaping (Timeline<Entry>) -> ()) {
         let defaults = UserDefaults(suiteName: "group.beerMais")
         let brand = defaults?.string(forKey: "BRAND")
         let amount = defaults?.string(forKey: "AMOUNT")
         let value = defaults?.string(forKey: "VALUE")
         let type = defaults?.string(forKey: "TYPE")
         let economy = defaults?.string(forKey: "ECONOMY")
-        
+        let count = defaults?.integer(forKey: "BEERS_COUNT") ?? 0
         
         let timeline = Timeline(entries: [
                                     SimpleEntry(date: Date(),
@@ -49,6 +54,7 @@ struct Provider: IntentTimelineProvider {
                                                 value: value,
                                                 type: type,
                                                 economy: economy,
+                                                count: count,
                                                 configuration: configuration)
         ], policy: .never)
         completion(timeline)
@@ -62,17 +68,31 @@ struct SimpleEntry: TimelineEntry {
     let value: String?
     let type: String?
     let economy: String?
+    let count: Int
     let configuration: ConfigurationIntent
 }
 
 struct BeerMais_widgetEntryView : View {
     var entry: Provider.Entry
+    
+    var border: some View {
+        RoundedRectangle(cornerRadius: 22)
+            .stroke(Color(
+                UIColor(named: "economyBorder")!
+            ), lineWidth: entry.count < 2 ? 0 : 4)
+    }
+    
+    var backgroundColor: some View {
+        var uiColor = UIColor.tertiarySystemBackground
+        if entry.count >= 2  {
+            uiColor = UIColor(named: "economyBackground")!
+        }
+        return Color(uiColor).edgesIgnoringSafeArea(.all)
+    }
 
     var body: some View {
         ZStack {
-            Color(
-                UIColor(named: "economyBackground")!
-            ).edgesIgnoringSafeArea(.all)
+            backgroundColor
             VStack(spacing: 0) {
                 Spacer()
                 Text(entry.brand ?? "Marca")
@@ -80,6 +100,7 @@ struct BeerMais_widgetEntryView : View {
                     .fontWeight(.regular)
                     .foregroundColor(Color(UIColor.label))
                     .multilineTextAlignment(.center)
+                    .padding(.top, 5)
                     .frame(maxWidth: .infinity,
                            maxHeight: 20,
                            alignment: .center)
@@ -122,12 +143,7 @@ struct BeerMais_widgetEntryView : View {
                 }.frame(maxWidth: .infinity,
                         maxHeight: .infinity,
                         alignment: .leading)
-            }.overlay(
-                RoundedRectangle(cornerRadius: 22)
-                    .stroke(Color(
-                        UIColor(named: "economyBorder")!
-                    ), lineWidth: 4)
-            )
+            }.overlay(border)
         }
     }
 }
@@ -156,6 +172,7 @@ struct BeerMais_widget_Previews: PreviewProvider {
                                                     value: nil,
                                                     type: nil,
                                                     economy: nil,
+                                                    count: 0,
                                                     configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }

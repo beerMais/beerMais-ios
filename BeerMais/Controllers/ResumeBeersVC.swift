@@ -240,6 +240,7 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
             defaults?.set(rankValueLabel.text, forKey: "VALUE")
             defaults?.set(rankBeerType, forKey: "TYPE")
             defaults?.set(rankEconomyLabel.text, forKey: "ECONOMY")
+            defaults?.set(beers.count, forKey: "BEERS_COUNT")
         }
     }
 }
