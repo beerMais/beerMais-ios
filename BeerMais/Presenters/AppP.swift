@@ -8,6 +8,8 @@
 
 import Foundation
 import StoreKit
+import FirebaseAnalytics
+
 
 class AppP {
     private static let hasBeenLaunchedBeforeFlag = "hasBeenLaunchedBeforeFlag"
@@ -23,6 +25,7 @@ class AppP {
         }
         
         self.incrementAppOpenedCount()
+        logAppLaunch()
     }
     
     static func isFirstLaunch() -> Bool {
@@ -98,6 +101,19 @@ class AppP {
             break;
         }
         
+    }
+    
+    static func logAppLaunch() {
+        var style = "light"
+        if #available(iOS 13.0, *) {
+            if UITraitCollection.current.userInterfaceStyle == .dark {
+                style = "dark"
+            }
+        }
+        
+        Analytics.logEvent("app_launch", parameters: [
+            "interface_style": style
+        ])
     }
     
     func requestReview() {
