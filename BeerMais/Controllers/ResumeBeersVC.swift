@@ -241,6 +241,8 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
             defaults?.set(rankBeerType, forKey: "TYPE")
             defaults?.set(rankEconomyLabel.text, forKey: "ECONOMY")
             defaults?.set(beers.count, forKey: "BEERS_COUNT")
+            
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 }
@@ -248,9 +250,5 @@ class ResumeBeersVC: UIViewController, UICollectionViewDelegate, UICollectionVie
 extension ResumeBeersVC: ResumeBeersVCDelegate {
     internal func reloadBeers() {
         self.getBeers()
-        
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        } 
     }
 }
