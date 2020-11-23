@@ -10,34 +10,31 @@ import WidgetKit
 import SwiftUI
 import Intents
 
-struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(),
-                    brand: nil,
-                    amount: nil,
-                    value: nil,
-                    type: nil,
-                    economy: nil,
-                    count: 0,
-                    configuration: ConfigurationIntent())
+
+struct Provider: TimelineProvider {
+    func placeholder(in context: Context) -> BeerMaisEntry {
+        BeerMaisEntry(date: Date(),
+                      brand: nil,
+                      amount: nil,
+                      value: nil,
+                      type: nil,
+                      economy: nil,
+                      count: 0)
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent,
-                     in context: Context,
-                     completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(),
-                                brand: nil,
-                                amount: nil,
-                                value: nil,
-                                type: nil,
-                                economy: nil,
-                                count: 0,
-                                configuration: ConfigurationIntent())
+    func getSnapshot(in context: Context,
+                     completion: @escaping (BeerMaisEntry) -> ()) {
+        let entry = BeerMaisEntry(date: Date(),
+                                  brand: nil,
+                                  amount: nil,
+                                  value: nil,
+                                  type: nil,
+                                  economy: nil,
+                                  count: 0)
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent,
-                     in context: Context,
+    func getTimeline(in context: Context,
                      completion: @escaping (Timeline<Entry>) -> ()) {
         let defaults = UserDefaults(suiteName: "group.beerMais")
         let brand = defaults?.string(forKey: "BRAND")
@@ -48,20 +45,19 @@ struct Provider: IntentTimelineProvider {
         let count = defaults?.integer(forKey: "BEERS_COUNT") ?? 0
         
         let timeline = Timeline(entries: [
-                                    SimpleEntry(date: Date(),
-                                                brand: brand,
-                                                amount: amount,
-                                                value: value,
-                                                type: type,
-                                                economy: economy,
-                                                count: count,
-                                                configuration: configuration)
+                                    BeerMaisEntry(date: Date(),
+                                                  brand: brand,
+                                                  amount: amount,
+                                                  value: value,
+                                                  type: type,
+                                                  economy: economy,
+                                                  count: count)
         ], policy: .never)
         completion(timeline)
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct BeerMaisEntry: TimelineEntry {
     let date: Date
     let brand: String?
     let amount: String?
@@ -69,7 +65,6 @@ struct SimpleEntry: TimelineEntry {
     let type: String?
     let economy: String?
     let count: Int
-    let configuration: ConfigurationIntent
 }
 
 struct BeerMais_widgetEntryView : View {
@@ -153,27 +148,25 @@ struct BeerMais_widget: Widget {
     let kind: String = "BeerMais_widget"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind,
-                            intent: ConfigurationIntent.self,
+        StaticConfiguration(kind: kind,
                             provider: Provider()) { entry in
             BeerMais_widgetEntryView(entry: entry)
         }
         .supportedFamilies([.systemSmall])
-        .configurationDisplayName("Beer Mais Widget")
-        .description("Widget de destaque a bebida mais barata.")
+        .configurationDisplayName("Beer Mais")
+        .description("Deixe em destaque o melhor custo-beneficio")
     }
 }
 
 struct BeerMais_widget_Previews: PreviewProvider {
     static var previews: some View {
-        BeerMais_widgetEntryView(entry: SimpleEntry(date: Date(),
-                                                    brand: nil,
-                                                    amount: nil,
-                                                    value: nil,
-                                                    type: nil,
-                                                    economy: nil,
-                                                    count: 0,
-                                                    configuration: ConfigurationIntent()))
+        BeerMais_widgetEntryView(entry: BeerMaisEntry(date: Date(),
+                                                      brand: nil,
+                                                      amount: nil,
+                                                      value: nil,
+                                                      type: nil,
+                                                      economy: nil,
+                                                      count: 0))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
