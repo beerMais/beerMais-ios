@@ -27,3 +27,7 @@ end
 target 'BeerMais widgetExtension' do
     global_pods
 end
+
+target 'BeerMais Clip' do
+    global_pods
+end

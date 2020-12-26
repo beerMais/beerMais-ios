@@ -45,7 +45,11 @@ class NewBeerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.addBannerView()
+        #if DEBUG_APPCLIP || APPCLIP
+            removeBannerView()
+        #else
+            addBannerView()
+        #endif
         
         self.beerP = BeerP()
         
@@ -241,6 +245,10 @@ class NewBeerVC: UIViewController {
         self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
         
         UIView.commitAnimations()
+    }
+    
+    private func removeBannerView() {
+        bannerView.isHidden = true
     }
     
     private func addBannerView() {
