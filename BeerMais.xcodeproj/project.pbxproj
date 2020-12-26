@@ -65,16 +65,13 @@
 		2D79BB1C22288A8200799BC6 /* BeerCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D17012D21D2DCB50009A316 /* BeerCollectionCell.xib */; };
 		2D79BB1D22288A8200799BC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D17012021D2B3CF0009A316 /* Assets.xcassets */; };
 		2D79BB1F22288A8200799BC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D17011A21D2B3CE0009A316 /* Main.storyboard */; };
-		2D79BB2122288A8200799BC6 /* Help.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DB4AB7A21FABD43007F977B /* Help.storyboard */; };
 		2D79BB2C22288B4300799BC6 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D1D3E6221F67183008F51AC /* Settings.plist */; };
-		2DB4AB7B21FABD43007F977B /* Help.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DB4AB7A21FABD43007F977B /* Help.storyboard */; };
 		2DD7E2B621F6737E0084E17F /* SettingsP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7E2B421F6737D0084E17F /* SettingsP.swift */; };
 		3EA32B3DC2935556EB929E69 /* Pods_BeerMais.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18158F32597DEFF004B2018 /* Pods_BeerMais.framework */; };
 		8EEC50014226E9A1C515BC3A /* Pods_BeerMais_Clip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 588DEED8740CB033B318CD85 /* Pods_BeerMais_Clip.framework */; };
 		A18158B02597D1D5004B2018 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18158AF2597D1D5004B2018 /* AppDelegate.swift */; };
 		A18158B22597D1D5004B2018 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18158B12597D1D5004B2018 /* SceneDelegate.swift */; };
 		A18158BC2597D1D7004B2018 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A18158BB2597D1D7004B2018 /* Assets.xcassets */; };
-		A18158BF2597D1D7004B2018 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A18158BD2597D1D7004B2018 /* LaunchScreen.storyboard */; };
 		A18158C42597D1D7004B2018 /* BeerMais Clip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = A18158AD2597D1D4004B2018 /* BeerMais Clip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A18158CD2597D25D004B2018 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D17012021D2B3CF0009A316 /* Assets.xcassets */; };
 		A18159032597DF99004B2018 /* ResumeBeersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013321D2DECE0009A316 /* ResumeBeersVC.swift */; };
@@ -97,6 +94,7 @@
 		A18159B22597E8F8004B2018 /* BeerMais.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D17011D21D2B3CE0009A316 /* BeerMais.xcdatamodeld */; };
 		A18159BB2597E98A004B2018 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D616DEB22541FCE005E8BF7 /* AboutVC.swift */; };
 		A18159C02597EA26004B2018 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2D2630C02312FFFE00F02E45 /* Localizable.strings */; };
+		A18159C52597EA8A004B2018 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D17012221D2B3CF0009A316 /* LaunchScreen.storyboard */; };
 		BAC457B46A8740B98C7DE1B8 /* Pods_BeerMais.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D145C7C21F7DDE600B223E5 /* Pods_BeerMais.framework */; };
 		FD0D562BC2783098F71A193C /* Pods_BeerMais_widgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A9C1CE8DFD7AE2EEF9C6CB /* Pods_BeerMais_widgetExtension.framework */; };
 /* End PBXBuildFile section */
@@ -214,7 +212,6 @@
 		2D895C9F21F7DCDF0005CFA6 /* Pods_BeerMais.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BeerMais.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D92A1F0222B70D200690ED6 /* BeerMais.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeerMais.entitlements; sourceTree = "<group>"; };
 		2D92A1F2222B71AF00690ED6 /* BeerMais Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BeerMais Dev.entitlements"; sourceTree = "<group>"; };
-		2DB4AB7A21FABD43007F977B /* Help.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Help.storyboard; sourceTree = "<group>"; };
 		2DD7E2B421F6737D0084E17F /* SettingsP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsP.swift; sourceTree = "<group>"; };
 		2DD8D82D224FCA4D004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DD8D82F224FCA6C004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -226,7 +223,6 @@
 		A18158AF2597D1D5004B2018 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A18158B12597D1D5004B2018 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A18158BB2597D1D7004B2018 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A18158BE2597D1D7004B2018 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A18158C02597D1D7004B2018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A18158C12597D1D7004B2018 /* BeerMais_Clip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeerMais_Clip.entitlements; sourceTree = "<group>"; };
 		A18158F32597DEFF004B2018 /* Pods_BeerMais.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_BeerMais.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,7 +323,6 @@
 				2D2630B52312FC2400F02E45 /* About.storyboard */,
 				2D2630AD2312FBFE00F02E45 /* Alert.storyboard */,
 				2D17011A21D2B3CE0009A316 /* Main.storyboard */,
-				2DB4AB7A21FABD43007F977B /* Help.storyboard */,
 				2D2630A52312FBBA00F02E45 /* NewBeer.storyboard */,
 				2D17012221D2B3CF0009A316 /* LaunchScreen.storyboard */,
 			);
@@ -467,7 +462,6 @@
 				A18158AF2597D1D5004B2018 /* AppDelegate.swift */,
 				A18158B12597D1D5004B2018 /* SceneDelegate.swift */,
 				A18158BB2597D1D7004B2018 /* Assets.xcassets */,
-				A18158BD2597D1D7004B2018 /* LaunchScreen.storyboard */,
 				A18158C02597D1D7004B2018 /* Info.plist */,
 				A18158C12597D1D7004B2018 /* BeerMais_Clip.entitlements */,
 			);
@@ -631,7 +625,6 @@
 				2D1D3E5921F670C9008F51AC /* Main.storyboard in Resources */,
 				2D2630B22312FC2400F02E45 /* About.storyboard in Resources */,
 				2D779F67244D20830010C769 /* GoogleService-Info.plist in Resources */,
-				2DB4AB7B21FABD43007F977B /* Help.storyboard in Resources */,
 				2D2630AA2312FBFE00F02E45 /* Alert.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,7 +651,6 @@
 				2D79BB1F22288A8200799BC6 /* Main.storyboard in Resources */,
 				2D2630B32312FC2400F02E45 /* About.storyboard in Resources */,
 				2D779F65244D1DA80010C769 /* GoogleService-Info.plist in Resources */,
-				2D79BB2122288A8200799BC6 /* Help.storyboard in Resources */,
 				2D2630AB2312FBFE00F02E45 /* Alert.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,8 +660,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A181596B2597E312004B2018 /* Main.storyboard in Resources */,
-				A18158BF2597D1D7004B2018 /* LaunchScreen.storyboard in Resources */,
 				A181598A2597E358004B2018 /* About.storyboard in Resources */,
+				A18159C52597EA8A004B2018 /* LaunchScreen.storyboard in Resources */,
 				A18159202597E08F004B2018 /* Alert.storyboard in Resources */,
 				A18159C02597EA26004B2018 /* Localizable.strings in Resources */,
 				A181591C2597E089004B2018 /* BeerCollectionCell.xib in Resources */,
@@ -1035,14 +1027,6 @@
 				2D2630C62313008A00F02E45 /* pt-BR */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		A18158BD2597D1D7004B2018 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A18158BE2597D1D7004B2018 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
