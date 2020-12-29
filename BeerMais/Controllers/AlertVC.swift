@@ -34,7 +34,11 @@ class AlertVC: UIViewController {
         
         self.bodyLabel.baselineAdjustment = .alignCenters
         
-        self.addBannerView()
+        #if DEBUG_APPCLIP || APPCLIP
+            removeBannerView()
+        #else
+            addBannerView()
+        #endif
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -85,6 +89,10 @@ class AlertVC: UIViewController {
         self.bannerView.adUnitID = SettingsP().getAdMobBeerBannerID()
         self.bannerView.rootViewController = self
         self.bannerView.load(GADRequest())
+    }
+    
+    private func removeBannerView() {
+        bannerView.isHidden = true
     }
     
     private func addStyleToButtons() {
