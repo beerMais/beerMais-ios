@@ -45,12 +45,21 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2D1D3E4321F670C9008F51AC"
+            BuildableName = "BeerMais.app"
+            BlueprintName = "BeerMais"
+            ReferencedContainer = "container:BeerMais.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D79BB0722288A8200799BC6"
             BuildableName = "BeerMais Dev.app"
             BlueprintName = "BeerMais Dev"
             ReferencedContainer = "container:BeerMais.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <CommandLineArguments>
          <CommandLineArgument
             argument = "FIRDebugEnabled"
