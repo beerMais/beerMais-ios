@@ -29,6 +29,16 @@ class SettingsP {
         return adMobBeerBannerID
     }
     
+    class func getAmplitudeKey() -> String {
+        var key = ""
+        
+        if let dict = SettingsP().getDictionary() {
+            key = dict["AmplitudeKey"] as! String
+        }
+        
+        return key
+    }
+    
     private func getDictionary() -> NSDictionary? {
         if let path = Bundle.main.path(forResource: "Settings", ofType: "plist") {
             return NSDictionary(contentsOfFile: path)

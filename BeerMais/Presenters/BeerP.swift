@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FirebaseAnalytics
+import Amplitude
 
 
 class BeerP {
@@ -21,7 +21,7 @@ class BeerP {
                 
                 try context.save()
                 
-                Analytics.logEvent("beer_created", parameters: beerToAnalyticsParameters(beer))
+                Amplitude.instance().logEvent("beer_created", withEventProperties: beerToAnalyticsParameters(beer))
                 
                 return beer
             } catch let error {
@@ -53,7 +53,7 @@ class BeerP {
     func deleteBeers() {
         CoreDataP().deleteData(entityName: self.entityName)
         
-        Analytics.logEvent("all_beers_deleted", parameters: nil)
+        Amplitude.instance().logEvent("all_beers_deleted", withEventProperties: nil)
     }
     
     func formatValueToShow(value: Float) -> String {
@@ -64,13 +64,13 @@ class BeerP {
     func delete(beer: Beer) {
         CoreDataP().context.delete(beer)
         
-        Analytics.logEvent("beer_deleted", parameters: beerToAnalyticsParameters(beer))
+        Amplitude.instance().logEvent("beer_deleted", withEventProperties: beerToAnalyticsParameters(beer))
     }
     
     func edit(beer: Beer, data: [String: Any]) {
         _ = self.setBeerData(beer: beer, data: data)
         
-        Analytics.logEvent("beer_updated", parameters: beerToAnalyticsParameters(beer))
+        Amplitude.instance().logEvent("beer_updated", withEventProperties: beerToAnalyticsParameters(beer))
     }
     
     func getValuePerML(value: Float, amount: Int16) -> Float {

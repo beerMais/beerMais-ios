@@ -8,7 +8,7 @@
 
 import Foundation
 import StoreKit
-import FirebaseAnalytics
+import Amplitude
 
 
 class AppP {
@@ -111,7 +111,7 @@ class AppP {
             }
         }
         
-        Analytics.logEvent("app_launch", parameters: [
+        Amplitude.instance().logEvent("app_launch", withEventProperties: [
             "interface_style": style
         ])
     }

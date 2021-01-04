@@ -14,6 +14,7 @@ def global_pods
     pod 'Firebase/Messaging'
     pod 'Firebase/Analytics', '>= 7.3.0'
     pod 'Firebase/Crashlytics', '>= 7.3.0'
+    pod 'Amplitude', '~> 7.2.2'
 end
 
 target 'BeerMais' do

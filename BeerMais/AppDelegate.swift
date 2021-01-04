@@ -12,14 +12,18 @@ import UserNotifications
 import GoogleMobileAds
 import Firebase
 import FirebaseMessaging
+import Amplitude
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        Amplitude.instance().trackingSessionEvents = true
+        Amplitude.instance().initializeApiKey(SettingsP.getAmplitudeKey())
+        
         AppP.launch()
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)

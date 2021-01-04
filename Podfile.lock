@@ -1,4 +1,5 @@
 PODS:
+  - Amplitude (7.2.2)
   - Firebase/AdMob (7.3.0):
     - Firebase/CoreOnly
     - Google-Mobile-Ads-SDK (~> 7.66)
@@ -189,6 +190,7 @@ PODS:
   - PromisesObjC (1.2.12)
 
 DEPENDENCIES:
+  - Amplitude (~> 7.2.2)
   - Firebase/AdMob
   - Firebase/Analytics (>= 7.3.0)
   - Firebase/Crashlytics (>= 7.3.0)
@@ -202,6 +204,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Amplitude
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -222,6 +225,7 @@ SPEC REPOS:
     - PromisesObjC
 
 SPEC CHECKSUMS:
+  Amplitude: 517cdc7c485bda64b685174426ecbf17746eb16a
   Firebase: 26223c695fe322633274198cb19dca8cb7e54416
   FirebaseAnalytics: 2580c2d62535ae7b644143d48941fcc239ea897a
   FirebaseCore: 4d3c72622ce0e2106aaa07bb4b2935ba2c370972
@@ -241,6 +245,6 @@ SPEC CHECKSUMS:
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
-PODFILE CHECKSUM: 9ea0fd68d7100766da23704e343727a592e65654
+PODFILE CHECKSUM: c8c9e26f83c1369a906f87a5d4cd4c9cdff7f179
 
 COCOAPODS: 1.10.0
