@@ -16,8 +16,13 @@ class AppP {
     private static let APP_OPEN_COUNT = "APP_OPEN_COUNT"
     
     static func launch() {
+        Amplitude.instance().trackingSessionEvents = true
+        Amplitude.instance().initializeApiKey(SettingsP.getAmplitudeKey())
+        
         if (!self.isFirstLaunch()) {
             self.setFirstLaunch()
+            
+            Amplitude.instance().setUserId(nil)
             
             #if DEBUG
                 self.setInitialData()
