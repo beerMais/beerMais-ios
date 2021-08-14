@@ -4,7 +4,7 @@ platform :ios, '12.0'
 use_frameworks!
 
 def global_pods
-    pod 'Google-Mobile-Ads-SDK', '~> 8.4.0'
+    pod 'Google-Mobile-Ads-SDK', '~> 8.7.0'
     pod 'MaterialComponents/Buttons', '>= 124.2.0'
     pod 'MaterialComponents/Buttons+ButtonThemer'
     pod 'MaterialComponents/Buttons+ColorThemer'
