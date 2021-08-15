@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vjm-il-2kk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vjm-il-2kk">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,23 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1SH-pB-JYu">
-                                <rect key="frame" x="16" y="126" width="343" height="607"/>
-                                <color key="tintColor" red="1" green="0.79215686269999996" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <string key="text">A ideia desse app nasceu quando 3 amigos estavam fazendo as contas para decidir qual cerveja compensaria comprar para um churrasco.
-
-Não tendo um foco apenas em cerveja, o Beer Mais pode ser usado para calcular o melhor custo-beneficio entre quaisquer bebidas.
-
-A área em verde destaca a bebida de maior custo-beneficio e ordena a lista utilizando do mesmo critério.
-
-Ícones: 
-https://icons8.com
-https://www.flaticon.com</string>
-                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1Te-Le-2ha">
                                 <rect key="frame" x="110.33333333333333" y="60" width="154.66666666666669" height="50"/>
                                 <subviews>
@@ -51,52 +34,37 @@ https://www.flaticon.com</string>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bw6-26-Ieo">
-                                <rect key="frame" x="142" y="741" width="91.333333333333314" height="21"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Versão" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vjm-vi-ATR">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ps-in-etJ">
-                                        <rect key="frame" x="58" y="0.0" width="33.333333333333343" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="DWM-32-mzN"/>
-                                </constraints>
-                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RYw-LM-mph">
+                                <rect key="frame" x="0.0" y="126" width="375" height="686"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="KYw-qv-zcW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="1Te-Le-2ha" firstAttribute="centerX" secondItem="V1n-Yl-sPe" secondAttribute="centerX" id="AdK-zB-QHm"/>
-                            <constraint firstItem="KYw-qv-zcW" firstAttribute="trailing" secondItem="1SH-pB-JYu" secondAttribute="trailing" constant="16" id="Kph-IC-GCw"/>
+                            <constraint firstItem="KYw-qv-zcW" firstAttribute="trailing" secondItem="RYw-LM-mph" secondAttribute="trailing" id="Dh1-W4-tVE"/>
+                            <constraint firstAttribute="bottom" secondItem="RYw-LM-mph" secondAttribute="bottom" id="NCc-ob-t5D"/>
+                            <constraint firstItem="RYw-LM-mph" firstAttribute="leading" secondItem="KYw-qv-zcW" secondAttribute="leading" id="Ovn-xc-xiL"/>
                             <constraint firstItem="1Te-Le-2ha" firstAttribute="top" secondItem="KYw-qv-zcW" secondAttribute="top" constant="16" id="g5a-R8-MDf"/>
-                            <constraint firstItem="bw6-26-Ieo" firstAttribute="top" secondItem="1SH-pB-JYu" secondAttribute="bottom" constant="8" id="h1a-91-vlU"/>
-                            <constraint firstItem="KYw-qv-zcW" firstAttribute="bottom" secondItem="bw6-26-Ieo" secondAttribute="bottom" constant="16" id="if5-EP-Wtc"/>
-                            <constraint firstItem="1SH-pB-JYu" firstAttribute="top" secondItem="1Te-Le-2ha" secondAttribute="bottom" constant="16" id="lgL-c3-XNO"/>
-                            <constraint firstItem="1SH-pB-JYu" firstAttribute="leading" secondItem="KYw-qv-zcW" secondAttribute="leading" constant="16" id="trT-bG-hnw"/>
-                            <constraint firstItem="bw6-26-Ieo" firstAttribute="centerX" secondItem="V1n-Yl-sPe" secondAttribute="centerX" id="vtS-a5-gl2"/>
+                            <constraint firstItem="RYw-LM-mph" firstAttribute="top" secondItem="1Te-Le-2ha" secondAttribute="bottom" constant="16" id="oQP-5m-cyc"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="KYw-qv-zcW"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Sobre" image="icons8-about-50" id="fdP-rv-kPT"/>
                     <connections>
-                        <outlet property="versionLabel" destination="7ps-in-etJ" id="2zr-b2-NES"/>
+                        <outlet property="tableView" destination="RYw-LM-mph" id="0EU-j4-HUu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v84-1Q-3bM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1000" y="828"/>
+            <point key="canvasLocation" x="-1000.8" y="827.58620689655174"/>
         </scene>
     </scenes>
     <resources>
         <image name="icon_rounded" width="1024" height="1024"/>
         <image name="icons8-about-50" width="25" height="25"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

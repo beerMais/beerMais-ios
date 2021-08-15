@@ -16,7 +16,7 @@ class VersionP {
         return "Beer Mais"
     }
     
-    func getAppVersion() -> String {
+    static func getAppVersion() -> String {
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             return version
         }
