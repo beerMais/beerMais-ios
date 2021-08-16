@@ -13,11 +13,13 @@ class DonateTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "DonateTableViewCell"
     
-    var count = 3
+    lazy var presenter: DonateTableViewCellPresenter = {
+        DonateTableViewCellPresenter()
+    }()
     
     class func dequeueReusableCell(from tableView: UITableView, maxWidth: CGFloat) -> DonateTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DonateTableViewCell.reuseIdentifier) as! DonateTableViewCell
-        cell.teste(with: maxWidth)
+        cell.addDonateOptions(with: maxWidth)
         return cell
     }
     
@@ -26,7 +28,7 @@ class DonateTableViewCell: UITableViewCell {
                                       forCellWithReuseIdentifier: DonateCollectionViewCell.reuseIdentifier)
     }
     
-    func teste(with maxWidth: CGFloat) {
+    func addDonateOptions(with maxWidth: CGFloat) {
         let margin: CGFloat = 5
         donateCollectionView.contentInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         donateCollectionView.delegate = self
@@ -34,8 +36,8 @@ class DonateTableViewCell: UITableViewCell {
         
         let collectionViewFLowLayout = UICollectionViewFlowLayout()
 
-        let totalWidth = Int(maxWidth - (margin * CGFloat(count + 1)))
-        collectionViewFLowLayout.itemSize = CGSize(width: totalWidth / count,
+        let totalWidth = Int(maxWidth - (margin * CGFloat(presenter.availableDonatesCount() + 1)))
+        collectionViewFLowLayout.itemSize = CGSize(width: totalWidth / presenter.availableDonatesCount(),
                                                    height: 190)
         collectionViewFLowLayout.minimumLineSpacing = 0
         collectionViewFLowLayout.minimumInteritemSpacing = 0
@@ -45,19 +47,21 @@ class DonateTableViewCell: UITableViewCell {
 }
 
 extension DonateTableViewCell: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.didSelectDonateTypeByRow(indexPath.row)
+    }
 }
 
 extension DonateTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return presenter.availableDonatesCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = DonateCollectionViewCell.dequeueReusableCell(from: collectionView, for: indexPath)
         
-        if let donateType = DonateType(rawValue: indexPath.row) {
+        if let donateType = presenter.getDonateTypeByRow(indexPath.row) {
             cell.setType(donateType)
         }
         
