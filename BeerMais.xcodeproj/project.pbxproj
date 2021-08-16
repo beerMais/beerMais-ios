@@ -59,6 +59,7 @@
 		879583B626C89B9100F81B28 /* DonateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */; };
 		87E1766326CB14D800989B71 /* DonateTableViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1766226CB14D800989B71 /* DonateTableViewCellPresenter.swift */; };
 		87E1766426CB14D800989B71 /* DonateTableViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1766226CB14D800989B71 /* DonateTableViewCellPresenter.swift */; };
+		87E1766626CB185300989B71 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E1766526CB185300989B71 /* StoreKit.framework */; };
 		A14E361F259AF7E70080578E /* GoogleMobileAds.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14E35FF259AF7960080578E /* GoogleMobileAds.xcframework */; };
 		A18158B02597D1D5004B2018 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18158AF2597D1D5004B2018 /* AppDelegate.swift */; };
 		A18158B22597D1D5004B2018 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18158B12597D1D5004B2018 /* SceneDelegate.swift */; };
@@ -193,6 +194,7 @@
 		879583B126C89B8200F81B28 /* DonateCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonateCollectionViewCell.xib; sourceTree = "<group>"; };
 		879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateCollectionViewCell.swift; sourceTree = "<group>"; };
 		87E1766226CB14D800989B71 /* DonateTableViewCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateTableViewCellPresenter.swift; sourceTree = "<group>"; };
+		87E1766526CB185300989B71 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		880966FFE523D6247612C2D0 /* Pods_BeerMais.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeerMais.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ADEA4F0BAB855141BF2E8FD /* Pods_BeerMais_Clip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeerMais_Clip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14E34AA259AF03D0080578E /* BeerMais_Clip-debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BeerMais_Clip-debug.entitlements"; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6A12DE4575E8977F5B9FA12 /* Pods_BeerMais.framework in Frameworks */,
+				87E1766626CB185300989B71 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +400,7 @@
 		540576969A604AB673A2D23F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87E1766526CB185300989B71 /* StoreKit.framework */,
 				A14E35FF259AF7960080578E /* GoogleMobileAds.xcframework */,
 				2D4C51F8254F85CB00D0B2D0 /* WidgetKit.framework */,
 				2D4C51FA254F85CB00D0B2D0 /* SwiftUI.framework */,
