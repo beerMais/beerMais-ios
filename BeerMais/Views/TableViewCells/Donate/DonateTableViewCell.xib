@@ -9,27 +9,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="268" id="s4W-Kh-6mO" customClass="DonateTableViewCell" customModule="BeerMais" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="268"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="287" id="s4W-Kh-6mO" customClass="DonateTableViewCell" customModule="BeerMais" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="287"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s4W-Kh-6mO" id="gwX-nV-c9v">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="268"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="287"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7j-jd-xi9">
-                        <rect key="frame" x="20" y="0.0" width="374" height="100"/>
+                        <rect key="frame" x="20" y="0.0" width="374" height="79"/>
                         <string key="text">Se você já economizou usando o Beer Mais na hora de escolher a melhor bebida e deseja contibuir com a manutenção do app, qualquer valor é de grande ajuda 🍻</string>
                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="z1P-Fz-0QC">
-                        <rect key="frame" x="0.0" y="108" width="414" height="150"/>
+                        <rect key="frame" x="0.0" y="87" width="414" height="190"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="150" id="Cv9-yd-4Mo"/>
+                            <constraint firstAttribute="height" constant="190" id="Cv9-yd-4Mo"/>
                         </constraints>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="STr-1W-tHS">
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="STr-1W-tHS">
                             <size key="itemSize" width="100" height="130"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -50,7 +50,7 @@
             <connections>
                 <outlet property="donateCollectionView" destination="z1P-Fz-0QC" id="2yR-m1-JSJ"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="174.77678571428569"/>
+            <point key="canvasLocation" x="137.68115942028987" y="181.13839285714286"/>
         </tableViewCell>
     </objects>
     <resources>

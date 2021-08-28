@@ -30,19 +30,26 @@ class DonateTableViewCell: UITableViewCell {
     }
     
     func addDonateOptions(with maxWidth: CGFloat) {
-        let donatesCount = 3
-        let margin: CGFloat = 5
-        donateCollectionView.contentInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
+        let donatesCount: CGFloat = 3
+        
+        var cellWidth: CGFloat
+        if (maxWidth / donatesCount) > 115 {
+            cellWidth = 115
+        } else {
+            cellWidth = 100
+        }
+        
+        let margin = (maxWidth - CGFloat(donatesCount * cellWidth)) / 4
+        
+        donateCollectionView.contentInset = UIEdgeInsets(top: 0, left: margin, bottom: 0, right: margin)
         donateCollectionView.delegate = self
         donateCollectionView.dataSource = self
         
         let collectionViewFLowLayout = UICollectionViewFlowLayout()
-
-        let totalWidth = Int(maxWidth - (margin * CGFloat(donatesCount + 1)))
-        collectionViewFLowLayout.itemSize = CGSize(width: totalWidth / donatesCount,
-                                                   height: 190)
+        collectionViewFLowLayout.itemSize = CGSize(width: cellWidth, height: 160)
         collectionViewFLowLayout.minimumLineSpacing = 0
         collectionViewFLowLayout.minimumInteritemSpacing = 0
+        
         donateCollectionView.collectionViewLayout = collectionViewFLowLayout
     }
 

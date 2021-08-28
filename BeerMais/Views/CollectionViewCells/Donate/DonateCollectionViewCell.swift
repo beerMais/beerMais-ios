@@ -23,6 +23,10 @@ class DonateCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        layer.cornerRadius = 8
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderWidth = 0.5
+        
         descLabel.numberOfLines = 0
     }
     
