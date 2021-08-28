@@ -39,6 +39,8 @@
 		2D6FB1F921F7868E00407BC9 /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6FB1F821F7868E00407BC9 /* AlertVC.swift */; };
 		2DD7E2B621F6737E0084E17F /* SettingsP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7E2B421F6737D0084E17F /* SettingsP.swift */; };
 		7D3906F3D108F892B141BAEE /* Pods_BeerMais_Clip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ADEA4F0BAB855141BF2E8FD /* Pods_BeerMais_Clip.framework */; };
+		870E18F926DAC977005D60AD /* StoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 870E18F826DAC977005D60AD /* StoreKitConfig.storekit */; };
+		870E18FA26DAC977005D60AD /* StoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 870E18F826DAC977005D60AD /* StoreKitConfig.storekit */; };
 		8795839626C8827100F81B28 /* AboutP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795839526C8827100F81B28 /* AboutP.swift */; };
 		8795839726C8842700F81B28 /* AboutP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795839526C8827100F81B28 /* AboutP.swift */; };
 		8795839B26C8896600F81B28 /* AboutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8795839A26C8896600F81B28 /* AboutTableViewCell.xib */; };
@@ -184,6 +186,7 @@
 		2DD7E2B421F6737D0084E17F /* SettingsP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsP.swift; sourceTree = "<group>"; };
 		2DD8D82D224FCA4D004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DD8D82F224FCA6C004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		870E18F826DAC977005D60AD /* StoreKitConfig.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitConfig.storekit; sourceTree = "<group>"; };
 		8795839526C8827100F81B28 /* AboutP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutP.swift; sourceTree = "<group>"; };
 		8795839A26C8896600F81B28 /* AboutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutTableViewCell.xib; sourceTree = "<group>"; };
 		8795839C26C889B400F81B28 /* AboutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewCell.swift; sourceTree = "<group>"; };
@@ -283,6 +286,7 @@
 				2D17013521D32AD20009A316 /* Entities */,
 				2D17013A21D32DC90009A316 /* Presenters */,
 				2D1D3E3A21F66ADD008F51AC /* Property lists */,
+				870E18F726DAC95B005D60AD /* Configuration */,
 				2D17012B21D2DBDA0009A316 /* Views */,
 				2D2630C22313003500F02E45 /* Strings */,
 				2D17011621D2B3CE0009A316 /* AppDelegate.swift */,
@@ -408,6 +412,14 @@
 				8ADEA4F0BAB855141BF2E8FD /* Pods_BeerMais_Clip.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		870E18F726DAC95B005D60AD /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				870E18F826DAC977005D60AD /* StoreKitConfig.storekit */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		8795839826C8892600F81B28 /* TableViewCells */ = {
@@ -603,6 +615,7 @@
 				2D1D3E5621F670C9008F51AC /* BeerCollectionCell.xib in Resources */,
 				2D1D3E5721F670C9008F51AC /* Assets.xcassets in Resources */,
 				879583AD26C8971700F81B28 /* DonateTableViewCell.xib in Resources */,
+				870E18F926DAC977005D60AD /* StoreKitConfig.storekit in Resources */,
 				879583A226C894C200F81B28 /* VersionTableViewCell.xib in Resources */,
 				2D1D3E5921F670C9008F51AC /* Main.storyboard in Resources */,
 				2D2630B22312FC2400F02E45 /* About.storyboard in Resources */,
@@ -632,6 +645,7 @@
 				A18159202597E08F004B2018 /* Alert.storyboard in Resources */,
 				A18159C02597EA26004B2018 /* Localizable.strings in Resources */,
 				879583AE26C8971700F81B28 /* DonateTableViewCell.xib in Resources */,
+				870E18FA26DAC977005D60AD /* StoreKitConfig.storekit in Resources */,
 				A181591C2597E089004B2018 /* BeerCollectionCell.xib in Resources */,
 				A18158BC2597D1D7004B2018 /* Assets.xcassets in Resources */,
 				8795839F26C88AD200F81B28 /* AboutTableViewCell.xib in Resources */,
