@@ -13,9 +13,15 @@ class DonateTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "DonateTableViewCell"
     
-    lazy var presenter: DonateTableViewCellPresenter = {
-        DonateTableViewCellPresenter()
-    }()
+    var presenter: DonateTableViewCellPresenter!
+    
+    override func awakeFromNib() {
+        presenter = DonateTableViewCellPresenter()
+        presenter.delegate = self
+        
+        donateCollectionView.register(UINib(nibName: "DonateCollectionViewCell", bundle: nil),
+                                      forCellWithReuseIdentifier: DonateCollectionViewCell.reuseIdentifier)
+    }
     
     class func dequeueReusableCell(from tableView: UITableView, maxWidth: CGFloat) -> DonateTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DonateTableViewCell.reuseIdentifier) as! DonateTableViewCell
@@ -23,12 +29,8 @@ class DonateTableViewCell: UITableViewCell {
         return cell
     }
     
-    override func awakeFromNib() {
-        donateCollectionView.register(UINib(nibName: "DonateCollectionViewCell", bundle: nil),
-                                      forCellWithReuseIdentifier: DonateCollectionViewCell.reuseIdentifier)
-    }
-    
     func addDonateOptions(with maxWidth: CGFloat) {
+        let donatesCount = 3
         let margin: CGFloat = 5
         donateCollectionView.contentInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         donateCollectionView.delegate = self
@@ -36,8 +38,8 @@ class DonateTableViewCell: UITableViewCell {
         
         let collectionViewFLowLayout = UICollectionViewFlowLayout()
 
-        let totalWidth = Int(maxWidth - (margin * CGFloat(presenter.availableDonatesCount() + 1)))
-        collectionViewFLowLayout.itemSize = CGSize(width: totalWidth / presenter.availableDonatesCount(),
+        let totalWidth = Int(maxWidth - (margin * CGFloat(donatesCount + 1)))
+        collectionViewFLowLayout.itemSize = CGSize(width: totalWidth / donatesCount,
                                                    height: 190)
         collectionViewFLowLayout.minimumLineSpacing = 0
         collectionViewFLowLayout.minimumInteritemSpacing = 0
@@ -68,4 +70,10 @@ extension DonateTableViewCell: UICollectionViewDataSource {
         return cell
     }
     
+}
+
+extension DonateTableViewCell: DonateTableViewCellDelegate {
+    func reloadAvailableDonates() {
+        donateCollectionView.reloadData()
+    }
 }

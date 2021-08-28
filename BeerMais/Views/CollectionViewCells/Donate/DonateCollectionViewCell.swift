@@ -8,12 +8,6 @@
 
 import UIKit
 
-enum DonateType: Int {
-    case small
-    case medium
-    case large
-}
-
 class DonateCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descLabel: UILabel!
