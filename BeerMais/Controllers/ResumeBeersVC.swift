@@ -9,7 +9,7 @@
 import UIKit
 import WidgetKit
 
-protocol ResumeBeersVCDelegate: class {
+protocol ResumeBeersVCDelegate: AnyObject {
     func reloadBeers()
 }
 

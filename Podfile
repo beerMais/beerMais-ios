@@ -10,10 +10,10 @@ def global_pods
     pod 'MaterialComponents/Buttons+ColorThemer'
     pod 'MaterialComponents/Buttons+Theming'
     pod 'MaterialComponents/TextFields'
-    pod 'Firebase/Messaging'
-    pod 'Firebase/Analytics', '>= 7.11.0'
-    pod 'Firebase/Crashlytics', '>= 7.11.0'
-    pod 'Amplitude', '~> 8.3.0'
+    pod 'Firebase/Messaging', '>= 8.15.0'
+    pod 'Firebase/Analytics', '>= 8.15.0'
+    pod 'Firebase/Crashlytics', '>= 8.15.0'
+    pod 'Amplitude', '~> 8.3.1'
 end
 
 target 'BeerMais' do
