@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         AppP.launch()
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
@@ -27,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.requestNotificationAuthorization(application: application)
         application.registerForRemoteNotifications()
+        
+        window = UIWindow()
+        window?.rootViewController = HomeFactory.build()
+        window?.makeKeyAndVisible()
         
         return true
     }

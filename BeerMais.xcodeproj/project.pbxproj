@@ -39,6 +39,15 @@
 		2D6FB1F921F7868E00407BC9 /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6FB1F821F7868E00407BC9 /* AlertVC.swift */; };
 		2DD7E2B621F6737E0084E17F /* SettingsP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7E2B421F6737D0084E17F /* SettingsP.swift */; };
 		7D3906F3D108F892B141BAEE /* Pods_BeerMais_Clip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ADEA4F0BAB855141BF2E8FD /* Pods_BeerMais_Clip.framework */; };
+		870BACDB281747CF00AEF61E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACDA281747CF00AEF61E /* HomeViewController.swift */; };
+		870BACDE2817485800AEF61E /* ViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACDD2817485800AEF61E /* ViewProtocol.swift */; };
+		870BACE128174A8600AEF61E /* HomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACE028174A8600AEF61E /* HomeFactory.swift */; };
+		870BACE328174C3000AEF61E /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACE228174C3000AEF61E /* HomeInteractor.swift */; };
+		870BACE528174C9C00AEF61E /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACE428174C9C00AEF61E /* HomePresenter.swift */; };
+		870BACE728174E8500AEF61E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACE628174E8500AEF61E /* SceneDelegate.swift */; };
+		870BACEA2817502F00AEF61E /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACE92817502E00AEF61E /* UIView+extensions.swift */; };
+		870BACEC281762F700AEF61E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACEB281762F700AEF61E /* Colors.swift */; };
+		870BACEE281763DC00AEF61E /* RankBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACED281763DC00AEF61E /* RankBeerView.swift */; };
 		870E18F926DAC977005D60AD /* StoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 870E18F826DAC977005D60AD /* StoreKitConfig.storekit */; };
 		870E18FA26DAC977005D60AD /* StoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 870E18F826DAC977005D60AD /* StoreKitConfig.storekit */; };
 		8795839626C8827100F81B28 /* AboutP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795839526C8827100F81B28 /* AboutP.swift */; };
@@ -186,6 +195,15 @@
 		2DD7E2B421F6737D0084E17F /* SettingsP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsP.swift; sourceTree = "<group>"; };
 		2DD8D82D224FCA4D004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DD8D82F224FCA6C004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		870BACDA281747CF00AEF61E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		870BACDD2817485800AEF61E /* ViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProtocol.swift; sourceTree = "<group>"; };
+		870BACE028174A8600AEF61E /* HomeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFactory.swift; sourceTree = "<group>"; };
+		870BACE228174C3000AEF61E /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		870BACE428174C9C00AEF61E /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		870BACE628174E8500AEF61E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		870BACE92817502E00AEF61E /* UIView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
+		870BACEB281762F700AEF61E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		870BACED281763DC00AEF61E /* RankBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankBeerView.swift; sourceTree = "<group>"; };
 		870E18F826DAC977005D60AD /* StoreKitConfig.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitConfig.storekit; sourceTree = "<group>"; };
 		8795839526C8827100F81B28 /* AboutP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutP.swift; sourceTree = "<group>"; };
 		8795839A26C8896600F81B28 /* AboutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutTableViewCell.xib; sourceTree = "<group>"; };
@@ -280,6 +298,8 @@
 		2D17011521D2B3CD0009A316 /* BeerMais */ = {
 			isa = PBXGroup;
 			children = (
+				870BACDC2817484200AEF61E /* Common */,
+				870BACD9281747C000AEF61E /* Scenes */,
 				2D92A1F2222B71AF00690ED6 /* BeerMais Dev.entitlements */,
 				2D92A1F0222B70D200690ED6 /* BeerMais.entitlements */,
 				2D17013221D2DDF10009A316 /* Controllers */,
@@ -290,6 +310,7 @@
 				2D17012B21D2DBDA0009A316 /* Views */,
 				2D2630C22313003500F02E45 /* Strings */,
 				2D17011621D2B3CE0009A316 /* AppDelegate.swift */,
+				870BACE628174E8500AEF61E /* SceneDelegate.swift */,
 				2D17012021D2B3CF0009A316 /* Assets.xcassets */,
 				2D17011D21D2B3CE0009A316 /* BeerMais.xcdatamodeld */,
 			);
@@ -306,6 +327,7 @@
 				2D17011A21D2B3CE0009A316 /* Main.storyboard */,
 				2D2630A52312FBBA00F02E45 /* NewBeer.storyboard */,
 				2D17012221D2B3CF0009A316 /* LaunchScreen.storyboard */,
+				870BACED281763DC00AEF61E /* RankBeerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -412,6 +434,35 @@
 				8ADEA4F0BAB855141BF2E8FD /* Pods_BeerMais_Clip.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		870BACD9281747C000AEF61E /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				870BACDF28174A7500AEF61E /* Home */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		870BACDC2817484200AEF61E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				870BACEB281762F700AEF61E /* Colors.swift */,
+				870BACE92817502E00AEF61E /* UIView+extensions.swift */,
+				870BACDD2817485800AEF61E /* ViewProtocol.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		870BACDF28174A7500AEF61E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				870BACE028174A8600AEF61E /* HomeFactory.swift */,
+				870BACDA281747CF00AEF61E /* HomeViewController.swift */,
+				870BACE228174C3000AEF61E /* HomeInteractor.swift */,
+				870BACE428174C9C00AEF61E /* HomePresenter.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		870E18F726DAC95B005D60AD /* Configuration */ = {
@@ -802,14 +853,23 @@
 				8795839626C8827100F81B28 /* AboutP.swift in Sources */,
 				879583B526C89B9100F81B28 /* DonateCollectionViewCell.swift in Sources */,
 				2D1D3E4721F670C9008F51AC /* ResumeBeersVC.swift in Sources */,
+				870BACE128174A8600AEF61E /* HomeFactory.swift in Sources */,
 				2D1D3E4821F670C9008F51AC /* CoreDataP.swift in Sources */,
 				2D1D3E4921F670C9008F51AC /* BeerMais.xcdatamodeld in Sources */,
+				870BACE328174C3000AEF61E /* HomeInteractor.swift in Sources */,
+				870BACE528174C9C00AEF61E /* HomePresenter.swift in Sources */,
 				2D616DEC22541FCE005E8BF7 /* AboutVC.swift in Sources */,
+				870BACE728174E8500AEF61E /* SceneDelegate.swift in Sources */,
+				870BACEE281763DC00AEF61E /* RankBeerView.swift in Sources */,
 				2D1D3E4A21F670C9008F51AC /* BeerP.swift in Sources */,
+				870BACDE2817485800AEF61E /* ViewProtocol.swift in Sources */,
+				870BACEA2817502F00AEF61E /* UIView+extensions.swift in Sources */,
+				870BACDB281747CF00AEF61E /* HomeViewController.swift in Sources */,
 				2D1D3E4B21F670C9008F51AC /* AppP.swift in Sources */,
 				87E1766326CB14D800989B71 /* DonateTableViewCellPresenter.swift in Sources */,
 				8795839D26C889B400F81B28 /* AboutTableViewCell.swift in Sources */,
 				2D1D3E4C21F670C9008F51AC /* Beer+CoreDataProperties.swift in Sources */,
+				870BACEC281762F700AEF61E /* Colors.swift in Sources */,
 				879583A926C8970800F81B28 /* DonateTableViewCell.swift in Sources */,
 				2D616DEF22542091005E8BF7 /* VersionP.swift in Sources */,
 				2D1D3E4D21F670C9008F51AC /* AppDelegate.swift in Sources */,
