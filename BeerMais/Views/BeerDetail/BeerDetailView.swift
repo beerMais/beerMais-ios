@@ -19,6 +19,7 @@ protocol BeerDetailViewProtocol {
     func setIsValidValue(_ isValidValue: Bool)
     func deleteSucess()
     func editSucess()
+    func createSucess()
 }
 
 final class BeerDetailView: UIView {
@@ -37,6 +38,7 @@ final class BeerDetailView: UIView {
         view.delegate = self
         view.placeholder = "Preço"
         view.keyboardType = .numberPad
+        view.addTarget(self, action: #selector(priceValueChanged(_:)), for: .editingChanged)
         
         return view
     }()
@@ -46,12 +48,14 @@ final class BeerDetailView: UIView {
         view.delegate = self
         view.placeholder = "Tamanho"
         view.keyboardType = .numberPad
+        view.addTarget(self, action: #selector(amountValueChanged(_:)), for: .editingChanged)
         
         return view
     }()
     
     lazy var amountSegment: UISegmentedControl = {
         let view = UISegmentedControl(items: ["269ml", "350ml", "473ml", "1L"])
+        view.addTarget(self, action: #selector(amountSegmentChanged(_:)), for: .valueChanged)
         
         return view
     }()
@@ -130,7 +134,7 @@ final class BeerDetailView: UIView {
     }
     
     @objc func addAction(_ sender: Any) {
-        
+        presenter?.createBeer()
     }
     
     private func animateViewMoving (up: Bool, moveValue: CGFloat){
@@ -163,10 +167,6 @@ extension BeerDetailView: ViewProtocol {
         
         sizeController = BeerTextInputController.build(textInput: sizeTextField)
         sizeController?.helperText = "sizeDesc".localized
-        
-        priceTextField.addTarget(self, action: #selector(priceValueChanged(_:)), for: .editingChanged)
-        sizeTextField.addTarget(self, action: #selector(amountValueChanged(_:)), for: .editingChanged)
-        amountSegment.addTarget(self, action: #selector(amountSegmentChanged(_:)), for: .valueChanged)
     }
     
     func configViews() {
@@ -296,6 +296,10 @@ extension BeerDetailView: BeerDetailViewProtocol {
     }
     
     func editSucess() {
+        delegate?.close()
+    }
+    
+    func createSucess() {
         delegate?.close()
     }
     

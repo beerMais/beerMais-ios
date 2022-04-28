@@ -15,6 +15,7 @@ protocol BeerDetailPresenterProtocol {
     func amountSegmentChanged(index: Int)
     func deleteBeer()
     func editBeer()
+    func createBeer()
 }
 
 final class BeerDetailPresenter: BeerDetailPresenterProtocol {
@@ -110,6 +111,16 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         BeerP().edit(beer: beer, data: getBeerArray())
         
         view.editSucess()
+    }
+    
+    func createBeer() {
+        if !validateBeerAndGetResult() {
+            return
+        }
+        
+        BeerP().create(data: getBeerArray())
+        
+        view.createSucess()
     }
     
     private func parseAmountToFillSegment(_ amountString: String) {
