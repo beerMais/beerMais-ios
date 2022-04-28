@@ -12,6 +12,7 @@ protocol HomeViewControllerProtocol: AnyObject {
     func setBeers(with beers: [Beer])
     func setDefaultDataToRank()
     func highligthBeer(_ beer: Beer, economy: String)
+    func reloadBeers()
 }
 
 final class HomeViewController: UIViewController {
@@ -71,6 +72,10 @@ extension HomeViewController: HomeViewControllerProtocol {
         rankView.setBorderStyle(isHighlighted: true)
         rankView.setBeerData(with: beer, economy: economy)
     }
+    
+    func reloadBeers() {
+        interactor?.reloadBeers()
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -97,17 +102,13 @@ extension HomeViewController: UICollectionViewDelegate {
                         didSelectItemAt indexPath: IndexPath) {
         let beer = self.beers[indexPath.row]
         
-        let storyboard = UIStoryboard(name: "NewBeer", bundle: nil)
-        
-        let viewController = storyboard.instantiateViewController(withIdentifier: "NewBeerVCID") as! NewBeerVC
+        let viewController = DetailsFactory.build(with: beer, delegate: self)
         viewController.modalPresentationStyle = .overCurrentContext
-//        viewController.attachResumeBeersDelegate(delegate: self)
-        viewController.setBeer(beer: beer)
         
         if self.tabBarController != nil {
-            self.tabBarController?.present(viewController, animated: true, completion: nil)
+            self.tabBarController?.present(viewController, animated: true)
         } else {
-            self.present(viewController, animated: true, completion: nil)
+            self.present(viewController, animated: true)
         }
     }
 }

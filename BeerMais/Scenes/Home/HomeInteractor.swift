@@ -9,7 +9,7 @@
 import Foundation
 
 protocol HomeInteractorProtocol {
-
+    func reloadBeers()
 }
 
 final class HomeInteractor: HomeInteractorProtocol {
@@ -19,10 +19,10 @@ final class HomeInteractor: HomeInteractorProtocol {
     init(presenter: HomePresenter) {
         self.presenter = presenter
         
-        getBeers()
+        reloadBeers()
     }
     
-    private func getBeers() {
+    func reloadBeers() {
         BeerP().getBeers() { [weak self] beers in
             self?.presenter.setBeers(with: beers)
         }

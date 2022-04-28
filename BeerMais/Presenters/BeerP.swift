@@ -91,10 +91,19 @@ class BeerP {
     }
     
     private func setBeerData(beer: Beer, data: [String: Any]) -> Beer {
-        beer.amount = data["amount"] as! Int16
         beer.brand = data["brand"] as? String
-        beer.value = Float(truncating: data["value"] as! NSNumber)
-        beer.type = data["type"] as! Int16
+        
+        if let value = data["value"] as? NSNumber {
+            beer.value = Float(truncating: value)
+        }
+        
+        if let amount = data["amount"] as? Int16 {
+            beer.amount = amount
+        }
+        
+        if let type = data["type"] as? Int16 {
+            beer.type = type
+        }
         
         return beer
     }
