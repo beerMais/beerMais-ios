@@ -54,6 +54,37 @@ final class HomeViewController: UIViewController {
         
         setupViews()
     }
+    
+    @objc func newBeerAction(_ sender: Any) {
+        let viewController = DetailsFactory.build(delegate: self)
+        viewController.modalPresentationStyle = .overCurrentContext
+        
+        if tabBarController != nil {
+            tabBarController?.present(viewController, animated: true)
+        } else {
+            present(viewController, animated: true)
+        }
+    }
+    
+    @objc func deleteBeersAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Alert", bundle: nil)
+        
+        let viewController = storyboard.instantiateViewController(withIdentifier: "AlertVCID") as! AlertVC
+        viewController.modalPresentationStyle = .overCurrentContext
+        
+        if self.tabBarController != nil {
+            self.tabBarController?.present(viewController, animated: true, completion: nil)
+        } else {
+            self.present(viewController, animated: true, completion: nil)
+        }
+        
+        viewController.setTitle(title: "Apagar?")
+        viewController.setBody(body: "Deseja apagar todas as cervejas? Essa ação não terá volta.")
+        viewController.setNegativeAction(text: "Voltar")
+        viewController.setPositiveAction({
+//            self.deleteBeers()
+        }, text: "Apagar")
+    }
 }
 
 // MARK: - HomeViewControllerProtocol
@@ -100,15 +131,15 @@ extension HomeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        let beer = self.beers[indexPath.row]
+        let beer = beers[indexPath.row]
         
         let viewController = DetailsFactory.build(with: beer, delegate: self)
         viewController.modalPresentationStyle = .overCurrentContext
         
-        if self.tabBarController != nil {
-            self.tabBarController?.present(viewController, animated: true)
+        if tabBarController != nil {
+            tabBarController?.present(viewController, animated: true)
         } else {
-            self.present(viewController, animated: true)
+            present(viewController, animated: true)
         }
     }
 }
@@ -155,6 +186,29 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: ViewProtocol {
     func buildViews() {
         view.backgroundColor = BeerColors.whiteBlack
+        
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = BeerColors.primary
+            
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        }
+        
+        navigationItem.title = "Beer Mais"
+        
+        let leftButton = UIBarButtonItem(barButtonSystemItem: .trash,
+                                          target: self,
+                                          action: #selector(deleteBeersAction(_:)))
+        leftButton.tintColor = BeerColors.blackWhite
+        navigationItem.setLeftBarButton(leftButton, animated: true)
+        
+        let rightButton = UIBarButtonItem(barButtonSystemItem: .add,
+                                          target: self,
+                                          action: #selector(newBeerAction(_:)))
+        rightButton.tintColor = BeerColors.blackWhite
+        navigationItem.setRightBarButton(rightButton, animated: true)
     }
     
     func configViews() {

@@ -30,7 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         window = UIWindow()
-        window?.rootViewController = HomeFactory.build()
+        
+        let navController = UINavigationController(rootViewController: HomeFactory.build())
+        navController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [
+            navController
+        ]
+        
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
         return true
