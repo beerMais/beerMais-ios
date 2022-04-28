@@ -12,6 +12,7 @@ protocol DetailsViewControllerProtocol {
     func setupData(with beer: Beer)
     func reloadBeers()
     func close()
+    func animateViewMoving(up: Bool, moveValue: CGFloat)
 }
 
 final class DetailsViewController: UIViewController {
@@ -64,6 +65,19 @@ extension DetailsViewController: DetailsViewControllerProtocol {
     func close() {
         delegate?.reloadBeers()
         dismiss(animated: true)
+    }
+    
+    func animateViewMoving(up: Bool, moveValue: CGFloat) {
+        let movementDuration:TimeInterval = 0.3
+        let movement: CGFloat = ( up ? -moveValue : moveValue)
+        
+        UIView.beginAnimations("animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        
+        view.frame = view.frame.offsetBy(dx: 0, dy: movement)
+        
+        UIView.commitAnimations()
     }
 }
 
