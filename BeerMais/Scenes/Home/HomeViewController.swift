@@ -56,14 +56,7 @@ final class HomeViewController: UIViewController {
     }
     
     @objc func newBeerAction(_ sender: Any) {
-        let viewController = DetailsFactory.build(delegate: self)
-        viewController.modalPresentationStyle = .overCurrentContext
-        
-        if tabBarController != nil {
-            tabBarController?.present(viewController, animated: true)
-        } else {
-            present(viewController, animated: true)
-        }
+        openDetails()
     }
     
     @objc func deleteBeersAction(_ sender: Any) {
@@ -84,6 +77,17 @@ final class HomeViewController: UIViewController {
         viewController.setPositiveAction({
 //            self.deleteBeers()
         }, text: "Apagar")
+    }
+    
+    private func openDetails(with beer: Beer? = nil) {
+        let viewController = DetailsFactory.build(with: beer, delegate: self)
+        viewController.modalPresentationStyle = .overCurrentContext
+        
+        if tabBarController != nil {
+            tabBarController?.present(viewController, animated: true)
+        } else {
+            present(viewController, animated: true)
+        }
     }
 }
 
@@ -131,16 +135,7 @@ extension HomeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        let beer = beers[indexPath.row]
-        
-        let viewController = DetailsFactory.build(with: beer, delegate: self)
-        viewController.modalPresentationStyle = .overCurrentContext
-        
-        if tabBarController != nil {
-            tabBarController?.present(viewController, animated: true)
-        } else {
-            present(viewController, animated: true)
-        }
+        openDetails(with: beers[indexPath.row])
     }
 }
 
