@@ -74,6 +74,10 @@
 		879583B326C89B8200F81B28 /* DonateCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583B126C89B8200F81B28 /* DonateCollectionViewCell.xib */; };
 		879583B526C89B9100F81B28 /* DonateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */; };
 		879583B626C89B9100F81B28 /* DonateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */; };
+		87B5222F281B710F00ADA2FE /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B5222E281B710F00ADA2FE /* AlertFactory.swift */; };
+		87B52231281B714E00ADA2FE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B52230281B714E00ADA2FE /* AlertViewController.swift */; };
+		87B52233281B71A800ADA2FE /* AlertInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B52232281B71A800ADA2FE /* AlertInteractor.swift */; };
+		87B52235281B720000ADA2FE /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B52234281B720000ADA2FE /* AlertPresenter.swift */; };
 		87E1766326CB14D800989B71 /* DonateTableViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1766226CB14D800989B71 /* DonateTableViewCellPresenter.swift */; };
 		87E1766426CB14D800989B71 /* DonateTableViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1766226CB14D800989B71 /* DonateTableViewCellPresenter.swift */; };
 		87E1766626CB185300989B71 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E1766526CB185300989B71 /* StoreKit.framework */; };
@@ -233,6 +237,10 @@
 		879583AC26C8971700F81B28 /* DonateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonateTableViewCell.xib; sourceTree = "<group>"; };
 		879583B126C89B8200F81B28 /* DonateCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonateCollectionViewCell.xib; sourceTree = "<group>"; };
 		879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateCollectionViewCell.swift; sourceTree = "<group>"; };
+		87B5222E281B710F00ADA2FE /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
+		87B52230281B714E00ADA2FE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		87B52232281B71A800ADA2FE /* AlertInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInteractor.swift; sourceTree = "<group>"; };
+		87B52234281B720000ADA2FE /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		87E1766226CB14D800989B71 /* DonateTableViewCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateTableViewCellPresenter.swift; sourceTree = "<group>"; };
 		87E1766526CB185300989B71 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		87FE20332819EF4800B61429 /* BeerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerButton.swift; sourceTree = "<group>"; };
@@ -466,6 +474,7 @@
 		870BACD9281747C000AEF61E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				87B5222D281B70FF00ADA2FE /* Alert */,
 				870BACEF2817953700AEF61E /* Details */,
 				870BACDF28174A7500AEF61E /* Home */,
 			);
@@ -568,6 +577,17 @@
 				879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */,
 			);
 			path = Donate;
+			sourceTree = "<group>";
+		};
+		87B5222D281B70FF00ADA2FE /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				87B5222E281B710F00ADA2FE /* AlertFactory.swift */,
+				87B52230281B714E00ADA2FE /* AlertViewController.swift */,
+				87B52232281B71A800ADA2FE /* AlertInteractor.swift */,
+				87B52234281B720000ADA2FE /* AlertPresenter.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		87FE20352819F11800B61429 /* Extensions */ = {
@@ -924,6 +944,7 @@
 				87FE2040281A197A00B61429 /* Float+extensions.swift in Sources */,
 				870BACF3281796E000AEF61E /* DetailsViewController.swift in Sources */,
 				870BACE328174C3000AEF61E /* HomeInteractor.swift in Sources */,
+				87B52231281B714E00ADA2FE /* AlertViewController.swift in Sources */,
 				870BACE528174C9C00AEF61E /* HomePresenter.swift in Sources */,
 				87FE203E281A188200B61429 /* String+extensions.swift in Sources */,
 				2D616DEC22541FCE005E8BF7 /* AboutVC.swift in Sources */,
@@ -939,9 +960,11 @@
 				87E1766326CB14D800989B71 /* DonateTableViewCellPresenter.swift in Sources */,
 				8795839D26C889B400F81B28 /* AboutTableViewCell.swift in Sources */,
 				2D1D3E4C21F670C9008F51AC /* Beer+CoreDataProperties.swift in Sources */,
+				87B52233281B71A800ADA2FE /* AlertInteractor.swift in Sources */,
 				870BACEC281762F700AEF61E /* Colors.swift in Sources */,
 				870BACFB2817AAA400AEF61E /* BeerTextField.swift in Sources */,
 				879583A926C8970800F81B28 /* DonateTableViewCell.swift in Sources */,
+				87B52235281B720000ADA2FE /* AlertPresenter.swift in Sources */,
 				2D616DEF22542091005E8BF7 /* VersionP.swift in Sources */,
 				2D1D3E4D21F670C9008F51AC /* AppDelegate.swift in Sources */,
 				2D6FB1F921F7868E00407BC9 /* AlertVC.swift in Sources */,
@@ -952,6 +975,7 @@
 				87FE2042281A19CB00B61429 /* Int+extensions.swift in Sources */,
 				879583A526C894CC00F81B28 /* VersionTableViewCell.swift in Sources */,
 				870BACF72817977400AEF61E /* DetailsPresenter.swift in Sources */,
+				87B5222F281B710F00ADA2FE /* AlertFactory.swift in Sources */,
 				870BACF52817971B00AEF61E /* DetailsInteractor.swift in Sources */,
 				2D1D3E4F21F670C9008F51AC /* NewBeerVC.swift in Sources */,
 			);

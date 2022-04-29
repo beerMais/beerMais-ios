@@ -60,23 +60,19 @@ final class HomeViewController: UIViewController {
     }
     
     @objc func deleteBeersAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Alert", bundle: nil)
-        
-        let viewController = storyboard.instantiateViewController(withIdentifier: "AlertVCID") as! AlertVC
+        let viewController = AlertFactory.build(with: .init(title: "Apagar?",
+                                                            description: "Deseja apagar todas as cervejas? Essa ação não terá volta.",
+                                                            negativeActionTitle: "Voltar",
+                                                            positiveActionTitle: "Apagar",
+                                                            negativeAction: nil,
+                                                            positiveAction: nil))
         viewController.modalPresentationStyle = .overCurrentContext
         
-        if self.tabBarController != nil {
-            self.tabBarController?.present(viewController, animated: true, completion: nil)
+        if tabBarController != nil {
+            tabBarController?.present(viewController, animated: true)
         } else {
-            self.present(viewController, animated: true, completion: nil)
+            present(viewController, animated: true)
         }
-        
-        viewController.setTitle(title: "Apagar?")
-        viewController.setBody(body: "Deseja apagar todas as cervejas? Essa ação não terá volta.")
-        viewController.setNegativeAction(text: "Voltar")
-        viewController.setPositiveAction({
-//            self.deleteBeers()
-        }, text: "Apagar")
     }
     
     private func openDetails(with beer: Beer? = nil) {
