@@ -29,10 +29,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let aboutNavController = UINavigationController(rootViewController: HomeFactory.build())
             aboutNavController.tabBarItem = UITabBarItem(title: "Sobre",
                                                     image: UIImage(named: "icons8-about-50"),
-                                                    tag: 0)
+                                                    tag: 1)
             
             let tabBarController = UITabBarController()
-            tabBarController.tabBar.tintColor = BeerColors.primary
+            tabBarController.tabBar.tintColor = BeerColors.primaryLight
+            tabBarController.tabBar.barTintColor = .tertiarySystemBackground
+            tabBarController.tabBar.backgroundColor = .clear
+            tabBarController.tabBar.isTranslucent = false
             tabBarController.viewControllers = [
                 homeNavController,
                 aboutNavController
