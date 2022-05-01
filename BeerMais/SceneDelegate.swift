@@ -20,12 +20,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             
-            let navController = UINavigationController(rootViewController: HomeFactory.build())
-            navController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
+            let homeNavController = UINavigationController(rootViewController: HomeFactory.build())
+            homeNavController.tabBarItem = UITabBarItem(title: "Calculadora",
+                                                    image: UIImage(named: "icons8-math-50"),
+                                                    tag: 0)
+            homeNavController.tabBarItem.image?.withTintColor(.red)
+            
+            let aboutNavController = UINavigationController(rootViewController: HomeFactory.build())
+            aboutNavController.tabBarItem = UITabBarItem(title: "Sobre",
+                                                    image: UIImage(named: "icons8-about-50"),
+                                                    tag: 0)
             
             let tabBarController = UITabBarController()
+            tabBarController.tabBar.tintColor = BeerColors.primary
             tabBarController.viewControllers = [
-                navController
+                homeNavController,
+                aboutNavController
             ]
             
             window.rootViewController = tabBarController
