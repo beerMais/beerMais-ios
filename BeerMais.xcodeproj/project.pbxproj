@@ -74,6 +74,7 @@
 		879583B326C89B8200F81B28 /* DonateCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583B126C89B8200F81B28 /* DonateCollectionViewCell.xib */; };
 		879583B526C89B9100F81B28 /* DonateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */; };
 		879583B626C89B9100F81B28 /* DonateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */; };
+		87AD524B281E1EDD00F757E6 /* BeerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD524A281E1EDD00F757E6 /* BeerAdView.swift */; };
 		87B5222F281B710F00ADA2FE /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B5222E281B710F00ADA2FE /* AlertFactory.swift */; };
 		87B52231281B714E00ADA2FE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B52230281B714E00ADA2FE /* AlertViewController.swift */; };
 		87B52233281B71A800ADA2FE /* AlertInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B52232281B71A800ADA2FE /* AlertInteractor.swift */; };
@@ -237,6 +238,7 @@
 		879583AC26C8971700F81B28 /* DonateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonateTableViewCell.xib; sourceTree = "<group>"; };
 		879583B126C89B8200F81B28 /* DonateCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonateCollectionViewCell.xib; sourceTree = "<group>"; };
 		879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateCollectionViewCell.swift; sourceTree = "<group>"; };
+		87AD524A281E1EDD00F757E6 /* BeerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerAdView.swift; sourceTree = "<group>"; };
 		87B5222E281B710F00ADA2FE /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		87B52230281B714E00ADA2FE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		87B52232281B71A800ADA2FE /* AlertInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInteractor.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				87FE20352819F11800B61429 /* Extensions */,
+				87AD524A281E1EDD00F757E6 /* BeerAdView.swift */,
 				87FE20332819EF4800B61429 /* BeerButton.swift */,
 				870BACFA2817AAA400AEF61E /* BeerTextField.swift */,
 				870BACEB281762F700AEF61E /* Colors.swift */,
@@ -972,6 +975,7 @@
 				2D2630C82313021700F02E45 /* StringExtensions.swift in Sources */,
 				2D1D3E4E21F670C9008F51AC /* Beer+CoreDataClass.swift in Sources */,
 				87FE20372819F12100B61429 /* UIStackView+extensions.swift in Sources */,
+				87AD524B281E1EDD00F757E6 /* BeerAdView.swift in Sources */,
 				87FE2042281A19CB00B61429 /* Int+extensions.swift in Sources */,
 				879583A526C894CC00F81B28 /* VersionTableViewCell.swift in Sources */,
 				870BACF72817977400AEF61E /* DetailsPresenter.swift in Sources */,

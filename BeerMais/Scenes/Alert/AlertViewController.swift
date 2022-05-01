@@ -77,6 +77,12 @@ final class AlertViewController: UIViewController {
         return view
     }()
     
+    lazy var adBannerView: BeerAdView = {
+        let view = BeerAdView.build(with: self)
+        
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -121,7 +127,8 @@ extension AlertViewController: ViewProtocol {
         container.addSubViews([
             titleLabel,
             bodyLabel,
-            buttonsStackView
+            buttonsStackView,
+            adBannerView
         ])
     }
     
@@ -144,6 +151,11 @@ extension AlertViewController: ViewProtocol {
             buttonsStackView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -16),
             buttonsStackView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
             buttonsStackView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant:  -16),
+            
+            adBannerView.heightAnchor.constraint(equalToConstant: 100),
+            adBannerView.widthAnchor.constraint(equalToConstant: 320),
+            adBannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            adBannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
     

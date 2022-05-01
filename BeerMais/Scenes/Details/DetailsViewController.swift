@@ -24,6 +24,12 @@ final class DetailsViewController: UIViewController {
         return view
     }()
     
+    lazy var adBannerView: BeerAdView = {
+        let view = BeerAdView.build(with: self)
+        
+        return view
+    }()
+    
     var interactor: DetailsInteractor?
     var delegate: HomeViewControllerProtocol?
     private var beer: Beer?
@@ -90,7 +96,10 @@ extension DetailsViewController: ViewProtocol {
     }
     
     func configViews() {
-        view.addSubViews([beerDetailView])
+        view.addSubViews([
+            beerDetailView,
+            adBannerView
+        ])
     }
     
     func setupConstraints() {
@@ -99,6 +108,11 @@ extension DetailsViewController: ViewProtocol {
             beerDetailView.heightAnchor.constraint(equalToConstant: 300),
             beerDetailView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             beerDetailView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            adBannerView.heightAnchor.constraint(equalToConstant: 100),
+            adBannerView.widthAnchor.constraint(equalToConstant: 320),
+            adBannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            adBannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
     
