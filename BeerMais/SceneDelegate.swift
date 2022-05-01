@@ -8,25 +8,33 @@
 
 import UIKit
 
-//class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-//    
-//    var window: UIWindow?
-//
-//    @available(iOS 13.0, *)
-//    func scene(_ scene: UIScene,
-//               willConnectTo session: UISceneSession,
-//               options connectionOptions: UIScene.ConnectionOptions) {
-//        
-//
-//        if let windowScene = scene as? UIWindowScene {
-//            let window = UIWindow(windowScene: windowScene)
-//            window.rootViewController = HomeFactory.build()
-//            
-//            self.window = window
-//            
-//            window.makeKeyAndVisible()
-//        }
-//
-//    }
-//    
-//}
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
+    var window: UIWindow?
+
+    @available(iOS 13.0, *)
+    func scene(_ scene: UIScene,
+               willConnectTo session: UISceneSession,
+               options connectionOptions: UIScene.ConnectionOptions) {
+        
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            
+            let navController = UINavigationController(rootViewController: HomeFactory.build())
+            navController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
+            
+            let tabBarController = UITabBarController()
+            tabBarController.viewControllers = [
+                navController
+            ]
+            
+            window.rootViewController = tabBarController
+            
+            self.window = window
+            
+            window.makeKeyAndVisible()
+        }
+
+    }
+    
+}
