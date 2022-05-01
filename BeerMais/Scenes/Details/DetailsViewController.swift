@@ -86,7 +86,7 @@ extension DetailsViewController: DetailsViewControllerProtocol {
 extension DetailsViewController: ViewProtocol {
     
     func buildViews() {
-        view.backgroundColor = UIColor(white: 0, alpha: 0.25)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.3)
     }
     
     func configViews() {

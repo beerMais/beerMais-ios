@@ -10,6 +10,7 @@ import Foundation
 
 protocol HomeInteractorProtocol {
     func reloadBeers()
+    func deleteAllBeers()
 }
 
 final class HomeInteractor: HomeInteractorProtocol {
@@ -26,5 +27,10 @@ final class HomeInteractor: HomeInteractorProtocol {
         BeerP().getBeers() { [weak self] beers in
             self?.presenter.setBeers(with: beers)
         }
+    }
+    
+    func deleteAllBeers() {
+        BeerP().deleteBeers()
+        presenter.setBeers(with: [])
     }
 }

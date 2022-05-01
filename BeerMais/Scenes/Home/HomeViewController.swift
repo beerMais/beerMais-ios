@@ -65,7 +65,10 @@ final class HomeViewController: UIViewController {
                                                             negativeActionTitle: "Voltar",
                                                             positiveActionTitle: "Apagar",
                                                             negativeAction: nil,
-                                                            positiveAction: nil))
+                                                            positiveAction: { [weak self] in
+            self?.interactor?.deleteAllBeers()
+        }))
+        
         viewController.modalPresentationStyle = .overCurrentContext
         
         if tabBarController != nil {

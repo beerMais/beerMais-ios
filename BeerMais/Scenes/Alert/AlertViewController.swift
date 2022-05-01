@@ -20,7 +20,7 @@ final class AlertViewController: UIViewController {
     
     var interactor: AlertInteractorProtocol?
     
-    lazy var contrainer: UIView = {
+    lazy var container: UIView = {
         let view = UIView()
         
         if #available(iOS 13.0, *) {
@@ -83,6 +83,17 @@ final class AlertViewController: UIViewController {
         setupViews()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        
+        let touch = touches.first
+        guard let location = touch?.location(in: view) else { return }
+        
+        if !container.frame.contains(location) {
+            close()
+        }
+    }
+    
     @objc func negativeAction(_ sender: Any) {
         interactor?.negativeAction()
     }
@@ -95,18 +106,19 @@ final class AlertViewController: UIViewController {
 
 extension AlertViewController: ViewProtocol {
     func buildViews() {
-        
+        view.backgroundColor = UIColor(white: 0, alpha: 0.3)
+        container.layer.cornerRadius = 10
     }
     
     func configViews() {
         view.addSubViews([
-            contrainer
+            container
         ])
         
         buttonsStackView.addArrangedSubviews([negativeButton,
                                               positiveButton])
         
-        contrainer.addSubViews([
+        container.addSubViews([
             titleLabel,
             bodyLabel,
             buttonsStackView
@@ -115,23 +127,23 @@ extension AlertViewController: ViewProtocol {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            contrainer.widthAnchor.constraint(equalToConstant: 300),
-            contrainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            contrainer.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            container.widthAnchor.constraint(equalToConstant: 300),
+            container.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            container.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
             titleLabel.heightAnchor.constraint(equalToConstant: 25),
-            titleLabel.topAnchor.constraint(equalTo: contrainer.topAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: contrainer.leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: contrainer.trailingAnchor, constant:  -16),
+            titleLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant:  -16),
             
             bodyLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
-            bodyLabel.leadingAnchor.constraint(equalTo: contrainer.leadingAnchor, constant: 16),
-            bodyLabel.trailingAnchor.constraint(equalTo: contrainer.trailingAnchor, constant:  -16),
+            bodyLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
+            bodyLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant:  -16),
             
             buttonsStackView.topAnchor.constraint(equalTo: bodyLabel.bottomAnchor, constant: 16),
-            buttonsStackView.bottomAnchor.constraint(equalTo: contrainer.bottomAnchor, constant: -16),
-            buttonsStackView.leadingAnchor.constraint(equalTo: contrainer.leadingAnchor, constant: 16),
-            buttonsStackView.trailingAnchor.constraint(equalTo: contrainer.trailingAnchor, constant:  -16),
+            buttonsStackView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -16),
+            buttonsStackView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
+            buttonsStackView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant:  -16),
         ])
     }
     
