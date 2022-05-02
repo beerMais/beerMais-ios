@@ -8,8 +8,21 @@
 
 "helpBeerText" = "Clique em + para adicionar uma bebida";
 "brand" = "Marca";
+"size" = "Tamanho";
+"price" = "Valor";
 "addSize" = "Digite um Tamanho";
 "addBrand" = "Digite uma Marca";
 "addPrice" = "Digite um Valor";
 "sizeDesc" = "Em mL";
 "appName" = "Beer Mais";
+"saving" = "Economizando:";
+"disclaimer" = "*entre bebidas 1 and 2";
+"yes" = "Sim";
+"no" = "Não";
+"backScreen" = "Voltar";
+"delete" = "Apagar";
+"deleteTitle" = "Apagar?";
+"deleteBeerAlert" = "Deseja apagar todas as cervejas? Essa ação não terá volta.";
+"save" = "Salvar";
+"add" = "Adicionar";
+"detailsHelpText" = "Selecione acima ou digite clicando no campo \"Tamanho\"";

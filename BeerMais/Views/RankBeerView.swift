@@ -20,14 +20,14 @@ final class RankBeerView: UIView, RankBeerViewProtocol {
         let view = UILabel()
         view.textAlignment = .center
         view.font = UIFont.systemFont(ofSize: 16)
-        view.text = "Marca"
+        view.text = "brand".localized
         
         return view
     }()
     
     lazy var beerImageView: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "icons8-beer-can-100")
+        view.image = BeerImage.iconBeerCan100
         view.tintColor = BeerColors.blackWhite
         
         return view
@@ -55,7 +55,7 @@ final class RankBeerView: UIView, RankBeerViewProtocol {
         let view = UILabel()
         view.textAlignment = .center
         view.font = UIFont.systemFont(ofSize: 20)
-        view.text = "Economizando:"
+        view.text = "saving".localized
         
         return view
     }()
@@ -74,7 +74,7 @@ final class RankBeerView: UIView, RankBeerViewProtocol {
         let view = UILabel()
         view.textAlignment = .center
         view.font = UIFont.systemFont(ofSize: 10)
-        view.text = "*entre bebidas 1 e 2"
+        view.text = "disclaimer".localized
         view.textColor = UIColor.lightGray
         
         return view
@@ -84,7 +84,7 @@ final class RankBeerView: UIView, RankBeerViewProtocol {
         if (isHighlighted) {
             layer.borderColor = BeerColors.economyBorder.cgColor
             layer.borderWidth = 2.0
-            backgroundColor = UIColor(named: "economyBackground")!
+            backgroundColor = BeerColors.economyBackground
             
             return
         }
@@ -101,7 +101,7 @@ final class RankBeerView: UIView, RankBeerViewProtocol {
     
     func setDefaultData() {
         brandLabel.text = "brand".localized
-        beerImageView.image = UIImage(named: "icons8-beer-can-100")
+        beerImageView.image = BeerImage.iconBeerCan100
         amountLabel.text = "350ml"
         valueLabel.text = "RS 0,00"
         economyValueLabel.text = "R$ 0,00/L"
@@ -123,18 +123,11 @@ final class RankBeerView: UIView, RankBeerViewProtocol {
         }
         amountLabel.text = amountText
         
-//        rankBeerType = Int(beer.type)
-        var imageName = ""
-        switch beer.type {
-        case 1:
-            imageName = "icons8-beer-can-100"
-        case 2:
-            imageName = "icons8-beer-bottle-100"
-        default:
-            imageName = "icons8-beer-can-100"
+        if beer.type == 2 {
+            beerImageView.image = BeerImage.iconBeerBottle100
+        } else {
+            beerImageView.image = BeerImage.iconBeerCan100
         }
-        
-        beerImageView.image = UIImage(named: imageName)
         
         let valueString = BeerP().formatValueToShow(value: beer.value)
         valueLabel.text = "R$ \(valueString)"

@@ -27,7 +27,7 @@ final class BeerDetailView: UIView {
     lazy var brandTextField: BeerTextField = {
         let view = BeerTextField.build()
         view.delegate = self
-        view.placeholder = "Marca"
+        view.placeholder = "brand".localized
         view.addTarget(self, action: #selector(brandValueChanged(_:)), for: .editingChanged)
         
         return view
@@ -36,7 +36,7 @@ final class BeerDetailView: UIView {
     lazy var priceTextField: BeerTextField = {
         let view = BeerTextField.build()
         view.delegate = self
-        view.placeholder = "Preço"
+        view.placeholder = "price".localized
         view.keyboardType = .numberPad
         view.addTarget(self, action: #selector(priceValueChanged(_:)), for: .editingChanged)
         
@@ -46,7 +46,7 @@ final class BeerDetailView: UIView {
     lazy var sizeTextField: BeerTextField = {
         let view = BeerTextField.build()
         view.delegate = self
-        view.placeholder = "Tamanho"
+        view.placeholder = "size".localized
         view.keyboardType = .numberPad
         view.addTarget(self, action: #selector(amountValueChanged(_:)), for: .editingChanged)
         
@@ -64,7 +64,7 @@ final class BeerDetailView: UIView {
         let view = UILabel()
         view.font = UIFont.systemFont(ofSize: 12)
         view.numberOfLines = 0
-        view.text = "Selecione acima ou digite clicando no campo \"Tamanho\""
+        view.text = "detailsHelpText".localized
         
         return view
     }()
@@ -79,7 +79,7 @@ final class BeerDetailView: UIView {
     
     lazy var deleteButton: BeerButton = {
         let view = BeerButton.build(style: .negative)
-        view.setTitle("Delete", for: .normal)
+        view.setTitle("delete".localized, for: .normal)
         view.addTarget(self, action: #selector(deleteAction(_:)), for: .touchUpInside)
         
         return view
@@ -87,7 +87,7 @@ final class BeerDetailView: UIView {
     
     lazy var saveButton: BeerButton = {
         let view = BeerButton.build(style: .positive)
-        view.setTitle("Save", for: .normal)
+        view.setTitle("save".localized, for: .normal)
         view.addTarget(self, action: #selector(saveAction(_:)), for: .touchUpInside)
         
         return view
@@ -95,7 +95,7 @@ final class BeerDetailView: UIView {
     
     lazy var addButton: BeerButton = {
         let view = BeerButton.build(style: .positive)
-        view.setTitle("Add", for: .normal)
+        view.setTitle("add".localized, for: .normal)
         view.isHidden = true
         view.addTarget(self, action: #selector(addAction(_:)), for: .touchUpInside)
         

@@ -12,6 +12,7 @@ final class BeerColors {
     static var blackWhite = UIColor(named: "black-white")!
     static var whiteBlack = UIColor(named: "white-black")!
     static var economyBorder = UIColor(named: "economyBorder")!
+    static var economyBackground = UIColor(named: "economyBackground")!
     static var primary = UIColor(named: "primary")!
     static var primaryLight = UIColor(named: "primaryLight")!
 }

@@ -59,6 +59,8 @@
 		87849E51281F7C9000B6F61F /* AboutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87849E50281F7C9000B6F61F /* AboutInteractor.swift */; };
 		87849E53281F7CE000B6F61F /* AboutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87849E52281F7CE000B6F61F /* AboutPresenter.swift */; };
 		87849E55281F80E200B6F61F /* BeerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87849E54281F80E200B6F61F /* BeerImage.swift */; };
+		87849E5728205E7F00B6F61F /* BeerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87849E54281F80E200B6F61F /* BeerImage.swift */; };
+		87849E5828205E7F00B6F61F /* BeerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87849E54281F80E200B6F61F /* BeerImage.swift */; };
 		8795839B26C8896600F81B28 /* AboutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8795839A26C8896600F81B28 /* AboutTableViewCell.xib */; };
 		8795839D26C889B400F81B28 /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795839C26C889B400F81B28 /* AboutTableViewCell.swift */; };
 		8795839E26C88ABD00F81B28 /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795839C26C889B400F81B28 /* AboutTableViewCell.swift */; };
@@ -1002,6 +1004,7 @@
 				2D4C521A254F921E00D0B2D0 /* Beer+CoreDataProperties.swift in Sources */,
 				2D4C5216254F921C00D0B2D0 /* Beer+CoreDataClass.swift in Sources */,
 				2D4C51FE254F85CB00D0B2D0 /* BeerMais_widget.swift in Sources */,
+				87849E5728205E7F00B6F61F /* BeerImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1024,6 +1027,7 @@
 				A181590B2597E059004B2018 /* Beer+CoreDataProperties.swift in Sources */,
 				A18159142597E06D004B2018 /* NewBeerVC.swift in Sources */,
 				A181592B2597E09A004B2018 /* AppP.swift in Sources */,
+				87849E5828205E7F00B6F61F /* BeerImage.swift in Sources */,
 				A18158B02597D1D5004B2018 /* AppDelegate.swift in Sources */,
 				879583A626C894CC00F81B28 /* VersionTableViewCell.swift in Sources */,
 				A18159662597E242004B2018 /* StringExtensions.swift in Sources */,

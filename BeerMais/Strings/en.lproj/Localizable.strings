@@ -8,8 +8,21 @@
 
 "helpBeerText" = "Tap + to add a drink";
 "brand" = "Brand";
+"size" = "Size";
+"price" = "Price";
 "addSize" = "Enter a Size";
 "addBrand" = "Enter a Brand";
 "addPrice" = "Enter a Price";
 "sizeDesc" = "In mL";
 "appName" = "Beer Mais";
+"saving" = "Saving:";
+"disclaimer" = "*between drinks 1 and 2";
+"yes" = "Yes";
+"no" = "No";
+"backScreen" = "Back";
+"delete" = "Delete";
+"deleteTitle" = "Delete?";
+"deleteBeerAlert" = "Do you want to delete all beers? This action cannot be undone.";
+"save" = "Save";
+"add" = "Add";
+"detailsHelpText" = "Select above or type by clicking in the field \"Size\"";

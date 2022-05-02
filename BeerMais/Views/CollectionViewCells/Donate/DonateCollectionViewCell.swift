@@ -33,7 +33,7 @@ class DonateCollectionViewCell: UICollectionViewCell {
     func setType(_ type: DonateType) {
         switch type {
         case .small:
-            imageView.image = UIImage(named: "icons8-beer-can-100")
+            imageView.image = BeerImage.iconBeerCan100
             descLabel.text = "Café\nR$ 4,90"
         case .medium:
             imageView.image = UIImage(named: "icons8-beer-bottle-100")

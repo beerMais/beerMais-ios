@@ -60,10 +60,10 @@ final class HomeViewController: UIViewController {
     }
     
     @objc func deleteBeersAction(_ sender: Any) {
-        let viewController = AlertFactory.build(with: .init(title: "Apagar?",
-                                                            description: "Deseja apagar todas as cervejas? Essa ação não terá volta.",
-                                                            negativeActionTitle: "Voltar",
-                                                            positiveActionTitle: "Apagar",
+        let viewController = AlertFactory.build(with: .init(title: "deleteTitle".localized,
+                                                            description: "deleteBeerAlert".localized,
+                                                            negativeActionTitle: "backScreen".localized,
+                                                            positiveActionTitle: "delete".localized,
                                                             negativeAction: nil,
                                                             positiveAction: { [weak self] in
             self?.interactor?.deleteAllBeers()
@@ -190,7 +190,7 @@ extension HomeViewController: ViewProtocol {
             navigationController?.navigationBar.scrollEdgeAppearance = appearance
         }
         
-        navigationItem.title = "Beer Mais"
+        navigationItem.title = "appName".localized
         
         let leftButton = UIBarButtonItem(barButtonSystemItem: .trash,
                                           target: self,
