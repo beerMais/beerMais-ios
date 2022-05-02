@@ -23,3 +23,7 @@ end
 target 'BeerMais Clip' do
     global_pods
 end
+
+target 'BeerMaisTests' do
+    global_pods
+end
