@@ -1,5 +1,5 @@
 //
-//  Colors.swift
+//  BeerColors.swift
 //  BeerMais
 //
 //  Created by Jose Neves on 25/04/22.

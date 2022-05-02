@@ -26,8 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                                     tag: 0)
             homeNavController.tabBarItem.image?.withTintColor(.red)
             
-            let aboutNavController = UINavigationController(rootViewController: HomeFactory.build())
-            aboutNavController.tabBarItem = UITabBarItem(title: "Sobre",
+            let aboutController = AboutFactory.build()
+            aboutController.tabBarItem = UITabBarItem(title: "Sobre",
                                                     image: UIImage(named: "icons8-about-50"),
                                                     tag: 1)
             
@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tabBarController.tabBar.isTranslucent = false
             tabBarController.viewControllers = [
                 homeNavController,
-                aboutNavController
+                aboutController
             ]
             
             window.rootViewController = tabBarController
