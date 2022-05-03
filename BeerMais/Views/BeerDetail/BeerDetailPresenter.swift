@@ -118,7 +118,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
             return
         }
         
-        BeerP().create(data: getBeerArray())
+        _ = BeerP().create(data: getBeerArray())
         
         view.createSucess()
     }

@@ -1,5 +1,5 @@
 //
-//  DetailsViewTests.swift
+//  DetailsTests.swift
 //  BeerMaisTests
 //
 //  Created by Jose Neves on 02/05/22.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-final class DetailsViewTests: XCTestCase {
+final class DetailsTests: XCTestCase {
     
     var sut: DetailsInteractor!
     var spy: DetailsViewControllerSpy!
