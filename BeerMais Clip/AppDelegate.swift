@@ -14,17 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if let controller = UIStoryboard(name: "Main", bundle: Bundle(for: ResumeBeersVC.self))
-            .instantiateViewController(withIdentifier: "ResumeBeersVC") as? ResumeBeersVC {
-            if let window = self.window, let rootViewController = window.rootViewController {
-                var currentController = rootViewController
-                while let presentedController = currentController.presentedViewController {
-                    currentController = presentedController
-                }
-                currentController.present(controller, animated: true, completion: nil)
-            }
-        }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         return true
     }
 
