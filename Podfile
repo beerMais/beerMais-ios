@@ -13,7 +13,7 @@ def global_pods
     pod 'Firebase/Messaging', '~> 10.5.0'
     pod 'Firebase/Analytics', '>= 10.5.0'
     pod 'Firebase/Crashlytics', '>= 10.5.0'
-    pod 'Amplitude', '~> 8.15.1'
+    pod 'AmplitudeSwift', '~> 1.1.0'
 end
 
 target 'BeerMais' do

@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import Amplitude
+import AmplitudeSwift
 
 
-class BeerP {
+final class BeerP {
     private let entityName = "Beer"
     
     func create(data: [String: Any]) -> Beer? {
@@ -21,7 +21,10 @@ class BeerP {
                 
                 try context.save()
                 
-                Amplitude.instance().logEvent("beer_created", withEventProperties: beerToAnalyticsParameters(beer))
+                AppP.amplitude.track(event: BaseEvent(
+                    eventType: "beer_created",
+                    eventProperties: beerToAnalyticsParameters(beer)
+                ))
                 
                 return beer
             } catch let error {
@@ -53,7 +56,10 @@ class BeerP {
     func deleteBeers() {
         CoreDataP().deleteData(entityName: self.entityName)
         
-        Amplitude.instance().logEvent("all_beers_deleted", withEventProperties: nil)
+        AppP.amplitude.track(event: BaseEvent(
+            eventType: "all_beers_deleted",
+            eventProperties: nil
+        ))
     }
     
     func formatValueToShow(value: Float) -> String {
@@ -64,13 +70,19 @@ class BeerP {
     func delete(beer: Beer) {
         CoreDataP().context.delete(beer)
         
-        Amplitude.instance().logEvent("beer_deleted", withEventProperties: beerToAnalyticsParameters(beer))
+        AppP.amplitude.track(event: BaseEvent(
+            eventType: "beer_deleted",
+            eventProperties: beerToAnalyticsParameters(beer)
+        ))
     }
     
     func edit(beer: Beer, data: [String: Any]) {
         _ = self.setBeerData(beer: beer, data: data)
         
-        Amplitude.instance().logEvent("beer_updated", withEventProperties: beerToAnalyticsParameters(beer))
+        AppP.amplitude.track(event: BaseEvent(
+            eventType: "beer_updated",
+            eventProperties: beerToAnalyticsParameters(beer)
+        ))
     }
     
     func getValuePerML(value: Float, amount: Int16) -> Float {

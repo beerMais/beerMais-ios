@@ -8,21 +8,26 @@
 
 import Foundation
 import StoreKit
-import Amplitude
+import AmplitudeSwift
 
 
-class AppP {
+final class AppP {
     private static let hasBeenLaunchedBeforeFlag = "hasBeenLaunchedBeforeFlag"
     private static let APP_OPEN_COUNT = "APP_OPEN_COUNT"
     
+    public static let amplitude: Amplitude = Amplitude(configuration: Configuration(
+        apiKey: SettingsP.getAmplitudeKey(),
+        defaultTracking: DefaultTrackingOptions(
+            sessions: true
+        )
+    ))
+    
     static func launch() {
-        Amplitude.instance().trackingSessionEvents = true
-        Amplitude.instance().initializeApiKey(SettingsP.getAmplitudeKey())
         
         if (!self.isFirstLaunch()) {
             self.setFirstLaunch()
             
-            Amplitude.instance().setUserId(nil)
+            AppP.amplitude.setUserId(userId: nil)
             
             #if DEBUG
                 self.setInitialData()
@@ -109,15 +114,12 @@ class AppP {
     }
     
     static func logAppLaunch() {
-        var style = "light"
-        
-        if UITraitCollection.current.userInterfaceStyle == .dark {
-            style = "dark"
-        }
-        
-        Amplitude.instance().logEvent("app_launch", withEventProperties: [
-            "interface_style": style
-        ])
+        AppP.amplitude.track(event: BaseEvent(
+            eventType: "app_launch",
+            eventProperties: [
+                "interface_style": UITraitCollection.current.userInterfaceStyle == .dark ? "dark" : "light"
+            ]
+        ))
     }
     
     func requestReview() {
