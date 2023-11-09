@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -794,10 +794,10 @@
 				2D1D3E4521F670C9008F51AC /* Sources */,
 				2D1D3E5021F670C9008F51AC /* Frameworks */,
 				2D1D3E5221F670C9008F51AC /* Resources */,
-				2D75DC4E254F4AA700889F47 /* ShellScript */,
 				2D4C5208254F85CC00D0B2D0 /* Embed Foundation Extensions */,
 				A19FDD5B259AC9950007E828 /* Embed App Clips */,
 				F8F19CA83FF0FA2F37FDDDD0 /* [CP] Embed Pods Frameworks */,
+				2D75DC4E254F4AA700889F47 /* ShellScript */,
 			);
 			buildRules = (
 			);
