@@ -110,10 +110,9 @@ class AppP {
     
     static func logAppLaunch() {
         var style = "light"
-        if #available(iOS 13.0, *) {
-            if UITraitCollection.current.userInterfaceStyle == .dark {
-                style = "dark"
-            }
+        
+        if UITraitCollection.current.userInterfaceStyle == .dark {
+            style = "dark"
         }
         
         Amplitude.instance().logEvent("app_launch", withEventProperties: [

@@ -92,11 +92,7 @@ final class RankBeerView: UIView, RankBeerViewProtocol {
         layer.borderColor = UIColor.lightGray.cgColor
         layer.borderWidth = 0.5
         
-        if #available(iOS 13.0, *) {
-            backgroundColor = UIColor.tertiarySystemBackground
-        } else {
-            backgroundColor = UIColor.white
-        }
+        backgroundColor = UIColor.tertiarySystemBackground
     }
     
     func setDefaultData() {

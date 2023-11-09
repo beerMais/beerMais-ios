@@ -22,12 +22,7 @@ final class AlertViewController: UIViewController {
     
     lazy var container: UIView = {
         let view = UIView()
-        
-        if #available(iOS 13.0, *) {
-            view.backgroundColor = .tertiarySystemBackground
-        } else {
-            view.backgroundColor = .white
-        }
+        view.backgroundColor = .tertiarySystemBackground
         
         return view
     }()
@@ -43,12 +38,7 @@ final class AlertViewController: UIViewController {
         let view = UILabel()
         view.font = UIFont.systemFont(ofSize: 16)
         view.numberOfLines = 0
-        
-        if #available(iOS 13.0, *) {
-            view.textColor = .secondaryLabel
-        } else {
-            view.textColor = .gray
-        }
+        view.textColor = .secondaryLabel
         
         return view
     }()

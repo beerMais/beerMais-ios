@@ -142,11 +142,7 @@ final class BeerDetailView: UIView {
 extension BeerDetailView: ViewProtocol {
     
     func buildViews() {
-        if #available(iOS 13.0, *) {
-            backgroundColor = .tertiarySystemBackground
-        } else {
-            backgroundColor = .black
-        }
+        backgroundColor = .tertiarySystemBackground
         
         layer.cornerRadius = 10
         

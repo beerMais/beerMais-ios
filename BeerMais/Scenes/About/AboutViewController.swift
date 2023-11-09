@@ -96,9 +96,7 @@ extension AboutViewController: AboutViewControllerProtocol {
 extension AboutViewController: ViewProtocol {
     
     func buildViews() {
-        if #available(iOS 13.0, *) {
-            view.backgroundColor = .systemBackground
-        }
+        view.backgroundColor = .systemBackground
     }
     
     func configViews() {
