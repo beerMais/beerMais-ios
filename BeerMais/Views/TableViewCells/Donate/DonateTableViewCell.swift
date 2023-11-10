@@ -33,10 +33,10 @@ class DonateTableViewCell: UITableViewCell {
         let donatesCount: CGFloat = 3
         
         var cellWidth: CGFloat
-        if (maxWidth / donatesCount) > 115 {
-            cellWidth = 115
+        if (maxWidth / donatesCount) > 105 {
+            cellWidth = 105
         } else {
-            cellWidth = 100
+            cellWidth = 90
         }
         
         let margin = (maxWidth - CGFloat(donatesCount * cellWidth)) / 4
@@ -46,7 +46,7 @@ class DonateTableViewCell: UITableViewCell {
         donateCollectionView.dataSource = self
         
         let collectionViewFLowLayout = UICollectionViewFlowLayout()
-        collectionViewFLowLayout.itemSize = CGSize(width: cellWidth, height: 160)
+        collectionViewFLowLayout.itemSize = CGSize(width: cellWidth, height: 140)
         collectionViewFLowLayout.minimumLineSpacing = 0
         collectionViewFLowLayout.minimumInteritemSpacing = 0
         

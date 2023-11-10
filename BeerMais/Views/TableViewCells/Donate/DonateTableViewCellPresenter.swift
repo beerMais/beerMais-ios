@@ -65,15 +65,18 @@ class DonateTableViewCellPresenter: NSObject {
         
         SKPaymentQueue.default().add(self)
         
-        refreshAvailableDonates { products in
-            for product in products ?? [] {
+        refreshAvailableDonates { [weak self] products in
+            
+            guard let products else { return }
+            
+            for product in products.sorted(by: { $0.price.doubleValue < $1.price.doubleValue }) {
                 if let donateType = DonateType.getByProductId(product.productIdentifier) {
-                    self.availableDonates.append(donateType)
+                    self?.availableDonates.append(donateType)
                 }
             }
             
             DispatchQueue.main.async {
-                self.delegate?.reloadAvailableDonates()
+                self?.delegate?.reloadAvailableDonates()
             }
         }
     }
