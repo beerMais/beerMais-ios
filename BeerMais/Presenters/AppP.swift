@@ -9,6 +9,7 @@
 import Foundation
 import StoreKit
 import AmplitudeSwift
+import FirebaseRemoteConfig
 
 
 final class AppP {
@@ -21,6 +22,8 @@ final class AppP {
             sessions: true
         )
     ))
+    
+    public static let remoteConfig: RemoteConfig = RemoteConfig.remoteConfig()
     
     static func launch() {
         
@@ -36,6 +39,11 @@ final class AppP {
         
         self.incrementAppOpenedCount()
         logAppLaunch()
+    }
+    
+    static func launchRemoteConfig() {
+        let settings = RemoteConfigSettings()
+        AppP.remoteConfig.configSettings = settings
     }
     
     static func isFirstLaunch() -> Bool {

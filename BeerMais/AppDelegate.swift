@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         Messaging.messaging().delegate = self
         
+        AppP.launchRemoteConfig()
+        
         return true
     }
 

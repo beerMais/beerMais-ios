@@ -15,6 +15,8 @@ PODS:
   - Firebase/Messaging (10.17.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 10.17.0)
+  - FirebaseABTesting (10.17.0):
+    - FirebaseCore (~> 10.0)
   - FirebaseAnalytics (10.17.0):
     - FirebaseAnalytics/AdIdSupport (= 10.17.0)
     - FirebaseCore (~> 10.0)
@@ -63,6 +65,13 @@ PODS:
     - GoogleUtilities/Reachability (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseRemoteConfig (10.17.0):
+    - FirebaseABTesting (~> 10.0)
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - FirebaseSharedSwift (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
   - FirebaseSessions (10.17.0):
     - FirebaseCore (~> 10.5)
     - FirebaseCoreExtension (~> 10.0)
@@ -71,6 +80,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.10)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesSwift (~> 2.1)
+  - FirebaseSharedSwift (10.17.0)
   - Google-Mobile-Ads-SDK (10.13.0):
     - GoogleAppMeasurement (< 11.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
@@ -229,6 +239,7 @@ DEPENDENCIES:
   - Firebase/Analytics (>= 10.17.0)
   - Firebase/Crashlytics (>= 10.17.0)
   - Firebase/Messaging (~> 10.17.0)
+  - FirebaseRemoteConfig (>= 10.17.0)
   - Google-Mobile-Ads-SDK (~> 10.13.0)
   - MaterialComponents/Buttons (>= 124.2.0)
   - "MaterialComponents/Buttons+ButtonThemer"
@@ -241,6 +252,7 @@ SPEC REPOS:
     - AmplitudeSwift
     - AnalyticsConnector
     - Firebase
+    - FirebaseABTesting
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreExtension
@@ -248,7 +260,9 @@ SPEC REPOS:
     - FirebaseCrashlytics
     - FirebaseInstallations
     - FirebaseMessaging
+    - FirebaseRemoteConfig
     - FirebaseSessions
+    - FirebaseSharedSwift
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -265,6 +279,7 @@ SPEC CHECKSUMS:
   AmplitudeSwift: 1ac941da7f93c779c667f65eecca9384c9ec2bfe
   AnalyticsConnector: a53214d38ae22734c6266106c0492b37832633a9
   Firebase: f4ac0b02927af9253ae094d23deecf0890da7374
+  FirebaseABTesting: 609e15b57b5f1096c8feb984e8995d9e769858fe
   FirebaseAnalytics: b9284f9fff10157a843e0422e908711f7bf3b9f2
   FirebaseCore: 534544dd98cabcf4bf8598d88ec683b02319a528
   FirebaseCoreExtension: 47720bb330d7041047c0935a34a3a4b92f818074
@@ -272,7 +287,9 @@ SPEC CHECKSUMS:
   FirebaseCrashlytics: d78651ad7db206ef98269e103ac38d69d569200a
   FirebaseInstallations: 9387bf15abfc69a714f54e54f74a251264fdb79b
   FirebaseMessaging: 1367b28c0c83a63072af4a711328fcc2e6899902
+  FirebaseRemoteConfig: 94ab72cd7aa865b6226ee527b1fa5c4f961a4e7b
   FirebaseSessions: 49f39e5c10e3f9fdd38d01b748329bae2a2fa8ed
+  FirebaseSharedSwift: e8fe8d63d434266a1b2c7f02807d5b64462e1851
   Google-Mobile-Ads-SDK: 517003a1a2430005da3e85df4d061cd7de107a5a
   GoogleAppMeasurement: 4dcddfc7f102825c1c4e6422cb35567b101881a7
   GoogleDataTransport: 54dee9d48d14580407f8f5fbf2f496e92437a2f2
@@ -285,6 +302,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
 
-PODFILE CHECKSUM: 7d41ae583ab1a4bd91cce27e85a57880e16849da
+PODFILE CHECKSUM: cabdd50da02bf3559afb58fd005652441ac24a7f
 
 COCOAPODS: 1.14.2
