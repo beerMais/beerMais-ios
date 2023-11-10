@@ -21,14 +21,18 @@ enum AboutRow {
 final class AboutInteractor {
     
     private var presenter: AboutPresenterProtocol
-    private var availableRows: [AboutRow] = [
-        .description,
-        .donate,
-        .version
-    ]
     
     init(presenter: AboutPresenterProtocol) {
         self.presenter = presenter
+        
+        var availableRows: [AboutRow] = [
+            .description,
+            .version
+        ]
+        
+        if AppP.remoteConfig.configValue(forKey: "is_donate_available").boolValue {
+            availableRows.insert(.donate, at: 1)
+        }
         
         showItems(with: availableRows)
     }

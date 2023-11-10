@@ -43,7 +43,13 @@ final class AppP {
     
     static func launchRemoteConfig() {
         let settings = RemoteConfigSettings()
+        
+        #if DEBUG
+            settings.minimumFetchInterval = 0
+        #endif
+        
         AppP.remoteConfig.configSettings = settings
+        AppP.remoteConfig.fetchAndActivate()
     }
     
     static func isFirstLaunch() -> Bool {
