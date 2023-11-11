@@ -14,6 +14,9 @@ protocol DonateTableViewCellDelegate {
 }
 
 class DonateTableViewCellPresenter: NSObject {
+    
+    typealias PurchaseProductResult = Result<Bool, Error>
+    
     var availableDonates: [DonateProduct] = []
     var delegate: DonateTableViewCellDelegate?
 
@@ -24,6 +27,7 @@ class DonateTableViewCellPresenter: NSObject {
     }()
     private var productsRequest: SKProductsRequest?
     private var productsRequestCompletionHandler: ((_ products: [SKProduct]?) -> Void)?
+    private var productPurchaseCallback: ((PurchaseProductResult) -> Void)?
     
     override init() {
         super.init()
@@ -60,11 +64,20 @@ class DonateTableViewCellPresenter: NSObject {
     }
     
     func didSelectDonateTypeByRow(_ row: Int) {
-        guard let donateType = getDonateTypeByRow(row) else {
+        guard let donateProduct = getDonateTypeByRow(row) else {
             return
         }
         
-        print(donateType)
+        purchaseProduct(product: donateProduct.product) { [weak self] result in
+            switch result {
+            case .success:
+                print("success")
+            case .failure(let error):
+                print(error)
+            }
+            
+            self?.productPurchaseCallback = nil
+        }
     }
 
     func refreshAvailableDonates(_ completionHandler: @escaping (_ products: [SKProduct]?) -> Void) {
@@ -82,6 +95,17 @@ class DonateTableViewCellPresenter: NSObject {
       productsRequestCompletionHandler = nil
     }
     
+    private func purchaseProduct(product: SKProduct, completion: @escaping (PurchaseProductResult) -> Void) {
+        guard productPurchaseCallback == nil else {
+            completion(.failure(PurchasesError.purchaseInProgress))
+            return
+        }
+
+        productPurchaseCallback = completion
+        
+        let payment = SKPayment(product: product)
+        SKPaymentQueue.default().add(payment)
+    }
 }
 
 
@@ -100,16 +124,14 @@ extension DonateTableViewCellPresenter: SKProductsRequestDelegate {
 extension DonateTableViewCellPresenter: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
+            
             switch (transaction.transactionState) {
-            case .purchased:
-            //          complete(transaction: transaction)
-              break
+            case .purchased, .restored:
+                SKPaymentQueue.default().finishTransaction(transaction)
+                productPurchaseCallback?(.success(true))
             case .failed:
-            //          fail(transaction: transaction)
-              break
-            case .restored:
-            //          restore(transaction: transaction)
-              break
+                productPurchaseCallback?(.failure(transaction.error ?? PurchasesError.unknown))
+                SKPaymentQueue.default().finishTransaction(transaction)
             case .deferred:
               break
             case .purchasing:
@@ -119,4 +141,10 @@ extension DonateTableViewCellPresenter: SKPaymentTransactionObserver {
             }
         }
     }
+}
+
+enum PurchasesError: Error {
+    case purchaseInProgress
+    case productNotFound
+    case unknown
 }
