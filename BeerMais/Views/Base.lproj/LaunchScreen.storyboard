@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,27 +15,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cheers" translatesAutoresizingMaskIntoConstraints="NO" id="DMD-5V-qYZ">
-                                <rect key="frame" x="123.66666666666669" y="94" width="128" height="128"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t88-as-39g">
+                                <rect key="frame" x="123.66666666666669" y="315" width="128" height="182"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cheers" translatesAutoresizingMaskIntoConstraints="NO" id="DMD-5V-qYZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="128" id="PbR-tZ-Sj7"/>
+                                            <constraint firstAttribute="width" constant="128" id="iej-oL-MF6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beer Mais" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3N-7O-kSG">
+                                        <rect key="frame" x="0.0" y="152" width="128" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="PbR-tZ-Sj7"/>
-                                    <constraint firstAttribute="width" constant="128" id="iej-oL-MF6"/>
+                                    <constraint firstItem="H3N-7O-kSG" firstAttribute="leading" secondItem="t88-as-39g" secondAttribute="leading" id="84L-5M-tHb"/>
+                                    <constraint firstAttribute="trailing" secondItem="H3N-7O-kSG" secondAttribute="trailing" id="hh4-CD-oHF"/>
+                                    <constraint firstAttribute="bottom" secondItem="H3N-7O-kSG" secondAttribute="bottom" id="loE-tD-o1u"/>
+                                    <constraint firstItem="DMD-5V-qYZ" firstAttribute="leading" secondItem="t88-as-39g" secondAttribute="leading" id="qHq-ed-TpA"/>
+                                    <constraint firstAttribute="trailing" secondItem="DMD-5V-qYZ" secondAttribute="trailing" id="soT-Fg-HMc"/>
+                                    <constraint firstItem="H3N-7O-kSG" firstAttribute="top" secondItem="DMD-5V-qYZ" secondAttribute="bottom" constant="24" id="x2c-FL-TFI"/>
+                                    <constraint firstItem="DMD-5V-qYZ" firstAttribute="top" secondItem="t88-as-39g" secondAttribute="top" id="x8y-q6-M7F"/>
                                 </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beer Mais" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3N-7O-kSG">
-                                <rect key="frame" x="131.66666666666666" y="648" width="112" height="30"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="0.79215686269999996" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="H3N-7O-kSG" secondAttribute="bottom" constant="100" id="Nd6-Ho-WAf"/>
-                            <constraint firstItem="DMD-5V-qYZ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="UmC-Io-OLd"/>
-                            <constraint firstItem="DMD-5V-qYZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="bJ7-ef-RdP"/>
-                            <constraint firstItem="H3N-7O-kSG" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="xpt-qn-24O"/>
+                            <constraint firstItem="t88-as-39g" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Kzt-jc-4ba"/>
+                            <constraint firstItem="t88-as-39g" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="MoO-ov-cA2"/>
                         </constraints>
                     </view>
                 </viewController>
