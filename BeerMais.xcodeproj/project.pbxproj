@@ -48,8 +48,6 @@
 		870BACF72817977400AEF61E /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACF62817977400AEF61E /* DetailsPresenter.swift */; };
 		870BACF92817A14400AEF61E /* BeerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACF82817A14400AEF61E /* BeerDetailView.swift */; };
 		870BACFB2817AAA400AEF61E /* BeerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACFA2817AAA400AEF61E /* BeerTextField.swift */; };
-		870E18F926DAC977005D60AD /* StoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 870E18F826DAC977005D60AD /* StoreKitConfig.storekit */; };
-		870E18FA26DAC977005D60AD /* StoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 870E18F826DAC977005D60AD /* StoreKitConfig.storekit */; };
 		87334DF82820739C00EA5EF9 /* DetailsViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87334DF72820739C00EA5EF9 /* DetailsViewControllerSpy.swift */; };
 		87334DFA2820743800EA5EF9 /* DetailsTestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87334DF92820743800EA5EF9 /* DetailsTestsFactory.swift */; };
 		87334DFB282078DC00EA5EF9 /* SettingsP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7E2B421F6737D0084E17F /* SettingsP.swift */; };
@@ -295,6 +293,8 @@
 		2D779F66244D20830010C769 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D92A1F0222B70D200690ED6 /* BeerMais.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeerMais.entitlements; sourceTree = "<group>"; };
 		2D92A1F2222B71AF00690ED6 /* BeerMais Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BeerMais Dev.entitlements"; sourceTree = "<group>"; };
+		2DB9313E2AFFF1E8001EE5B9 /* BeerMais.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = BeerMais.storekit; sourceTree = "<group>"; };
+		2DB9313F2AFFF219001EE5B9 /* BeerDebug.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = BeerDebug.storekit; sourceTree = "<group>"; };
 		2DD7E2B421F6737D0084E17F /* SettingsP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsP.swift; sourceTree = "<group>"; };
 		2DD8D82D224FCA4D004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DD8D82F224FCA6C004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -315,7 +315,6 @@
 		870BACF62817977400AEF61E /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		870BACF82817A14400AEF61E /* BeerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerDetailView.swift; sourceTree = "<group>"; };
 		870BACFA2817AAA400AEF61E /* BeerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerTextField.swift; sourceTree = "<group>"; };
-		870E18F826DAC977005D60AD /* StoreKitConfig.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitConfig.storekit; sourceTree = "<group>"; };
 		87334DF72820739C00EA5EF9 /* DetailsViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewControllerSpy.swift; sourceTree = "<group>"; };
 		87334DF92820743800EA5EF9 /* DetailsTestsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTestsFactory.swift; sourceTree = "<group>"; };
 		87334E162820E7C800EA5EF9 /* BeerDetailViewSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerDetailViewSpy.swift; sourceTree = "<group>"; };
@@ -619,7 +618,8 @@
 		870E18F726DAC95B005D60AD /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				870E18F826DAC977005D60AD /* StoreKitConfig.storekit */,
+				2DB9313E2AFFF1E8001EE5B9 /* BeerMais.storekit */,
+				2DB9313F2AFFF219001EE5B9 /* BeerDebug.storekit */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -931,7 +931,6 @@
 				2D1D3E5621F670C9008F51AC /* BeerCollectionCell.xib in Resources */,
 				2D1D3E5721F670C9008F51AC /* Assets.xcassets in Resources */,
 				879583AD26C8971700F81B28 /* DonateTableViewCell.xib in Resources */,
-				870E18F926DAC977005D60AD /* StoreKitConfig.storekit in Resources */,
 				879583A226C894C200F81B28 /* VersionTableViewCell.xib in Resources */,
 				879583B226C89B8200F81B28 /* DonateCollectionViewCell.xib in Resources */,
 			);
@@ -969,7 +968,6 @@
 				A18159C52597EA8A004B2018 /* LaunchScreen.storyboard in Resources */,
 				A18159C02597EA26004B2018 /* Localizable.strings in Resources */,
 				879583AE26C8971700F81B28 /* DonateTableViewCell.xib in Resources */,
-				870E18FA26DAC977005D60AD /* StoreKitConfig.storekit in Resources */,
 				A181591C2597E089004B2018 /* BeerCollectionCell.xib in Resources */,
 				A18158BC2597D1D7004B2018 /* Assets.xcassets in Resources */,
 				8795839F26C88AD200F81B28 /* AboutTableViewCell.xib in Resources */,

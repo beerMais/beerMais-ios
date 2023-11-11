@@ -1,5 +1,5 @@
 {
-  "identifier" : "E7C52C8D",
+  "identifier" : "B8E4776F",
   "nonRenewingSubscriptions" : [
 
   ],
@@ -7,51 +7,29 @@
     {
       "displayPrice" : "0.99",
       "familyShareable" : false,
-      "internalID" : "C197A993",
+      "internalID" : "1581300160",
       "localizations" : [
         {
-          "description" : "",
-          "displayName" : "",
+          "description" : "Ajuda para um Café",
+          "displayName" : "Café",
+          "locale" : "pt_BR"
+        },
+        {
+          "description" : "Donation for a Coffee",
+          "displayName" : "Coffee",
           "locale" : "en_US"
         }
       ],
-      "productID" : "small_debug",
-      "referenceName" : "small",
-      "type" : "NonConsumable"
-    },
-    {
-      "displayPrice" : "1.99",
-      "familyShareable" : false,
-      "internalID" : "D63EBDFC",
-      "localizations" : [
-        {
-          "description" : "",
-          "displayName" : "",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "medium_debug",
-      "referenceName" : "medium",
-      "type" : "NonConsumable"
-    },
-    {
-      "displayPrice" : "2.99",
-      "familyShareable" : false,
-      "internalID" : "BD00104E",
-      "localizations" : [
-        {
-          "description" : "",
-          "displayName" : "",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "large_debug",
-      "referenceName" : "large",
-      "type" : "NonConsumable"
+      "productID" : "small",
+      "referenceName" : "Small",
+      "type" : "Consumable"
     }
   ],
   "settings" : {
+    "_applicationInternalID" : "1450659497",
+    "_developerTeamID" : "2LEA6X25G9",
     "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 721416682.61044204,
     "_locale" : "en_US",
     "_storefront" : "USA",
     "_storeKitErrors" : [

@@ -89,7 +89,7 @@
          referenceType = "1">
       </LocationScenarioReference>
       <StoreKitConfigurationFileReference
-         identifier = "../BeerMais/Configuration/StoreKitConfig.storekit">
+         identifier = "../BeerMais/Configuration/BeerDebug.storekit">
       </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
