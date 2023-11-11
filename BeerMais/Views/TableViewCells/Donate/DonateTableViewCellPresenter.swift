@@ -9,47 +9,12 @@
 import Foundation
 import StoreKit
 
-enum DonateType: Int {
-    case small
-    case medium
-    case large
-    
-    var productId: String {
-        var debugString = ""
-        
-        #if DEBUG
-            debugString = "_debug"
-        #endif
-        
-        switch self {
-        case .small: return "small\(debugString)"
-        case .medium: return "medium\(debugString)"
-        case .large: return "large\(debugString)"
-        }
-    }
-    
-    static func getByProductId(_ productId: String) -> DonateType? {
-        var debugString = ""
-        
-        #if DEBUG
-            debugString = "_debug"
-        #endif
-        
-        switch productId {
-        case "small\(debugString)": return .small
-        case "medium\(debugString)": return .medium
-        case "large\(debugString)": return .large
-        default: return nil
-        }
-    }
-}
-
 protocol DonateTableViewCellDelegate {
     func reloadAvailableDonates()
 }
 
 class DonateTableViewCellPresenter: NSObject {
-    var availableDonates: [DonateType] = []
+    var availableDonates: [DonateProduct] = []
     var delegate: DonateTableViewCellDelegate?
 
     private let productIdentifiers: Set<String> = {
@@ -70,8 +35,9 @@ class DonateTableViewCellPresenter: NSObject {
             guard let products else { return }
             
             for product in products.sorted(by: { $0.price.doubleValue < $1.price.doubleValue }) {
-                if let donateType = DonateType.getByProductId(product.productIdentifier) {
-                    self?.availableDonates.append(donateType)
+                
+                if let donateProduct = DonateProduct(product: product) {
+                    self?.availableDonates.append(donateProduct)
                 }
             }
             
@@ -85,7 +51,7 @@ class DonateTableViewCellPresenter: NSObject {
         return availableDonates.count
     }
     
-    func getDonateTypeByRow(_ row: Int) -> DonateType? {
+    func getDonateTypeByRow(_ row: Int) -> DonateProduct? {
         if row >= availableDonates.count {
             return nil
         }
@@ -107,9 +73,8 @@ class DonateTableViewCellPresenter: NSObject {
 
         productsRequest = SKProductsRequest(productIdentifiers: productIdentifiers)
         
-        guard let productsRequest = productsRequest else { return }
-        productsRequest.delegate = self
-        productsRequest.start()
+        productsRequest?.delegate = self
+        productsRequest?.start()
     }
 
     private func clearRequestAndHandler() {

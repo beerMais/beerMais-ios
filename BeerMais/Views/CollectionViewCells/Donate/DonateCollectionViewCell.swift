@@ -30,18 +30,17 @@ class DonateCollectionViewCell: UICollectionViewCell {
         descLabel.numberOfLines = 0
     }
     
-    func setType(_ type: DonateType) {
-        switch type {
+    func setDonate(_ donateProduct: DonateProduct) {
+        switch donateProduct.type {
         case .small:
             imageView.image = BeerImage.iconBeerCan100
-            descLabel.text = "Café\nR$ 4,90"
         case .medium:
             imageView.image = UIImage(named: "icons8-beer-bottle-100")
-            descLabel.text = "Breja\nR$ 10,90"
         case .large:
             imageView.image = UIImage(named: "icons8-bottles-100")
-            descLabel.text = "Churras\nR$ 16,90"
         }
+        
+        descLabel.text = "\(donateProduct.name)\n\(donateProduct.priceFormatted ?? "")"
     }
     
 }

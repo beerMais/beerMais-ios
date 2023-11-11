@@ -5,7 +5,7 @@
   ],
   "products" : [
     {
-      "displayPrice" : "2.99",
+      "displayPrice" : "14.9",
       "familyShareable" : false,
       "internalID" : "1582109844",
       "localizations" : [
@@ -20,7 +20,7 @@
       "type" : "NonConsumable"
     },
     {
-      "displayPrice" : "1.99",
+      "displayPrice" : "9.9",
       "familyShareable" : false,
       "internalID" : "1582109507",
       "localizations" : [
@@ -35,13 +35,13 @@
       "type" : "NonConsumable"
     },
     {
-      "displayPrice" : "0.99",
+      "displayPrice" : "4.9",
       "familyShareable" : false,
       "internalID" : "1581503941",
       "localizations" : [
         {
           "description" : "DESC",
-          "displayName" : "display",
+          "displayName" : "Display",
           "locale" : "pt_BR"
         }
       ],
@@ -54,9 +54,9 @@
     "_applicationInternalID" : "1581504043",
     "_developerTeamID" : "2LEA6X25G9",
     "_failTransactionsEnabled" : false,
-    "_lastSynchronizedDate" : 721416732.76994598,
-    "_locale" : "en_US",
-    "_storefront" : "USA",
+    "_lastSynchronizedDate" : 721421077.22230196,
+    "_locale" : "pt_BR",
+    "_storefront" : "BRA",
     "_storeKitErrors" : [
       {
         "current" : null,

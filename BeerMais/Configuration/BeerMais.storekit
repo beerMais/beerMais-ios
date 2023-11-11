@@ -5,7 +5,7 @@
   ],
   "products" : [
     {
-      "displayPrice" : "0.99",
+      "displayPrice" : "4.9",
       "familyShareable" : false,
       "internalID" : "1581300160",
       "localizations" : [
@@ -29,9 +29,9 @@
     "_applicationInternalID" : "1450659497",
     "_developerTeamID" : "2LEA6X25G9",
     "_failTransactionsEnabled" : false,
-    "_lastSynchronizedDate" : 721416682.61044204,
-    "_locale" : "en_US",
-    "_storefront" : "USA",
+    "_lastSynchronizedDate" : 721421218.52581799,
+    "_locale" : "pt_BR",
+    "_storefront" : "BRA",
     "_storeKitErrors" : [
       {
         "current" : null,

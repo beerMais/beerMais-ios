@@ -70,8 +70,8 @@ extension DonateTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = DonateCollectionViewCell.dequeueReusableCell(from: collectionView, for: indexPath)
         
-        if let donateType = presenter.getDonateTypeByRow(indexPath.row) {
-            cell.setType(donateType)
+        if let donateProduct = presenter.getDonateTypeByRow(indexPath.row) {
+            cell.setDonate(donateProduct)
         }
         
         return cell
