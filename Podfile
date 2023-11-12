@@ -14,7 +14,6 @@ def global_pods
     pod 'Firebase/Analytics', '>= 10.17.0'
     pod 'Firebase/Crashlytics', '>= 10.17.0'
     pod 'FirebaseRemoteConfig', '>= 10.17.0'
-    pod 'AmplitudeSwift', '~> 1.1.0'
 end
 
 target 'BeerMais' do

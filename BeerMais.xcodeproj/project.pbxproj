@@ -36,6 +36,8 @@
 		2DEBCA652B018C7B001DB86E /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DEBCA642B018C7B001DB86E /* success.json */; };
 		2DEBCA682B018E75001DB86E /* SuccessFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEBCA672B018E75001DB86E /* SuccessFeedbackView.swift */; };
 		2DEBCA692B018FD7001DB86E /* SuccessFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEBCA672B018E75001DB86E /* SuccessFeedbackView.swift */; };
+		2DEBCA6C2B0195DF001DB86E /* AmplitudeSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2DEBCA6B2B0195DF001DB86E /* AmplitudeSwift */; };
+		2DEBCA6E2B0196A1001DB86E /* AmplitudeSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2DEBCA6D2B0196A1001DB86E /* AmplitudeSwift */; };
 		5154A37346E95F89EF535417 /* Pods_BeerMaisTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B216F3FFD6A622B59BC79CC /* Pods_BeerMaisTests.framework */; };
 		6B6764A429A6D70D00C8EFE6 /* GoogleMobileAds.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6764A329A6D70D00C8EFE6 /* GoogleMobileAds.xcframework */; };
 		6B6764A529A6D70D00C8EFE6 /* GoogleMobileAds.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6764A329A6D70D00C8EFE6 /* GoogleMobileAds.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -379,6 +381,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DEBCA6C2B0195DF001DB86E /* AmplitudeSwift in Frameworks */,
 				87E1766626CB185300989B71 /* StoreKit.framework in Frameworks */,
 				958D1A8B1E824DD110735102 /* Pods_BeerMais.framework in Frameworks */,
 				2DEBCA622B018AFE001DB86E /* Lottie in Frameworks */,
@@ -406,6 +409,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DEBCA6E2B0196A1001DB86E /* AmplitudeSwift in Frameworks */,
 				6B6764A429A6D70D00C8EFE6 /* GoogleMobileAds.xcframework in Frameworks */,
 				F136CF3C090E3BD087B971A5 /* Pods_BeerMais_Clip.framework in Frameworks */,
 			);
@@ -829,6 +833,7 @@
 			name = BeerMais;
 			packageProductDependencies = (
 				2DEBCA612B018AFE001DB86E /* Lottie */,
+				2DEBCA6B2B0195DF001DB86E /* AmplitudeSwift */,
 			);
 			productName = BeerMais;
 			productReference = 2D1D3E5F21F670C9008F51AC /* BeerMais.app */;
@@ -888,6 +893,9 @@
 			dependencies = (
 			);
 			name = "BeerMais Clip";
+			packageProductDependencies = (
+				2DEBCA6D2B0196A1001DB86E /* AmplitudeSwift */,
+			);
 			productName = "BeerMais Clip";
 			productReference = A18158AD2597D1D4004B2018 /* BeerMais Clip.app */;
 			productType = "com.apple.product-type.application.on-demand-install-capable";
@@ -934,6 +942,7 @@
 			mainGroup = 2D17010A21D2B3CD0009A316;
 			packageReferences = (
 				2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				2DEBCA6A2B0195DF001DB86E /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
 			);
 			productRefGroup = 2D17011421D2B3CD0009A316 /* Products */;
 			projectDirPath = "";
@@ -1558,8 +1567,6 @@
 					"-framework",
 					"\"AVFoundation\"",
 					"-framework",
-					"\"AmplitudeSwift\"",
-					"-framework",
 					"\"AudioToolbox\"",
 					"-framework",
 					"\"CFNetwork\"",
@@ -1663,8 +1670,6 @@
 					"-l\"z\"",
 					"-framework",
 					"\"AVFoundation\"",
-					"-framework",
-					"\"AmplitudeSwift\"",
 					"-framework",
 					"\"AudioToolbox\"",
 					"-framework",
@@ -1947,6 +1952,14 @@
 				version = 4.3.3;
 			};
 		};
+		2DEBCA6A2B0195DF001DB86E /* XCRemoteSwiftPackageReference "Amplitude-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amplitude/Amplitude-Swift";
+			requirement = {
+				kind = exactVersion;
+				version = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1954,6 +1967,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		2DEBCA6B2B0195DF001DB86E /* AmplitudeSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DEBCA6A2B0195DF001DB86E /* XCRemoteSwiftPackageReference "Amplitude-Swift" */;
+			productName = AmplitudeSwift;
+		};
+		2DEBCA6D2B0196A1001DB86E /* AmplitudeSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DEBCA6A2B0195DF001DB86E /* XCRemoteSwiftPackageReference "Amplitude-Swift" */;
+			productName = AmplitudeSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 
