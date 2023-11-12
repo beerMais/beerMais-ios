@@ -19,6 +19,8 @@ class DonateTableViewCellPresenter: NSObject {
     
     var availableDonates: [DonateProduct] = []
     var delegate: DonateTableViewCellDelegate?
+    
+    private let successFeedbackView = SuccessFeedbackView()
 
     private let productIdentifiers: Set<String> = {
         return [DonateType.small.productId,
@@ -129,6 +131,8 @@ extension DonateTableViewCellPresenter: SKPaymentTransactionObserver {
             case .purchased, .restored:
                 SKPaymentQueue.default().finishTransaction(transaction)
                 productPurchaseCallback?(.success(true))
+                
+                successFeedbackView.show()
             case .failed:
                 productPurchaseCallback?(.failure(transaction.error ?? PurchasesError.unknown))
                 SKPaymentQueue.default().finishTransaction(transaction)

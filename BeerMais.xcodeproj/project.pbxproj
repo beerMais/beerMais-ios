@@ -32,6 +32,10 @@
 		2DB931412AFFF5F9001EE5B9 /* Donate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB931402AFFF5F9001EE5B9 /* Donate.swift */; };
 		2DB931422AFFF6A6001EE5B9 /* Donate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB931402AFFF5F9001EE5B9 /* Donate.swift */; };
 		2DD7E2B621F6737E0084E17F /* SettingsP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7E2B421F6737D0084E17F /* SettingsP.swift */; };
+		2DEBCA622B018AFE001DB86E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 2DEBCA612B018AFE001DB86E /* Lottie */; };
+		2DEBCA652B018C7B001DB86E /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DEBCA642B018C7B001DB86E /* success.json */; };
+		2DEBCA682B018E75001DB86E /* SuccessFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEBCA672B018E75001DB86E /* SuccessFeedbackView.swift */; };
+		2DEBCA692B018FD7001DB86E /* SuccessFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEBCA672B018E75001DB86E /* SuccessFeedbackView.swift */; };
 		5154A37346E95F89EF535417 /* Pods_BeerMaisTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B216F3FFD6A622B59BC79CC /* Pods_BeerMaisTests.framework */; };
 		6B6764A429A6D70D00C8EFE6 /* GoogleMobileAds.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6764A329A6D70D00C8EFE6 /* GoogleMobileAds.xcframework */; };
 		6B6764A529A6D70D00C8EFE6 /* GoogleMobileAds.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6764A329A6D70D00C8EFE6 /* GoogleMobileAds.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -301,6 +305,8 @@
 		2DD7E2B421F6737D0084E17F /* SettingsP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsP.swift; sourceTree = "<group>"; };
 		2DD8D82D224FCA4D004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DD8D82F224FCA6C004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2DEBCA642B018C7B001DB86E /* success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
+		2DEBCA672B018E75001DB86E /* SuccessFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessFeedbackView.swift; sourceTree = "<group>"; };
 		5B216F3FFD6A622B59BC79CC /* Pods_BeerMaisTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeerMaisTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B6764A329A6D70D00C8EFE6 /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleMobileAds.xcframework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework/GoogleMobileAds.xcframework"; sourceTree = "<group>"; };
 		870BACDA281747CF00AEF61E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -375,6 +381,7 @@
 			files = (
 				87E1766626CB185300989B71 /* StoreKit.framework in Frameworks */,
 				958D1A8B1E824DD110735102 /* Pods_BeerMais.framework in Frameworks */,
+				2DEBCA622B018AFE001DB86E /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,19 +455,20 @@
 			isa = PBXGroup;
 			children = (
 				870BACDC2817484200AEF61E /* Common */,
-				870BACD9281747C000AEF61E /* Scenes */,
-				2D92A1F2222B71AF00690ED6 /* BeerMais Dev.entitlements */,
-				2D92A1F0222B70D200690ED6 /* BeerMais.entitlements */,
+				870E18F726DAC95B005D60AD /* Configuration */,
 				2D17013521D32AD20009A316 /* Entities */,
+				2DEBCA632B018C61001DB86E /* Lottie */,
 				2D17013A21D32DC90009A316 /* Presenters */,
 				2D1D3E3A21F66ADD008F51AC /* Property lists */,
-				870E18F726DAC95B005D60AD /* Configuration */,
-				2D17012B21D2DBDA0009A316 /* Views */,
+				870BACD9281747C000AEF61E /* Scenes */,
 				2D2630C22313003500F02E45 /* Strings */,
+				2D17012B21D2DBDA0009A316 /* Views */,
 				2D17011621D2B3CE0009A316 /* AppDelegate.swift */,
-				870BACE628174E8500AEF61E /* SceneDelegate.swift */,
 				2D17012021D2B3CF0009A316 /* Assets.xcassets */,
+				2D92A1F2222B71AF00690ED6 /* BeerMais Dev.entitlements */,
+				2D92A1F0222B70D200690ED6 /* BeerMais.entitlements */,
 				2D17011D21D2B3CE0009A316 /* BeerMais.xcdatamodeld */,
+				870BACE628174E8500AEF61E /* SceneDelegate.swift */,
 			);
 			path = BeerMais;
 			sourceTree = "<group>";
@@ -556,6 +564,14 @@
 			path = "BeerMais widget";
 			sourceTree = "<group>";
 		};
+		2DEBCA632B018C61001DB86E /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				2DEBCA642B018C7B001DB86E /* success.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		540576969A604AB673A2D23F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -592,6 +608,7 @@
 				87849E54281F80E200B6F61F /* BeerImage.swift */,
 				870BACFA2817AAA400AEF61E /* BeerTextField.swift */,
 				870BACDD2817485800AEF61E /* ViewProtocol.swift */,
+				2DEBCA672B018E75001DB86E /* SuccessFeedbackView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -810,6 +827,9 @@
 				2D4C5206254F85CC00D0B2D0 /* PBXTargetDependency */,
 			);
 			name = BeerMais;
+			packageProductDependencies = (
+				2DEBCA612B018AFE001DB86E /* Lottie */,
+			);
 			productName = BeerMais;
 			productReference = 2D1D3E5F21F670C9008F51AC /* BeerMais.app */;
 			productType = "com.apple.product-type.application";
@@ -912,6 +932,9 @@
 				"pt-BR",
 			);
 			mainGroup = 2D17010A21D2B3CD0009A316;
+			packageReferences = (
+				2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */,
+			);
 			productRefGroup = 2D17011421D2B3CD0009A316 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -931,6 +954,7 @@
 			files = (
 				8795839B26C8896600F81B28 /* AboutTableViewCell.xib in Resources */,
 				2D1D3E5321F670C9008F51AC /* LaunchScreen.storyboard in Resources */,
+				2DEBCA652B018C7B001DB86E /* success.json in Resources */,
 				2D2630BD2312FFFE00F02E45 /* Localizable.strings in Resources */,
 				2D1D3E5621F670C9008F51AC /* BeerCollectionCell.xib in Resources */,
 				2D1D3E5721F670C9008F51AC /* Assets.xcassets in Resources */,
@@ -1182,6 +1206,7 @@
 				2D1D3E4A21F670C9008F51AC /* BeerP.swift in Sources */,
 				870BACDE2817485800AEF61E /* ViewProtocol.swift in Sources */,
 				870BACEA2817502F00AEF61E /* UIView+extensions.swift in Sources */,
+				2DEBCA682B018E75001DB86E /* SuccessFeedbackView.swift in Sources */,
 				870BACDB281747CF00AEF61E /* HomeViewController.swift in Sources */,
 				87FE203A281A0DA200B61429 /* BeerDetailPresenter.swift in Sources */,
 				87849E55281F80E200B6F61F /* BeerImage.swift in Sources */,
@@ -1310,6 +1335,7 @@
 				A181592A2597E09A004B2018 /* VersionP.swift in Sources */,
 				87849E6F2820690100B6F61F /* DetailsFactory.swift in Sources */,
 				87BB696228206BE6005489A8 /* BeerDetailFactory.swift in Sources */,
+				2DEBCA692B018FD7001DB86E /* SuccessFeedbackView.swift in Sources */,
 				87BB696428206BE6005489A8 /* BeerDetailPresenter.swift in Sources */,
 				87849E7728206A1C00B6F61F /* BeerButton.swift in Sources */,
 				87BB697C28206C60005489A8 /* AlertInteractor.swift in Sources */,
@@ -1911,6 +1937,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.3.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2DEBCA612B018AFE001DB86E /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2D17011D21D2B3CE0009A316 /* BeerMais.xcdatamodeld */ = {
