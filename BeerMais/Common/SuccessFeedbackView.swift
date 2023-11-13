@@ -37,7 +37,7 @@ final class SuccessFeedbackView {
         animationView.frame = topController.view.bounds
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = secondsToStop == 0 ? .playOnce : .loop
-        animationView.animationSpeed = 0.5
+        animationView.animationSpeed = 1
 
         topController.view.addSubview(animationView)
 

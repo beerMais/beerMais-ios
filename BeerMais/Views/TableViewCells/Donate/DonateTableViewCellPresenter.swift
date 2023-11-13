@@ -21,6 +21,7 @@ class DonateTableViewCellPresenter: NSObject {
     var delegate: DonateTableViewCellDelegate?
     
     private let successFeedbackView = SuccessFeedbackView()
+    private let loadingView = LoadingView()
 
     private let productIdentifiers: Set<String> = {
         return [DonateType.small.productId,
@@ -79,6 +80,7 @@ class DonateTableViewCellPresenter: NSObject {
             }
             
             self?.productPurchaseCallback = nil
+            self?.loadingView.hide()
         }
     }
 
@@ -102,6 +104,8 @@ class DonateTableViewCellPresenter: NSObject {
             completion(.failure(PurchasesError.purchaseInProgress))
             return
         }
+        
+        loadingView.show()
 
         productPurchaseCallback = completion
         
