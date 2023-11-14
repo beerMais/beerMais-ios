@@ -14,6 +14,18 @@ import Lottie
 
 class LaunchScreenViewController: UIViewController {
     
+    private let completionHandler: () -> Void
+    
+    init(completionHandler: @escaping () -> Void) {
+        self.completionHandler = completionHandler
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,7 +34,7 @@ class LaunchScreenViewController: UIViewController {
         let animationView = LottieAnimationView(name: "loading")
         animationView.frame = view.bounds
         animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .autoReverse
+        animationView.loopMode = .playOnce
         animationView.animationSpeed = 1
         
         let appNameLabel = UILabel()
@@ -36,8 +48,6 @@ class LaunchScreenViewController: UIViewController {
             appNameLabel
         ])
         
-        animationView.play()
-        
         NSLayoutConstraint.activate([
             animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -24),
@@ -49,5 +59,9 @@ class LaunchScreenViewController: UIViewController {
             appNameLabel.heightAnchor.constraint(equalToConstant: 30),
             appNameLabel.topAnchor.constraint(equalTo: animationView.bottomAnchor, constant: 22)
         ])
+        
+        animationView.play(completion: { [weak self] _ in
+            self?.completionHandler()
+        })
     }
 }
