@@ -28,7 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     image: UIImage(named: "icons8-math-50"),
                     tag: 0
                 )
-                homeNavController.tabBarItem.image?.withTintColor(.red)
                 
                 let aboutController = AboutFactory.build()
                 aboutController.tabBarItem = UITabBarItem(

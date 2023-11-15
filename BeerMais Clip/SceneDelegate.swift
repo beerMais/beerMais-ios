@@ -20,21 +20,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             
             let homeNavController = UINavigationController(rootViewController: HomeFactory.build())
-            homeNavController.tabBarItem = UITabBarItem(title: "Calculadora",
-                                                    image: UIImage(named: "icons8-math-50"),
-                                                    tag: 0)
-            homeNavController.tabBarItem.image?.withTintColor(.red)
+            homeNavController.tabBarItem = UITabBarItem(
+                title: "Calculadora",
+                image: UIImage(named: "icons8-math-50"),
+                tag: 0
+            )
             
             let aboutController = AboutFactory.build()
-            aboutController.tabBarItem = UITabBarItem(title: "Sobre",
-                                                    image: UIImage(named: "icons8-about-50"),
-                                                    tag: 1)
+            aboutController.tabBarItem = UITabBarItem(
+                title: "Sobre",
+                image: UIImage(named: "icons8-about-50"),
+                tag: 1
+            )
             
             let tabBarController = UITabBarController()
             tabBarController.tabBar.tintColor = BeerColors.primaryLight
             tabBarController.tabBar.barTintColor = .tertiarySystemBackground
-            tabBarController.tabBar.backgroundColor = .clear
-            tabBarController.tabBar.isTranslucent = false
+            tabBarController.tabBar.backgroundColor = .systemBackground
             tabBarController.viewControllers = [
                 homeNavController,
                 aboutController
@@ -46,9 +48,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             window.makeKeyAndVisible()
         }
-
     }
-
-
 }
-
