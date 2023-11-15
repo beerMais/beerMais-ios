@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-class CoreDataP {
+final class CoreDataP {
     var context: NSManagedObjectContext!
     
     init() {

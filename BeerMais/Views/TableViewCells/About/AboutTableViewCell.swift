@@ -8,7 +8,8 @@
 
 import UIKit
 
-class AboutTableViewCell: UITableViewCell {
+final class AboutTableViewCell: UITableViewCell {
+    
     static let reuseIdentifier = "AboutTableViewCell"
     
     class func dequeueReusableCell(from tableView: UITableView) -> AboutTableViewCell {

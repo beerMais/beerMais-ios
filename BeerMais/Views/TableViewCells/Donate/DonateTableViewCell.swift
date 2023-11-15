@@ -8,7 +8,8 @@
 
 import UIKit
 
-class DonateTableViewCell: UITableViewCell {
+final class DonateTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var donateCollectionView: UICollectionView!
     
     static let reuseIdentifier = "DonateTableViewCell"

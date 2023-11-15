@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D0FE9082B04E45E00FA3A16 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 2D0FE9072B04E45E00FA3A16 /* Lottie */; };
 		2D13B01F2B02E47F00444F73 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D13B01E2B02E47F00444F73 /* LaunchScreenViewController.swift */; };
 		2D13B0202B02E55000444F73 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D13B01E2B02E47F00444F73 /* LaunchScreenViewController.swift */; };
 		2D13B0222B02E7EF00444F73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D13B0212B02E7EF00444F73 /* LaunchScreen.storyboard */; };
@@ -420,6 +421,7 @@
 				2DEBCA6E2B0196A1001DB86E /* AmplitudeSwift in Frameworks */,
 				6B6764A429A6D70D00C8EFE6 /* GoogleMobileAds.xcframework in Frameworks */,
 				F136CF3C090E3BD087B971A5 /* Pods_BeerMais_Clip.framework in Frameworks */,
+				2D0FE9082B04E45E00FA3A16 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -914,6 +916,7 @@
 			name = "BeerMais Clip";
 			packageProductDependencies = (
 				2DEBCA6D2B0196A1001DB86E /* AmplitudeSwift */,
+				2D0FE9072B04E45E00FA3A16 /* Lottie */,
 			);
 			productName = "BeerMais Clip";
 			productReference = A18158AD2597D1D4004B2018 /* BeerMais Clip.app */;
@@ -1979,6 +1982,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2D0FE9072B04E45E00FA3A16 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
 		2DEBCA612B018AFE001DB86E /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */;

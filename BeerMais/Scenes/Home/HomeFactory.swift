@@ -8,7 +8,8 @@
 
 import Foundation
 
-class HomeFactory {
+final class HomeFactory {
+    
     static func build() -> HomeViewController {
         let controller = HomeViewController()
         let presenter = HomePresenter(view: controller)

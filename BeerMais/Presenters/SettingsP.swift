@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SettingsP {
+final class SettingsP {
     func getAdMobId() -> String {
         var adMobId = ""
         

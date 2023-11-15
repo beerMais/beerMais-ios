@@ -8,7 +8,8 @@
 
 import UIKit
 
-class VersionTableViewCell: UITableViewCell {
+final class VersionTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var versionLabel: UILabel!
     
     static let reuseIdentifier = "VersionTableViewCell"

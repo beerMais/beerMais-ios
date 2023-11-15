@@ -13,7 +13,7 @@ protocol DonateTableViewCellDelegate {
     func reloadAvailableDonates()
 }
 
-class DonateTableViewCellPresenter: NSObject {
+final class DonateTableViewCellPresenter: NSObject {
     
     typealias PurchaseProductResult = Result<Bool, Error>
     

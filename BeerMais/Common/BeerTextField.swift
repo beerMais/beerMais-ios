@@ -9,7 +9,7 @@
 import UIKit
 import MaterialComponents.MaterialTextFields
 
-class BeerTextField: MDCTextField {
+final class BeerTextField: MDCTextField {
     
     static func build() -> BeerTextField {
         let textField = BeerTextField()
@@ -18,7 +18,7 @@ class BeerTextField: MDCTextField {
     }
 }
 
-class BeerTextInputController: MDCTextInputControllerOutlined {
+final class BeerTextInputController: MDCTextInputControllerOutlined {
     
     static func build(textInput input: (UIView & MDCTextInput)?) -> BeerTextInputController {
         let controller = BeerTextInputController(textInput: input)

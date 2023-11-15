@@ -8,7 +8,8 @@
 
 import UIKit
 
-class DonateCollectionViewCell: UICollectionViewCell {
+final class DonateCollectionViewCell: UICollectionViewCell {
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descLabel: UILabel!
     

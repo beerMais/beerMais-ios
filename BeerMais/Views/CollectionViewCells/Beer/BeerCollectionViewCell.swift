@@ -8,7 +8,8 @@
 
 import UIKit
 
-class BeerCollectionViewCell: UICollectionViewCell {
+final class BeerCollectionViewCell: UICollectionViewCell {
+    
     @IBOutlet weak var beerImageView: UIImageView!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var brandLabel: UILabel!

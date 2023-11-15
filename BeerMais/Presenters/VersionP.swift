@@ -8,7 +8,7 @@
 
 import Foundation
 
-class VersionP {
+final class VersionP {
     func getAppName() -> String {
         if let version = Bundle.main.infoDictionary?["CFBundleName"] as? String {
             return version

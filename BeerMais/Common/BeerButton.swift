@@ -10,7 +10,7 @@ import MaterialComponents.MaterialButtons
 import MaterialComponents.MaterialButtons_ButtonThemer
 import MaterialComponents.MaterialButtons_ColorThemer
 
-class BeerButton: MDCButton {
+final class BeerButton: MDCButton {
     
     enum ButtonStyle {
         case positive
