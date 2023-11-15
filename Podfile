@@ -10,14 +10,17 @@ def global_pods
     pod 'MaterialComponents/Buttons+ColorThemer'
     pod 'MaterialComponents/Buttons+Theming'
     pod 'MaterialComponents/TextFields'
-    pod 'Firebase/Messaging', '~> 10.17.0'
-    pod 'Firebase/Analytics', '>= 10.17.0'
-    pod 'Firebase/Crashlytics', '>= 10.17.0'
     pod 'FirebaseRemoteConfig', '>= 10.17.0'
+end
+
+def main_app_pods
+    pod 'Firebase/Messaging', '~> 10.17.0'
+    pod 'Firebase/Crashlytics', '>= 10.17.0'
 end
 
 target 'BeerMais' do
     global_pods
+    main_app_pods
 end
 
 target 'BeerMais Clip' do
@@ -26,6 +29,7 @@ end
 
 target 'BeerMaisTests' do
     global_pods
+    main_app_pods
 end
 
 post_install do |installer|
