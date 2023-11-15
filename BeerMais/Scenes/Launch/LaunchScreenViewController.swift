@@ -15,6 +15,7 @@ import Lottie
 class LaunchScreenViewController: UIViewController {
     
     private let completionHandler: () -> Void
+    private let animationView = LottieAnimationView(name: "loading")
     
     init(completionHandler: @escaping () -> Void) {
         self.completionHandler = completionHandler
@@ -31,7 +32,6 @@ class LaunchScreenViewController: UIViewController {
         
         view.backgroundColor = BeerColors.primary
         
-        let animationView = LottieAnimationView(name: "loading")
         animationView.frame = view.bounds
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .playOnce
@@ -49,7 +49,7 @@ class LaunchScreenViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -3.5),
             animationView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -24),
             
             animationView.widthAnchor.constraint(equalToConstant: 128),
@@ -59,7 +59,9 @@ class LaunchScreenViewController: UIViewController {
             appNameLabel.heightAnchor.constraint(equalToConstant: 30),
             appNameLabel.topAnchor.constraint(equalTo: animationView.bottomAnchor, constant: 22)
         ])
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         animationView.play(completion: { [weak self] _ in
             self?.completionHandler()
         })
