@@ -48,8 +48,6 @@
 		2DEBCA732B01996A001DB86E /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEBCA712B019903001DB86E /* LoadingView.swift */; };
 		2DEBCA752B0199EA001DB86E /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 2DEBCA742B0199EA001DB86E /* loading.json */; };
 		5154A37346E95F89EF535417 /* Pods_BeerMaisTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B216F3FFD6A622B59BC79CC /* Pods_BeerMaisTests.framework */; };
-		6B6764A429A6D70D00C8EFE6 /* GoogleMobileAds.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6764A329A6D70D00C8EFE6 /* GoogleMobileAds.xcframework */; };
-		6B6764A529A6D70D00C8EFE6 /* GoogleMobileAds.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6764A329A6D70D00C8EFE6 /* GoogleMobileAds.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		870BACDB281747CF00AEF61E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACDA281747CF00AEF61E /* HomeViewController.swift */; };
 		870BACDE2817485800AEF61E /* ViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACDD2817485800AEF61E /* ViewProtocol.swift */; };
 		870BACE128174A8600AEF61E /* HomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACE028174A8600AEF61E /* HomeFactory.swift */; };
@@ -251,17 +249,6 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6B6764A629A6D70D00C8EFE6 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				6B6764A529A6D70D00C8EFE6 /* GoogleMobileAds.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A19FDD5B259AC9950007E828 /* Embed App Clips */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -376,7 +363,6 @@
 		A18158AF2597D1D5004B2018 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A18158B12597D1D5004B2018 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A18158BB2597D1D7004B2018 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A18158C02597D1D7004B2018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A18158C12597D1D7004B2018 /* BeerMais_Clip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeerMais_Clip.entitlements; sourceTree = "<group>"; };
 		A6EE432411EE5DED51E41482 /* Pods-BeerMais.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerMais.debug.xcconfig"; path = "Target Support Files/Pods-BeerMais/Pods-BeerMais.debug.xcconfig"; sourceTree = "<group>"; };
 		BE5A5758E0C3B85CA9E8E5A5 /* Pods-BeerMais Clip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerMais Clip.release.xcconfig"; path = "Target Support Files/Pods-BeerMais Clip/Pods-BeerMais Clip.release.xcconfig"; sourceTree = "<group>"; };
@@ -419,7 +405,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DEBCA6E2B0196A1001DB86E /* AmplitudeSwift in Frameworks */,
-				6B6764A429A6D70D00C8EFE6 /* GoogleMobileAds.xcframework in Frameworks */,
 				F136CF3C090E3BD087B971A5 /* Pods_BeerMais_Clip.framework in Frameworks */,
 				2D0FE9082B04E45E00FA3A16 /* Lottie in Frameworks */,
 			);
@@ -823,7 +808,6 @@
 				A18158AF2597D1D5004B2018 /* AppDelegate.swift */,
 				A18158B12597D1D5004B2018 /* SceneDelegate.swift */,
 				A18158BB2597D1D7004B2018 /* Assets.xcassets */,
-				A18158C02597D1D7004B2018 /* Info.plist */,
 			);
 			path = "BeerMais Clip";
 			sourceTree = "<group>";
@@ -902,11 +886,10 @@
 			buildConfigurationList = A18158C82597D1D7004B2018 /* Build configuration list for PBXNativeTarget "BeerMais Clip" */;
 			buildPhases = (
 				A4D2D6C8F6C476D2FB19550B /* [CP] Check Pods Manifest.lock */,
+				A181598F2597E497004B2018 /* Copy plists */,
 				A18158A92597D1D4004B2018 /* Sources */,
 				A18158AA2597D1D4004B2018 /* Frameworks */,
 				A18158AB2597D1D4004B2018 /* Resources */,
-				A181598F2597E497004B2018 /* Copy plists */,
-				6B6764A629A6D70D00C8EFE6 /* Embed Frameworks */,
 				123927E8B4E6368DD722AE2E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -954,7 +937,7 @@
 			};
 			buildConfigurationList = 2D17010E21D2B3CD0009A316 /* Build configuration list for PBXProject "BeerMais" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = en;
+			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -1136,7 +1119,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PATH_TO_PLISTS=\"${PROJECT_DIR}/BeerMais/Property lists\"\n\ncase \"${CONFIGURATION}\" in\n\n   \"DEBUG_APPCLIP\" )\n        cp -r \"$PATH_TO_PLISTS/Dev/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" \n        \n        cp -r \"$PATH_TO_PLISTS/Dev/Settings.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.plist\" ;;\n\n   \"APPCLIP\" )\n        cp -r \"$PATH_TO_PLISTS/Prod/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" \n        \n        cp -r \"$PATH_TO_PLISTS/Prod/Settings.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.plist\" ;;\n\n    *)\n        ;;\nesac\n\n\n";
+			shellScript = "PATH_TO_PLISTS=\"${SRCROOT}/BeerMais/Property lists\"\n\ncase \"${CONFIGURATION}\" in\n\n   \"DEBUG_APPCLIP\"|\"Debug\" )\n        \n        cp -r \"$PATH_TO_PLISTS/Dev/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" \n        \n        cp -r \"$PATH_TO_PLISTS/Dev/Settings.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.plist\" ;;\n\n   \"APPCLIP\"|\"Release\" )\n        \n        cp -r \"$PATH_TO_PLISTS/Prod/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" \n        \n        cp -r \"$PATH_TO_PLISTS/Prod/Settings.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.plist\" ;;\n\n    *)\n        ;;\nesac\n\n\n";
 		};
 		A19FDDE1259AD2430007E828 /* Copy plists Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1567,7 +1550,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BeerMais/BeerMais.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 27;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
 				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Property lists/Dev/Info.plist";
@@ -1672,8 +1655,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BeerMais/BeerMais.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
 				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Property lists/Prod/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
@@ -1765,6 +1749,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.joseneves.BeerMais.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1777,7 +1762,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "BeerMais widget/BeerMais widgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
 				INFOPLIST_FILE = "BeerMais widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -1802,7 +1787,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "BeerMais widget/BeerMais widgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
 				INFOPLIST_FILE = "BeerMais widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -1871,9 +1856,9 @@
 				CODE_SIGN_ENTITLEMENTS = "BeerMais Clip/BeerMais_Clip-debug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
-				INFOPLIST_FILE = "BeerMais Clip/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Property lists/Dev/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1898,9 +1883,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "BeerMais Clip/BeerMais_Clip.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
-				INFOPLIST_FILE = "BeerMais Clip/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Property lists/Prod/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
