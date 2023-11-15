@@ -5,6 +5,21 @@
   ],
   "products" : [
     {
+      "displayPrice" : "9.9",
+      "familyShareable" : false,
+      "internalID" : "6445801436",
+      "localizations" : [
+        {
+          "description" : "Ajuda para tomar uma depois do trabalho",
+          "displayName" : "Breja",
+          "locale" : "pt_BR"
+        }
+      ],
+      "productID" : "medium",
+      "referenceName" : "Breja",
+      "type" : "Consumable"
+    },
+    {
       "displayPrice" : "4.9",
       "familyShareable" : false,
       "internalID" : "1581300160",
@@ -21,7 +36,22 @@
         }
       ],
       "productID" : "small",
-      "referenceName" : "Small",
+      "referenceName" : "Café",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "14.9",
+      "familyShareable" : false,
+      "internalID" : "6450401406",
+      "localizations" : [
+        {
+          "description" : "Ajuda para o Churras do final de semana",
+          "displayName" : "Churras",
+          "locale" : "pt_BR"
+        }
+      ],
+      "productID" : "large",
+      "referenceName" : "Churras",
       "type" : "Consumable"
     }
   ],
@@ -29,7 +59,7 @@
     "_applicationInternalID" : "1450659497",
     "_developerTeamID" : "2LEA6X25G9",
     "_failTransactionsEnabled" : false,
-    "_lastSynchronizedDate" : 721421218.52581799,
+    "_lastSynchronizedDate" : 721742593.11134398,
     "_locale" : "pt_BR",
     "_storefront" : "BRA",
     "_storeKitErrors" : [
