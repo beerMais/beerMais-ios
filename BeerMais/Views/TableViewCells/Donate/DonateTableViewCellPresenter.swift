@@ -71,14 +71,14 @@ final class DonateTableViewCellPresenter: NSObject {
             return
         }
         
-        purchaseProduct(product: donateProduct.product) { [weak self] result in
-            switch result {
-            case .success:
-                print("success")
-            case .failure(let error):
-                print(error)
-            }
-            
+        AppP.amplitude.track(event: .init(
+            eventType: "donate_tap",
+            eventProperties: [
+                "product": donateProduct.name
+            ]
+        ))
+        
+        purchaseProduct(product: donateProduct.product) { [weak self] _ in
             self?.productPurchaseCallback = nil
             self?.loadingView.hide()
         }
@@ -130,6 +130,13 @@ extension DonateTableViewCellPresenter: SKProductsRequestDelegate {
 extension DonateTableViewCellPresenter: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
+            
+            AppP.amplitude.track(event: .init(
+                eventType: "donate_transaction",
+                eventProperties: [
+                    "transaction_state": transaction.transactionState.rawValue
+                ]
+            ))
             
             switch (transaction.transactionState) {
             case .purchased, .restored:
