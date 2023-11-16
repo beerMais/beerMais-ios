@@ -25,14 +25,9 @@
       "internalID" : "1581300160",
       "localizations" : [
         {
-          "description" : "Ajuda para um Café",
+          "description" : "Um café para ajudar a trazer mais novidades",
           "displayName" : "Café",
           "locale" : "pt_BR"
-        },
-        {
-          "description" : "Donation for a Coffee",
-          "displayName" : "Coffee",
-          "locale" : "en_US"
         }
       ],
       "productID" : "small",
@@ -59,7 +54,7 @@
     "_applicationInternalID" : "1450659497",
     "_developerTeamID" : "2LEA6X25G9",
     "_failTransactionsEnabled" : false,
-    "_lastSynchronizedDate" : 721781491.56006396,
+    "_lastSynchronizedDate" : 721782374.71565604,
     "_locale" : "pt_BR",
     "_storefront" : "BRA",
     "_storeKitErrors" : [
