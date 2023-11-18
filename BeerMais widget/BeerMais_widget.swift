@@ -44,15 +44,21 @@ struct Provider: TimelineProvider {
         let economy = defaults?.string(forKey: "ECONOMY")
         let count = defaults?.integer(forKey: "BEERS_COUNT") ?? 0
         
-        let timeline = Timeline(entries: [
-                                    BeerMaisEntry(date: Date(),
-                                                  brand: brand,
-                                                  amount: amount,
-                                                  value: value,
-                                                  type: type,
-                                                  economy: economy,
-                                                  count: count)
-        ], policy: .never)
+        let timeline = Timeline(
+            entries: [
+                BeerMaisEntry(
+                    date: Date(),
+                    brand: brand,
+                    amount: amount,
+                    value: value,
+                    type: type,
+                    economy: economy,
+                    count: count
+                )
+            ], 
+            policy: .never
+        )
+    
         completion(timeline)
     }
 }
@@ -89,7 +95,6 @@ struct BeerMais_widgetEntryView : View {
         ZStack {
             backgroundColor
             VStack(spacing: 0) {
-                Spacer()
                 Text(entry.brand ?? "Marca")
                     .font(.system(size: 16))
                     .fontWeight(.regular)
@@ -99,7 +104,7 @@ struct BeerMais_widgetEntryView : View {
                     .frame(maxWidth: .infinity,
                            maxHeight: 20,
                            alignment: .center)
-                HStack {
+                let container = HStack {
                     Spacer()
                     VStack {
                         Image(Int(entry.type ?? "1") == 1 ? "icons8-beer-can-100" : "icons8-beer-bottle-100")
@@ -135,9 +140,17 @@ struct BeerMais_widgetEntryView : View {
                             ))
                     }
                     Spacer()
-                }.frame(maxWidth: .infinity,
+                }
+                if #available(iOSApplicationExtension 17.0, *) {
+                    container.containerBackground(for: .widget) { backgroundColor }
+                }
+                else {
+                    container.frame(
+                        maxWidth: .infinity,
                         maxHeight: .infinity,
-                        alignment: .leading)
+                        alignment: .leading
+                    )
+                }
             }.overlay(border)
         }
     }
