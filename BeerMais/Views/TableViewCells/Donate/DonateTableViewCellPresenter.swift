@@ -20,8 +20,10 @@ final class DonateTableViewCellPresenter: NSObject {
     var availableDonates: [DonateProduct] = []
     var delegate: DonateTableViewCellDelegate?
     
+#if !(DEBUG_APPCLIP || APPCLIP)
     private let successFeedbackView = SuccessFeedbackView()
     private let loadingView = LoadingView()
+#endif
 
     private let productIdentifiers: Set<String> = {
         return [DonateType.small.productId,
@@ -80,7 +82,9 @@ final class DonateTableViewCellPresenter: NSObject {
         
         purchaseProduct(product: donateProduct.product) { [weak self] _ in
             self?.productPurchaseCallback = nil
+#if !(DEBUG_APPCLIP || APPCLIP)
             self?.loadingView.hide()
+#endif
         }
     }
 
@@ -105,7 +109,9 @@ final class DonateTableViewCellPresenter: NSObject {
             return
         }
         
+#if !(DEBUG_APPCLIP || APPCLIP)
         loadingView.show()
+#endif
 
         productPurchaseCallback = completion
         
@@ -143,7 +149,9 @@ extension DonateTableViewCellPresenter: SKPaymentTransactionObserver {
                 SKPaymentQueue.default().finishTransaction(transaction)
                 productPurchaseCallback?(.success(true))
                 
+#if !(DEBUG_APPCLIP || APPCLIP)
                 successFeedbackView.show()
+#endif
             case .failed:
                 productPurchaseCallback?(.failure(transaction.error ?? PurchasesError.unknown))
                 SKPaymentQueue.default().finishTransaction(transaction)
