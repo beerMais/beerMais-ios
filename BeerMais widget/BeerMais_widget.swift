@@ -13,25 +13,30 @@ import Intents
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> BeerMaisEntry {
-        BeerMaisEntry(date: Date(),
-                      brand: nil,
-                      amount: nil,
-                      value: nil,
-                      type: nil,
-                      economy: nil,
-                      count: 0)
+        BeerMaisEntry(
+            date: Date(),
+            brand: nil,
+            amount: nil,
+            value: nil,
+            type: nil,
+            economy: nil,
+            count: 0
+        )
     }
 
-    func getSnapshot(in context: Context,
-                     completion: @escaping (BeerMaisEntry) -> ()) {
-        let entry = BeerMaisEntry(date: Date(),
-                                  brand: nil,
-                                  amount: nil,
-                                  value: nil,
-                                  type: nil,
-                                  economy: nil,
-                                  count: 0)
-        completion(entry)
+    func getSnapshot(
+        in context: Context,
+        completion: @escaping (BeerMaisEntry) -> ()
+    ) {
+        completion(BeerMaisEntry(
+            date: Date(),
+            brand: nil,
+            amount: nil,
+            value: nil,
+            type: nil,
+            economy: nil,
+            count: 0
+        ))
     }
 
     func getTimeline(in context: Context,
@@ -78,9 +83,10 @@ struct BeerMais_widgetEntryView : View {
     
     var border: some View {
         RoundedRectangle(cornerRadius: 22)
-            .stroke(Color(
-                UIColor(named: "economyBorder")!
-            ), lineWidth: entry.count < 2 ? 0 : 4)
+            .stroke(
+                Color(UIColor(named: "economyBorder")!),
+                lineWidth: entry.count < 2 ? 0 : 4
+            )
     }
     
     var backgroundColor: some View {
@@ -93,18 +99,19 @@ struct BeerMais_widgetEntryView : View {
 
     var body: some View {
         ZStack {
-            backgroundColor
-            VStack(spacing: 0) {
+            VStack {
                 Text(entry.brand ?? "Marca")
                     .font(.system(size: 16))
                     .fontWeight(.regular)
                     .foregroundColor(Color(UIColor.label))
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
-                    .frame(maxWidth: .infinity,
-                           maxHeight: 20,
-                           alignment: .center)
-                let container = HStack {
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: 20,
+                        alignment: .center
+                    )
+                HStack {
                     Spacer()
                     VStack {
                         Image(Int(entry.type ?? "1") == 1 ? "icons8-beer-can-100" : "icons8-beer-bottle-100")
@@ -141,18 +148,11 @@ struct BeerMais_widgetEntryView : View {
                     }
                     Spacer()
                 }
-                if #available(iOSApplicationExtension 17.0, *) {
-                    container.containerBackground(for: .widget) { backgroundColor }
-                }
-                else {
-                    container.frame(
-                        maxWidth: .infinity,
-                        maxHeight: .infinity,
-                        alignment: .leading
-                    )
-                }
-            }.overlay(border)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .overlay(border)
         }
+        .widgetBackground(backgroundView: backgroundColor)
     }
 }
 
@@ -173,13 +173,38 @@ struct BeerMais_widget: Widget {
 
 struct BeerMais_widget_Previews: PreviewProvider {
     static var previews: some View {
-        BeerMais_widgetEntryView(entry: BeerMaisEntry(date: Date(),
-                                                      brand: nil,
-                                                      amount: nil,
-                                                      value: nil,
-                                                      type: nil,
-                                                      economy: nil,
-                                                      count: 0))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        BeerMais_widgetEntryView(entry: BeerMaisEntry(
+            date: Date(),
+            brand: nil,
+            amount: nil,
+            value: nil,
+            type: nil,
+            economy: nil,
+            count: 0
+        ))
+        .previewContext(WidgetPreviewContext(family: .systemSmall))
+        BeerMais_widgetEntryView(entry: BeerMaisEntry(
+            date: Date(),
+            brand: nil,
+            amount: nil,
+            value: nil,
+            type: nil,
+            economy: nil,
+            count: 3
+        ))
+        .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
+}
+
+extension View {
+    func widgetBackground(backgroundView: some View) -> some View {
+        if #available(iOSApplicationExtension 17.0, *) {
+            return containerBackground(for: .widget) {
+                backgroundView
+            }
+            .padding(.all, -15)
+        } else {
+            return background(backgroundView)
+        }
     }
 }
