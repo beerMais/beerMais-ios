@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 import UserNotifications
+import WidgetKit
+
 import GoogleMobileAds
 import Firebase
 
@@ -27,8 +29,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+    }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
         self.saveContext()
     }
     
