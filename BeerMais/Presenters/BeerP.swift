@@ -37,24 +37,71 @@ final class BeerP {
     }
     
     func getBeers(completion: @escaping([Beer]) -> Void) {
-        if let data = CoreDataP().getData(entityName: self.entityName) as? [Beer] {
-            completion(data)
+        if let beers = CoreDataP().getData(entityName: self.entityName) as? [Beer] {
+            completion(orderBeers(beers))
+        } else {
+            completion([])
         }
     }
     
-    func calculateMostValuable(beers: [Beer]) -> [Beer] {
-        return beers.sorted(by: { self.getValuePerML(value: $0.value, amount: $0.amount) < self.getValuePerML(value: $1.value, amount: $1.amount) })
+    private func orderBeers(_ beers: [Beer]) -> [Beer] {
+        beers.sorted(by: {
+            getValuePerML(value: $0.value, amount: $0.amount) < getValuePerML(value: $1.value, amount: $1.amount)
+        })
+    }
+    
+    func calculateMostValuable(beers: [Beer]) -> Beer? {
+        guard let mostValuableBeer = orderBeers(beers).first else {
+            return nil
+        }
+        
+        // TODO: Please refactory this!
+        let defaults = UserDefaults(suiteName: "group.beerMais")
+        if let brand = mostValuableBeer.brand {
+            defaults?.set(brand, forKey: "BRAND")
+        }
+        
+        var amountText = "\(mostValuableBeer.amount)ml"
+        
+        if (mostValuableBeer.amount >= 1000) {
+            amountText = "1 L"
+            
+            if (mostValuableBeer.amount >= 1010) {
+                var amountString = String(format: "%.2f", Float(mostValuableBeer.amount) / 1000)
+                amountString = amountString.replacingOccurrences(of: ".", with: ",")
+                amountText = "\(amountString) L"
+            }
+        }
+        
+        defaults?.set(amountText, forKey: "AMOUNT")
+        defaults?.set(
+            "R$ \(formatValueToShow(value: mostValuableBeer.value))",
+            forKey: "VALUE"
+        )
+        defaults?.set(String(mostValuableBeer.type), forKey: "TYPE")
+        defaults?.set(String(beers.count), forKey: "BEERS_COUNT")
+        
+        if beers.count > 1 {
+            let economy = getEconomy(beer1: mostValuableBeer, beer2: beers[1])
+            
+            defaults?.set(
+                "R$ \(formatValueToShow(value: economy))",
+                forKey: "ECONOMY"
+            )
+        }
+        
+        return mostValuableBeer
     }
     
     func getEconomy(beer1: Beer, beer2: Beer) -> Float {
-        let value1 = self.getValuePerML(value: beer1.value, amount: beer1.amount)
-        let value2 = self.getValuePerML(value: beer2.value, amount: beer2.amount)
+        let value1 = getValuePerML(value: beer1.value, amount: beer1.amount)
+        let value2 = getValuePerML(value: beer2.value, amount: beer2.amount)
         
         return (value2 - value1) * 1000
     }
     
     func deleteBeers() {
-        CoreDataP().deleteData(entityName: self.entityName)
+        CoreDataP().deleteData(entityName: entityName)
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "all_beers_deleted",

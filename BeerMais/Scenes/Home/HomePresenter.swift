@@ -25,8 +25,7 @@ final class HomePresenter: HomePresenterProtocol {
         
         if beers.count < 2 {
             view.setDefaultDataToRank()
-        } else {
-            let beer = beers[0]
+        } else if let beer = BeerP().calculateMostValuable(beers: beers) {
             let economyValue = BeerP().getEconomy(beer1: beer, beer2: beers[1])
             let economy = BeerP().formatValueToShow(value: economyValue)
             view.highligthBeer(beer, economy: economy)
