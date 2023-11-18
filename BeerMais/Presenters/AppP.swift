@@ -58,7 +58,6 @@ final class AppP {
     
     static func setFirstLaunch() {
         UserDefaults.standard.set(true, forKey: self.hasBeenLaunchedBeforeFlag)
-        UserDefaults.standard.synchronize()
     }
     
     static private func setInitialData() {
