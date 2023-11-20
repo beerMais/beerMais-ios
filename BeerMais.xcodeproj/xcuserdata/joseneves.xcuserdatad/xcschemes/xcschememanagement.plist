@@ -17,7 +17,7 @@
 		<key>BeerMais widgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>29</integer>
+			<integer>28</integer>
 		</dict>
 		<key>BeerMais.xcscheme</key>
 		<dict>
@@ -43,6 +43,11 @@
 			<true/>
 		</dict>
 		<key>2D1D3E4321F670C9008F51AC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2D4C51F6254F85CB00D0B2D0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
