@@ -115,7 +115,7 @@ final class BeerP {
     }
     
     func delete(beer: Beer) {
-        CoreDataP().context.delete(beer)
+        CoreDataP().context?.delete(beer)
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "beer_deleted",

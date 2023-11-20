@@ -12,14 +12,18 @@ import CoreData
 
 
 extension Beer {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Beer> {
-        return NSFetchRequest<Beer>(entityName: "Beer")
+    
+    public override var description: String {
+        "Beer"
     }
 
-    @NSManaged public var brand: String?
-    @NSManaged public var value: Float
-    @NSManaged public var amount: Int16
-    @NSManaged public var type: Int16
+//    @nonobjc public class func fetchRequest() -> NSFetchRequest<Beer> {
+//        return NSFetchRequest<Beer>(entityName: "Beer")
+//    }
+//
+//    @NSManaged public var brand: String?
+//    @NSManaged public var value: Float
+//    @NSManaged public var amount: Int16
+//    @NSManaged public var type: Int16
 
 }

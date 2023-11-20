@@ -10,7 +10,8 @@ import CoreData
 import UIKit
 
 final class CoreDataP {
-    var context: NSManagedObjectContext!
+    
+    private (set) var context: NSManagedObjectContext?
     
     init() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -20,7 +21,7 @@ final class CoreDataP {
     func getData(entityName: String) -> [Any] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         do {
-            return try context.fetch(fetchRequest)
+            return try context?.fetch(fetchRequest) ?? []
         } catch let error as NSError {
             print("Get all data in \(entityName) error : \(error) \(error.userInfo)")
             return []
@@ -32,10 +33,10 @@ final class CoreDataP {
         fetchRequest.returnsObjectsAsFaults = false
         
         do {
-            let results = try self.context.fetch(fetchRequest)
+            let results = try context?.fetch(fetchRequest) ?? []
             for managedObject in results {
                 if let managedObjectData = managedObject as? NSManagedObject {
-                    self.context.delete(managedObjectData)
+                    context?.delete(managedObjectData)
                 }
             }
         } catch let error as NSError {
