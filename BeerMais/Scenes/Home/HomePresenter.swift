@@ -14,10 +14,17 @@ protocol HomePresenterProtocol {
 
 final class HomePresenter: HomePresenterProtocol {
     
-    private let view: HomeViewController
+    // MARK: - Injected Properties
     
-    init(view: HomeViewController) {
+    let view: HomeViewController
+    let beerFacade: BeerFacadeProtocol
+    
+    init(
+        view: HomeViewController,
+        beerFacade: BeerFacadeProtocol
+    ) {
         self.view = view
+        self.beerFacade = beerFacade
     }
     
     func setBeers(with beers: [Beer]) {
@@ -26,7 +33,7 @@ final class HomePresenter: HomePresenterProtocol {
         if beers.count < 2 {
             view.setDefaultDataToRank()
         } else if let beer = BeerP().calculateMostValuable(beers: beers) {
-            let economyValue = BeerP().getEconomy(beer1: beer, beer2: beers[1])
+            let economyValue = beerFacade.calcEconomyBetweenBeers(beer1: beer, beer2: beers[1])
             let economy = BeerP().formatValueToShow(value: economyValue)
             view.highligthBeer(beer, economy: economy)
         }

@@ -53,7 +53,7 @@ final class BeerP {
         defaults?.set(String(beers.count), forKey: "BEERS_COUNT")
         
         if beers.count > 1 {
-            let economy = getEconomy(beer1: mostValuableBeer, beer2: beers[1])
+            let economy = BeerFacade().calcEconomyBetweenBeers(beer1: mostValuableBeer, beer2: beers[1])
             
             defaults?.set(
                 "R$ \(formatValueToShow(value: economy))",
@@ -62,13 +62,6 @@ final class BeerP {
         }
         
         return mostValuableBeer
-    }
-    
-    func getEconomy(beer1: Beer, beer2: Beer) -> Float {
-        let value1 = BeerFacade().getValuePerML(beer: beer1)
-        let value2 = BeerFacade().getValuePerML(beer: beer2)
-        
-        return (value2 - value1) * 1000
     }
     
     func deleteBeers() {

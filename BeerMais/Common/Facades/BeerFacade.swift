@@ -15,6 +15,7 @@ protocol BeerFacadeProtocol {
     
     func orderBeers(_ beers: [Beer]) -> [Beer]
     func getValuePerML(beer: Beer) -> Float
+    func calcEconomyBetweenBeers(beer1: Beer, beer2: Beer) -> Float
 }
 
 final class BeerFacade: BeerFacadeProtocol {
@@ -53,6 +54,10 @@ final class BeerFacade: BeerFacadeProtocol {
     
     func getValuePerML(beer: Beer) -> Float {
         beer.value / Float(beer.amount)
+    }
+    
+    func calcEconomyBetweenBeers(beer1: Beer, beer2: Beer) -> Float {
+        (getValuePerML(beer: beer2) - getValuePerML(beer: beer1)) * 1000
     }
     
     // MARK: - Private methods
