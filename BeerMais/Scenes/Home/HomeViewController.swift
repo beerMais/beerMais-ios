@@ -163,13 +163,12 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let beer = beers[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "beerCollectionCell",
-                                                      for: indexPath) as! BeerCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "beerCollectionCell",
+            for: indexPath
+        ) as! BeerCollectionViewCell
         
-        cell.setAmount(amount: beer.amount)
-        cell.setBrand(brand: beer.brand ?? "")
-        cell.setValue(value: beer.value)
-        cell.setType(type: beer.type)
+        cell.setBeer(beer: beer)
         cell.setCounter(counter: indexPath.row + 1)
         
         return cell

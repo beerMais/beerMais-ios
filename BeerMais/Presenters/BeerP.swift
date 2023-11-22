@@ -15,20 +15,14 @@ final class BeerP {
     
     func getBeers(completion: @escaping([Beer]) -> Void) {
         if let beers = CoreDataP().getData(entityName: self.entityName) as? [Beer] {
-            completion(orderBeers(beers))
+            completion(BeerFacade().orderBeers(beers))
         } else {
             completion([])
         }
     }
     
-    private func orderBeers(_ beers: [Beer]) -> [Beer] {
-        beers.sorted(by: {
-            getValuePerML(value: $0.value, amount: $0.amount) < getValuePerML(value: $1.value, amount: $1.amount)
-        })
-    }
-    
     func calculateMostValuable(beers: [Beer]) -> Beer? {
-        guard let mostValuableBeer = orderBeers(beers).first else {
+        guard let mostValuableBeer = BeerFacade().orderBeers(beers).first else {
             return nil
         }
         
@@ -71,8 +65,8 @@ final class BeerP {
     }
     
     func getEconomy(beer1: Beer, beer2: Beer) -> Float {
-        let value1 = getValuePerML(value: beer1.value, amount: beer1.amount)
-        let value2 = getValuePerML(value: beer2.value, amount: beer2.amount)
+        let value1 = BeerFacade().getValuePerML(beer: beer1)
+        let value2 = BeerFacade().getValuePerML(beer: beer2)
         
         return (value2 - value1) * 1000
     }
@@ -107,10 +101,6 @@ final class BeerP {
             eventType: "beer_updated",
             eventProperties: beerToAnalyticsParameters(beer)
         ))
-    }
-    
-    func getValuePerML(value: Float, amount: Int16) -> Float {
-        return value / Float(amount)
     }
     
     static func getValueFromString(value: String) -> Float {
