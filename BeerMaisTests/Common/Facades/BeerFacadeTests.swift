@@ -82,4 +82,33 @@ final class BeerFacadeTests: XCTestCase {
         XCTAssertEqual(sut.calcEconomyBetweenBeers(beer1: beer3, beer2: beer2), 8.742857)
         XCTAssertEqual(sut.calcEconomyBetweenBeers(beer1: beer2, beer2: beer3), -8.742857)
     }
+    
+    func testFormatBeerValueToShow() {
+        
+        let beer = Beer.mock()
+        beer.value = 10
+        beer.amount = 1000
+
+        XCTAssertEqual(sut.formatBeerValueToShow(value: beer.value), "10,00")
+        
+        let beer2 = Beer.mock()
+        beer2.value = 2.19
+        beer2.amount = 350
+
+        XCTAssertEqual(sut.formatBeerValueToShow(value: beer2.value), "2,19")
+    }
+    
+    func testCalculateMostValuableBeer() {
+        
+        let beer = Beer.mock()
+        beer.value = 10
+        beer.amount = 1000
+
+        let beer2 = Beer.mock()
+        beer2.value = 11.0
+        beer2.amount = 1000
+
+        XCTAssertEqual(sut.calculateMostValuableBeer(beers: [beer, beer2]), beer)
+        XCTAssertEqual(sut.calculateMostValuableBeer(beers: [beer2, beer]), beer)
+    }
 }

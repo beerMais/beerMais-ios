@@ -32,10 +32,12 @@ final class HomePresenter: HomePresenterProtocol {
         
         if beers.count < 2 {
             view.setDefaultDataToRank()
-        } else if let beer = BeerP().calculateMostValuable(beers: beers) {
+        } else if let beer = beerFacade.calculateMostValuableBeer(beers: beers) {
             let economyValue = beerFacade.calcEconomyBetweenBeers(beer1: beer, beer2: beers[1])
-            let economy = BeerP().formatValueToShow(value: economyValue)
-            view.highligthBeer(beer, economy: economy)
+            view.highligthBeer(
+                beer,
+                economy: beerFacade.formatBeerValueToShow(value: economyValue)
+            )
         }
     }
 }

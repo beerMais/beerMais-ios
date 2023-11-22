@@ -16,6 +16,8 @@ protocol BeerFacadeProtocol {
     func orderBeers(_ beers: [Beer]) -> [Beer]
     func getValuePerML(beer: Beer) -> Float
     func calcEconomyBetweenBeers(beer1: Beer, beer2: Beer) -> Float
+    func formatBeerValueToShow(value: Float) -> String
+    func calculateMostValuableBeer(beers: [Beer]) -> Beer?
 }
 
 final class BeerFacade: BeerFacadeProtocol {
@@ -58,6 +60,53 @@ final class BeerFacade: BeerFacadeProtocol {
     
     func calcEconomyBetweenBeers(beer1: Beer, beer2: Beer) -> Float {
         (getValuePerML(beer: beer2) - getValuePerML(beer: beer1)) * 1000
+    }
+    
+    func formatBeerValueToShow(value: Float) -> String {
+        String(format: "%.2f", value).replacingOccurrences(of: ".", with: ",")
+    }
+    
+    func calculateMostValuableBeer(beers: [Beer]) -> Beer? {
+        guard let mostValuableBeer = orderBeers(beers).first else {
+            return nil
+        }
+        
+        // TODO: Please refactory this!
+        let defaults = UserDefaults(suiteName: "group.beerMais")
+        if let brand = mostValuableBeer.brand {
+            defaults?.set(brand, forKey: "BRAND")
+        }
+        
+        var amountText = "\(mostValuableBeer.amount)ml"
+        
+        if (mostValuableBeer.amount >= 1000) {
+            amountText = "1 L"
+            
+            if (mostValuableBeer.amount >= 1010) {
+                var amountString = String(format: "%.2f", Float(mostValuableBeer.amount) / 1000)
+                amountString = amountString.replacingOccurrences(of: ".", with: ",")
+                amountText = "\(amountString) L"
+            }
+        }
+        
+        defaults?.set(amountText, forKey: "AMOUNT")
+        defaults?.set(
+            "R$ \(formatBeerValueToShow(value: mostValuableBeer.value))",
+            forKey: "VALUE"
+        )
+        defaults?.set(String(mostValuableBeer.type), forKey: "TYPE")
+        defaults?.set(String(beers.count), forKey: "BEERS_COUNT")
+        
+        if beers.count > 1 {
+            let economy = calcEconomyBetweenBeers(beer1: mostValuableBeer, beer2: beers[1])
+            
+            defaults?.set(
+                "R$ \(formatBeerValueToShow(value: economy))",
+                forKey: "ECONOMY"
+            )
+        }
+        
+        return mostValuableBeer
     }
     
     // MARK: - Private methods
