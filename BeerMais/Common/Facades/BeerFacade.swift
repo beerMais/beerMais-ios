@@ -11,7 +11,7 @@ import Foundation
 import AmplitudeSwift
 
 protocol BeerFacadeProtocol {
-    func createBeer(data: [String: Any]) -> Beer?
+    @discardableResult func createBeer(data: [String: Any]) -> Beer?
     
     func orderBeers(_ beers: [Beer]) -> [Beer]
     func getValuePerML(beer: Beer) -> Float
@@ -25,7 +25,7 @@ final class BeerFacade: BeerFacadeProtocol {
     
     // MARK: - BeerFacadeProtocol
     
-    func createBeer(data: [String: Any]) -> Beer? {
+    @discardableResult func createBeer(data: [String: Any]) -> Beer? {
         guard let context = CoreDataP().context else { return nil }
             
         do {

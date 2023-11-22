@@ -13,29 +13,6 @@ import AmplitudeSwift
 final class BeerP {
     private let entityName = "Beer"
     
-    func create(data: [String: Any]) -> Beer? {
-        if let context = CoreDataP().context {
-            
-            do {
-                let beer = self.setBeerData(beer: Beer(context: context), data: data)
-                
-                try context.save()
-                
-                AppP.amplitude.track(event: BaseEvent(
-                    eventType: "beer_created",
-                    eventProperties: beerToAnalyticsParameters(beer)
-                ))
-                
-                return beer
-            } catch let error {
-                print("Could not save. \(error), \(String(describing: error._userInfo))")
-                return nil
-            }
-        } else {
-            return nil
-        }
-    }
-    
     func getBeers(completion: @escaping([Beer]) -> Void) {
         if let beers = CoreDataP().getData(entityName: self.entityName) as? [Beer] {
             completion(orderBeers(beers))

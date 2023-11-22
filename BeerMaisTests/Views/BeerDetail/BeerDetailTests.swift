@@ -39,13 +39,11 @@ final class BeerDetailTests: XCTestCase {
     
     func testSetupWithBeer() {
         // Given
-        var beerData = [String: Any]()
-        beerData["amount"] = Int16(350)
-        beerData["brand"] = "test brand"
-        beerData["value"] = 2.59
-        beerData["type"] = Int16(1)
-        
-        let beer = BeerP().create(data: beerData)
+        let beer = Beer.mock()
+        beer.amount = 350
+        beer.brand = "test brand"
+        beer.value = 2.59
+        beer.type = 1
         
         // When
         sut = BeerDetailTestsFactory.build(with: spy, beer: beer)
@@ -55,8 +53,8 @@ final class BeerDetailTests: XCTestCase {
         XCTAssertEqual(spy.setBrandCalls, 1)
         XCTAssertEqual(spy.setBrandBrand, "test brand")
         XCTAssertEqual(spy.setPriceCalls, 1)
-        XCTAssertEqual(spy.setPricePrice, "R$ 1,00")
+        XCTAssertEqual(spy.setPricePrice, "R$ 2,59")
         XCTAssertEqual(spy.setSizeCalls, 1)
-        XCTAssertEqual(spy.setSizeSize, "269 ml")
+        XCTAssertEqual(spy.setSizeSize, "350")
     }
 }

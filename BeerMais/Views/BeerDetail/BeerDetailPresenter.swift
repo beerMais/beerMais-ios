@@ -20,7 +20,8 @@ protocol BeerDetailPresenterProtocol {
 
 final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     
-    private let view: BeerDetailViewProtocol
+    // MARK: - Private Properties
+
     private var beer: Beer?
     private let amountValues: [Int: String] = [
         0: "269",
@@ -32,13 +33,26 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     private var beerBrand: String = ""
     private var beerAmount: Int16 = 0
     private var beerValue: Float = 0
+    
+    // MARK: - Injected Properties
+    
+    let view: BeerDetailViewProtocol
+    let beerFacade: BeerFacadeProtocol
  
-    init(view: BeerDetailViewProtocol) {
+    init(
+        view: BeerDetailViewProtocol,
+        beerFacade: BeerFacadeProtocol
+    ) {
         self.view = view
+        self.beerFacade = beerFacade
     }
     
-    convenience init(view: BeerDetailViewProtocol, beer: Beer?) {
-        self.init(view: view)
+    convenience init(
+        view: BeerDetailViewProtocol,
+        beer: Beer?,
+        beerFacade: BeerFacadeProtocol
+    ) {
+        self.init(view: view, beerFacade: beerFacade)
         
         if let currentBeer = beer {
             self.beer = currentBeer
@@ -108,7 +122,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
             return
         }
         
-        BeerP().edit(beer: beer, data: getBeerArray())
+        BeerP().edit(beer: beer, data: beerDataDict())
         
         view.editSucess()
     }
@@ -118,7 +132,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
             return
         }
         
-        _ = BeerP().create(data: getBeerArray())
+        beerFacade.createBeer(data: beerDataDict())
         
         view.createSucess()
     }
@@ -148,7 +162,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         return isValidAmount && isValidBrand && isValidValue
     }
     
-    private func getBeerArray() -> [String: Any] {
+    private func beerDataDict() -> [String: Any] {
         var data = [String: Any]()
         data["amount"] = beerAmount
         data["brand"] = beerBrand

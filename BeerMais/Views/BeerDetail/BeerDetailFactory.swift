@@ -9,10 +9,18 @@
 import Foundation
 
 final class BeerDetailFactory {
-    static func build(with beer: Beer? = nil,
-                      delegate: DetailsViewControllerProtocol? = nil) -> BeerDetailView {
+    
+    static func build(
+        with beer: Beer? = nil,
+        delegate: DetailsViewControllerProtocol? = nil,
+        beerFacade: BeerFacadeProtocol = BeerFacade()
+    ) -> BeerDetailView {
         let view = BeerDetailView()
-        let presenter = BeerDetailPresenter(view: view, beer: beer)
+        let presenter = BeerDetailPresenter(
+            view: view, 
+            beer: beer,
+            beerFacade: beerFacade
+        )
         
         view.presenter = presenter
         view.delegate = delegate
