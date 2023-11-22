@@ -57,7 +57,7 @@ final class BeerFacade: BeerFacadeProtocol {
     
     // MARK: - Private methods
     
-    func setDataToBeer(beer: Beer, data: [String: Any]) -> Beer {
+    private func setDataToBeer(beer: Beer, data: [String: Any]) -> Beer {
         beer.brand = data["brand"] as? String
         
         if let value = data["value"] as? NSNumber {

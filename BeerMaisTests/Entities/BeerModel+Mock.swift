@@ -10,38 +10,27 @@ import Foundation
 import CoreData
 
 extension Beer {
-    static func mock() -> Beer {
-        var beer1 = [String: Any]()
-        beer1["amount"] = Int16(350)
-        beer1["brand"] = "Budweiser"
-        beer1["value"] = 2.59
-        beer1["type"] = Int16(1)
-        
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        decoder.userInfo[CodingUserInfoKey.managedObjectContext] = Self.setUpInMemoryManagedObjectContext()
-        
-        
-        let jsonData = try! JSONSerialization.data(withJSONObject: beer1, options: [])
-        return try! decoder.decode(Beer.self, from: jsonData)
-    }
     
-    static func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
-        let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
-        
-        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        persistentStoreCoordinator.name = "BeerMais"
-        
-        do {
-            try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
-        } catch {
-            print("Adding in-memory persistent store failed")
-        }
-        
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
-        
-        return managedObjectContext
+    static let managedObjectModel: NSManagedObjectModel = {
+        NSManagedObjectModel.mergedModel(from: [Bundle(for: Beer.self)])!
+    }()
+    
+    static var inMemoryManagedObjectContext: NSPersistentContainer = {
+        let storeURL = NSPersistentContainer.defaultDirectoryURL().appendingPathComponent("store")
+        let description = NSPersistentStoreDescription(url: storeURL)
+        description.shouldMigrateStoreAutomatically = true
+        description.shouldInferMappingModelAutomatically = true
+        description.shouldAddStoreAsynchronously = false
+        description.type = NSInMemoryStoreType
+
+        let persistentContainer = NSPersistentContainer(name: "BeerMais", managedObjectModel: Beer.managedObjectModel)
+        persistentContainer.persistentStoreDescriptions = [description]
+        persistentContainer.loadPersistentStores { _, _ in }
+
+        return persistentContainer
+    }()
+
+    static func mock() -> Beer {
+        Beer(context: Self.inMemoryManagedObjectContext.viewContext)
     }
 }
-
