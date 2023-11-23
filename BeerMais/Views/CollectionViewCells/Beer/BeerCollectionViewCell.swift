@@ -66,7 +66,7 @@ final class BeerCollectionViewCell: UICollectionViewCell {
     func setValue() {
         guard let beer else { return }
         
-        let valueString = BeerFacade().formatBeerValueToShow(value: beer.value)
+        let valueString = BeerWorker().formatBeerValueToShow(value: beer.value)
         self.valueLabel.text = "R$ \(valueString)"
         
         self.calculatePerLiter()
@@ -102,7 +102,7 @@ final class BeerCollectionViewCell: UICollectionViewCell {
             beer.amount != 0 && beer.value != 0
         else { return }
         
-        let perLiter = BeerFacade().getValuePerML(beer: beer) * 1000
-        self.perLiterLabel.text = "R$ \(BeerFacade().formatBeerValueToShow(value: perLiter))/L"
+        let perLiter = BeerWorker().getValuePerML(beer: beer) * 1000
+        self.perLiterLabel.text = "R$ \(BeerWorker().formatBeerValueToShow(value: perLiter))/L"
     }
 }

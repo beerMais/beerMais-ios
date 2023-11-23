@@ -125,7 +125,7 @@ final class RankBeerView: UIView, RankBeerViewProtocol {
             beerImageView.image = BeerImage.iconBeerCan100
         }
         
-        let valueString = BeerFacade().formatBeerValueToShow(value: beer.value)
+        let valueString = BeerWorker().formatBeerValueToShow(value: beer.value)
         valueLabel.text = "R$ \(valueString)"
         economyValueLabel.text = "R$ \(economy)/L"
     }

@@ -11,15 +11,15 @@ import Foundation
 final class HomeFactory {
     
     static func build(
-        beerFacade: BeerFacadeProtocol = BeerFacade()
+        beerWorker: BeerWorkerProtocol = BeerWorker()
     ) -> HomeViewController {
         let controller = HomeViewController()
         let interactor = HomeInteractor(
             presenter: HomePresenter(
                 view: controller,
-                beerFacade: beerFacade
+                beerWorker: beerWorker
             ),
-            beerFacade: beerFacade
+            beerWorker: beerWorker
         )
         
         controller.interactor = interactor

@@ -13,13 +13,13 @@ final class BeerDetailFactory {
     static func build(
         with beer: Beer? = nil,
         delegate: DetailsViewControllerProtocol? = nil,
-        beerFacade: BeerFacadeProtocol = BeerFacade()
+        beerWorker: BeerWorkerProtocol = BeerWorker()
     ) -> BeerDetailView {
         let view = BeerDetailView()
         let presenter = BeerDetailPresenter(
             view: view, 
             beer: beer,
-            beerFacade: beerFacade
+            beerWorker: beerWorker
         )
         
         view.presenter = presenter

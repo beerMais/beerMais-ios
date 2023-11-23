@@ -37,22 +37,22 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     // MARK: - Injected Properties
     
     let view: BeerDetailViewProtocol
-    let beerFacade: BeerFacadeProtocol
+    let beerWorker: BeerWorkerProtocol
  
     init(
         view: BeerDetailViewProtocol,
-        beerFacade: BeerFacadeProtocol
+        beerWorker: BeerWorkerProtocol
     ) {
         self.view = view
-        self.beerFacade = beerFacade
+        self.beerWorker = beerWorker
     }
     
     convenience init(
         view: BeerDetailViewProtocol,
         beer: Beer?,
-        beerFacade: BeerFacadeProtocol
+        beerWorker: BeerWorkerProtocol
     ) {
-        self.init(view: view, beerFacade: beerFacade)
+        self.init(view: view, beerWorker: beerWorker)
         
         if let currentBeer = beer {
             self.beer = currentBeer
@@ -110,7 +110,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     func deleteBeer() {
         guard let beer = beer else { return }
         
-        beerFacade.delete(beer: beer)
+        beerWorker.delete(beer: beer)
         
         view.deleteSucess()
     }
@@ -122,7 +122,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
             return
         }
         
-        beerFacade.edit(beer: beer, data: beerDataDict())
+        beerWorker.edit(beer: beer, data: beerDataDict())
         
         view.editSucess()
     }
@@ -132,7 +132,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
             return
         }
         
-        beerFacade.createBeer(data: beerDataDict())
+        beerWorker.createBeer(data: beerDataDict())
         
         view.createSucess()
     }

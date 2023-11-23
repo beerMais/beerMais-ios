@@ -1,5 +1,5 @@
 //
-//  BeerFacadeTests.swift
+//  BeerWorkerTests.swift
 //  BeerMaisTests
 //
 //  Created by José Neves on 19/11/23.
@@ -10,12 +10,12 @@ import CoreData
 import Foundation
 import XCTest
 
-final class BeerFacadeTests: XCTestCase {
+final class BeerWorkerTests: XCTestCase {
     
-    var sut: BeerFacade!
+    var sut: BeerWorker!
     
     override func setUp() {
-        sut = BeerFacade()
+        sut = BeerWorker()
     }
     
     override func tearDown() {

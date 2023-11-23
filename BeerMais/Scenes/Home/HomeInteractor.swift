@@ -18,24 +18,24 @@ final class HomeInteractor: HomeInteractorProtocol {
     // MARK: - Injected Properties
     
     let presenter: HomePresenterProtocol
-    let beerFacade: BeerFacadeProtocol
+    let beerWorker: BeerWorkerProtocol
     
     init(
         presenter: HomePresenter,
-        beerFacade: BeerFacadeProtocol
+        beerWorker: BeerWorkerProtocol
     ) {
         self.presenter = presenter
-        self.beerFacade = beerFacade
+        self.beerWorker = beerWorker
         
         reloadBeers()
     }
     
     func reloadBeers() {
-        presenter.setBeers(with: beerFacade.getBeers())
+        presenter.setBeers(with: beerWorker.getBeers())
     }
     
     func deleteAllBeers() {
-        beerFacade.deleteAllBeers()
+        beerWorker.deleteAllBeers()
         reloadBeers()
     }
 }

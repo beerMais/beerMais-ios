@@ -1,5 +1,5 @@
 //
-//  BeerFacade.swift
+//  BeerWorker.swift
 //  BeerMais
 //
 //  Created by José Neves on 19/11/23.
@@ -10,7 +10,7 @@ import Foundation
 
 import AmplitudeSwift
 
-protocol BeerFacadeProtocol {
+protocol BeerWorkerProtocol {
     @discardableResult func createBeer(data: [String: Any]) -> Beer?
     func getBeers() -> [Beer]
     func edit(beer: Beer, data: [String: Any])
@@ -24,13 +24,13 @@ protocol BeerFacadeProtocol {
     func calculateMostValuableBeer(beers: [Beer]) -> Beer?
 }
 
-final class BeerFacade: BeerFacadeProtocol {
+final class BeerWorker: BeerWorkerProtocol {
     
     // MARK: - Private properties
     
     private let entityName = "Beer"
     
-    // MARK: - BeerFacadeProtocol
+    // MARK: - BeerWorkerProtocol
     
     @discardableResult func createBeer(data: [String: Any]) -> Beer? {
         guard let context = CoreDataP().context else { return nil }

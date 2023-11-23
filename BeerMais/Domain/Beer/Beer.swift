@@ -1,5 +1,5 @@
 //
-//  Beer+CoreDataClass.swift
+//  Beer.swift
 //  BeerMais
 //
 //  Created by Jose Neves on 26/12/18.
