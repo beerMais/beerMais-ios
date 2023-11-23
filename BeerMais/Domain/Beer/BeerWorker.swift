@@ -29,11 +29,18 @@ final class BeerWorker: BeerWorkerProtocol {
     // MARK: - Private properties
     
     private let entityName = "Beer"
+    private let coreDataWorker: CoreDataWorkerProtocol
+    
+    // MARK: - Initialization
+    
+    init(coreDataWorker: CoreDataWorkerProtocol = CoreDataWorker.shared) {
+        self.coreDataWorker = coreDataWorker
+    }
     
     // MARK: - BeerWorkerProtocol
     
     @discardableResult func createBeer(data: [String: Any]) -> Beer? {
-        guard let context = CoreDataP().context else { return nil }
+        guard let context = coreDataWorker.context else { return nil }
             
         do {
             let beer = setDataToBeer(beer: Beer(context: context), data: data)
@@ -53,7 +60,7 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     func getBeers() -> [Beer] {
-        guard let beers = CoreDataP().getData(entityName: Beer.entityName) as? [Beer] else {
+        guard let beers = coreDataWorker.getData(entityName: Beer.entityName) as? [Beer] else {
             return []
         }
         
@@ -70,7 +77,7 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     func deleteAllBeers() {
-        CoreDataP().deleteData(entityName: entityName)
+        coreDataWorker.deleteData(entityName: entityName)
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "all_beers_deleted",
@@ -79,7 +86,7 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     func delete(beer: Beer) {
-        CoreDataP().context?.delete(beer)
+        coreDataWorker.context?.delete(beer)
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "beer_deleted",

@@ -1,17 +1,29 @@
 //
-//  CoreDataPresenter.swift
+//  CoreDataWorker.swift
 //  BeerMais
 //
-//  Created by Jose Neves on 26/12/18.
-//  Copyright © 2018 joseneves. All rights reserved.
+//  Created by José Neves on 22/11/23.
+//  Copyright © 2023 joseneves. All rights reserved.
 //
 
+import Foundation
 import CoreData
 import UIKit
 
-final class CoreDataP {
+public protocol CoreDataWorkerProtocol {
+    var context: NSManagedObjectContext? { get }
     
-    private (set) var context: NSManagedObjectContext?
+    func getData(entityName: String) -> [Any]
+    func deleteData(entityName: String)
+}
+
+final class CoreDataWorker: CoreDataWorkerProtocol {
+    
+    static var shared: CoreDataWorkerProtocol = {
+        CoreDataWorker()
+    }()
+    
+    public var context: NSManagedObjectContext?
     
     init() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -43,5 +55,4 @@ final class CoreDataP {
             print("Deleted all data in \(entityName) error : \(error) \(error.userInfo)")
         }
     }
-    
 }
