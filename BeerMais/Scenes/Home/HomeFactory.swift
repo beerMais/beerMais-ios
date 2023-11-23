@@ -18,7 +18,8 @@ final class HomeFactory {
             presenter: HomePresenter(
                 view: controller,
                 beerFacade: beerFacade
-            )
+            ),
+            beerFacade: beerFacade
         )
         
         controller.interactor = interactor

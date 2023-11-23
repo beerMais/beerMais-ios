@@ -12,6 +12,10 @@ import AmplitudeSwift
 
 protocol BeerFacadeProtocol {
     @discardableResult func createBeer(data: [String: Any]) -> Beer?
+    func getBeers() -> [Beer]
+    func edit(beer: Beer, data: [String: Any])
+    func deleteAllBeers()
+    func delete(beer: Beer)
     
     func orderBeers(_ beers: [Beer]) -> [Beer]
     func getValuePerML(beer: Beer) -> Float
@@ -46,6 +50,41 @@ final class BeerFacade: BeerFacadeProtocol {
             print("Could not save. \(error), \(String(describing: error._userInfo))")
             return nil
         }
+    }
+    
+    func getBeers() -> [Beer] {
+        guard let beers = CoreDataP().getData(entityName: Beer.entityName) as? [Beer] else {
+            return []
+        }
+        
+        return orderBeers(beers)
+    }
+    
+    func edit(beer: Beer, data: [String: Any]) {
+        _ = setDataToBeer(beer: beer, data: data)
+        
+        AppP.amplitude.track(event: BaseEvent(
+            eventType: "beer_updated",
+            eventProperties: beerToAnalyticsParameters(beer)
+        ))
+    }
+    
+    func deleteAllBeers() {
+        CoreDataP().deleteData(entityName: entityName)
+        
+        AppP.amplitude.track(event: BaseEvent(
+            eventType: "all_beers_deleted",
+            eventProperties: nil
+        ))
+    }
+    
+    func delete(beer: Beer) {
+        CoreDataP().context?.delete(beer)
+        
+        AppP.amplitude.track(event: BaseEvent(
+            eventType: "beer_deleted",
+            eventProperties: beerToAnalyticsParameters(beer)
+        ))
     }
     
     func orderBeers(_ beers: [Beer]) -> [Beer] {

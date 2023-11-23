@@ -110,7 +110,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     func deleteBeer() {
         guard let beer = beer else { return }
         
-        BeerP().delete(beer: beer)
+        beerFacade.delete(beer: beer)
         
         view.deleteSucess()
     }
@@ -122,7 +122,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
             return
         }
         
-        BeerP().edit(beer: beer, data: beerDataDict())
+        beerFacade.edit(beer: beer, data: beerDataDict())
         
         view.editSucess()
     }
