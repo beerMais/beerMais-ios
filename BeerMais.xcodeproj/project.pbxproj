@@ -14,6 +14,8 @@
 		2D0B321A2B0EDC83002FA88C /* CoreDataWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B32192B0EDC83002FA88C /* CoreDataWorker.swift */; };
 		2D0B321B2B0EDC83002FA88C /* CoreDataWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B32192B0EDC83002FA88C /* CoreDataWorker.swift */; };
 		2D0B321C2B0EDC83002FA88C /* CoreDataWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B32192B0EDC83002FA88C /* CoreDataWorker.swift */; };
+		2D13244B2B0FEDED002C2A59 /* AlertViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D13244A2B0FEDED002C2A59 /* AlertViewControllerSpy.swift */; };
+		2D13244D2B0FEFC5002C2A59 /* AlertInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D13244C2B0FEFC5002C2A59 /* AlertInteractorTests.swift */; };
 		2D13B01F2B02E47F00444F73 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D13B01E2B02E47F00444F73 /* LaunchScreenViewController.swift */; };
 		2D13B0222B02E7EF00444F73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D13B0212B02E7EF00444F73 /* LaunchScreen.storyboard */; };
 		2D13B0232B02E7EF00444F73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D13B0212B02E7EF00444F73 /* LaunchScreen.storyboard */; };
@@ -265,6 +267,8 @@
 		1DEDC348DCFE1F8156EAF333 /* Pods-BeerMais Clip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerMais Clip.release.xcconfig"; path = "Target Support Files/Pods-BeerMais Clip/Pods-BeerMais Clip.release.xcconfig"; sourceTree = "<group>"; };
 		2D0B32132B0EDB3E002FA88C /* Beer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 		2D0B32192B0EDC83002FA88C /* CoreDataWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWorker.swift; sourceTree = "<group>"; };
+		2D13244A2B0FEDED002C2A59 /* AlertViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewControllerSpy.swift; sourceTree = "<group>"; };
+		2D13244C2B0FEFC5002C2A59 /* AlertInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInteractorTests.swift; sourceTree = "<group>"; };
 		2D13B01E2B02E47F00444F73 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		2D13B0212B02E7EF00444F73 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D17011621D2B3CE0009A316 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -453,6 +457,15 @@
 				870BACE628174E8500AEF61E /* SceneDelegate.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		2D1324492B0FEB68002C2A59 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				2D13244A2B0FEDED002C2A59 /* AlertViewControllerSpy.swift */,
+				2D13244C2B0FEFC5002C2A59 /* AlertInteractorTests.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		2D13B01D2B02E46300444F73 /* Launch */ = {
@@ -734,6 +747,7 @@
 		87849E662820682400B6F61F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				2D1324492B0FEB68002C2A59 /* Alert */,
 				87849E672820684600B6F61F /* Details */,
 			);
 			path = Scenes;
@@ -1334,6 +1348,7 @@
 				87BB698228206C60005489A8 /* AlertPresenter.swift in Sources */,
 				87BB696528206BE6005489A8 /* BeerDetailFactory.swift in Sources */,
 				87BB697828206C26005489A8 /* HomeFactory.swift in Sources */,
+				2D13244D2B0FEFC5002C2A59 /* AlertInteractorTests.swift in Sources */,
 				87BB697928206C26005489A8 /* HomeInteractor.swift in Sources */,
 				87BB696128206BE1005489A8 /* RankBeerView.swift in Sources */,
 				87BB696D28206BFB005489A8 /* AboutTableViewCell.swift in Sources */,
@@ -1366,6 +1381,7 @@
 				2DD484712B09296000FE7277 /* SuccessFeedbackView.swift in Sources */,
 				87BB695828206BD4005489A8 /* BeerColors.swift in Sources */,
 				87BB695F28206BDA005489A8 /* DetailsPresenter.swift in Sources */,
+				2D13244B2B0FEDED002C2A59 /* AlertViewControllerSpy.swift in Sources */,
 				87334DFB282078DC00EA5EF9 /* SettingsP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

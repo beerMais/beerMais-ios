@@ -24,33 +24,28 @@ final class AlertInteractor {
         var positiveAction: (() -> Void)?
     }
     
-    private var presenter: AlertPresenterProtocol
-    private var details: AlertDetails
+    var presenter: AlertPresenterProtocol
+    var details: AlertDetails?
     
-    init(presenter: AlertPresenterProtocol) {
-        self.presenter = presenter
-        self.details = AlertDetails()
-    }
-    
-    convenience init(presenter: AlertPresenterProtocol, details: AlertDetails) {
-        self.init(presenter: presenter)
-        
+    init(presenter: AlertPresenterProtocol, details: AlertDetails?) {
         self.presenter = presenter
         self.details = details
         
-        presenter.setupData(with: details)
+        if let details {
+            presenter.setupData(with: details)
+        }
     }
     
 }
 
 extension AlertInteractor: AlertInteractorProtocol {
     func negativeAction() {
-        details.negativeAction?()
+        details?.negativeAction?()
         presenter.close()
     }
     
     func positiveAction() {
-        details.positiveAction?()
+        details?.positiveAction?()
         presenter.close()
     }
 }
