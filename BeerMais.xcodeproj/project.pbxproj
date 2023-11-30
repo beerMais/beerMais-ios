@@ -2010,7 +2010,7 @@
 			repositoryURL = "https://github.com/jnevesjunior/BasicsKit";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.4;
+				minimumVersion = 0.0.5;
 			};
 		};
 		2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
