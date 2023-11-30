@@ -42,6 +42,7 @@
 		2D4C526E254FB26100D0B2D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D17012021D2B3CF0009A316 /* Assets.xcassets */; };
 		2D616DEF22542091005E8BF7 /* VersionP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D616DEE22542091005E8BF7 /* VersionP.swift */; };
 		2D8F1E6E2B18106F00C7D55F /* AlertPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8F1E6D2B18106F00C7D55F /* AlertPresenterTests.swift */; };
+		2D8F1E712B1812A000C7D55F /* BasicsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2D8F1E702B1812A000C7D55F /* BasicsKit */; };
 		2DB931412AFFF5F9001EE5B9 /* Donate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB931402AFFF5F9001EE5B9 /* Donate.swift */; };
 		2DB931422AFFF6A6001EE5B9 /* Donate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB931402AFFF5F9001EE5B9 /* Donate.swift */; };
 		2DD4846F2B0928F900FE7277 /* Donate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB931402AFFF5F9001EE5B9 /* Donate.swift */; };
@@ -401,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D45ABFA2B0AE6EE00DB682B /* AmplitudeSwift in Frameworks */,
+				2D8F1E712B1812A000C7D55F /* BasicsKit in Frameworks */,
 				904BA056A52D0D476C722D20 /* Pods_BeerMaisTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -935,6 +937,7 @@
 			name = BeerMaisTests;
 			packageProductDependencies = (
 				2D45ABF92B0AE6EE00DB682B /* AmplitudeSwift */,
+				2D8F1E702B1812A000C7D55F /* BasicsKit */,
 			);
 			productName = BeerMaisTests;
 			productReference = 87849E5D2820680700B6F61F /* BeerMaisTests.xctest */;
@@ -1005,6 +1008,7 @@
 			packageReferences = (
 				2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				2DEBCA6A2B0195DF001DB86E /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
+				2D8F1E6F2B1812A000C7D55F /* XCRemoteSwiftPackageReference "BasicsKit" */,
 			);
 			productRefGroup = 2D17011421D2B3CD0009A316 /* Products */;
 			projectDirPath = "";
@@ -2001,6 +2005,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2D8F1E6F2B1812A000C7D55F /* XCRemoteSwiftPackageReference "BasicsKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jnevesjunior/BasicsKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.4;
+			};
+		};
 		2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
@@ -2029,6 +2041,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2DEBCA6A2B0195DF001DB86E /* XCRemoteSwiftPackageReference "Amplitude-Swift" */;
 			productName = AmplitudeSwift;
+		};
+		2D8F1E702B1812A000C7D55F /* BasicsKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D8F1E6F2B1812A000C7D55F /* XCRemoteSwiftPackageReference "BasicsKit" */;
+			productName = BasicsKit;
 		};
 		2DEBCA612B018AFE001DB86E /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

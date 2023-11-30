@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "basicskit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jnevesjunior/BasicsKit",
+      "state" : {
+        "revision" : "a8ca8532a5cf6003d07e5c3211ce796f09d9e998",
+        "version" : "0.0.4"
+      }
+    },
+    {
       "identity" : "lottie-spm",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-spm.git",
