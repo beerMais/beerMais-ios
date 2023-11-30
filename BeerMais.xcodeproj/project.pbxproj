@@ -41,6 +41,7 @@
 		2D4C5207254F85CC00D0B2D0 /* BeerMais widgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2D4C51F7254F85CB00D0B2D0 /* BeerMais widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2D4C526E254FB26100D0B2D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D17012021D2B3CF0009A316 /* Assets.xcassets */; };
 		2D616DEF22542091005E8BF7 /* VersionP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D616DEE22542091005E8BF7 /* VersionP.swift */; };
+		2D8F1E6E2B18106F00C7D55F /* AlertPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8F1E6D2B18106F00C7D55F /* AlertPresenterTests.swift */; };
 		2DB931412AFFF5F9001EE5B9 /* Donate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB931402AFFF5F9001EE5B9 /* Donate.swift */; };
 		2DB931422AFFF6A6001EE5B9 /* Donate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB931402AFFF5F9001EE5B9 /* Donate.swift */; };
 		2DD4846F2B0928F900FE7277 /* Donate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB931402AFFF5F9001EE5B9 /* Donate.swift */; };
@@ -296,6 +297,7 @@
 		2D616DEE22542091005E8BF7 /* VersionP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionP.swift; sourceTree = "<group>"; };
 		2D779F64244D1DA80010C769 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D779F66244D20830010C769 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2D8F1E6D2B18106F00C7D55F /* AlertPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenterTests.swift; sourceTree = "<group>"; };
 		2D92A1F0222B70D200690ED6 /* BeerMais.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeerMais.entitlements; sourceTree = "<group>"; };
 		2D92A1F2222B71AF00690ED6 /* BeerMais Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BeerMais Dev.entitlements"; sourceTree = "<group>"; };
 		2DB9313E2AFFF1E8001EE5B9 /* BeerMais.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = BeerMais.storekit; sourceTree = "<group>"; };
@@ -462,8 +464,9 @@
 		2D1324492B0FEB68002C2A59 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
-				2D13244A2B0FEDED002C2A59 /* AlertViewControllerSpy.swift */,
 				2D13244C2B0FEFC5002C2A59 /* AlertInteractorTests.swift */,
+				2D8F1E6D2B18106F00C7D55F /* AlertPresenterTests.swift */,
+				2D13244A2B0FEDED002C2A59 /* AlertViewControllerSpy.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1363,6 +1366,7 @@
 				87BB697728206C26005489A8 /* HomeViewController.swift in Sources */,
 				87BB695228206BD0005489A8 /* Float+extensions.swift in Sources */,
 				87BB695728206BD4005489A8 /* BeerImage.swift in Sources */,
+				2D8F1E6E2B18106F00C7D55F /* AlertPresenterTests.swift in Sources */,
 				87334E1B2820E7C800EA5EF9 /* BeerDetailTestsFactory.swift in Sources */,
 				87849E692820685A00B6F61F /* DetailsTests.swift in Sources */,
 				87334DFA2820743800EA5EF9 /* DetailsTestsFactory.swift in Sources */,
