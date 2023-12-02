@@ -11,7 +11,7 @@ import XCTest
 
 import BasicsKit
 
-final class AlertPresenterTests: XCTest {
+final class AlertPresenterTests: XCTestCase {
     
     var sut: AlertPresenter!
     var viewControllerSpy: AlertViewControllerSpy!

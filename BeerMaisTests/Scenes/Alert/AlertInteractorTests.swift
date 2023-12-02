@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-final class AlertInteractorTests: XCTest {
+final class AlertInteractorTests: XCTestCase {
     
     var sut: AlertInteractor!
     var presenter: AlertPresenterSpy!
@@ -58,11 +58,11 @@ final class AlertInteractorTests: XCTest {
         )
         
         XCTAssertEqual(positiveActionCalls, 0)
-        XCTAssertEqual(presenter.setupDataCalls, 0)
+        XCTAssertEqual(presenter.closeCalls, 0)
         sut.positiveAction()
         
         XCTAssertEqual(positiveActionCalls, 1)
-        XCTAssertEqual(presenter.setupDataCalls, 1)
+        XCTAssertEqual(presenter.closeCalls, 1)
     }
 }
 
