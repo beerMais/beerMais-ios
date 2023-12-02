@@ -2009,8 +2009,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jnevesjunior/BasicsKit";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.5;
+				kind = exactVersion;
+				version = 0.0.6;
 			};
 		};
 		2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */ = {

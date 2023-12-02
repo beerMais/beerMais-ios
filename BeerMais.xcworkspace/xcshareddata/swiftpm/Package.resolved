@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jnevesjunior/BasicsKit",
       "state" : {
-        "revision" : "f134c89034b00af88dfdf32d6c7f84b77d1d4b50",
-        "version" : "0.0.5"
+        "revision" : "fc415786d829d5d404ffd8c6ba22cf364c642e33",
+        "version" : "0.0.6"
       }
     },
     {
