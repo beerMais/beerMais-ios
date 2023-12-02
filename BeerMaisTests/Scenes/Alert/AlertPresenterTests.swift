@@ -9,6 +9,8 @@
 import Foundation
 import XCTest
 
+import BasicsKit
+
 final class AlertPresenterTests: XCTest {
     
     var sut: AlertPresenter!
@@ -25,21 +27,32 @@ final class AlertPresenterTests: XCTest {
     }
     
     func testSetupData() {
-        let details = AlertInteractor.AlertDetails()
+        
+        let expectedTitle = String.random()
+        let expectedDescription = String.random()
+        let expectedNegativeActionTitle = String.random()
+        let expectedPositiveActionTitle = String.random()
+        
+        let details = AlertInteractor.AlertDetails(
+            title: expectedTitle,
+            description: expectedDescription,
+            negativeActionTitle: expectedNegativeActionTitle,
+            positiveActionTitle: expectedPositiveActionTitle
+        )
         
         sut.setupData(with: details)
         
         XCTAssertEqual(viewControllerSpy.setTitleCalls, 1)
-        XCTAssertEqual(viewControllerSpy.setTitleTitle, details.title)
+        XCTAssertEqual(viewControllerSpy.setTitleTitle, expectedTitle)
         
         XCTAssertEqual(viewControllerSpy.setDescriptionCalls, 1)
-        XCTAssertEqual(viewControllerSpy.setDescriptionDescription, details.description)
+        XCTAssertEqual(viewControllerSpy.setDescriptionDescription, expectedDescription)
         
         XCTAssertEqual(viewControllerSpy.setNegativeButtonTitleCalls, 1)
-        XCTAssertEqual(viewControllerSpy.setNegativeButtonTitleTitle, details.negativeActionTitle)
+        XCTAssertEqual(viewControllerSpy.setNegativeButtonTitleTitle, expectedNegativeActionTitle)
         
         XCTAssertEqual(viewControllerSpy.setPositiveButtonTitleCalls, 1)
-        XCTAssertEqual(viewControllerSpy.setPositiveButtonTitleTitle, details.positiveActionTitle)
+        XCTAssertEqual(viewControllerSpy.setPositiveButtonTitleTitle, expectedPositiveActionTitle)
     }
     
     func testClose() {
