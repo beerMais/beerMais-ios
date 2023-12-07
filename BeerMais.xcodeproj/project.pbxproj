@@ -45,6 +45,7 @@
 		2D63AD4E2B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
 		2D63AD4F2B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
 		2D63AD502B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
+		2D63AD532B2154BC00C0BF4C /* AlertViewControllerSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD522B2154BB00C0BF4C /* AlertViewControllerSnapshot.swift */; };
 		2D63E33E2B1FE6AB00A41CC0 /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2D63E33D2B1FE6AB00A41CC0 /* InlineSnapshotTesting */; };
 		2D63E3402B1FE6AB00A41CC0 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2D63E33F2B1FE6AB00A41CC0 /* SnapshotTesting */; };
 		2D63E3432B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63E3422B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift */; };
@@ -304,6 +305,7 @@
 		2D4C5252254FA19C00D0B2D0 /* BeerMais widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BeerMais widgetExtension.entitlements"; sourceTree = "<group>"; };
 		2D616DEE22542091005E8BF7 /* VersionP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionP.swift; sourceTree = "<group>"; };
 		2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extension.swift"; sourceTree = "<group>"; };
+		2D63AD522B2154BB00C0BF4C /* AlertViewControllerSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewControllerSnapshot.swift; sourceTree = "<group>"; };
 		2D63E3422B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewControllerSnapshot.swift; sourceTree = "<group>"; };
 		2D779F64244D1DA80010C769 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D779F66244D20830010C769 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -479,6 +481,7 @@
 			children = (
 				2D13244C2B0FEFC5002C2A59 /* AlertInteractorTests.swift */,
 				2D8F1E6D2B18106F00C7D55F /* AlertPresenterTests.swift */,
+				2D63AD522B2154BB00C0BF4C /* AlertViewControllerSnapshot.swift */,
 				2D13244A2B0FEDED002C2A59 /* AlertViewControllerSpy.swift */,
 			);
 			path = Alert;
@@ -773,9 +776,9 @@
 			isa = PBXGroup;
 			children = (
 				87849E682820685A00B6F61F /* DetailsTests.swift */,
-				87334DF72820739C00EA5EF9 /* DetailsViewControllerSpy.swift */,
 				87334DF92820743800EA5EF9 /* DetailsTestsFactory.swift */,
 				2D63E3422B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift */,
+				87334DF72820739C00EA5EF9 /* DetailsViewControllerSpy.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -1357,6 +1360,7 @@
 				2D0B32172B0EDB3E002FA88C /* Beer.swift in Sources */,
 				87BB698028206C60005489A8 /* AlertInteractor.swift in Sources */,
 				87BB697A28206C26005489A8 /* HomePresenter.swift in Sources */,
+				2D63AD532B2154BC00C0BF4C /* AlertViewControllerSnapshot.swift in Sources */,
 				87BB695328206BD0005489A8 /* Int+extensions.swift in Sources */,
 				87BB698A28206C65005489A8 /* AboutPresenter.swift in Sources */,
 				87334E052820794300EA5EF9 /* AppDelegate.swift in Sources */,
