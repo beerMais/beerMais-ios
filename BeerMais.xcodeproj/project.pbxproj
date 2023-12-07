@@ -41,6 +41,13 @@
 		2D4C5207254F85CC00D0B2D0 /* BeerMais widgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2D4C51F7254F85CB00D0B2D0 /* BeerMais widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2D4C526E254FB26100D0B2D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D17012021D2B3CF0009A316 /* Assets.xcassets */; };
 		2D616DEF22542091005E8BF7 /* VersionP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D616DEE22542091005E8BF7 /* VersionP.swift */; };
+		2D63AD4D2B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
+		2D63AD4E2B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
+		2D63AD4F2B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
+		2D63AD502B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
+		2D63E33E2B1FE6AB00A41CC0 /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2D63E33D2B1FE6AB00A41CC0 /* InlineSnapshotTesting */; };
+		2D63E3402B1FE6AB00A41CC0 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2D63E33F2B1FE6AB00A41CC0 /* SnapshotTesting */; };
+		2D63E3432B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63E3422B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift */; };
 		2D8F1E6E2B18106F00C7D55F /* AlertPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8F1E6D2B18106F00C7D55F /* AlertPresenterTests.swift */; };
 		2D8F1E712B1812A000C7D55F /* BasicsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2D8F1E702B1812A000C7D55F /* BasicsKit */; };
 		2DB931412AFFF5F9001EE5B9 /* Donate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB931402AFFF5F9001EE5B9 /* Donate.swift */; };
@@ -296,6 +303,8 @@
 		2D4C5202254F85CC00D0B2D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D4C5252254FA19C00D0B2D0 /* BeerMais widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BeerMais widgetExtension.entitlements"; sourceTree = "<group>"; };
 		2D616DEE22542091005E8BF7 /* VersionP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionP.swift; sourceTree = "<group>"; };
+		2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extension.swift"; sourceTree = "<group>"; };
+		2D63E3422B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewControllerSnapshot.swift; sourceTree = "<group>"; };
 		2D779F64244D1DA80010C769 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D779F66244D20830010C769 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D8F1E6D2B18106F00C7D55F /* AlertPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenterTests.swift; sourceTree = "<group>"; };
@@ -401,8 +410,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D63E3402B1FE6AB00A41CC0 /* SnapshotTesting in Frameworks */,
 				2D45ABFA2B0AE6EE00DB682B /* AmplitudeSwift in Frameworks */,
 				2D8F1E712B1812A000C7D55F /* BasicsKit in Frameworks */,
+				2D63E33E2B1FE6AB00A41CC0 /* InlineSnapshotTesting in Frameworks */,
 				904BA056A52D0D476C722D20 /* Pods_BeerMaisTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -764,6 +775,7 @@
 				87849E682820685A00B6F61F /* DetailsTests.swift */,
 				87334DF72820739C00EA5EF9 /* DetailsViewControllerSpy.swift */,
 				87334DF92820743800EA5EF9 /* DetailsTestsFactory.swift */,
+				2D63E3422B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -839,11 +851,12 @@
 		87FE20352819F11800B61429 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				87FE20362819F12100B61429 /* UIStackView+extensions.swift */,
-				870BACE92817502E00AEF61E /* UIView+extensions.swift */,
-				87FE203D281A188200B61429 /* String+extensions.swift */,
+				2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */,
 				87FE203F281A197A00B61429 /* Float+extensions.swift */,
 				87FE2041281A19CB00B61429 /* Int+extensions.swift */,
+				87FE203D281A188200B61429 /* String+extensions.swift */,
+				87FE20362819F12100B61429 /* UIStackView+extensions.swift */,
+				870BACE92817502E00AEF61E /* UIView+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -938,6 +951,8 @@
 			packageProductDependencies = (
 				2D45ABF92B0AE6EE00DB682B /* AmplitudeSwift */,
 				2D8F1E702B1812A000C7D55F /* BasicsKit */,
+				2D63E33D2B1FE6AB00A41CC0 /* InlineSnapshotTesting */,
+				2D63E33F2B1FE6AB00A41CC0 /* SnapshotTesting */,
 			);
 			productName = BeerMaisTests;
 			productReference = 87849E5D2820680700B6F61F /* BeerMaisTests.xctest */;
@@ -1009,6 +1024,7 @@
 				2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				2DEBCA6A2B0195DF001DB86E /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
 				2D8F1E6F2B1812A000C7D55F /* XCRemoteSwiftPackageReference "BasicsKit" */,
+				2D63E33C2B1FE6AB00A41CC0 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 2D17011421D2B3CD0009A316 /* Products */;
 			projectDirPath = "";
@@ -1280,6 +1296,7 @@
 				870BACE728174E8500AEF61E /* SceneDelegate.swift in Sources */,
 				870BACEE281763DC00AEF61E /* RankBeerView.swift in Sources */,
 				870BACDE2817485800AEF61E /* ViewProtocol.swift in Sources */,
+				2D63AD4D2B21520E00C0BF4C /* Bundle+extension.swift in Sources */,
 				870BACEA2817502F00AEF61E /* UIView+extensions.swift in Sources */,
 				2DEBCA682B018E75001DB86E /* SuccessFeedbackView.swift in Sources */,
 				870BACDB281747CF00AEF61E /* HomeViewController.swift in Sources */,
@@ -1322,6 +1339,7 @@
 				2D4C51FE254F85CB00D0B2D0 /* BeerMais_widget.swift in Sources */,
 				2D0B32152B0EDB3E002FA88C /* Beer.swift in Sources */,
 				87849E5728205E7F00B6F61F /* BeerImage.swift in Sources */,
+				2D63AD4E2B21520E00C0BF4C /* Bundle+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1330,6 +1348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87BB695128206BD0005489A8 /* UIView+extensions.swift in Sources */,
+				2D63E3432B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift in Sources */,
 				87BB698928206C65005489A8 /* AboutInteractor.swift in Sources */,
 				87BB695A28206BD4005489A8 /* BeerButton.swift in Sources */,
 				2DD484702B09295B00FE7277 /* LoadingView.swift in Sources */,
@@ -1347,6 +1366,7 @@
 				2DD4846F2B0928F900FE7277 /* Donate.swift in Sources */,
 				2D45ABF62B0AE00700DB682B /* BeerFacadeTests.swift in Sources */,
 				87BB696628206BE6005489A8 /* BeerDetailView.swift in Sources */,
+				2D63AD502B21520E00C0BF4C /* Bundle+extension.swift in Sources */,
 				87BB698128206C60005489A8 /* AlertViewController.swift in Sources */,
 				87BB695628206BD4005489A8 /* ViewProtocol.swift in Sources */,
 				2D0B321C2B0EDC83002FA88C /* CoreDataWorker.swift in Sources */,
@@ -1443,6 +1463,7 @@
 				A18159662597E242004B2018 /* StringExtensions.swift in Sources */,
 				A18158B22597D1D5004B2018 /* SceneDelegate.swift in Sources */,
 				87BB697B28206C60005489A8 /* AlertFactory.swift in Sources */,
+				2D63AD4F2B21520E00C0BF4C /* Bundle+extension.swift in Sources */,
 				87849E7A28206A1C00B6F61F /* ViewProtocol.swift in Sources */,
 				A18159292597E09A004B2018 /* SettingsP.swift in Sources */,
 				2D45ABF82B0AE03D00DB682B /* BeerWorker.swift in Sources */,
@@ -2005,6 +2026,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2D63E33C2B1FE6AB00A41CC0 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = exactVersion;
+				version = 1.15.1;
+			};
+		};
 		2D8F1E6F2B1812A000C7D55F /* XCRemoteSwiftPackageReference "BasicsKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jnevesjunior/BasicsKit";
@@ -2041,6 +2070,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2DEBCA6A2B0195DF001DB86E /* XCRemoteSwiftPackageReference "Amplitude-Swift" */;
 			productName = AmplitudeSwift;
+		};
+		2D63E33D2B1FE6AB00A41CC0 /* InlineSnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D63E33C2B1FE6AB00A41CC0 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = InlineSnapshotTesting;
+		};
+		2D63E33F2B1FE6AB00A41CC0 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D63E33C2B1FE6AB00A41CC0 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 		2D8F1E702B1812A000C7D55F /* BasicsKit */ = {
 			isa = XCSwiftPackageProductDependency;
