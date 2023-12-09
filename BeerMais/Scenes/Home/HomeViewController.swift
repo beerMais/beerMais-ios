@@ -34,7 +34,7 @@ final class HomeViewController: UIViewController {
         let view = UICollectionView(frame: .zero,
                                     collectionViewLayout: layout)
         
-        view.register(UINib(nibName: "BeerCollectionCell", bundle: nil),
+        view.register(UINib(nibName: "BeerCollectionCell", bundle: .beerMais),
                       forCellWithReuseIdentifier: "beerCollectionCell")
         view.backgroundColor = BeerColors.whiteBlack
         view.showsHorizontalScrollIndicator = false

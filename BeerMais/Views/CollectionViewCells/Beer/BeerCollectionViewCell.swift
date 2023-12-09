@@ -85,7 +85,7 @@ final class BeerCollectionViewCell: UICollectionViewCell {
             imageName = "icons8-beer-can-100"
         }
         
-        beerImageView.image = UIImage(named: imageName)
+        beerImageView.image = UIImage(named: imageName, in: .beerMais, with: nil)
     }
     
     func setBackgroudColor(color: UIColor) {
