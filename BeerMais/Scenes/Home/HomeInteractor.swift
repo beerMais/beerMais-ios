@@ -15,22 +15,27 @@ protocol HomeInteractorProtocol {
 
 final class HomeInteractor: HomeInteractorProtocol {
     
-    private let presenter: HomePresenterProtocol
+    // MARK: - Injected Properties
     
-    init(presenter: HomePresenter) {
+    let presenter: HomePresenterProtocol
+    let beerWorker: BeerWorkerProtocol
+    
+    init(
+        presenter: HomePresenter,
+        beerWorker: BeerWorkerProtocol
+    ) {
         self.presenter = presenter
+        self.beerWorker = beerWorker
         
         reloadBeers()
     }
     
     func reloadBeers() {
-        BeerP().getBeers() { [weak self] beers in
-            self?.presenter.setBeers(with: beers)
-        }
+        presenter.setBeers(with: beerWorker.getBeers())
     }
     
     func deleteAllBeers() {
-        BeerP().deleteBeers()
-        presenter.setBeers(with: [])
+        beerWorker.deleteAllBeers()
+        reloadBeers()
     }
 }

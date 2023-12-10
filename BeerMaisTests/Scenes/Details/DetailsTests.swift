@@ -29,7 +29,7 @@ final class DetailsTests: XCTestCase {
         // When
         
         // Then
-        XCTAssertEqual(spy.setupDataCalls, 0)
+        XCTAssertEqual(spy.setupDataCalls.count, 0)
     }
     
     func testSetupInitialDataWithBeer() {
@@ -40,7 +40,7 @@ final class DetailsTests: XCTestCase {
         sut = DetailsTestsFactory.build(with: spy, beer: beer)
         
         // Then
-        XCTAssertEqual(spy.setupDataCalls, 1)
+        XCTAssertEqual(spy.setupDataCalls.count, 1)
     }
     
 }

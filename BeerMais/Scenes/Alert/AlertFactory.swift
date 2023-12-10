@@ -12,14 +12,10 @@ final class AlertFactory {
     
     static func build(with details: AlertInteractor.AlertDetails? = nil) -> AlertViewController {
         let controller = AlertViewController()
-        let presenter = AlertPresenter(view: controller)
-        
-        var interactor: AlertInteractor
-        if let details = details {
-            interactor = AlertInteractor(presenter: presenter, details: details)
-        } else {
-            interactor = AlertInteractor(presenter: presenter)
-        }
+        let interactor = AlertInteractor(
+            presenter: AlertPresenter(view: controller),
+            details: details
+        )
         
         controller.interactor = interactor
         

@@ -20,7 +20,8 @@ protocol BeerDetailPresenterProtocol {
 
 final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     
-    private let view: BeerDetailViewProtocol
+    // MARK: - Private Properties
+
     private var beer: Beer?
     private let amountValues: [Int: String] = [
         0: "269",
@@ -32,13 +33,26 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     private var beerBrand: String = ""
     private var beerAmount: Int16 = 0
     private var beerValue: Float = 0
+    
+    // MARK: - Injected Properties
+    
+    let view: BeerDetailViewProtocol
+    let beerWorker: BeerWorkerProtocol
  
-    init(view: BeerDetailViewProtocol) {
+    init(
+        view: BeerDetailViewProtocol,
+        beerWorker: BeerWorkerProtocol
+    ) {
         self.view = view
+        self.beerWorker = beerWorker
     }
     
-    convenience init(view: BeerDetailViewProtocol, beer: Beer?) {
-        self.init(view: view)
+    convenience init(
+        view: BeerDetailViewProtocol,
+        beer: Beer?,
+        beerWorker: BeerWorkerProtocol
+    ) {
+        self.init(view: view, beerWorker: beerWorker)
         
         if let currentBeer = beer {
             self.beer = currentBeer
@@ -96,7 +110,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     func deleteBeer() {
         guard let beer = beer else { return }
         
-        BeerP().delete(beer: beer)
+        beerWorker.delete(beer: beer)
         
         view.deleteSucess()
     }
@@ -108,7 +122,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
             return
         }
         
-        BeerP().edit(beer: beer, data: getBeerArray())
+        beerWorker.edit(beer: beer, data: beerDataDict())
         
         view.editSucess()
     }
@@ -118,7 +132,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
             return
         }
         
-        _ = BeerP().create(data: getBeerArray())
+        beerWorker.createBeer(data: beerDataDict())
         
         view.createSucess()
     }
@@ -148,7 +162,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         return isValidAmount && isValidBrand && isValidValue
     }
     
-    private func getBeerArray() -> [String: Any] {
+    private func beerDataDict() -> [String: Any] {
         var data = [String: Any]()
         data["amount"] = beerAmount
         data["brand"] = beerBrand

@@ -10,10 +10,15 @@ import Foundation
 
 final class BeerDetailTestsFactory {
     
-    static func build(with spy: BeerDetailViewSpy,
-                      beer: Beer? = nil) -> BeerDetailPresenter {
-        let presenter = BeerDetailPresenter(view: spy, beer: beer)
-        
-        return presenter
+    static func build(
+        with spy: BeerDetailViewSpy,
+        beer: Beer? = nil,
+        beerWorker: BeerWorkerProtocol = BeerWorker()
+    ) -> BeerDetailPresenter {
+        .init(
+            view: spy,
+            beer: beer,
+            beerWorker: beerWorker
+        )
     }
 }

@@ -18,8 +18,7 @@ final class BeerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var counterLabel: UILabel!
     @IBOutlet weak var perLiterLabel: UILabel!
     
-    private var amount: Int16 = 0
-    private var value: Float = 0.0
+    private var beer: Beer?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,14 +28,25 @@ final class BeerCollectionViewCell: UICollectionViewCell {
         self.layer.borderWidth = 0.5
     }
     
-    func setAmount(amount: Int16) {
-        var amountText = "\(amount)ml"
+    func setBeer(beer: Beer) {
+        self.beer = beer
         
-        if (amount >= 1000) {
+        setAmount()
+        setBrand()
+        setValue()
+        setType()
+    }
+    
+    func setAmount() {
+        guard let beer else { return }
+        
+        var amountText = "\(beer.amount)ml"
+        
+        if (beer.amount >= 1000) {
             amountText = "1 L"
             
-            if (amount >= 1010) {
-                var amountString = String(format: "%.2f", Float(amount) / 1000)
+            if (beer.amount >= 1010) {
+                var amountString = String(format: "%.2f", Float(beer.amount) / 1000)
                 amountString = amountString.replacingOccurrences(of: ".", with: ",")
                 amountText = "\(amountString) L"
             }
@@ -44,25 +54,29 @@ final class BeerCollectionViewCell: UICollectionViewCell {
         
         self.amountLabel.text = amountText
         
-        self.amount = amount
         self.calculatePerLiter()
     }
     
-    func setBrand(brand: String) {
-        self.brandLabel.text = brand
+    func setBrand() {
+        guard let beer else { return }
+        
+        brandLabel.text = beer.brand
     }
     
-    func setValue(value: Float) {
-        let valueString = BeerP().formatValueToShow(value: value)
+    func setValue() {
+        guard let beer else { return }
+        
+        let valueString = BeerWorker().formatBeerValueToShow(value: beer.value)
         self.valueLabel.text = "R$ \(valueString)"
         
-        self.value = value
         self.calculatePerLiter()
     }
     
-    func setType(type: Int16) {
+    func setType() {
+        guard let beer else { return }
+        
         var imageName = ""
-        switch type {
+        switch beer.type {
         case 1:
             imageName = "icons8-beer-can-100"
         case 2:
@@ -71,24 +85,24 @@ final class BeerCollectionViewCell: UICollectionViewCell {
             imageName = "icons8-beer-can-100"
         }
         
-        self.beerImageView.image = UIImage(named: imageName)
+        beerImageView.image = UIImage(named: imageName, in: .beerMais, with: nil)
     }
     
     func setBackgroudColor(color: UIColor) {
-        self.cellView.backgroundColor = color
+        cellView.backgroundColor = color
     }
     
     func setCounter(counter: Int) {
-        self.counterLabel.text = String(counter)
+        counterLabel.text = String(counter)
     }
     
     private func calculatePerLiter() {
-        if amount == 0 && value == 0 {
-            return
-        }
+        guard 
+            let beer,
+            beer.amount != 0 && beer.value != 0
+        else { return }
         
-        let beerP = BeerP()
-        let perLiter = beerP.getValuePerML(value: value, amount: amount) * 1000
-        self.perLiterLabel.text = "R$ \(beerP.formatValueToShow(value: perLiter))/L"
+        let perLiter = BeerWorker().getValuePerML(beer: beer) * 1000
+        self.perLiterLabel.text = "R$ \(BeerWorker().formatBeerValueToShow(value: perLiter))/L"
     }
 }

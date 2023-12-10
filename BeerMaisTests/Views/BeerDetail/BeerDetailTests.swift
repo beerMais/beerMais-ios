@@ -29,34 +29,32 @@ final class BeerDetailTests: XCTestCase {
         // When
         
         // Then
-        XCTAssertFalse(spy.isEditModeValue ?? true)
-        XCTAssertEqual(spy.setBrandCalls, 0)
-        XCTAssertEqual(spy.setPriceCalls, 0)
-        XCTAssertEqual(spy.setSizeCalls, 0)
-        XCTAssertEqual(spy.setSegmentIndexCalls, 0)
-        XCTAssertEqual(spy.isEditModeCalls, 1)
+        XCTAssertFalse(spy.isEditModeCalls.first?.isEditMode ?? true)
+        XCTAssertEqual(spy.setBrandCalls.count, 0)
+        XCTAssertEqual(spy.setPriceCalls.count, 0)
+        XCTAssertEqual(spy.setSizeCalls.count, 0)
+        XCTAssertEqual(spy.setSegmentIndexCalls.count, 0)
+        XCTAssertEqual(spy.isEditModeCalls.count, 1)
     }
     
     func testSetupWithBeer() {
         // Given
-        var beerData = [String: Any]()
-        beerData["amount"] = Int16(350)
-        beerData["brand"] = "test brand"
-        beerData["value"] = 2.59
-        beerData["type"] = Int16(1)
-        
-        let beer = BeerP().create(data: beerData)
+        let beer = Beer.mock()
+        beer.amount = 350
+        beer.brand = "test brand"
+        beer.value = 2.59
+        beer.type = 1
         
         // When
         sut = BeerDetailTestsFactory.build(with: spy, beer: beer)
         
         // Then
-        XCTAssertTrue(spy.isEditModeValue ?? false)
-        XCTAssertEqual(spy.setBrandCalls, 1)
-        XCTAssertEqual(spy.setBrandBrand, "test brand")
-        XCTAssertEqual(spy.setPriceCalls, 1)
-        XCTAssertEqual(spy.setPricePrice, "R$ 1,00")
-        XCTAssertEqual(spy.setSizeCalls, 1)
-        XCTAssertEqual(spy.setSizeSize, "269 ml")
+        XCTAssertTrue(spy.isEditModeCalls.last?.isEditMode ?? false)
+        XCTAssertEqual(spy.setBrandCalls.count, 1)
+        XCTAssertEqual(spy.setBrandCalls.first?.brand, "test brand")
+        XCTAssertEqual(spy.setPriceCalls.count, 1)
+        XCTAssertEqual(spy.setPriceCalls.first?.price, "R$ 2,59")
+        XCTAssertEqual(spy.setSizeCalls.count, 1)
+        XCTAssertEqual(spy.setSizeCalls.first?.size, "350")
     }
 }

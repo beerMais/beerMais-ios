@@ -10,67 +10,130 @@ import Foundation
 
 final class BeerDetailViewSpy: BeerDetailViewProtocol {
     
-    var setBrandCalls = 0
-    var setBrandBrand: String?
+    // MARK: - Calls
+    
+    var setBrandCalls: [SetBrandCall] = []
+    
+    var setPriceCalls: [SetPriceCall] = []
+    
+    var setSizeCalls: [SetSizeCall] = []
+    
+    var setSegmentIndexCalls: [SetSegmentIndexCall] = []
+    
+    var isEditModeCalls: [IsEditModeCall] = []
+    
+    var setIsValidAmountCalls: [SetIsValidAmountCall] = []
+    
+    var setIsValidBrandCalls: [SetIsValidBrandCall] = []
+    
+    var setIsValidValueCalls: [SetIsValidValueCall] = []
+    
+    var deleteSucessCalls: [DeleteSucessCall] = []
+    
+    var editSucessCalls: [EditSucessCall] = []
+    
+    var createSucessCalls: [CreateSucessCall] = []
+    
+    // MARK: - BeerDetailViewProtocol
+    
     func setBrand(with brand: String) {
-        setBrandCalls += 1
-        setBrandBrand = brand
+        setBrandCalls.append(.init(
+            brand: brand
+        ))
     }
     
-    var setPriceCalls = 0
-    var setPricePrice: String?
     func setPrice(with price: String) {
-        setPriceCalls += 1
-        setPricePrice = price
+        setPriceCalls.append(.init(
+            price: price
+        ))
     }
     
-    var setSizeCalls = 0
-    var setSizeSize: String?
     func setSize(with size: String) {
-        setSizeCalls += 1
-        setSizeSize = size
+        setSizeCalls.append(.init(
+            size: size
+        ))
     }
     
-    var setSegmentIndexCalls = 0
     func setSegmentIndex(_ index: Int) {
-        setSegmentIndexCalls += 1
+        setSegmentIndexCalls.append(.init(
+            index: index
+        ))
     }
     
-    var isEditModeCalls = 0
-    var isEditModeValue: Bool?
     func isEditMode(_ isEditMode: Bool) {
-        isEditModeCalls += 1
-        isEditModeValue = isEditMode
+        isEditModeCalls.append(.init(
+            isEditMode: isEditMode
+        ))
     }
     
-    var setIsValidAmountCalls = 0
     func setIsValidAmount(_ isValidAmount: Bool) {
-        setIsValidAmountCalls += 1
+        setIsValidAmountCalls.append(.init(
+            isValidAmount: isValidAmount
+        ))
     }
     
-    var setIsValidBrandCalls = 0
     func setIsValidBrand(_ isValidBrand: Bool) {
-        setIsValidBrandCalls += 1
+        setIsValidBrandCalls.append(.init(
+            isValidBrand: isValidBrand
+        ))
     }
     
-    var setIsValidValueCalls = 0
     func setIsValidValue(_ isValidValue: Bool) {
-        setIsValidValueCalls += 1
+        setIsValidValueCalls.append(.init(
+            isValidValue: isValidValue
+        ))
     }
     
-    var deleteSucessCalls = 0
     func deleteSucess() {
-        deleteSucessCalls += 1
+        deleteSucessCalls.append(.init())
     }
     
-    var editSucessCalls = 0
     func editSucess() {
-        editSucessCalls += 1
+        editSucessCalls.append(.init())
     }
     
-    var createSucessCalls = 0
     func createSucess() {
-        createSucessCalls += 1
+        createSucessCalls.append(.init())
     }
+    
+    // MARK: - Call structs
+    
+    struct SetBrandCall {
+        let brand: String
+    }
+    
+    struct SetPriceCall {
+        let price: String
+    }
+    
+    struct SetSizeCall {
+        let size: String
+    }
+    
+    struct SetSegmentIndexCall {
+        let index: Int
+    }
+    
+    struct IsEditModeCall {
+        let isEditMode: Bool
+    }
+    
+    struct SetIsValidAmountCall {
+        let isValidAmount: Bool
+    }
+
+    struct SetIsValidBrandCall {
+        let isValidBrand: Bool
+    }
+
+    struct SetIsValidValueCall {
+        let isValidValue: Bool
+    }
+    
+    struct DeleteSucessCall {}
+
+    struct EditSucessCall {}
+
+    struct CreateSucessCall {}
 
 }

@@ -10,31 +10,54 @@ import XCTest
 
 final class DetailsViewControllerSpy: DetailsViewControllerProtocol {
     
-    var setupDataCalls = 0
-    var setupDataBeer: Beer?
+    // MARK: - Calls
+    
+    var setupDataCalls: [SetupDataCall] = []
+    
+    var reloadBeersCalls: [ReloadBeersCall] = []
+    
+    var closeCalls: [CloseCall] = []
+    
+    var animateViewMovingCalls: [AnimateViewMovingCall] = []
+    
+    // MARK: - DetailsViewControllerProtocol
+    
     func setupData(with beer: Beer) {
-        setupDataCalls += 1
-        setupDataBeer = beer
+        setupDataCalls.append(.init(
+            beer: beer
+        ))
     }
     
-    var reloadBeersCalls = 0
     func reloadBeers() {
-        reloadBeersCalls += 1
+        reloadBeersCalls.append(.init())
     }
     
-    var closeCalls = 0
     func close() {
-        closeCalls += 1
+        reloadBeersCalls.append(.init())
     }
     
-    var animateViewMovingCalls = 0
-    var animateViewMovingUp: Bool?
-    var animateViewMovingMoveValue: CGFloat?
     func animateViewMoving(up: Bool, moveValue: CGFloat) {
-        animateViewMovingCalls += 1
-        animateViewMovingUp = up
-        animateViewMovingMoveValue = moveValue
+        animateViewMovingCalls.append(.init(
+            up: up,
+            moveValue: moveValue
+        ))
     }
+    
+    // MARK: - Call structs
+    
+    struct SetupDataCall {
+        let beer: Beer
+    }
+    
+    struct ReloadBeersCall {}
+
+    struct CloseCall {}
+
+    struct AnimateViewMovingCall {
+        let up: Bool
+        let moveValue: CGFloat
+    }
+    
     
     
 }
