@@ -37,7 +37,7 @@ final class HomeViewControllerSnapshot: XCTestCase {
         beer2.amount = 1000
         beer2.type = 2
         
-        let beerWorker = BeerWorkerStub()
+        let beerWorker = BeerWorkerSpy()
         beerWorker.getBeersReturn = [
             beer,
             beer2

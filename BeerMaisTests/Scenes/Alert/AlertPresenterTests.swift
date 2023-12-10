@@ -42,23 +42,23 @@ final class AlertPresenterTests: XCTestCase {
         
         sut.setupData(with: details)
         
-        XCTAssertEqual(viewControllerSpy.setTitleCalls, 1)
-        XCTAssertEqual(viewControllerSpy.setTitleTitle, expectedTitle)
+        XCTAssertEqual(viewControllerSpy.setTitleCalls.count, 1)
+        XCTAssertEqual(viewControllerSpy.setTitleCalls.first?.title, expectedTitle)
         
-        XCTAssertEqual(viewControllerSpy.setDescriptionCalls, 1)
-        XCTAssertEqual(viewControllerSpy.setDescriptionDescription, expectedDescription)
+        XCTAssertEqual(viewControllerSpy.setDescriptionCalls.count, 1)
+        XCTAssertEqual(viewControllerSpy.setDescriptionCalls.first?.description, expectedDescription)
         
-        XCTAssertEqual(viewControllerSpy.setNegativeButtonTitleCalls, 1)
-        XCTAssertEqual(viewControllerSpy.setNegativeButtonTitleTitle, expectedNegativeActionTitle)
+        XCTAssertEqual(viewControllerSpy.setNegativeButtonTitleCalls.count, 1)
+        XCTAssertEqual(viewControllerSpy.setNegativeButtonTitleCalls.first?.title, expectedNegativeActionTitle)
         
-        XCTAssertEqual(viewControllerSpy.setPositiveButtonTitleCalls, 1)
-        XCTAssertEqual(viewControllerSpy.setPositiveButtonTitleTitle, expectedPositiveActionTitle)
+        XCTAssertEqual(viewControllerSpy.setPositiveButtonTitleCalls.count, 1)
+        XCTAssertEqual(viewControllerSpy.setPositiveButtonTitleCalls.first?.title, expectedPositiveActionTitle)
     }
     
     func testClose() {
         
         sut.close()
         
-        XCTAssertEqual(viewControllerSpy.closeCalls, 1)
+        XCTAssertEqual(viewControllerSpy.closeCalls.count, 1)
     }
 }

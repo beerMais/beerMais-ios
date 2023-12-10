@@ -11,36 +11,68 @@ import XCTest
 
 final class AlertViewControllerSpy: AlertViewControllerProtocol {
     
-    var setTitleTitle: String?
-    var setTitleCalls = 0
+    // MARK: - Calls
+    
+    var setTitleCalls: [SetTitleCall] = []
+    
+    var setDescriptionCalls: [SetDescriptionCall] = []
+    
+    var setNegativeButtonTitleCalls: [SetNegativeButtonTitleCall] = []
+    
+    var setPositiveButtonTitleCalls: [SetPositiveButtonTitleCall] = []
+    
+    var closeCalls: [CloseCall] = []
+    
+    // MARK: - AlertViewControllerProtocol
+
     func setTitle(title: String) {
-        setTitleTitle = title
-        setTitleCalls += 1
+        setTitleCalls.append(.init(
+            title: title
+        ))
     }
     
-    var setDescriptionDescription: String?
-    var setDescriptionCalls = 0
     func setDescription(description: String) {
-        setDescriptionDescription = description
-        setDescriptionCalls += 1
+        setDescriptionCalls.append(.init(
+            description: description
+        ))
     }
     
-    var setNegativeButtonTitleTitle: String?
-    var setNegativeButtonTitleCalls = 0
     func setNegativeButtonTitle(title: String) {
-        setNegativeButtonTitleTitle = title
-        setNegativeButtonTitleCalls += 1
+        setNegativeButtonTitleCalls.append(.init(
+            title: title
+        ))
     }
     
-    var setPositiveButtonTitleTitle: String?
-    var setPositiveButtonTitleCalls = 0
     func setPositiveButtonTitle(title: String) {
-        setPositiveButtonTitleTitle = title
-        setPositiveButtonTitleCalls += 1
+        setPositiveButtonTitleCalls.append(.init(
+            title: title
+        ))
     }
     
-    var closeCalls = 0
     func close() {
-        closeCalls += 1
+        closeCalls.append(.init())
     }
+    
+    // MARK: - Call structs
+    
+    struct SetTitleCall {
+        let title: String
+    }
+    
+    struct SetDescriptionCall {
+        let description: String
+
+    }
+    
+    struct SetNegativeButtonTitleCall {
+        let title: String
+
+    }
+    
+    struct SetPositiveButtonTitleCall {
+        let title: String
+
+    }
+    
+    struct CloseCall {}
 }
