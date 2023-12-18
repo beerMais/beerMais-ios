@@ -47,8 +47,10 @@ final class AboutViewController: UIViewController {
         view.estimatedRowHeight = UITableView.automaticDimension
         view.dataSource = self
         
-        view.register(UINib(nibName: "AboutTableViewCell", bundle: nil),
-                      forCellReuseIdentifier: AboutTableViewCell.reuseIdentifier)
+        view.register(
+            AboutTableViewCell.self,
+            forCellReuseIdentifier: AboutTableViewCell.reuseIdentifier
+        )
         view.register(UINib(nibName: "VersionTableViewCell", bundle: nil),
                       forCellReuseIdentifier: VersionTableViewCell.reuseIdentifier)
         view.register(UINib(nibName: "DonateTableViewCell", bundle: nil),

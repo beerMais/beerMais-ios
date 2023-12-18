@@ -117,10 +117,8 @@
 		87849E7928206A1C00B6F61F /* BeerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACFA2817AAA400AEF61E /* BeerTextField.swift */; };
 		87849E7A28206A1C00B6F61F /* ViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACDD2817485800AEF61E /* ViewProtocol.swift */; };
 		87849E7B28206A1C00B6F61F /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FE203D281A188200B61429 /* String+extensions.swift */; };
-		8795839B26C8896600F81B28 /* AboutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8795839A26C8896600F81B28 /* AboutTableViewCell.xib */; };
 		8795839D26C889B400F81B28 /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795839C26C889B400F81B28 /* AboutTableViewCell.swift */; };
 		8795839E26C88ABD00F81B28 /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795839C26C889B400F81B28 /* AboutTableViewCell.swift */; };
-		8795839F26C88AD200F81B28 /* AboutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8795839A26C8896600F81B28 /* AboutTableViewCell.xib */; };
 		879583A226C894C200F81B28 /* VersionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583A126C894C200F81B28 /* VersionTableViewCell.xib */; };
 		879583A326C894C200F81B28 /* VersionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583A126C894C200F81B28 /* VersionTableViewCell.xib */; };
 		879583A526C894CC00F81B28 /* VersionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583A426C894CC00F81B28 /* VersionTableViewCell.swift */; };
@@ -166,7 +164,6 @@
 		87BB696B28206BF8005489A8 /* DonateTableViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1766226CB14D800989B71 /* DonateTableViewCellPresenter.swift */; };
 		87BB696C28206BF8005489A8 /* DonateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583AC26C8971700F81B28 /* DonateTableViewCell.xib */; };
 		87BB696D28206BFB005489A8 /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795839C26C889B400F81B28 /* AboutTableViewCell.swift */; };
-		87BB696E28206BFB005489A8 /* AboutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8795839A26C8896600F81B28 /* AboutTableViewCell.xib */; };
 		87BB696F28206C03005489A8 /* DonateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */; };
 		87BB697128206C08005489A8 /* BeerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013021D2DD320009A316 /* BeerCollectionViewCell.swift */; };
 		87BB697328206C25005489A8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACDA281747CF00AEF61E /* HomeViewController.swift */; };
@@ -349,7 +346,6 @@
 		87849E54281F80E200B6F61F /* BeerImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerImage.swift; sourceTree = "<group>"; };
 		87849E5D2820680700B6F61F /* BeerMaisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerMaisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87849E682820685A00B6F61F /* DetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTests.swift; sourceTree = "<group>"; };
-		8795839A26C8896600F81B28 /* AboutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutTableViewCell.xib; sourceTree = "<group>"; };
 		8795839C26C889B400F81B28 /* AboutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewCell.swift; sourceTree = "<group>"; };
 		879583A126C894C200F81B28 /* VersionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VersionTableViewCell.xib; sourceTree = "<group>"; };
 		879583A426C894CC00F81B28 /* VersionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionTableViewCell.swift; sourceTree = "<group>"; };
@@ -818,7 +814,6 @@
 		8795839926C8894800F81B28 /* About */ = {
 			isa = PBXGroup;
 			children = (
-				8795839A26C8896600F81B28 /* AboutTableViewCell.xib */,
 				8795839C26C889B400F81B28 /* AboutTableViewCell.swift */,
 			);
 			path = About;
@@ -1066,7 +1061,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8795839B26C8896600F81B28 /* AboutTableViewCell.xib in Resources */,
 				2DEBCA652B018C7B001DB86E /* success.json in Resources */,
 				2D2630BD2312FFFE00F02E45 /* Localizable.strings in Resources */,
 				2D13B0222B02E7EF00444F73 /* LaunchScreen.storyboard in Resources */,
@@ -1090,7 +1084,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87BB696E28206BFB005489A8 /* AboutTableViewCell.xib in Resources */,
 				87334E022820790900EA5EF9 /* Localizable.strings in Resources */,
 				87BB696C28206BF8005489A8 /* DonateTableViewCell.xib in Resources */,
 				87334E042820794300EA5EF9 /* Assets.xcassets in Resources */,
@@ -1107,7 +1100,6 @@
 				A18159C02597EA26004B2018 /* Localizable.strings in Resources */,
 				879583AE26C8971700F81B28 /* DonateTableViewCell.xib in Resources */,
 				A18158BC2597D1D7004B2018 /* Assets.xcassets in Resources */,
-				8795839F26C88AD200F81B28 /* AboutTableViewCell.xib in Resources */,
 				A18158CD2597D25D004B2018 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
