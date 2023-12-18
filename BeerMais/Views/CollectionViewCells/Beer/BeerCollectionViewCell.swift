@@ -10,7 +10,7 @@ import UIKit
 
 final class BeerCollectionViewCell: UICollectionViewCell {
     
-    public static let customReuseIdentifier = "beerCollectionCell"
+    public static let reuseIdentifier = "BeerCollectionCell"
     
     lazy var brandLabel: UILabel = {
         let view = UILabel()
