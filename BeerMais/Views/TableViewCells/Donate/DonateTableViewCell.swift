@@ -20,8 +20,10 @@ final class DonateTableViewCell: UITableViewCell {
         presenter = DonateTableViewCellPresenter()
         presenter.delegate = self
         
-        donateCollectionView.register(UINib(nibName: "DonateCollectionViewCell", bundle: nil),
-                                      forCellWithReuseIdentifier: DonateCollectionViewCell.reuseIdentifier)
+        donateCollectionView.register(
+            DonateCollectionViewCell.self,
+            forCellWithReuseIdentifier: DonateCollectionViewCell.reuseIdentifier
+        )
     }
     
     class func dequeueReusableCell(from tableView: UITableView, maxWidth: CGFloat) -> DonateTableViewCell {
@@ -69,7 +71,9 @@ extension DonateTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = DonateCollectionViewCell.dequeueReusableCell(from: collectionView, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: DonateCollectionViewCell.reuseIdentifier, for: indexPath
+        ) as? DonateCollectionViewCell else { return UICollectionViewCell() }
         
         if let donateProduct = presenter.getDonateTypeByRow(indexPath.row) {
             cell.setDonate(donateProduct)

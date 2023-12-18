@@ -129,8 +129,6 @@
 		879583AA26C8970800F81B28 /* DonateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583A826C8970800F81B28 /* DonateTableViewCell.swift */; };
 		879583AD26C8971700F81B28 /* DonateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583AC26C8971700F81B28 /* DonateTableViewCell.xib */; };
 		879583AE26C8971700F81B28 /* DonateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583AC26C8971700F81B28 /* DonateTableViewCell.xib */; };
-		879583B226C89B8200F81B28 /* DonateCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583B126C89B8200F81B28 /* DonateCollectionViewCell.xib */; };
-		879583B326C89B8200F81B28 /* DonateCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583B126C89B8200F81B28 /* DonateCollectionViewCell.xib */; };
 		879583B526C89B9100F81B28 /* DonateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */; };
 		879583B626C89B9100F81B28 /* DonateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */; };
 		87AD524B281E1EDD00F757E6 /* BeerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD524A281E1EDD00F757E6 /* BeerAdView.swift */; };
@@ -170,7 +168,6 @@
 		87BB696D28206BFB005489A8 /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795839C26C889B400F81B28 /* AboutTableViewCell.swift */; };
 		87BB696E28206BFB005489A8 /* AboutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8795839A26C8896600F81B28 /* AboutTableViewCell.xib */; };
 		87BB696F28206C03005489A8 /* DonateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */; };
-		87BB697028206C03005489A8 /* DonateCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583B126C89B8200F81B28 /* DonateCollectionViewCell.xib */; };
 		87BB697128206C08005489A8 /* BeerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D17013021D2DD320009A316 /* BeerCollectionViewCell.swift */; };
 		87BB697328206C25005489A8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACDA281747CF00AEF61E /* HomeViewController.swift */; };
 		87BB697428206C25005489A8 /* HomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACE028174A8600AEF61E /* HomeFactory.swift */; };
@@ -358,7 +355,6 @@
 		879583A426C894CC00F81B28 /* VersionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionTableViewCell.swift; sourceTree = "<group>"; };
 		879583A826C8970800F81B28 /* DonateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateTableViewCell.swift; sourceTree = "<group>"; };
 		879583AC26C8971700F81B28 /* DonateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonateTableViewCell.xib; sourceTree = "<group>"; };
-		879583B126C89B8200F81B28 /* DonateCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonateCollectionViewCell.xib; sourceTree = "<group>"; };
 		879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateCollectionViewCell.swift; sourceTree = "<group>"; };
 		87AD524A281E1EDD00F757E6 /* BeerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerAdView.swift; sourceTree = "<group>"; };
 		87B5222E281B710F00ADA2FE /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
@@ -859,7 +855,6 @@
 		879583B026C89B4100F81B28 /* Donate */ = {
 			isa = PBXGroup;
 			children = (
-				879583B126C89B8200F81B28 /* DonateCollectionViewCell.xib */,
 				879583B426C89B9100F81B28 /* DonateCollectionViewCell.swift */,
 			);
 			path = Donate;
@@ -1079,7 +1074,6 @@
 				2D1D3E5721F670C9008F51AC /* Assets.xcassets in Resources */,
 				879583AD26C8971700F81B28 /* DonateTableViewCell.xib in Resources */,
 				879583A226C894C200F81B28 /* VersionTableViewCell.xib in Resources */,
-				879583B226C89B8200F81B28 /* DonateCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1101,7 +1095,6 @@
 				87BB696C28206BF8005489A8 /* DonateTableViewCell.xib in Resources */,
 				87334E042820794300EA5EF9 /* Assets.xcassets in Resources */,
 				87BB696828206BF6005489A8 /* VersionTableViewCell.xib in Resources */,
-				87BB697028206C03005489A8 /* DonateCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1111,7 +1104,6 @@
 			files = (
 				2D13B0232B02E7EF00444F73 /* LaunchScreen.storyboard in Resources */,
 				879583A326C894C200F81B28 /* VersionTableViewCell.xib in Resources */,
-				879583B326C89B8200F81B28 /* DonateCollectionViewCell.xib in Resources */,
 				A18159C02597EA26004B2018 /* Localizable.strings in Resources */,
 				879583AE26C8971700F81B28 /* DonateTableViewCell.xib in Resources */,
 				A18158BC2597D1D7004B2018 /* Assets.xcassets in Resources */,
