@@ -51,8 +51,10 @@ final class AboutViewController: UIViewController {
             AboutTableViewCell.self,
             forCellReuseIdentifier: AboutTableViewCell.reuseIdentifier
         )
-        view.register(UINib(nibName: "VersionTableViewCell", bundle: nil),
-                      forCellReuseIdentifier: VersionTableViewCell.reuseIdentifier)
+        view.register(
+            VersionTableViewCell.self,
+            forCellReuseIdentifier: VersionTableViewCell.reuseIdentifier
+        )
         view.register(UINib(nibName: "DonateTableViewCell", bundle: nil),
                       forCellReuseIdentifier: DonateTableViewCell.reuseIdentifier)
         

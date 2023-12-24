@@ -119,8 +119,6 @@
 		87849E7B28206A1C00B6F61F /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FE203D281A188200B61429 /* String+extensions.swift */; };
 		8795839D26C889B400F81B28 /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795839C26C889B400F81B28 /* AboutTableViewCell.swift */; };
 		8795839E26C88ABD00F81B28 /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795839C26C889B400F81B28 /* AboutTableViewCell.swift */; };
-		879583A226C894C200F81B28 /* VersionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583A126C894C200F81B28 /* VersionTableViewCell.xib */; };
-		879583A326C894C200F81B28 /* VersionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583A126C894C200F81B28 /* VersionTableViewCell.xib */; };
 		879583A526C894CC00F81B28 /* VersionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583A426C894CC00F81B28 /* VersionTableViewCell.swift */; };
 		879583A626C894CC00F81B28 /* VersionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583A426C894CC00F81B28 /* VersionTableViewCell.swift */; };
 		879583A926C8970800F81B28 /* DonateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583A826C8970800F81B28 /* DonateTableViewCell.swift */; };
@@ -158,7 +156,6 @@
 		87BB696528206BE6005489A8 /* BeerDetailFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FE203B281A0FD200B61429 /* BeerDetailFactory.swift */; };
 		87BB696628206BE6005489A8 /* BeerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACF82817A14400AEF61E /* BeerDetailView.swift */; };
 		87BB696728206BE6005489A8 /* BeerDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FE2039281A0DA200B61429 /* BeerDetailPresenter.swift */; };
-		87BB696828206BF6005489A8 /* VersionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 879583A126C894C200F81B28 /* VersionTableViewCell.xib */; };
 		87BB696928206BF6005489A8 /* VersionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583A426C894CC00F81B28 /* VersionTableViewCell.swift */; };
 		87BB696A28206BF8005489A8 /* DonateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879583A826C8970800F81B28 /* DonateTableViewCell.swift */; };
 		87BB696B28206BF8005489A8 /* DonateTableViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1766226CB14D800989B71 /* DonateTableViewCellPresenter.swift */; };
@@ -347,7 +344,6 @@
 		87849E5D2820680700B6F61F /* BeerMaisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeerMaisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87849E682820685A00B6F61F /* DetailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTests.swift; sourceTree = "<group>"; };
 		8795839C26C889B400F81B28 /* AboutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewCell.swift; sourceTree = "<group>"; };
-		879583A126C894C200F81B28 /* VersionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VersionTableViewCell.xib; sourceTree = "<group>"; };
 		879583A426C894CC00F81B28 /* VersionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionTableViewCell.swift; sourceTree = "<group>"; };
 		879583A826C8970800F81B28 /* DonateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateTableViewCell.swift; sourceTree = "<group>"; };
 		879583AC26C8971700F81B28 /* DonateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonateTableViewCell.xib; sourceTree = "<group>"; };
@@ -822,7 +818,6 @@
 		879583A026C894A900F81B28 /* Version */ = {
 			isa = PBXGroup;
 			children = (
-				879583A126C894C200F81B28 /* VersionTableViewCell.xib */,
 				879583A426C894CC00F81B28 /* VersionTableViewCell.swift */,
 			);
 			path = Version;
@@ -1067,7 +1062,6 @@
 				2DEBCA752B0199EA001DB86E /* loading.json in Resources */,
 				2D1D3E5721F670C9008F51AC /* Assets.xcassets in Resources */,
 				879583AD26C8971700F81B28 /* DonateTableViewCell.xib in Resources */,
-				879583A226C894C200F81B28 /* VersionTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1087,7 +1081,6 @@
 				87334E022820790900EA5EF9 /* Localizable.strings in Resources */,
 				87BB696C28206BF8005489A8 /* DonateTableViewCell.xib in Resources */,
 				87334E042820794300EA5EF9 /* Assets.xcassets in Resources */,
-				87BB696828206BF6005489A8 /* VersionTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1096,7 +1089,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D13B0232B02E7EF00444F73 /* LaunchScreen.storyboard in Resources */,
-				879583A326C894C200F81B28 /* VersionTableViewCell.xib in Resources */,
 				A18159C02597EA26004B2018 /* Localizable.strings in Resources */,
 				879583AE26C8971700F81B28 /* DonateTableViewCell.xib in Resources */,
 				A18158BC2597D1D7004B2018 /* Assets.xcassets in Resources */,
