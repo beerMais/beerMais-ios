@@ -20,17 +20,26 @@ enum AboutRow {
 
 final class AboutInteractor {
     
-    private var presenter: AboutPresenterProtocol
+    // MARK: - Injected Properties
     
-    init(presenter: AboutPresenterProtocol) {
+    private let presenter: AboutPresenterProtocol
+    private let remoteConfig: RemoteConfigProtocol
+    
+    // MARK: - Initialization
+    
+    init(
+        presenter: AboutPresenterProtocol,
+        remoteConfig: RemoteConfigProtocol
+    ) {
         self.presenter = presenter
+        self.remoteConfig = remoteConfig
         
         var availableRows: [AboutRow] = [
             .description,
             .version
         ]
         
-        if AppP.remoteConfig.configValue(forKey: "is_donate_available").boolValue {
+        if remoteConfig.configValue(forKey: "is_donate_available").boolValue {
             availableRows.insert(.donate, at: 1)
         }
         
@@ -41,6 +50,8 @@ final class AboutInteractor {
         presenter.showItems(with: availableRows)
     }
 }
+
+// MARK: - AboutInteractorProtocol
 
 extension AboutInteractor: AboutInteractorProtocol {
     

@@ -23,7 +23,7 @@ final class AppP {
         )
     ))
     
-    public static let remoteConfig: RemoteConfig = RemoteConfig.remoteConfig()
+    public static let remoteConfig: RemoteConfigProtocol = RemoteConfig.remoteConfig()
     
     static func launch() {
         
