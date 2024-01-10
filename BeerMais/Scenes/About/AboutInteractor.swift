@@ -39,7 +39,7 @@ final class AboutInteractor {
             .version
         ]
         
-        if remoteConfig.configValue(forKey: "is_donate_available").boolValue {
+        if remoteConfig.configValue(key: "is_donate_available").boolValue {
             availableRows.insert(.donate, at: 1)
         }
         

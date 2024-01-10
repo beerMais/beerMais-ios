@@ -19,7 +19,7 @@ final class RemoteConfigSpy: RemoteConfigProtocol {
     var fetchAndActivateWithCompletionHandlerCalls: [FetchAndActivateWithCompletionHandlerCall] = []
     
     var configValueCalls: [ConfigValueCall] = []
-    var configValueReturn = RemoteConfigValue()
+    var configValueCacheReturn = [String: RemoteConfigValueProtocol]()
     
     // MARK: - BeerWorkerProtocol
     
@@ -35,7 +35,15 @@ final class RemoteConfigSpy: RemoteConfigProtocol {
         ))
     }
     
-    func configValue(forKey key: String?) -> RemoteConfigValue {
+    func configValue(key: String?) -> RemoteConfigValueProtocol {
+        
+        var configValueReturn: RemoteConfigValueProtocol = RemoteConfigValueStub()
+        
+        if let key,
+           let configValueCache = configValueCacheReturn[key] {
+            configValueReturn = configValueCache
+        }
+        
         configValueCalls.append(.init(
             key: key,
             returnedValue: configValueReturn
@@ -54,6 +62,6 @@ final class RemoteConfigSpy: RemoteConfigProtocol {
     
     struct ConfigValueCall {
         let key: String?
-        let returnedValue: RemoteConfigValue
+        let returnedValue: RemoteConfigValueProtocol
     }
 }
