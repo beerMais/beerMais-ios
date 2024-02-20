@@ -43,7 +43,7 @@ final class BeerTextInput: UIView, BeerTextInputProtocol {
         view.font = .systemFont(ofSize: 11)
         
         if helperText != nil {
-            view.textColor = .gray
+            view.textColor = .label
             view.text = helperText
         } else {
             view.textColor = .red
@@ -110,25 +110,44 @@ final class BeerTextInput: UIView, BeerTextInputProtocol {
     func showError(message: String?) {
         
         guard let message, !message.isEmpty else {
-            UIView.animate(withDuration: 0.2) {
-                self.textField.layer.borderColor = UIColor.lightGray.cgColor
-                
-                if self.helperText != nil {
-                    self.helperLabel.textColor = .gray
-                    self.helperLabel.text = self.helperText
-                } else {
-                    self.helperLabel.alpha = 0
+            UIView.transition(
+                with: helperLabel,
+                duration: 0.2,
+                options: .transitionCrossDissolve,
+                animations: {
+                    if self.helperText != nil {
+                        self.helperLabel.textColor = .label
+                        self.helperLabel.text = self.helperText
+                    } else {
+                        self.helperLabel.alpha = 0
+                    }
                 }
+            )
+            
+            UIView.animate(withDuration: 0.2) {
+                self.textField.layer.borderWidth = 1
+                self.textField.layer.borderColor = UIColor.lightGray.cgColor
             }
+            
             return
         }
         
+        UIView.transition(
+            with: helperLabel,
+            duration: 0.2,
+            options: .transitionCrossDissolve,
+            animations: {
+                self.helperLabel.textColor = .systemRed
+                self.helperLabel.text = message
+                self.helperLabel.alpha = 1
+            }
+        )
+        
         UIView.animate(withDuration: 0.2) {
-            self.textField.layer.borderColor = UIColor.red.cgColor
+            self.textField.layer.borderWidth = 2
+            self.textField.layer.borderColor = UIColor.systemRed.cgColor
             
-            self.helperLabel.textColor = .red
-            self.helperLabel.text = message
-            self.helperLabel.alpha = 1
+            
         }
     }
 }
@@ -170,7 +189,7 @@ extension BeerTextInput: ViewProtocol {
             textField.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
-            helperLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: -2),
+            helperLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: -1),
             helperLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             helperLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
         ])
