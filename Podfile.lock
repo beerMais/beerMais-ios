@@ -185,14 +185,6 @@ PODS:
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
     - MaterialComponents/ShadowLayer
-  - MaterialComponents/TextFields (124.2.0):
-    - MaterialComponents/AnimationTiming
-    - MaterialComponents/Buttons
-    - MaterialComponents/Elevation
-    - MaterialComponents/Palettes
-    - MaterialComponents/private/Math
-    - MaterialComponents/Typography
-    - MDFInternationalization
   - MaterialComponents/Typography (124.2.0):
     - MaterialComponents/private/Application
     - MaterialComponents/private/Math
@@ -217,7 +209,6 @@ DEPENDENCIES:
   - "MaterialComponents/Buttons+ButtonThemer"
   - "MaterialComponents/Buttons+ColorThemer"
   - "MaterialComponents/Buttons+Theming"
-  - MaterialComponents/TextFields
 
 SPEC REPOS:
   trunk:
@@ -268,6 +259,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
 
-PODFILE CHECKSUM: 5cf2c36794d0c13acabedddaadf6254a070f79fb
+PODFILE CHECKSUM: 4bbae28a42d11c94736b11a87fa0539b9d35f51d
 
 COCOAPODS: 1.14.2
