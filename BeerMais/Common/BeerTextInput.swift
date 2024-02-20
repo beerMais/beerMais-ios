@@ -37,7 +37,7 @@ final class BeerTextInput: UIView, BeerTextInputProtocol {
         return view
     }()
     
-    private lazy var errorLabel: UILabel = {
+    private lazy var helperLabel: UILabel = {
         let view = UILabel()
 
         view.font = .systemFont(ofSize: 11)
@@ -114,10 +114,10 @@ final class BeerTextInput: UIView, BeerTextInputProtocol {
                 self.textField.layer.borderColor = UIColor.lightGray.cgColor
                 
                 if self.helperText != nil {
-                    self.errorLabel.textColor = .gray
-                    self.errorLabel.text = self.helperText
+                    self.helperLabel.textColor = .gray
+                    self.helperLabel.text = self.helperText
                 } else {
-                    self.errorLabel.alpha = 0
+                    self.helperLabel.alpha = 0
                 }
             }
             return
@@ -126,9 +126,9 @@ final class BeerTextInput: UIView, BeerTextInputProtocol {
         UIView.animate(withDuration: 0.2) {
             self.textField.layer.borderColor = UIColor.red.cgColor
             
-            self.errorLabel.textColor = .red
-            self.errorLabel.text = message
-            self.errorLabel.alpha = 1
+            self.helperLabel.textColor = .red
+            self.helperLabel.text = message
+            self.helperLabel.alpha = 1
         }
     }
 }
@@ -153,7 +153,7 @@ extension BeerTextInput: ViewProtocol {
         addSubViews([
             textField,
             placeholderLabel,
-            errorLabel
+            helperLabel
         ])
     }
     
@@ -170,9 +170,9 @@ extension BeerTextInput: ViewProtocol {
             textField.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
-            errorLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: -2),
-            errorLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            errorLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            helperLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: -2),
+            helperLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            helperLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
         ])
     }
 }
