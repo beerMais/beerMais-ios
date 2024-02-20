@@ -146,8 +146,6 @@ final class BeerTextInput: UIView, BeerTextInputProtocol {
         UIView.animate(withDuration: 0.2) {
             self.textField.layer.borderWidth = 2
             self.textField.layer.borderColor = UIColor.systemRed.cgColor
-            
-            
         }
     }
 }
