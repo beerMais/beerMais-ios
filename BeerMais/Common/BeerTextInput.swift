@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 protocol BeerTextInputProtocol {
+    func setText(_ text: String?)
     func showError(message: String?)
 }
 
@@ -101,6 +102,11 @@ final class BeerTextInput: UIView, BeerTextInputProtocol {
     
     // MARK: - BeerTextInputProtocol
     
+    func setText(_ text: String?) {
+        textField.text = text
+        textChanged()
+    }
+    
     func showError(message: String?) {
         
         guard let message, !message.isEmpty else {
@@ -140,7 +146,7 @@ extension BeerTextInput: ViewProtocol {
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.lightGray.cgColor
         
-        textField.addTarget(self, action: #selector(textChanged), for: .editingChanged)
+        textField.addTarget(self, action: #selector(textChanged), for: .allEditingEvents)
     }
     
     func configViews() {

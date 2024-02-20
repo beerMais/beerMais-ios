@@ -223,15 +223,15 @@ extension BeerDetailView: UITextFieldDelegate {
 extension BeerDetailView: BeerDetailViewProtocol {
     
     func setBrand(with brand: String) {
-        brandTextField.textField.text = brand
+        brandTextField.setText(brand)
     }
     
     func setPrice(with price: String) {
-        priceTextField.textField.text = price
+        priceTextField.setText(price)
     }
     
     func setSize(with size: String) {
-        sizeTextField.textField.text = size
+        sizeTextField.setText(size)
     }
     
     func setSegmentIndex(_ index: Int) {
