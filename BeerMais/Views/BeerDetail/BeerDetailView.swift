@@ -86,24 +86,30 @@ final class BeerDetailView: UIView {
     }()
     
     lazy var deleteButton: BeerButton = {
-        let view = BeerButton.build(style: .negative)
-        view.setTitle("delete".localized, for: .normal)
+        let view = BeerButton(
+            style: .negative,
+            title: "delete".localized
+        )
         view.addTarget(self, action: #selector(deleteAction(_:)), for: .touchUpInside)
         
         return view
     }()
     
     lazy var saveButton: BeerButton = {
-        let view = BeerButton.build(style: .positive)
-        view.setTitle("save".localized, for: .normal)
+        let view = BeerButton(
+            style: .positive,
+            title: "save".localized
+        )
         view.addTarget(self, action: #selector(saveAction(_:)), for: .touchUpInside)
         
         return view
     }()
     
     lazy var addButton: BeerButton = {
-        let view = BeerButton.build(style: .positive)
-        view.setTitle("add".localized, for: .normal)
+        let view = BeerButton(
+            style: .positive,
+            title: "add".localized
+        )
         view.isHidden = true
         view.addTarget(self, action: #selector(addAction(_:)), for: .touchUpInside)
         
