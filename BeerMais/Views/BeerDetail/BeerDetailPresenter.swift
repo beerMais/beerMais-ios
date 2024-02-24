@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BasicsKit
 
 protocol BeerDetailPresenterProtocol {
     func brandValueChanged(value: String?)
@@ -77,7 +78,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     }
     
     func brandValueChanged(value: String?) {
-        beerBrand = value ?? ""
+        beerBrand = value.orEmpty.trimmingCharacters(in: .whitespaces)
     }
     
     func priceValueChanged(value: String?) {
