@@ -1712,7 +1712,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"c++\"",
@@ -1751,12 +1751,6 @@
 					"\"GoogleMobileAds\"",
 					"-framework",
 					"\"GoogleUtilities\"",
-					"-framework",
-					"\"MDFInternationalization\"",
-					"-framework",
-					"\"MDFTextAccessibility\"",
-					"-framework",
-					"\"MaterialComponents\"",
 					"-framework",
 					"\"MediaPlayer\"",
 					"-framework",
@@ -1817,7 +1811,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"c++\"",
@@ -1856,12 +1850,6 @@
 					"\"GoogleMobileAds\"",
 					"-framework",
 					"\"GoogleUtilities\"",
-					"-framework",
-					"\"MDFInternationalization\"",
-					"-framework",
-					"\"MDFTextAccessibility\"",
-					"-framework",
-					"\"MaterialComponents\"",
 					"-framework",
 					"\"MediaPlayer\"",
 					"-framework",
@@ -1920,7 +1908,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.joseneves.BeerMais.debug.BeerMais-widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1945,7 +1933,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.joseneves.BeerMais.ios.BeerMais-widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2013,7 +2001,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.joseneves.BeerMais.debug.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2041,7 +2029,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.joseneves.BeerMais.ios.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPCLIP;
