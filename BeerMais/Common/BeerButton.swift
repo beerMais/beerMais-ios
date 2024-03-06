@@ -6,11 +6,12 @@
 //  Copyright © 2022 joseneves. All rights reserved.
 //
 
-import MaterialComponents.MaterialButtons
-import MaterialComponents.MaterialButtons_ButtonThemer
-import MaterialComponents.MaterialButtons_ColorThemer
+import UIKit
+import BasicsKit
 
-final class BeerButton: MDCButton {
+final class BeerButton: UIButton {
+    
+    // MARK: - ButtonStyle
     
     enum ButtonStyle {
         case positive
@@ -18,41 +19,67 @@ final class BeerButton: MDCButton {
         case neutral
     }
     
-    static func build(style: ButtonStyle = .positive) -> BeerButton {
-        let button = BeerButton()
-        button.applyStyle(style)
-        
-        button.isUppercaseTitle = false
-        button.setTitleFont(UIFont.systemFont(ofSize: 16, weight: .medium), for: .normal)
-        
-        return button
-    }
+    // MARK: - Private Properties
     
-    func applyStyle(_ style: ButtonStyle) {
-        let shapeGenerator = MDCCurvedRectShapeGenerator()
-        shapeGenerator.cornerSize = CGSize(width: 6, height: 6)
-        
-        self.shapeGenerator = shapeGenerator
-        
-        let containerScheme = MDCContainerScheme()
-        let colorScheme = MDCSemanticColorScheme()
-        containerScheme.colorScheme = colorScheme
-        
+    lazy var buttonColor: UIColor = {
         switch style {
         case .positive:
-            colorScheme.primaryColor = UIColor(red: 0.04, green: 0.69, blue: 0.00, alpha: 1.0)
+            return BeerColors.buttonPositive
         case .negative:
-            colorScheme.primaryColor = UIColor(red: 0.96, green: 0.26, blue: 0.21, alpha: 1.0)
+            return BeerColors.buttonNegative
         case .neutral:
-            backgroundColor = .clear
-            setTitleColor(BeerColors.blackWhite, for: .normal)
+            return .gray
+        }
+    }()
+    
+    
+    // MARK: - Injected Properties
+    
+    var style: ButtonStyle
+    var title: String?
+    
+    // MARK: - Initialization
+    
+    init(
+        style: ButtonStyle = .neutral,
+        title: String? = nil
+    ) {
+        self.style = style
+        self.title = title
+        
+        super.init(frame: .zero)
+        
+        setupViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension BeerButton: ViewProtocol {
+    
+    func buildViews() {
+        if #available(iOS 15.0, *) {
+            configuration = UIButton.Configuration.bordered()
+            configuration?.baseBackgroundColor = buttonColor
+            configuration?.attributedTitle = AttributedString(
+                title.orEmpty,
+                attributes: .init([
+                    .font: UIFont.systemFont(ofSize: 16, weight: .medium)
+                ])
+            )
+        } else {
+            backgroundColor = buttonColor
+            layer.cornerRadius = 8
+            setTitle(title, for: .normal)
+            titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         }
         
-        if style != .neutral {
-            setTitleColor(BeerColors.whiteBlack, for: .normal)
-            setElevation(ShadowElevation(1), for: .normal)
-            
-            applyContainedTheme(withScheme: containerScheme)
-        }
+        tintColor = .white
     }
+    
+    func configViews() {}
+    
+    func setupConstraints() {}
 }

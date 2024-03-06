@@ -16,7 +16,7 @@
 "sizeDesc" = "Em mL";
 "appName" = "Beer Mais";
 "saving" = "Economizando:";
-"disclaimer" = "*entre bebidas 1 and 2";
+"disclaimer" = "*entre bebidas 1 e 2";
 "yes" = "Sim";
 "no" = "Não";
 "backScreen" = "Voltar";
@@ -26,3 +26,4 @@
 "save" = "Salvar";
 "add" = "Adicionar";
 "detailsHelpText" = "Selecione acima ou digite clicando no campo \"Tamanho\"";
+"appVersion" = "Versão";

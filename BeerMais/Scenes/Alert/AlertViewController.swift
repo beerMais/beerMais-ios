@@ -52,16 +52,20 @@ final class AlertViewController: UIViewController {
     }()
     
     lazy var negativeButton: BeerButton = {
-        let view = BeerButton.build(style: .neutral)
-        view.setTitle("no".localized, for: .normal)
+        let view = BeerButton(
+            style: .neutral,
+            title: "no".localized
+        )
         view.addTarget(self, action: #selector(negativeAction(_:)), for: .touchUpInside)
         
         return view
     }()
     
     lazy var positiveButton: BeerButton = {
-        let view = BeerButton.build(style: .positive)
-        view.setTitle("yes".localized, for: .normal)
+        let view = BeerButton(
+            style: .positive,
+            title: "yes".localized
+        )
         view.addTarget(self, action: #selector(positiveAction(_:)), for: .touchUpInside)
         
         return view

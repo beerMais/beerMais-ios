@@ -34,8 +34,10 @@ final class HomeViewController: UIViewController {
         let view = UICollectionView(frame: .zero,
                                     collectionViewLayout: layout)
         
-        view.register(UINib(nibName: "BeerCollectionCell", bundle: .beerMais),
-                      forCellWithReuseIdentifier: "beerCollectionCell")
+        view.register(
+            BeerCollectionViewCell.self,
+            forCellWithReuseIdentifier: BeerCollectionViewCell.reuseIdentifier
+        )
         view.backgroundColor = BeerColors.whiteBlack
         view.showsHorizontalScrollIndicator = false
         view.delegate = self
@@ -163,10 +165,10 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let beer = beers[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "beerCollectionCell",
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: BeerCollectionViewCell.reuseIdentifier,
             for: indexPath
-        ) as! BeerCollectionViewCell
+        ) as? BeerCollectionViewCell else { return UICollectionViewCell() }
         
         cell.setBeer(beer: beer)
         cell.setCounter(counter: indexPath.row + 1)

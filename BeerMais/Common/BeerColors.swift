@@ -15,4 +15,6 @@ final class BeerColors {
     static var economyBackground = UIColor(named: "economyBackground", in: .beerMais, compatibleWith: nil)!
     static var primary = UIColor(named: "primary", in: .beerMais, compatibleWith: nil)!
     static var primaryLight = UIColor(named: "primaryLight", in: .beerMais, compatibleWith: nil)!
+    static var buttonPositive = UIColor(named: "buttonPositive", in: .beerMais, compatibleWith: nil)!
+    static var buttonNegative = UIColor(named: "buttonNegative", in: .beerMais, compatibleWith: nil)!
 }

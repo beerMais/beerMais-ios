@@ -10,10 +10,15 @@ import Foundation
 
 final class AboutFactory {
     
-    static func build() -> AboutViewController {
+    static func build(
+        remoteConfig: RemoteConfigProtocol = AppP.remoteConfig
+    ) -> AboutViewController {
         let controller = AboutViewController()
         let presenter = AboutPresenter(view: controller)
-        let interactor = AboutInteractor(presenter: presenter)
+        let interactor = AboutInteractor(
+            presenter: presenter,
+            remoteConfig: remoteConfig
+        )
         
         controller.interactor = interactor
         

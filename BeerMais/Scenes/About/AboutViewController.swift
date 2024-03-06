@@ -19,7 +19,8 @@ final class AboutViewController: UIViewController {
     lazy var headerStackView: UIStackView = {
         let view = UIStackView()
         view.spacing = 8
-        view.distribution = .fill
+        view.alignment = .center
+        view.distribution = .equalCentering
         
         return view
     }()
@@ -40,22 +41,19 @@ final class AboutViewController: UIViewController {
         return view
     }()
     
-    lazy var contentTableView: UITableView = {
-        let view = UITableView()
-        view.allowsSelection = false
-        view.separatorStyle = .none
-        view.estimatedRowHeight = UITableView.automaticDimension
-        view.dataSource = self
-        
-        view.register(UINib(nibName: "AboutTableViewCell", bundle: nil),
-                      forCellReuseIdentifier: AboutTableViewCell.reuseIdentifier)
-        view.register(UINib(nibName: "VersionTableViewCell", bundle: nil),
-                      forCellReuseIdentifier: VersionTableViewCell.reuseIdentifier)
-        view.register(UINib(nibName: "DonateTableViewCell", bundle: nil),
-                      forCellReuseIdentifier: DonateTableViewCell.reuseIdentifier)
+    lazy var scrollView: UIScrollView = {
+        UIScrollView()
+    }()
+    
+    lazy var containerStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .center
         
         return view
     }()
+    
+    var donateView: DonateView?
     
     private var availableRows: [AboutRow] = []
     
@@ -67,29 +65,11 @@ final class AboutViewController: UIViewController {
     
 }
 
-extension AboutViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return availableRows.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch availableRows[indexPath.row] {
-        case .description:
-            return AboutTableViewCell.dequeueReusableCell(from: tableView)
-        case .donate:
-            return DonateTableViewCell.dequeueReusableCell(from: tableView, maxWidth: view.frame.width)
-        case .version:
-            return VersionTableViewCell.dequeueReusableCell(from: tableView)
-        }
-    }
-}
-
 extension AboutViewController: AboutViewControllerProtocol {
     func showItems(with availableRows: [AboutRow]) {
         self.availableRows = availableRows
         
-        contentTableView.reloadData()
+        setupViews()
     }
 }
 
@@ -105,25 +85,52 @@ extension AboutViewController: ViewProtocol {
             titleLabel
         ])
         
-        view.addSubViews([
-            headerStackView,
-            contentTableView
+        var views: [UIView] = [headerStackView]
+        
+        availableRows.forEach {
+            switch $0 {
+            case .description:
+                views.append(AppDescriptionView())
+            case .donate:
+                let donateView = DonateView()
+                donateView.addDonateOptions(with: view.frame.width)
+                
+                views.append(donateView)
+            case .version:
+                views.append(VersionView())
+            }
+        }
+        containerStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+        containerStackView.addArrangedSubviews(views)
+        
+        scrollView.addSubViews([
+            containerStackView
         ])
         
+        view.addSubViews([
+            scrollView
+        ])
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            containerStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            containerStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            containerStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            containerStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            containerStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
             iconImageView.widthAnchor.constraint(equalToConstant: 50),
             iconImageView.heightAnchor.constraint(equalToConstant: 50),
             
-            headerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            headerStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            contentTableView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 16),
-            contentTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            contentTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerStackView.heightAnchor.constraint(equalToConstant: 66),
         ])
     }
     

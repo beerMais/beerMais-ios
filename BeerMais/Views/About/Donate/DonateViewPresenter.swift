@@ -9,16 +9,16 @@
 import Foundation
 import StoreKit
 
-protocol DonateTableViewCellDelegate {
+protocol DonateViewDelegate {
     func reloadAvailableDonates()
 }
 
-final class DonateTableViewCellPresenter: NSObject {
+final class DonateViewPresenter: NSObject {
     
     typealias PurchaseProductResult = Result<Bool, Error>
     
     var availableDonates: [DonateProduct] = []
-    var delegate: DonateTableViewCellDelegate?
+    var delegate: DonateViewDelegate?
     
 #if !(DEBUG_APPCLIP || APPCLIP)
     private let successFeedbackView = SuccessFeedbackView()
@@ -123,7 +123,7 @@ final class DonateTableViewCellPresenter: NSObject {
 
 // MARK: - SKProductsRequestDelegate
 
-extension DonateTableViewCellPresenter: SKProductsRequestDelegate {
+extension DonateViewPresenter: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         let products = response.products
         productsRequestCompletionHandler?(products)
@@ -133,7 +133,7 @@ extension DonateTableViewCellPresenter: SKProductsRequestDelegate {
 
 // MARK: - SKPaymentTransactionObserver
 
-extension DonateTableViewCellPresenter: SKPaymentTransactionObserver {
+extension DonateViewPresenter: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BasicsKit
 
 protocol BeerDetailViewProtocol {
     func setBrand(with brand: String)
@@ -24,31 +25,38 @@ protocol BeerDetailViewProtocol {
 
 final class BeerDetailView: UIView {
     
-    lazy var brandTextField: BeerTextField = {
-        let view = BeerTextField.build()
-        view.delegate = self
-        view.placeholder = "brand".localized
-        view.addTarget(self, action: #selector(brandValueChanged(_:)), for: .editingChanged)
+    lazy var brandTextField: BeerTextInput = {
+        let view = BeerTextInput(
+            placeholder: "brand".localized,
+            placeholderBackgroundColor: .tertiarySystemBackground
+        )
+        view.textField.delegate = self
+        view.textField.addTarget(self, action: #selector(brandValueChanged(_:)), for: .editingChanged)
         
         return view
     }()
     
-    lazy var priceTextField: BeerTextField = {
-        let view = BeerTextField.build()
-        view.delegate = self
-        view.placeholder = "price".localized
-        view.keyboardType = .numberPad
-        view.addTarget(self, action: #selector(priceValueChanged(_:)), for: .editingChanged)
+    lazy var priceTextField: BeerTextInput = {
+        let view = BeerTextInput(
+            placeholder: "price".localized,
+            placeholderBackgroundColor: .tertiarySystemBackground
+        )
+        view.textField.delegate = self
+        view.textField.keyboardType = .numberPad
+        view.textField.addTarget(self, action: #selector(priceValueChanged(_:)), for: .editingChanged)
         
         return view
     }()
     
-    lazy var sizeTextField: BeerTextField = {
-        let view = BeerTextField.build()
-        view.delegate = self
-        view.placeholder = "size".localized
-        view.keyboardType = .numberPad
-        view.addTarget(self, action: #selector(amountValueChanged(_:)), for: .editingChanged)
+    lazy var sizeTextField: BeerTextInput = {
+        let view = BeerTextInput(
+            placeholder: "size".localized,
+            placeholderBackgroundColor: .tertiarySystemBackground,
+            helperText: "sizeDesc".localized
+        )
+        view.textField.delegate = self
+        view.textField.keyboardType = .numberPad
+        view.textField.addTarget(self, action: #selector(amountValueChanged(_:)), for: .editingChanged)
         
         return view
     }()
@@ -78,47 +86,49 @@ final class BeerDetailView: UIView {
     }()
     
     lazy var deleteButton: BeerButton = {
-        let view = BeerButton.build(style: .negative)
-        view.setTitle("delete".localized, for: .normal)
+        let view = BeerButton(
+            style: .negative,
+            title: "delete".localized
+        )
         view.addTarget(self, action: #selector(deleteAction(_:)), for: .touchUpInside)
         
         return view
     }()
     
     lazy var saveButton: BeerButton = {
-        let view = BeerButton.build(style: .positive)
-        view.setTitle("save".localized, for: .normal)
+        let view = BeerButton(
+            style: .positive,
+            title: "save".localized
+        )
         view.addTarget(self, action: #selector(saveAction(_:)), for: .touchUpInside)
         
         return view
     }()
     
     lazy var addButton: BeerButton = {
-        let view = BeerButton.build(style: .positive)
-        view.setTitle("add".localized, for: .normal)
+        let view = BeerButton(
+            style: .positive,
+            title: "add".localized
+        )
         view.isHidden = true
         view.addTarget(self, action: #selector(addAction(_:)), for: .touchUpInside)
         
         return view
     }()
     
-    private var brandController: BeerTextInputController?
-    private var priceController: BeerTextInputController?
-    private var sizeController: BeerTextInputController?
-    
     var presenter: BeerDetailPresenterProtocol?
     var delegate: DetailsViewControllerProtocol?
     
     @objc func brandValueChanged(_ sender: Any) {
-        presenter?.brandValueChanged(value: brandTextField.text ?? "")
+        presenter?.brandValueChanged(value: brandTextField.textField.text.orEmpty)
     }
     
     @objc func priceValueChanged(_ sender: Any) {
-        presenter?.priceValueChanged(value: priceTextField.text ?? "")
+        presenter?.priceValueChanged(value: priceTextField.textField.text.orEmpty)
     }
     
     @objc func amountValueChanged(_ sender: Any) {
-        presenter?.amountValueChanged(value: sizeTextField.text ?? "")
+        presenter?.amountValueChanged(value: sizeTextField.textField.text.orEmpty)
     }
     
     @objc func amountSegmentChanged(_ sender: UISegmentedControl) {
@@ -145,12 +155,6 @@ extension BeerDetailView: ViewProtocol {
         backgroundColor = .tertiarySystemBackground
         
         layer.cornerRadius = 10
-        
-        brandController = BeerTextInputController.build(textInput: brandTextField)
-        priceController = BeerTextInputController.build(textInput: priceTextField)
-        
-        sizeController = BeerTextInputController.build(textInput: sizeTextField)
-        sizeController?.helperText = "sizeDesc".localized
     }
     
     func configViews() {
@@ -225,15 +229,15 @@ extension BeerDetailView: UITextFieldDelegate {
 extension BeerDetailView: BeerDetailViewProtocol {
     
     func setBrand(with brand: String) {
-        brandTextField.text = brand
+        brandTextField.setText(brand)
     }
     
     func setPrice(with price: String) {
-        priceTextField.text = price
+        priceTextField.setText(price)
     }
     
     func setSize(with size: String) {
-        sizeTextField.text = size
+        sizeTextField.setText(size)
     }
     
     func setSegmentIndex(_ index: Int) {
@@ -246,33 +250,33 @@ extension BeerDetailView: BeerDetailViewProtocol {
     }
     
     func setIsValidAmount(_ isValidAmount: Bool) {
-        var errorText: String? = nil
+        var errorText: String?
         
-        if (!isValidAmount) {
+        if !isValidAmount {
             errorText = "addSize".localized
         }
         
-        sizeController?.setErrorText(errorText, errorAccessibilityValue: nil)
+        sizeTextField.showError(message: errorText)
     }
     
     func setIsValidBrand(_ isValidBrand: Bool) {
-        var errorText: String? = nil
+        var errorText: String?
         
-        if (!isValidBrand) {
+        if !isValidBrand {
             errorText = "addBrand".localized
         }
         
-        brandController?.setErrorText(errorText, errorAccessibilityValue: nil)
+        brandTextField.showError(message: errorText)
     }
     
     func setIsValidValue(_ isValidValue: Bool) {
-        var errorText: String? = nil
+        var errorText: String?
         
-        if (!isValidValue) {
+        if !isValidValue {
             errorText = "addPrice".localized
         }
         
-        priceController?.setErrorText(errorText, errorAccessibilityValue: nil)
+        priceTextField.showError(message: errorText)
     }
     
     func deleteSucess() {

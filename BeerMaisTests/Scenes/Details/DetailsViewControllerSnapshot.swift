@@ -11,7 +11,7 @@ import XCTest
 
 import SnapshotTesting
 
-class DetailsViewControllerSnapshot: XCTestCase {
+final class DetailsViewControllerSnapshot: XCTestCase {
     
     override class func setUp() {
         isRecording = false
