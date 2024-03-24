@@ -4,7 +4,6 @@ platform :ios, '13.0'
 use_frameworks!
 
 def global_pods
-    pod 'Google-Mobile-Ads-SDK', '~> 10.13.0'
     pod 'FirebaseRemoteConfig', '>= 10.17.0'
 end
 

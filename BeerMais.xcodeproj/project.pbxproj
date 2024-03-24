@@ -59,6 +59,9 @@
 		2D8F1E6E2B18106F00C7D55F /* AlertPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8F1E6D2B18106F00C7D55F /* AlertPresenterTests.swift */; };
 		2D8F1E712B1812A000C7D55F /* BasicsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2D8F1E702B1812A000C7D55F /* BasicsKit */; };
 		2D9A43B82B8529E4009FD475 /* BeerTextInputSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9A43B72B8529E4009FD475 /* BeerTextInputSnapshot.swift */; };
+		2DAFDD232BB0D1F500449A2B /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 2DAFDD222BB0D1F500449A2B /* GoogleMobileAds */; };
+		2DAFDD252BB0D2B600449A2B /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 2DAFDD242BB0D2B600449A2B /* GoogleMobileAds */; };
+		2DAFDD272BB0D3A300449A2B /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 2DAFDD262BB0D3A300449A2B /* GoogleMobileAds */; };
 		2DB931412AFFF5F9001EE5B9 /* Donate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB931402AFFF5F9001EE5B9 /* Donate.swift */; };
 		2DB931422AFFF6A6001EE5B9 /* Donate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB931402AFFF5F9001EE5B9 /* Donate.swift */; };
 		2DD2DF082B4CB13100CE6C0B /* RemoteConfig+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD2DF072B4CB13100CE6C0B /* RemoteConfig+Extensions.swift */; };
@@ -394,6 +397,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DAFDD232BB0D1F500449A2B /* GoogleMobileAds in Frameworks */,
 				2DEBCA6C2B0195DF001DB86E /* AmplitudeSwift in Frameworks */,
 				87E1766626CB185300989B71 /* StoreKit.framework in Frameworks */,
 				2DEBCA622B018AFE001DB86E /* Lottie in Frameworks */,
@@ -415,6 +419,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DAFDD272BB0D3A300449A2B /* GoogleMobileAds in Frameworks */,
 				2D63E3402B1FE6AB00A41CC0 /* SnapshotTesting in Frameworks */,
 				2D45ABFA2B0AE6EE00DB682B /* AmplitudeSwift in Frameworks */,
 				2D8F1E712B1812A000C7D55F /* BasicsKit in Frameworks */,
@@ -427,6 +432,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DAFDD252BB0D2B600449A2B /* GoogleMobileAds in Frameworks */,
 				2D3AD23B2B054DE70003BDF6 /* AmplitudeSwift in Frameworks */,
 				2D3FD1AE2B81487800DD5262 /* BasicsKit in Frameworks */,
 				363F3B1D8DFC332E317A4F17 /* Pods_BeerMais_Clip.framework in Frameworks */,
@@ -977,6 +983,7 @@
 				2DEBCA612B018AFE001DB86E /* Lottie */,
 				2DEBCA6B2B0195DF001DB86E /* AmplitudeSwift */,
 				2D3FD1AF2B81489B00DD5262 /* BasicsKit */,
+				2DAFDD222BB0D1F500449A2B /* GoogleMobileAds */,
 			);
 			productName = BeerMais;
 			productReference = 2D1D3E5F21F670C9008F51AC /* BeerMais.app */;
@@ -1020,6 +1027,7 @@
 				2D8F1E702B1812A000C7D55F /* BasicsKit */,
 				2D63E33D2B1FE6AB00A41CC0 /* InlineSnapshotTesting */,
 				2D63E33F2B1FE6AB00A41CC0 /* SnapshotTesting */,
+				2DAFDD262BB0D3A300449A2B /* GoogleMobileAds */,
 			);
 			productName = BeerMaisTests;
 			productReference = 87849E5D2820680700B6F61F /* BeerMaisTests.xctest */;
@@ -1044,6 +1052,7 @@
 			packageProductDependencies = (
 				2D3AD23A2B054DE70003BDF6 /* AmplitudeSwift */,
 				2D3FD1AD2B81487800DD5262 /* BasicsKit */,
+				2DAFDD242BB0D2B600449A2B /* GoogleMobileAds */,
 			);
 			productName = "BeerMais Clip";
 			productReference = A18158AD2597D1D4004B2018 /* BeerMais Clip.app */;
@@ -1094,6 +1103,7 @@
 				2DEBCA6A2B0195DF001DB86E /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
 				2D8F1E6F2B1812A000C7D55F /* XCRemoteSwiftPackageReference "BasicsKit" */,
 				2D63E33C2B1FE6AB00A41CC0 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				2DAFDD212BB0D1F500449A2B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 2D17011421D2B3CD0009A316 /* Products */;
 			projectDirPath = "";
@@ -1744,8 +1754,6 @@
 					"-framework",
 					"\"Foundation\"",
 					"-framework",
-					"\"GoogleAppMeasurement\"",
-					"-framework",
 					"\"GoogleDataTransport\"",
 					"-framework",
 					"\"GoogleMobileAds\"",
@@ -1842,8 +1850,6 @@
 					"\"FirebaseInstallations\"",
 					"-framework",
 					"\"Foundation\"",
-					"-framework",
-					"\"GoogleAppMeasurement\"",
 					"-framework",
 					"\"GoogleDataTransport\"",
 					"-framework",
@@ -2105,6 +2111,14 @@
 				version = 0.0.6;
 			};
 		};
+		2DAFDD212BB0D1F500449A2B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = exactVersion;
+				version = 11.2.0;
+			};
+		};
 		2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
@@ -2158,6 +2172,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2D8F1E6F2B1812A000C7D55F /* XCRemoteSwiftPackageReference "BasicsKit" */;
 			productName = BasicsKit;
+		};
+		2DAFDD222BB0D1F500449A2B /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DAFDD212BB0D1F500449A2B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+		2DAFDD242BB0D2B600449A2B /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DAFDD212BB0D1F500449A2B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+		2DAFDD262BB0D3A300449A2B /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DAFDD212BB0D1F500449A2B /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 		2DEBCA612B018AFE001DB86E /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
