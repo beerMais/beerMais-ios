@@ -5,6 +5,7 @@ use_frameworks!
 
 def global_pods
     pod 'FirebaseRemoteConfig', '>= 10.17.0'
+    pod 'GoogleUtilities'
 end
 
 def main_app_pods
