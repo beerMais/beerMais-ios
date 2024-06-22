@@ -29,7 +29,7 @@ final class BeerDetailTests: XCTestCase {
         // When
         
         // Then
-        XCTAssertFalse(spy.isEditModeCalls.first?.isEditMode ?? true)
+        XCTAssertEqual(spy.isEditModeCalls.first?.isEditMode ?? true, false)
         XCTAssertEqual(spy.setBrandCalls.count, 0)
         XCTAssertEqual(spy.setPriceCalls.count, 0)
         XCTAssertEqual(spy.setSizeCalls.count, 0)
@@ -49,7 +49,7 @@ final class BeerDetailTests: XCTestCase {
         sut = BeerDetailTestsFactory.build(with: spy, beer: beer)
         
         // Then
-        XCTAssertTrue(spy.isEditModeCalls.last?.isEditMode ?? false)
+        XCTAssertEqual(spy.isEditModeCalls.last?.isEditMode ?? false, true)
         XCTAssertEqual(spy.setBrandCalls.count, 1)
         XCTAssertEqual(spy.setBrandCalls.first?.brand, "test brand")
         XCTAssertEqual(spy.setPriceCalls.count, 1)
