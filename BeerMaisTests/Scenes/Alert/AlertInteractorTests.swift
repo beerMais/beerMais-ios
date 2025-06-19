@@ -7,63 +7,57 @@
 //
 
 import Foundation
-import XCTest
+import Testing
 
-final class AlertInteractorTests: XCTestCase {
-    
-    var sut: AlertInteractor!
-    var presenter: AlertPresenterSpy!
-    
-    override func setUp() {
+struct AlertInteractorTests {
+    private var presenter: AlertPresenterSpy
+
+    init() throws {
         presenter = AlertPresenterSpy()
-        sut = AlertInteractor.mock(presenter: presenter)
     }
     
-    override func tearDown() {
-        sut =  nil
-        presenter =  nil
-    }
-
-    func testNegativeAction() {
-        
-        var negativeActionCalls = 0
+    @Test
+    mutating func negativeAction() {
+        var actionCalls = 0
         let details = AlertInteractor.AlertDetails(negativeAction: {
-            negativeActionCalls += 1
+            actionCalls += 1
         })
         
-        sut = AlertInteractor.mock(
+        let sut = AlertInteractor.mock(
             presenter: presenter,
             details: details
         )
         
-        XCTAssertEqual(negativeActionCalls, 0)
-        XCTAssertEqual(presenter.closeCalls, 0)
+        #expect(actionCalls == 0)
+        #expect(presenter.closeCalls == 0)
         
         sut.negativeAction()
         
-        XCTAssertEqual(negativeActionCalls, 1)
-        XCTAssertEqual(presenter.closeCalls, 1)
+        #expect(actionCalls == 1)
+        #expect(presenter.closeCalls == 1)
     }
-
-    func testPositiveAction() {
-        
-        var positiveActionCalls = 0
+    
+    @Test
+    mutating func positiveAction() {
+        var actionCalls = 0
         let details = AlertInteractor.AlertDetails(positiveAction: {
-            positiveActionCalls += 1
+            actionCalls += 1
         })
         
-        sut = AlertInteractor.mock(
+        let sut = AlertInteractor.mock(
             presenter: presenter,
             details: details
         )
         
-        XCTAssertEqual(positiveActionCalls, 0)
-        XCTAssertEqual(presenter.closeCalls, 0)
+        #expect(actionCalls == 0)
+        #expect(presenter.closeCalls == 0)
+        
         sut.positiveAction()
         
-        XCTAssertEqual(positiveActionCalls, 1)
-        XCTAssertEqual(presenter.closeCalls, 1)
+        #expect(actionCalls == 1)
+        #expect(presenter.closeCalls == 1)
     }
+
 }
 
 extension AlertInteractor {

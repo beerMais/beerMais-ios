@@ -7,27 +7,22 @@
 //
 
 import Foundation
-import XCTest
+import Testing
 
 import BasicsKit
 
-final class AlertPresenterTests: XCTestCase {
+struct AlertPresenterTests {
     
     var sut: AlertPresenter!
     var viewControllerSpy: AlertViewControllerSpy!
     
-    override func setUp() {
+    init() throws {
         viewControllerSpy = .init()
         sut = .init(view: viewControllerSpy)
     }
     
-    override func tearDown() {
-        sut = nil
-        viewControllerSpy = nil
-    }
-    
-    func testSetupData() {
-        
+    @Test
+    mutating func testSetupData() {
         let expectedTitle = String.random()
         let expectedDescription = String.random()
         let expectedNegativeActionTitle = String.random()
@@ -42,23 +37,23 @@ final class AlertPresenterTests: XCTestCase {
         
         sut.setupData(with: details)
         
-        XCTAssertEqual(viewControllerSpy.setTitleCalls.count, 1)
-        XCTAssertEqual(viewControllerSpy.setTitleCalls.first?.title, expectedTitle)
+        #expect(viewControllerSpy.setTitleCalls.count == 1)
+        #expect(viewControllerSpy.setTitleCalls.first?.title == expectedTitle)
         
-        XCTAssertEqual(viewControllerSpy.setDescriptionCalls.count, 1)
-        XCTAssertEqual(viewControllerSpy.setDescriptionCalls.first?.description, expectedDescription)
+        #expect(viewControllerSpy.setDescriptionCalls.count == 1)
+        #expect(viewControllerSpy.setDescriptionCalls.first?.description == expectedDescription)
         
-        XCTAssertEqual(viewControllerSpy.setNegativeButtonTitleCalls.count, 1)
-        XCTAssertEqual(viewControllerSpy.setNegativeButtonTitleCalls.first?.title, expectedNegativeActionTitle)
+        #expect(viewControllerSpy.setNegativeButtonTitleCalls.count == 1)
+        #expect(viewControllerSpy.setNegativeButtonTitleCalls.first?.title == expectedNegativeActionTitle)
         
-        XCTAssertEqual(viewControllerSpy.setPositiveButtonTitleCalls.count, 1)
-        XCTAssertEqual(viewControllerSpy.setPositiveButtonTitleCalls.first?.title, expectedPositiveActionTitle)
+        #expect(viewControllerSpy.setPositiveButtonTitleCalls.count == 1)
+        #expect(viewControllerSpy.setPositiveButtonTitleCalls.first?.title == expectedPositiveActionTitle)
     }
     
-    func testClose() {
-        
+    @Test
+    mutating func testClose() {
         sut.close()
         
-        XCTAssertEqual(viewControllerSpy.closeCalls.count, 1)
+        #expect(viewControllerSpy.closeCalls.count == 1)
     }
 }
