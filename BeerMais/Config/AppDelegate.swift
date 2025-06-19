@@ -11,8 +11,9 @@ import CoreData
 import UserNotifications
 import WidgetKit
 
+import FirebaseCore
+import FirebaseMessaging
 import GoogleMobileAds
-import Firebase
 
 
 @UIApplicationMain

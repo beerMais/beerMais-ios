@@ -14,7 +14,6 @@ public protocol RemoteConfigProtocol: AnyObject {
     var configSettings: RemoteConfigSettings { get set }
     
     func fetchAndActivate()
-    func fetchAndActivate(completionHandler: ((RemoteConfigFetchAndActivateStatus, Error?) -> Void)?)
     func configValue(key: String?) -> RemoteConfigValueProtocol
 }
 
@@ -31,7 +30,6 @@ extension RemoteConfig: RemoteConfigProtocol {
 
 public protocol RemoteConfigValueProtocol {
     
-    var stringValue: String? { get }
     var numberValue: NSNumber { get }
     var dataValue: Data { get }
     var boolValue: Bool { get }
