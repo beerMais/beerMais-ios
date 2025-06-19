@@ -6,41 +6,31 @@
 //  Copyright © 2022 joseneves. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 
-final class DetailsTests: XCTestCase {
+struct DetailsTests {
     
     var sut: DetailsInteractor!
     var spy: DetailsViewControllerSpy!
     
-    override func setUp() {
+    init() throws {
         spy = DetailsViewControllerSpy()
         sut = DetailsTestsFactory.build(with: spy)
     }
     
-    override func tearDown() {
-        sut =  nil
-        spy =  nil
-    }
-    
+    @Test
     func testSetupInitialData() {
-        // Given
-        
-        // When
-        
-        // Then
-        XCTAssertEqual(spy.setupDataCalls.count, 0)
+        #expect(spy.setupDataCalls.count == 0)
     }
     
-    func testSetupInitialDataWithBeer() {
-        // Given
+    @Test
+    mutating func testSetupInitialDataWithBeer() {
         let beer = Beer()
         
-        // When
         sut = DetailsTestsFactory.build(with: spy, beer: beer)
         
-        // Then
-        XCTAssertEqual(spy.setupDataCalls.count, 1)
+        #expect(spy.setupDataCalls.count == 1)
     }
     
 }
