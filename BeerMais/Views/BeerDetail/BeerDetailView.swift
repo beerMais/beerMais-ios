@@ -2,293 +2,134 @@
 //  BeerDetailView.swift
 //  BeerMais
 //
-//  Created by Jose Neves on 26/04/22.
-//  Copyright © 2022 joseneves. All rights reserved.
+//  Created by José Neves on 12/07/25.
+//  Copyright © 2025 joseneves. All rights reserved.
 //
 
-import UIKit
-import BasicsKit
+import SwiftUI
+import GoogleMobileAds
 
-protocol BeerDetailViewProtocol {
-    func setBrand(with brand: String)
-    func setPrice(with price: String)
-    func setSize(with size: String)
-    func setSegmentIndex(_ index: Int)
-    func isEditMode(_ isEditMode: Bool)
-    func setIsValidAmount(_ isValidAmount: Bool)
-    func setIsValidBrand(_ isValidBrand: Bool)
-    func setIsValidValue(_ isValidValue: Bool)
-    func deleteSucess()
-    func editSucess()
-    func createSucess()
-}
-
-final class BeerDetailView: UIView {
+enum Segment: String, CaseIterable, Identifiable {
+    case first, second, third, fourth
     
-    lazy var brandTextField: BeerTextInput = {
-        let view = BeerTextInput(
-            placeholder: "brand".localized,
-            placeholderBackgroundColor: .tertiarySystemBackground
-        )
-        view.textField.delegate = self
-        view.textField.addTarget(self, action: #selector(brandValueChanged(_:)), for: .editingChanged)
-        
-        return view
-    }()
+    var id: Self { self }
     
-    lazy var priceTextField: BeerTextInput = {
-        let view = BeerTextInput(
-            placeholder: "price".localized,
-            placeholderBackgroundColor: .tertiarySystemBackground
-        )
-        view.textField.delegate = self
-        view.textField.keyboardType = .numberPad
-        view.textField.addTarget(self, action: #selector(priceValueChanged(_:)), for: .editingChanged)
-        
-        return view
-    }()
-    
-    lazy var sizeTextField: BeerTextInput = {
-        let view = BeerTextInput(
-            placeholder: "size".localized,
-            placeholderBackgroundColor: .tertiarySystemBackground,
-            helperText: "sizeDesc".localized
-        )
-        view.textField.delegate = self
-        view.textField.keyboardType = .numberPad
-        view.textField.addTarget(self, action: #selector(amountValueChanged(_:)), for: .editingChanged)
-        
-        return view
-    }()
-    
-    lazy var amountSegment: UISegmentedControl = {
-        let view = UISegmentedControl(items: ["269ml", "350ml", "473ml", "1L"])
-        view.addTarget(self, action: #selector(amountSegmentChanged(_:)), for: .valueChanged)
-        
-        return view
-    }()
-    
-    lazy var disclaimerLabel: UILabel = {
-        let view = UILabel()
-        view.font = UIFont.systemFont(ofSize: 12)
-        view.numberOfLines = 0
-        view.text = "detailsHelpText".localized
-        
-        return view
-    }()
-    
-    lazy var buttonsStackView: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 16
-        view.distribution = .fillEqually
-        
-        return view
-    }()
-    
-    lazy var deleteButton: BeerButton = {
-        let view = BeerButton(
-            style: .negative,
-            title: "delete".localized
-        )
-        view.addTarget(self, action: #selector(deleteAction(_:)), for: .touchUpInside)
-        
-        return view
-    }()
-    
-    lazy var saveButton: BeerButton = {
-        let view = BeerButton(
-            style: .positive,
-            title: "save".localized
-        )
-        view.addTarget(self, action: #selector(saveAction(_:)), for: .touchUpInside)
-        
-        return view
-    }()
-    
-    lazy var addButton: BeerButton = {
-        let view = BeerButton(
-            style: .positive,
-            title: "add".localized
-        )
-        view.isHidden = true
-        view.addTarget(self, action: #selector(addAction(_:)), for: .touchUpInside)
-        
-        return view
-    }()
-    
-    var presenter: BeerDetailPresenterProtocol?
-    var delegate: DetailsViewControllerProtocol?
-    
-    @objc func brandValueChanged(_ sender: Any) {
-        presenter?.brandValueChanged(value: brandTextField.textField.text.orEmpty)
-    }
-    
-    @objc func priceValueChanged(_ sender: Any) {
-        presenter?.priceValueChanged(value: priceTextField.textField.text.orEmpty)
-    }
-    
-    @objc func amountValueChanged(_ sender: Any) {
-        presenter?.amountValueChanged(value: sizeTextField.textField.text.orEmpty)
-    }
-    
-    @objc func amountSegmentChanged(_ sender: UISegmentedControl) {
-        presenter?.amountSegmentChanged(index: sender.selectedSegmentIndex)
-    }
-    
-    @objc func deleteAction(_ sender: Any) {
-        presenter?.deleteBeer()
-    }
-    
-    @objc func saveAction(_ sender: Any) {
-        presenter?.editBeer()
-    }
-    
-    @objc func addAction(_ sender: Any) {
-        presenter?.createBeer()
-    }
-    
-}
-
-extension BeerDetailView: ViewProtocol {
-    
-    func buildViews() {
-        backgroundColor = .tertiarySystemBackground
-        
-        layer.cornerRadius = 10
-    }
-    
-    func configViews() {
-        buttonsStackView.addArrangedSubviews([deleteButton,
-                                              saveButton])
-        
-        addSubViews([
-            brandTextField,
-            priceTextField,
-            sizeTextField,
-            amountSegment,
-            disclaimerLabel,
-            buttonsStackView,
-            addButton
-        ])
-    }
-    
-    func setupConstraints() {
-        NSLayoutConstraint.activate([
-            brandTextField.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            brandTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            brandTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
-            priceTextField.widthAnchor.constraint(equalToConstant: 126),
-            priceTextField.topAnchor.constraint(equalTo: brandTextField.bottomAnchor),
-            priceTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            
-            sizeTextField.widthAnchor.constraint(equalToConstant: 126),
-            sizeTextField.topAnchor.constraint(equalTo: brandTextField.bottomAnchor),
-            sizeTextField.leadingAnchor.constraint(equalTo: priceTextField.trailingAnchor, constant: 16),
-            sizeTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
-            amountSegment.heightAnchor.constraint(equalToConstant: 30),
-            amountSegment.topAnchor.constraint(equalTo: sizeTextField.bottomAnchor, constant: 4),
-            amountSegment.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            amountSegment.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
-            disclaimerLabel.topAnchor.constraint(equalTo: amountSegment.bottomAnchor, constant: 8),
-            disclaimerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            disclaimerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
-            buttonsStackView.heightAnchor.constraint(equalToConstant: 35),
-            buttonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14),
-            buttonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            buttonsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
-            addButton.heightAnchor.constraint(equalToConstant: 35),
-            addButton.widthAnchor.constraint(equalToConstant: 110),
-            addButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14),
-            addButton.centerXAnchor.constraint(equalTo: centerXAnchor)
-        ])
-    }
-    
-}
-
-extension BeerDetailView: UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        delegate?.animateViewMoving(up: true, moveValue: 100)
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        delegate?.animateViewMoving(up: false, moveValue: 100)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
-
-extension BeerDetailView: BeerDetailViewProtocol {
-    
-    func setBrand(with brand: String) {
-        brandTextField.setText(brand)
-    }
-    
-    func setPrice(with price: String) {
-        priceTextField.setText(price)
-    }
-    
-    func setSize(with size: String) {
-        sizeTextField.setText(size)
-    }
-    
-    func setSegmentIndex(_ index: Int) {
-        amountSegment.selectedSegmentIndex = index
-    }
-    
-    func isEditMode(_ isEditMode: Bool) {
-        addButton.isHidden = isEditMode
-        buttonsStackView.isHidden = !isEditMode
-    }
-    
-    func setIsValidAmount(_ isValidAmount: Bool) {
-        var errorText: String?
-        
-        if !isValidAmount {
-            errorText = "addSize".localized
+    var name: String {
+        switch self {
+        case .first:
+            "269ml"
+        case .second:
+            "350ml"
+        case .third:
+            "473ml"
+        case .fourth:
+            "1L"
         }
-        
-        sizeTextField.showError(message: errorText)
     }
+}
+
+struct BeerDetailView: View {
+    @Environment(\.dismiss) private var dismiss
+    @StateObject private var viewModel: ViewModel
     
-    func setIsValidBrand(_ isValidBrand: Bool) {
-        var errorText: String?
-        
-        if !isValidBrand {
-            errorText = "addBrand".localized
+    private let selectedBeer: Beer?
+
+    init(selectedBeer: Beer? = nil) {
+        self.selectedBeer = selectedBeer
+        self._viewModel = StateObject(
+            wrappedValue: ViewModel(
+                selectedBeer: selectedBeer
+            )
+        )
+    }
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    VStack {
+                        TextField("brand", text: $viewModel.brand)
+                            .padding()
+                        TextField("price", text: $viewModel.price)
+                            .keyboardType(.numberPad)
+                            .padding()
+                            .onChange(of: viewModel.price) { newValue in
+                                let digits = newValue.filter(\.isNumber)
+                                let doubleValue = (Double(digits) ?? 0) / 100.0
+                                let formatted = String(format: "%.2f", doubleValue)
+                                if formatted != newValue {
+                                    viewModel.price = formatted
+                                }
+                            }
+                    }
+                }
+                
+                Section(content: {
+                    VStack {
+                        TextField("", text: $viewModel.size)
+                            .keyboardType(.numberPad)
+                            .padding()
+                            .overlay {
+                                Text(viewModel.sizeType)
+                                    .padding(.trailing)
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                            }
+                        
+                        Picker("Segments", selection: $viewModel.sizeSelection) {
+                            ForEach(Segment.allCases) { option in
+                                Text(option.name).tag(option)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                    }
+                }, header: {
+                    Text("size")
+                }, footer: {
+                    Text("detailsHelpText")
+                })
+                
+                let adSize = currentOrientationAnchoredAdaptiveBanner(width: UIScreen.main.bounds.width - 64)
+                BannerViewContainer(adSize)
+                    .frame(width: adSize.size.width, height: adSize.size.height)
+            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("backScreen") {
+                        dismiss()
+                    }
+                }
+                if selectedBeer != nil {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("delete") {
+                            viewModel.delete()
+                        }
+                    }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(selectedBeer == nil ? "add" : "save") {
+                        viewModel.create()
+                    }
+                }
+            }
+            .onTapGesture {
+                UIApplication.shared.endEditing()
+            }
         }
-        
-        brandTextField.showError(message: errorText)
-    }
-    
-    func setIsValidValue(_ isValidValue: Bool) {
-        var errorText: String?
-        
-        if !isValidValue {
-            errorText = "addPrice".localized
+        .onAppear {
+            viewModel.onFinish = {
+                dismiss()
+            }
         }
-        
-        priceTextField.showError(message: errorText)
     }
-    
-    func deleteSucess() {
-        delegate?.close()
+}
+
+#Preview {
+//    HomeView()
+//    BeerDetailView()
+}
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
-    
-    func editSucess() {
-        delegate?.close()
-    }
-    
-    func createSucess() {
-        delegate?.close()
-    }
-    
 }

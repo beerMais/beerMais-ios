@@ -25,5 +25,5 @@
 "deleteBeerAlert" = "Deseja apagar todas as cervejas? Essa ação não terá volta.";
 "save" = "Salvar";
 "add" = "Adicionar";
-"detailsHelpText" = "Selecione acima ou digite clicando no campo \"Tamanho\"";
+"detailsHelpText" = "Selecione acima ou digite tocando no campo \"Tamanho\"";
 "appVersion" = "Versão";

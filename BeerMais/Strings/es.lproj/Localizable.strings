@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  BeerMais
+
+  Created by José Neves on 21/06/25.
+  Copyright © 2019 joseneves. All rights reserved.
+*/
+
+"helpBeerText" = "Haz clic en + para agregar una bebida";
+"brand" = "Marca";
+"size" = "Tamaño";
+"price" = "Precio";
+"addSize" = "Ingresa un Tamaño";
+"addBrand" = "Ingresa una Marca";
+"addPrice" = "Ingresa un Precio";
+"sizeDesc" = "En mL";
+"appName" = "Beer Más";
+"saving" = "Ahorro:";
+"disclaimer" = "*entre bebidas 1 y 2";
+"yes" = "Sí";
+"no" = "No";
+"backScreen" = "Volver";
+"delete" = "Eliminar";
+"deleteTitle" = "¿Eliminar?";
+"deleteBeerAlert" = "¿Deseas eliminar todas las cervezas? Esta acción no se puede deshacer.";
+"save" = "Guardar";
+"add" = "Agregar";
+"detailsHelpText" = "Selecciona arriba o escribe haciendo clic en el campo \"Tamaño\"";
+"appVersion" = "Versión";

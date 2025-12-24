@@ -9,26 +9,32 @@
 import Foundation
 import StoreKit
 
-struct DonateProduct {
-    
+final class DonateProduct: ObservableObject {
     let type: DonateType
     let name: String
-    let price: Float
+    let price: Double
     let priceFormatted: String?
-    let product: SKProduct
+    let product: Product?
     
-    init?(product: SKProduct) {
-        
-        guard let type = DonateType.getByProductId(product.productIdentifier) else { return nil }
+    init?(product: Product) {
+        guard let type = DonateType.getByProductId(product.id) else { return nil }
         
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
         numberFormatter.locale = Locale(identifier: "pt_BR@currency=BRL")
-        priceFormatted = numberFormatter.string(from: product.price)
+        priceFormatted = product.displayPrice
         
         self.type = type
-        self.name = product.localizedTitle
-        self.price = product.price.floatValue
+        self.name = product.displayName
+        self.price = NSDecimalNumber(decimal: product.price).doubleValue
+        self.product = product
+    }
+    
+    init(type: DonateType, name: String, price: Double, priceFormatted: String? = nil, product: Product) {
+        self.type = type
+        self.name = name
+        self.price = price
+        self.priceFormatted = priceFormatted
         self.product = product
     }
 }

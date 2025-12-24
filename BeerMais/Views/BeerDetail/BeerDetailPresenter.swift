@@ -37,31 +37,23 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     
     // MARK: - Injected Properties
     
-    let view: BeerDetailViewProtocol
     let beerWorker: BeerWorkerProtocol
  
     init(
-        view: BeerDetailViewProtocol,
         beerWorker: BeerWorkerProtocol
     ) {
-        self.view = view
         self.beerWorker = beerWorker
     }
     
     convenience init(
-        view: BeerDetailViewProtocol,
         beer: Beer?,
         beerWorker: BeerWorkerProtocol
     ) {
-        self.init(view: view, beerWorker: beerWorker)
+        self.init(beerWorker: beerWorker)
         
         if let currentBeer = beer {
             self.beer = currentBeer
             setupData()
-            
-            view.isEditMode(true)
-        } else {
-            view.isEditMode(false)
         }
     }
     
@@ -71,9 +63,9 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         beerValue = beer.value
         beerAmount = beer.amount
         
-        view.setBrand(with: beerBrand)
-        view.setPrice(with: beerValue.formatValueToShow)
-        view.setSize(with: beerAmount.toString)
+//        view.setBrand(with: beerBrand)
+//        view.setPrice(with: beerValue.formatValueToShow)
+//        view.setSize(with: beerAmount.toString)
         parseAmountToFillSegment(beerAmount.toString)
     }
     
@@ -84,13 +76,13 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     func priceValueChanged(value: String?) {
         beerValue = value?.parseStringValueToFloat ?? 0
         
-        view.setPrice(with: beerValue.formatValueToShow)
+//        view.setPrice(with: beerValue.formatValueToShow)
     }
     
     func amountValueChanged(value: String?) {
         parseAmountToFillSegment(value ?? "")
         
-        if let amount = value?.toInt16 {
+        if let amount = value?.asInt16 {
             beerAmount = amount
         }
     }
@@ -102,9 +94,9 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         
         guard let amountValue = amountValues[index] else { return }
         
-        beerAmount = amountValue.toInt16
+        beerAmount = amountValue.asInt16.orZero
         
-        view.setSize(with: amountValue)
+//        view.setSize(with: amountValue)
         
     }
     
@@ -113,7 +105,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         
         beerWorker.delete(beer: beer)
         
-        view.deleteSucess()
+//        view.deleteSucess()
     }
     
     func editBeer() {
@@ -125,7 +117,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         
         beerWorker.edit(beer: beer, data: beerDataDict())
         
-        view.editSucess()
+//        view.editSucess()
     }
     
     func createBeer() {
@@ -135,19 +127,19 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         
         beerWorker.createBeer(data: beerDataDict())
         
-        view.createSucess()
+//        view.createSucess()
     }
     
     private func parseAmountToFillSegment(_ amountString: String) {
-        let amountValue = amountValues.filter {
-            $0.value == amountString
-        }
+//        let amountValue = amountValues.filter {
+//            $0.value == amountString
+//        }
         
-        if amountValue.count > 0 {
-            view.setSegmentIndex(amountValue.first?.key ?? -1)
-        } else {
-            view.setSegmentIndex(-1)
-        }
+//        if amountValue.count > 0 {
+//            view.setSegmentIndex(amountValue.first?.key ?? -1)
+//        } else {
+//            view.setSegmentIndex(-1)
+//        }
     }
     
     private func validateBeerAndGetResult() -> Bool {
@@ -156,9 +148,9 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         let isValidBrand = beerBrand.count > 0
         let isValidValue = beerValue > 0
         
-        view.setIsValidAmount(isValidAmount)
-        view.setIsValidBrand(isValidBrand)
-        view.setIsValidValue(isValidValue)
+//        view.setIsValidAmount(isValidAmount)
+//        view.setIsValidBrand(isValidBrand)
+//        view.setIsValidValue(isValidValue)
         
         return isValidAmount && isValidBrand && isValidValue
     }

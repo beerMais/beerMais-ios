@@ -2,129 +2,114 @@
 //  DonateView.swift
 //  BeerMais
 //
-//  Created by Jose Neves on 14/08/21.
-//  Copyright © 2021 joseneves. All rights reserved.
+//  Created by José Neves on 19/06/25.
+//  Copyright © 2025 joseneves. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
-final class DonateView: UIView {
+struct DonateView: View {
     
-    lazy var descriptionLabel: UILabel = {
-        let view = UILabel()
-        view.numberOfLines = 0
-        view.textAlignment = .justified
-        view.text = "Se você já economizou usando o Beer Mais na hora de escolher a melhor bebida e deseja contibuir com a manutenção do app, qualquer valor é de grande ajuda 🍻"
-        
-        return view
-    }()
+    @StateObject private var viewModel = ViewModel()
     
-    lazy var donateCollectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: .init())
-        view.delegate = self
-        view.dataSource = self
-        view.register(
-            DonateCollectionViewCell.self,
-            forCellWithReuseIdentifier: DonateCollectionViewCell.reuseIdentifier
-        )
-        
-        return view
-    }()
+#if !(DEBUG_APPCLIP || APPCLIP)
+    private let successFeedbackView = SuccessFeedbackView()
+    private let loadingView = LoadingView()
+#endif
     
-    lazy var presenter: DonateViewPresenter = {
-        let presenter = DonateViewPresenter()
-        presenter.delegate = self
-        
-        return presenter
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setupViews()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func addDonateOptions(with maxWidth: CGFloat) {
-        let donatesCount: CGFloat = 3
-        
-        var cellWidth: CGFloat
-        if (maxWidth / donatesCount) > 105 {
-            cellWidth = 105
-        } else {
-            cellWidth = 90
-        }
-        
-        let margin = (maxWidth - CGFloat(donatesCount * cellWidth)) / 4
-        
-        donateCollectionView.contentInset = UIEdgeInsets(top: 0, left: margin, bottom: 0, right: margin)
-        
-        let collectionViewFLowLayout = UICollectionViewFlowLayout()
-        collectionViewFLowLayout.itemSize = CGSize(width: cellWidth, height: 140)
-        collectionViewFLowLayout.minimumLineSpacing = 0
-        collectionViewFLowLayout.minimumInteritemSpacing = 0
-        
-        donateCollectionView.collectionViewLayout = collectionViewFLowLayout
-    }
-
-}
-
-extension DonateView: ViewProtocol {
-    func buildViews() {}
-    
-    func configViews() {
-        addSubViews([
-            descriptionLabel,
-            donateCollectionView
-        ])
-    }
-    
-    func setupConstraints() {
-        NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: topAnchor),
-            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+    var body: some View {
+        VStack {
+            Text("Se você já economizou usando o Beer Mais na hora de escolher a melhor bebida e deseja contibuir com a manutenção do app, qualquer valor é de grande ajuda 🍻")
             
-            donateCollectionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            donateCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            donateCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            donateCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            donateCollectionView.heightAnchor.constraint(greaterThanOrEqualToConstant: 140)
-        ])
-    }
-}
-
-extension DonateView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter.didSelectDonateTypeByRow(indexPath.row)
-    }
-}
-
-extension DonateView: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        presenter.availableDonatesCount()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: DonateCollectionViewCell.reuseIdentifier, for: indexPath
-        ) as? DonateCollectionViewCell else { return UICollectionViewCell() }
-        
-        if let donateProduct = presenter.getDonateTypeByRow(indexPath.row) {
-            cell.setDonate(donateProduct)
+            LazyHGrid(rows: [GridItem(.flexible())]) {
+                ForEach($viewModel.donates, id: \.name) { product in
+                    DonateProductView(product: product, action: {
+#if !(DEBUG_APPCLIP || APPCLIP)
+                        loadingView.show()
+                        Task {
+                            let isSucceed = await viewModel.buyProduct(product.wrappedValue)
+                            
+                            if isSucceed {
+                                loadingView.hide()
+                                successFeedbackView.show()
+                            } else {
+                                let rewardedViewModel = RewardedFullScreenAd()
+                                await rewardedViewModel.loadAd()
+                                
+                                loadingView.hide()
+                                rewardedViewModel.showAd()
+                                
+                            }
+                        }
+#else
+                        Task {
+                            await viewModel.buyProduct(product.wrappedValue)
+                        }
+#endif
+                    })
+                }
+            }
         }
-        
-        return cell
     }
-    
 }
 
-extension DonateView: DonateViewDelegate {
-    func reloadAvailableDonates() {
-        donateCollectionView.reloadData()
+//#Preview {
+//    AboutView()
+//}
+
+struct DonateProductView: View {
+    
+    @Binding var product: DonateProduct
+    var action: () -> Void
+    
+    private var image: Image {
+        switch product.type {
+        case .small:
+            BeerImage.iconBeerCan100UI
+        case .medium:
+            BeerImage.iconBeerBottle100UI
+        case .large:
+            BeerImage.iconBeerBottles100UI
+        }
+    }
+    
+    private var container: some View {
+        VStack {
+            Spacer(minLength: 8)
+            
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: UIScreen.main.bounds.width * 0.2)
+                .clipped()
+            
+            Text(product.name)
+                .font(.system(size: 16))
+            if let priceFormatted = product.priceFormatted {
+                Text(priceFormatted)
+                    .font(.system(size: 16))
+            }
+            
+            Spacer(minLength: 8)
+        }
+        .frame(minWidth: UIScreen.main.bounds.width * 0.29)
+    }
+    
+    var body: some View {
+        Button(action: action) {
+            if #available(iOS 26.0, *) {
+                container
+                    .glassEffect(.regular, in: .rect(cornerRadius: 16))
+
+            } else {
+                container
+                    .cornerRadius(8)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(.gray, lineWidth: 0.5)
+                    }
+            }
+        }
+        .tint(Color(UIColor.label))
     }
 }
