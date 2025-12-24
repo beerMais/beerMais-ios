@@ -198,13 +198,9 @@ struct BeerMais_widget_Previews: PreviewProvider {
 
 extension View {
     func widgetBackground(backgroundView: some View) -> some View {
-        if #available(iOSApplicationExtension 17.0, *) {
-            return containerBackground(for: .widget) {
-                backgroundView
-            }
-            .padding(.all, -15)
-        } else {
-            return background(backgroundView)
+        containerBackground(for: .widget) {
+            backgroundView
         }
+        .padding(.all, -15)
     }
 }

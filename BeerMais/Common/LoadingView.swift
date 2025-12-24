@@ -22,7 +22,10 @@ final class LoadingView {
         
         guard animationView == nil || topViewController == nil else { return }
         
-        let keyWindow = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
+        let keyWindow = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first { $0.isKeyWindow }
 
         guard var topViewController = keyWindow?.rootViewController else {
             return

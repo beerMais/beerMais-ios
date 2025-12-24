@@ -7,53 +7,34 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
 
-    func scene(_ scene: UIScene,
-               willConnectTo session: UISceneSession,
-               options connectionOptions: UIScene.ConnectionOptions) {
-        
+    func scene(
+        _ scene: UIScene,
+        willConnectTo session: UISceneSession,
+        options connectionOptions: UIScene.ConnectionOptions
+    ) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             
             let navigationController = UINavigationController()
+            let main = UIHostingController(
+                rootView: MainView().interactiveDismissDisabled()
+            )
             
-            let completionHandler = {
-                let homeNavController = UINavigationController(rootViewController: HomeFactory.build())
-                homeNavController.tabBarItem = UITabBarItem(
-                    title: "Calculadora",
-                    image: UIImage(named: "icons8-math-50"),
-                    tag: 0
-                )
-                
-                let aboutController = AboutFactory.build()
-                aboutController.tabBarItem = UITabBarItem(
-                    title: "Sobre",
-                    image: UIImage(named: "icons8-about-50"),
-                    tag: 1
-                )
-                
-                let tabBarController = UITabBarController()
-                tabBarController.tabBar.tintColor = BeerColors.primaryLight
-                tabBarController.tabBar.barTintColor = .tertiarySystemBackground
-                tabBarController.tabBar.backgroundColor = .systemBackground
-                tabBarController.viewControllers = [
-                    homeNavController,
-                    aboutController
-                ]
-                
-                tabBarController.modalPresentationStyle = .overFullScreen
-                navigationController.present(tabBarController, animated: true, completion: {
-                    navigationController.viewControllers.first?.removeFromParent()
-                })
+            if #available(iOS 26.0, *) {} else {
+                main.modalPresentationStyle = .overFullScreen
             }
             
             navigationController.viewControllers = [
                 LaunchScreenViewController(
-                    completionHandler: completionHandler
+                    completionHandler: {
+                        navigationController.present(main, animated: true)
+                    }
                 )
             ]
             

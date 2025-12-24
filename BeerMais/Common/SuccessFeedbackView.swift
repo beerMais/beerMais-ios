@@ -18,7 +18,11 @@ final class SuccessFeedbackView {
     private var topController: UIViewController?
     
     func show(secondsToStop: Int = 7) {
-        let keyWindow = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
+        
+        let keyWindow = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first { $0.isKeyWindow }
 
         guard var topController = keyWindow?.rootViewController else {
             return
@@ -54,5 +58,6 @@ final class SuccessFeedbackView {
         topController?.view.subviews.first(where: { $0 == animationView })?.removeFromSuperview()
 
         animationView = nil
+        topController = nil
     }
 }

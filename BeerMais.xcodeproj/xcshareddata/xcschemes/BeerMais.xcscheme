@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1640"
+   LastUpgradeVersion = "2600"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -71,7 +71,7 @@
          </CommandLineArgument>
       </CommandLineArguments>
       <StoreKitConfigurationFileReference
-         identifier = "../BeerMais/Configuration/BeerMais.storekit">
+         identifier = "../../BeerMais/Configuration/BeerMais.storekit">
       </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction

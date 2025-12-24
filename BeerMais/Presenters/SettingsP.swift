@@ -29,6 +29,16 @@ final class SettingsP {
         return adMobBeerBannerID
     }
     
+    func getAdMobBeerRewardedID() -> String {
+        var adMobBeerRewardedID = ""
+        
+        if let dict = self.getDictionary() {
+            adMobBeerRewardedID = dict["AdMobBeerRewardedID"] as! String
+        }
+        
+        return adMobBeerRewardedID
+    }
+    
     class func getAmplitudeKey() -> String {
         var key = ""
         
