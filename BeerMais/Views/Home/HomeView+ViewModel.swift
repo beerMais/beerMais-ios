@@ -18,8 +18,8 @@ extension HomeView {
         func reload() {
             beers = worker.getBeers()
             
-            if beers.count >= 2 {
-                highlightedBeer = beers.first
+            if let mostValuableBeer = worker.calculateMostValuableBeer(beers: beers) {
+                highlightedBeer = mostValuableBeer
             }
         }
     }

@@ -111,7 +111,8 @@ struct BeerView: View {
             Text(viewModel.isHighlighted ? "disclaimer".localized : viewModel.itemNumber?.asString ?? "")
                 .font(.system(size: 10))
                 .fontWeight(.light)
-                .padding(.trailing, 10)
+                .padding(.trailing, 6)
+                .padding(.bottom, 6)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 .foregroundColor(Color.gray)
         }
@@ -136,7 +137,8 @@ struct BeerView: View {
 //                "brand": "Budweiser",
 //                "value": 2.59,
 //                "type": Int16(1)
-//            ])!
+//            ])!,
+//            index: 1
 //        )
 //    )
 //    .padding(20)

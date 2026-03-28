@@ -13,58 +13,67 @@ import Intents
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> BeerMaisEntry {
-        BeerMaisEntry(
-            date: Date(),
-            brand: nil,
-            amount: nil,
-            value: nil,
-            type: nil,
-            economy: nil,
-            count: 0
-        )
+        buildBeerMaisEntry()
     }
 
     func getSnapshot(
         in context: Context,
         completion: @escaping (BeerMaisEntry) -> ()
     ) {
-        completion(BeerMaisEntry(
-            date: Date(),
-            brand: nil,
-            amount: nil,
-            value: nil,
-            type: nil,
-            economy: nil,
-            count: 0
-        ))
+        completion(buildBeerMaisEntry())
     }
 
-    func getTimeline(in context: Context,
-                     completion: @escaping (Timeline<Entry>) -> ()) {
-        let defaults = UserDefaults(suiteName: "group.beerMais")
-        let brand = defaults?.string(forKey: "BRAND")
-        let amount = defaults?.string(forKey: "AMOUNT")
-        let value = defaults?.string(forKey: "VALUE")
-        let type = defaults?.string(forKey: "TYPE")
-        let economy = defaults?.string(forKey: "ECONOMY")
-        let count = defaults?.integer(forKey: "BEERS_COUNT") ?? 0
+    func getTimeline(
+        in context: Context,
+        completion: @escaping (Timeline<Entry>) -> ()
+    ) {
+        guard
+            !context.isPreview,
+            context.family == .systemSmall
+        else {
+            completion(Timeline(
+                entries: [
+                    buildBeerMaisEntry()
+                ],
+                policy: .never
+            ))
+            return
+        }
         
-        let timeline = Timeline(
+        let defaults = UserDefaults(suiteName: "group.beerMais")
+        completion(Timeline(
             entries: [
                 BeerMaisEntry(
                     date: Date(),
-                    brand: brand,
-                    amount: amount,
-                    value: value,
-                    type: type,
-                    economy: economy,
-                    count: count
+                    brand: defaults?.string(forKey: "BRAND"),
+                    amount: defaults?.string(forKey: "AMOUNT"),
+                    value: defaults?.string(forKey: "VALUE"),
+                    type: defaults?.string(forKey: "TYPE"),
+                    economy: defaults?.string(forKey: "ECONOMY"),
+                    count: defaults?.integer(forKey: "BEERS_COUNT") ?? 0
                 )
-            ], 
+            ],
             policy: .never
-        )
+        ))
+    }
     
-        completion(timeline)
+    private func buildBeerMaisEntry(
+        brand: String? = nil,
+        amount: String? = nil,
+        value: String? = nil,
+        type: String? = nil,
+        economy: String? = nil,
+        count: Int = 0
+    ) -> BeerMaisEntry {
+        BeerMaisEntry(
+            date: Date(),
+            brand: brand,
+            amount: amount,
+            value: value,
+            type: type,
+            economy: economy,
+            count: count
+        )
     }
 }
 
@@ -80,14 +89,6 @@ struct BeerMaisEntry: TimelineEntry {
 
 struct BeerMais_widgetEntryView : View {
     var entry: Provider.Entry
-    
-    var border: some View {
-        RoundedRectangle(cornerRadius: 22)
-            .stroke(
-                Color(UIColor(named: "economyBorder")!),
-                lineWidth: entry.count < 2 ? 0 : 4
-            )
-    }
     
     var backgroundColor: some View {
         var uiColor = UIColor.tertiarySystemBackground
@@ -149,10 +150,22 @@ struct BeerMais_widgetEntryView : View {
                     Spacer()
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .overlay(border)
         }
-        .widgetBackground(backgroundView: backgroundColor)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .containerBackground(for: .widget) {
+            if entry.count >= 2  {
+                Color("economyBackground")
+            } else {
+                Color(UIColor.tertiarySystemBackground)
+            }
+        }
+        .clipShape(ContainerRelativeShape())
+        .overlay {
+            if entry.count >= 2 {
+                ContainerRelativeShape()
+                        .strokeBorder(Color("economyBorder"), lineWidth: 3)
+            }
+        }
     }
 }
 
@@ -161,40 +174,43 @@ struct BeerMais_widget: Widget {
     let kind: String = "BeerMais_widget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind,
-                            provider: Provider()) { entry in
+        StaticConfiguration(
+            kind: kind,
+            provider: Provider()
+        ) { entry in
             BeerMais_widgetEntryView(entry: entry)
         }
+        .contentMarginsDisabled()
         .supportedFamilies([.systemSmall])
         .configurationDisplayName("Beer Mais")
         .description("Deixe em destaque o melhor custo-beneficio")
     }
 }
 
-struct BeerMais_widget_Previews: PreviewProvider {
-    static var previews: some View {
-        BeerMais_widgetEntryView(entry: BeerMaisEntry(
-            date: Date(),
-            brand: nil,
-            amount: nil,
-            value: nil,
-            type: nil,
-            economy: nil,
-            count: 0
-        ))
-        .previewContext(WidgetPreviewContext(family: .systemSmall))
-        BeerMais_widgetEntryView(entry: BeerMaisEntry(
-            date: Date(),
-            brand: nil,
-            amount: nil,
-            value: nil,
-            type: nil,
-            economy: nil,
-            count: 3
-        ))
-        .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
-}
+//struct BeerMais_widget_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BeerMais_widgetEntryView(entry: BeerMaisEntry(
+//            date: Date(),
+//            brand: nil,
+//            amount: nil,
+//            value: nil,
+//            type: nil,
+//            economy: nil,
+//            count: 0
+//        ))
+//        .previewContext(WidgetPreviewContext(family: .systemSmall))
+//        BeerMais_widgetEntryView(entry: BeerMaisEntry(
+//            date: Date(),
+//            brand: "brand",
+//            amount: "1 L",
+//            value: "RS 1,00",
+//            type: "2",
+//            economy: "RS 2,00/L",
+//            count: 3
+//        ))
+//        .previewContext(WidgetPreviewContext(family: .systemSmall))
+//    }
+//}
 
 extension View {
     func widgetBackground(backgroundView: some View) -> some View {
