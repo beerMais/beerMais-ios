@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WidgetKit
 
 import AmplitudeSwift
 
@@ -79,6 +80,8 @@ final class BeerWorker: BeerWorkerProtocol {
     func deleteAllBeers() {
         coreDataWorker.deleteData(entityName: entityName)
         
+        cleandWidgetData()
+        
         AppP.amplitude.track(event: BaseEvent(
             eventType: "all_beers_deleted",
             eventProperties: nil
@@ -113,43 +116,49 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     func calculateMostValuableBeer(beers: [Beer]) -> Beer? {
-        guard let mostValuableBeer = orderBeers(beers).first else {
+        guard beers.count >= 2, let mostValuableBeer = beers.first else {
+            cleandWidgetData()
             return nil
         }
         
         // TODO: Please refactory this!
-        let defaults = UserDefaults(suiteName: "group.beerMais")
-        if let brand = mostValuableBeer.brand {
-            defaults?.set(brand, forKey: "BRAND")
+        guard let defaults = UserDefaults(suiteName: "group.beerMais") else {
+            return mostValuableBeer
         }
         
-        var amountText = "\(mostValuableBeer.amount)ml"
+        if let brand = mostValuableBeer.brand {
+            defaults.set(brand, forKey: "BRAND")
+        }
         
-        if (mostValuableBeer.amount >= 1000) {
-            amountText = "1 L"
-            
-            if (mostValuableBeer.amount >= 1010) {
+        let amountText: String
+        if mostValuableBeer.amount >= 1000 {
+            if mostValuableBeer.amount >= 1010 {
                 var amountString = String(format: "%.2f", Float(mostValuableBeer.amount) / 1000)
                 amountString = amountString.replacingOccurrences(of: ".", with: ",")
                 amountText = "\(amountString) L"
+            } else {
+                amountText = "1 L"
             }
+        } else {
+            amountText = "\(mostValuableBeer.amount)ml"
         }
+        defaults.set(amountText, forKey: "AMOUNT")
         
-        defaults?.set(amountText, forKey: "AMOUNT")
-        defaults?.set(
+        defaults.set(
             "R$ \(formatBeerValueToShow(value: mostValuableBeer.value))",
             forKey: "VALUE"
         )
-        defaults?.set(String(mostValuableBeer.type), forKey: "TYPE")
-        defaults?.set(String(beers.count), forKey: "BEERS_COUNT")
+        defaults.set(String(mostValuableBeer.type), forKey: "TYPE")
+        defaults.set(String(beers.count), forKey: "BEERS_COUNT")
         
         if beers.count > 1 {
             let economy = calcEconomyBetweenBeers(beer1: mostValuableBeer, beer2: beers[1])
             
-            defaults?.set(
+            defaults.set(
                 "R$ \(formatBeerValueToShow(value: economy))",
                 forKey: "ECONOMY"
             )
+            reloadWidget()
         }
         
         return mostValuableBeer
@@ -182,5 +191,19 @@ final class BeerWorker: BeerWorkerProtocol {
         parameters["value"] = beer.value as NSObject?
         
         return parameters
+    }
+    
+    private func reloadWidget() {
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+    
+    private func cleandWidgetData() {
+        if let defaults = UserDefaults(suiteName: "group.beerMais") {
+            for key in defaults.dictionaryRepresentation().keys {
+                defaults.removeObject(forKey: key)
+            }
+        }
+        
+        reloadWidget()
     }
 }

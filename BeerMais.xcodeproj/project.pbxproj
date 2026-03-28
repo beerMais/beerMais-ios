@@ -300,7 +300,6 @@
 		2DEBCA672B018E75001DB86E /* SuccessFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessFeedbackView.swift; sourceTree = "<group>"; };
 		2DEBCA712B019903001DB86E /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		2DEBCA742B0199EA001DB86E /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
-		6B6764A329A6D70D00C8EFE6 /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleMobileAds.xcframework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework/GoogleMobileAds.xcframework"; sourceTree = "<group>"; };
 		870BACDD2817485800AEF61E /* ViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProtocol.swift; sourceTree = "<group>"; };
 		870BACE628174E8500AEF61E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		870BACE92817502E00AEF61E /* UIView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
@@ -322,7 +321,6 @@
 		87FE203F281A197A00B61429 /* Float+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+extensions.swift"; sourceTree = "<group>"; };
 		87FE2041281A19CB00B61429 /* Int+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+extensions.swift"; sourceTree = "<group>"; };
 		A14E34AA259AF03D0080578E /* BeerMais_Clip-debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BeerMais_Clip-debug.entitlements"; sourceTree = "<group>"; };
-		A14E35FF259AF7960080578E /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleMobileAds.xcframework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework-Current/GoogleMobileAds.xcframework"; sourceTree = "<group>"; };
 		A18158AD2597D1D4004B2018 /* BeerMais Clip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BeerMais Clip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A18158AF2597D1D5004B2018 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A18158B12597D1D5004B2018 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -664,9 +662,7 @@
 		540576969A604AB673A2D23F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6B6764A329A6D70D00C8EFE6 /* GoogleMobileAds.xcframework */,
 				87E1766526CB185300989B71 /* StoreKit.framework */,
-				A14E35FF259AF7960080578E /* GoogleMobileAds.xcframework */,
 				2D4C51F8254F85CB00D0B2D0 /* WidgetKit.framework */,
 				2D4C51FA254F85CB00D0B2D0 /* SwiftUI.framework */,
 			);

@@ -30,13 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        WidgetCenter.shared.reloadAllTimelines()
-    }
-
     func applicationWillTerminate(_ application: UIApplication) {
-        WidgetCenter.shared.reloadAllTimelines()
         self.saveContext()
     }
     
