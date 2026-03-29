@@ -33,16 +33,16 @@ extension BeerDetailView {
             self.brand = selectedBeer?.brand ?? ""
             self.price = selectedBeer?.value.asString ?? ""
             self.size = selectedBeer?.amount.asString ?? ""
-            self.sizeType = "ml"
+            self.sizeType = selectedBeer?.amount == 1000 ? "L" : "ml"
             
-            switch selectedBeer?.amount.asString {
-            case Segment.first.name:
+            switch selectedBeer?.amount {
+            case Segment.first.amount:
                 self.sizeSelection = .first
-            case Segment.second.name:
+            case Segment.second.amount:
                 self.sizeSelection = .second
-            case Segment.third.name:
+            case Segment.third.amount:
                 self.sizeSelection = .third
-            case Segment.fourth.name:
+            case Segment.fourth.amount:
                 self.sizeSelection = .fourth
             default:
                 self.sizeSelection = .first
@@ -58,10 +58,13 @@ extension BeerDetailView {
                 
                 switch value.name {
                 case Segment.first.name:
+                    sizeType = "ml"
                     size = Segment.first.name
                 case Segment.second.name:
+                    sizeType = "ml"
                     size = Segment.second.name
                 case Segment.third.name:
+                    sizeType = "ml"
                     size = Segment.third.name
                 case Segment.fourth.name:
                     sizeType = "L"
@@ -93,11 +96,12 @@ extension BeerDetailView {
         }
         
         func createOrSave() {
+            let amount = normalizedAmount
             let data: [String : Any] = [
-                "amount": size.onlyNumbers.asInt16.orZero,
+                "amount": amount,
                 "brand": brand,
                 "value": price.parseStringValueToFloat,
-                "type": size.asInt16.orZero < 1000 ? 1 : 2
+                "type": Int16(amount < 1000 ? 1 : 2)
             ]
             if let selectedBeer {
                 worker.edit(beer: selectedBeer, data: data)
@@ -124,6 +128,14 @@ extension BeerDetailView {
             self.price = ""
             self.size = ""
             self.sizeSelection = .first
+        }
+
+        private var normalizedAmount: Int16 {
+            if sizeSelection == .fourth {
+                return 1000
+            }
+
+            return size.onlyNumbers.asInt16.orZero
         }
     }
 }

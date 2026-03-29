@@ -25,10 +25,10 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
 
     private var beer: Beer?
     private let amountValues: [Int: String] = [
-        0: "269",
-        1: "350",
-        2: "473",
-        3: "1000"
+        0: Segment.first.amount.asString,
+        1: Segment.second.amount.asString,
+        2: Segment.third.amount.asString,
+        3: Segment.fourth.amount.asString
     ]
     
     private var beerBrand: String = ""
