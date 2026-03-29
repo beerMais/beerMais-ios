@@ -15,6 +15,9 @@ extension BeerView {
         @Published var beer: Beer? {
             didSet { beerUpdated() }
         }
+        @Published var economy: Float? {
+            didSet { economyUpdated() }
+        }
         
         @Published var brand: String = ""
         @Published var amount: String = ""
@@ -54,6 +57,13 @@ extension BeerView {
             setBrand()
             setAmount()
             setValue()
+            if !isHighlighted {
+                setValuePerML()
+            }
+        }
+        
+        private func economyUpdated() {
+            guard isHighlighted else { return }
             setEconomy()
         }
         
@@ -81,17 +91,22 @@ extension BeerView {
         private func setValue() {
             let valueString = worker.formatBeerValueToShow(value: beer?.value ?? 0)
             
-            self.beerValue = "R$ \(valueString)"
+            beerValue = "R$ \(valueString)"
         }
         
-        private func setEconomy() {
+        private func setValuePerML() {
             var valuePerLiter: Float = 0
             if let beer = beer,
                beer.amount != 0 && beer.value != 0 {
                 valuePerLiter = worker.getValuePerML(beer: beer) * 1000
             }
             
-            self.beerEconomyValue = "R$ \(worker.formatBeerValueToShow(value: valuePerLiter))/L"
+            beerEconomyValue = "R$ \(worker.formatBeerValueToShow(value: valuePerLiter))/L"
+        }
+        
+        private func setEconomy() {
+            guard let economy else { return }
+            beerEconomyValue = "R$ \(worker.formatBeerValueToShow(value: economy))/L"
         }
     }
 }
