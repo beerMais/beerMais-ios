@@ -62,11 +62,6 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         beerBrand = beer.brand ?? ""
         beerValue = beer.value
         beerAmount = beer.amount
-        
-//        view.setBrand(with: beerBrand)
-//        view.setPrice(with: beerValue.formatValueToShow)
-//        view.setSize(with: beerAmount.toString)
-        parseAmountToFillSegment(beerAmount.toString)
     }
     
     func brandValueChanged(value: String?) {
@@ -75,13 +70,9 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
     
     func priceValueChanged(value: String?) {
         beerValue = value?.parseStringValueToFloat ?? 0
-        
-//        view.setPrice(with: beerValue.formatValueToShow)
     }
     
     func amountValueChanged(value: String?) {
-        parseAmountToFillSegment(value ?? "")
-        
         if let amount = value?.asInt16 {
             beerAmount = amount
         }
@@ -95,17 +86,12 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         guard let amountValue = amountValues[index] else { return }
         
         beerAmount = amountValue.asInt16.orZero
-        
-//        view.setSize(with: amountValue)
-        
     }
     
     func deleteBeer() {
         guard let beer = beer else { return }
         
         beerWorker.delete(beer: beer)
-        
-//        view.deleteSucess()
     }
     
     func editBeer() {
@@ -116,8 +102,6 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         }
         
         beerWorker.edit(beer: beer, data: beerDataDict())
-        
-//        view.editSucess()
     }
     
     func createBeer() {
@@ -126,31 +110,12 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         }
         
         beerWorker.createBeer(data: beerDataDict())
-        
-//        view.createSucess()
-    }
-    
-    private func parseAmountToFillSegment(_ amountString: String) {
-//        let amountValue = amountValues.filter {
-//            $0.value == amountString
-//        }
-        
-//        if amountValue.count > 0 {
-//            view.setSegmentIndex(amountValue.first?.key ?? -1)
-//        } else {
-//            view.setSegmentIndex(-1)
-//        }
     }
     
     private func validateBeerAndGetResult() -> Bool {
-        
         let isValidAmount = beerAmount > 0
         let isValidBrand = beerBrand.count > 0
         let isValidValue = beerValue > 0
-        
-//        view.setIsValidAmount(isValidAmount)
-//        view.setIsValidBrand(isValidBrand)
-//        view.setIsValidValue(isValidValue)
         
         return isValidAmount && isValidBrand && isValidValue
     }
