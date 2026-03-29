@@ -107,7 +107,7 @@ struct BeerDetailView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(selectedBeer == nil ? "add" : "save") {
-                        viewModel.create()
+                        viewModel.createOrSave()
                     }
                 }
             }
@@ -123,10 +123,10 @@ struct BeerDetailView: View {
     }
 }
 
-#Preview {
+//#Preview {
 //    HomeView()
 //    BeerDetailView()
-}
+//}
 
 extension UIApplication {
     func endEditing() {

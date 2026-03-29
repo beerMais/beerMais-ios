@@ -22,7 +22,6 @@ extension BeerDetailView {
         private var isUpdatingSizeSelection = false
         private var isUpdatingSize = false
 
-        
         var onFinish: (() -> Void)?
 
         private let selectedBeer: Beer?
@@ -93,9 +92,9 @@ extension BeerDetailView {
             }.store(in: &cancellables)
         }
         
-        func create() {
+        func createOrSave() {
             let data: [String : Any] = [
-                "amount": size.asInt16.orZero,
+                "amount": size.onlyNumbers.asInt16.orZero,
                 "brand": brand,
                 "value": price.parseStringValueToFloat,
                 "type": size.asInt16.orZero < 1000 ? 1 : 2
