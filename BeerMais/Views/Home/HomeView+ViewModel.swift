@@ -12,14 +12,19 @@ extension HomeView {
     final class ViewModel: ObservableObject {
         @Published var beers: [Beer] = []
         @Published var highlightedBeer: Beer? = nil
+        @Published var economy: Float? = nil
         
         private let worker = BeerWorker()
         
         func reload() {
             beers = worker.getBeers()
             
-            if let mostValuableBeer = worker.calculateMostValuableBeer(beers: beers) {
+            if let (mostValuableBeer, economy) = worker.calculateMostValuableBeer(beers: beers) {
                 highlightedBeer = mostValuableBeer
+                self.economy = economy
+            } else {
+                highlightedBeer = nil
+                economy = nil
             }
         }
     }

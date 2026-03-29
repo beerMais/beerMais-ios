@@ -110,6 +110,9 @@ struct HomeView: View {
         .onChange(of: viewModel.highlightedBeer) { _, newValue in
             highlightedBeerViewModel.beer = newValue
         }
+        .onChange(of: viewModel.economy) { _, newValue in
+            highlightedBeerViewModel.economy = newValue
+        }
         .onAppear {
             viewModel.reload()
         }

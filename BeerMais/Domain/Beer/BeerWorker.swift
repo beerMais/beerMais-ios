@@ -22,7 +22,7 @@ protocol BeerWorkerProtocol {
     func getValuePerML(beer: Beer) -> Float
     func calcEconomyBetweenBeers(beer1: Beer, beer2: Beer) -> Float
     func formatBeerValueToShow(value: Float) -> String
-    func calculateMostValuableBeer(beers: [Beer]) -> Beer?
+    func calculateMostValuableBeer(beers: [Beer]) -> (Beer, Float?)?
 }
 
 final class BeerWorker: BeerWorkerProtocol {
@@ -115,15 +115,17 @@ final class BeerWorker: BeerWorkerProtocol {
         String(format: "%.2f", value).replacingOccurrences(of: ".", with: ",")
     }
     
-    func calculateMostValuableBeer(beers: [Beer]) -> Beer? {
+    func calculateMostValuableBeer(beers: [Beer]) -> (Beer, Float?)? {
         guard beers.count >= 2, let mostValuableBeer = beers.first else {
             cleandWidgetData()
             return nil
         }
         
+        let economy: Float? = beers.count > 1 ? calcEconomyBetweenBeers(beer1: mostValuableBeer, beer2: beers[1]) : nil
+        
         // TODO: Please refactory this!
         guard let defaults = UserDefaults(suiteName: "group.beerMais") else {
-            return mostValuableBeer
+            return (mostValuableBeer, economy)
         }
         
         if let brand = mostValuableBeer.brand {
@@ -150,10 +152,8 @@ final class BeerWorker: BeerWorkerProtocol {
         )
         defaults.set(String(mostValuableBeer.type), forKey: "TYPE")
         defaults.set(String(beers.count), forKey: "BEERS_COUNT")
-        
-        if beers.count > 1 {
-            let economy = calcEconomyBetweenBeers(beer1: mostValuableBeer, beer2: beers[1])
-            
+    
+        if let economy {
             defaults.set(
                 "R$ \(formatBeerValueToShow(value: economy))",
                 forKey: "ECONOMY"
@@ -161,7 +161,7 @@ final class BeerWorker: BeerWorkerProtocol {
             reloadWidget()
         }
         
-        return mostValuableBeer
+        return (mostValuableBeer, economy)
     }
     
     // MARK: - Private methods
