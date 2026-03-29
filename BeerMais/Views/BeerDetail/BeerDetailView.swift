@@ -26,6 +26,19 @@ enum Segment: String, CaseIterable, Identifiable {
             "1L"
         }
     }
+    
+    var amount: Int16 {
+        switch self {
+        case .first:
+            269
+        case .second:
+            350
+        case .third:
+            473
+        case .fourth:
+            1000
+        }
+    }
 }
 
 struct BeerDetailView: View {

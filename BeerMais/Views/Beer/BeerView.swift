@@ -10,10 +10,10 @@ import SwiftUI
 import BasicsKit
 
 struct BeerView: View {
-    @StateObject private var viewModel: ViewModel
+    @ObservedObject private var viewModel: ViewModel
     
     init(viewModel: ViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+        _viewModel = ObservedObject(wrappedValue: viewModel)
     }
     
     var border: some View {

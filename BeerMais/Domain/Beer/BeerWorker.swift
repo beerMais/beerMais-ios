@@ -42,22 +42,17 @@ final class BeerWorker: BeerWorkerProtocol {
     
     @discardableResult func createBeer(data: [String: Any]) -> Beer? {
         guard let context = coreDataWorker.context else { return nil }
-            
-        do {
-            let beer = setDataToBeer(beer: Beer(context: context), data: data)
-            
-            try context.save()
-            
-            AppP.amplitude.track(event: BaseEvent(
-                eventType: "beer_created",
-                eventProperties: beerToAnalyticsParameters(beer)
-            ))
-            
-            return beer
-        } catch let error {
-            print("Could not save. \(error), \(String(describing: error._userInfo))")
-            return nil
-        }
+        
+        let beer = setDataToBeer(beer: Beer(context: context), data: data)
+        
+        saveContext()
+        
+        AppP.amplitude.track(event: BaseEvent(
+            eventType: "beer_created",
+            eventProperties: beerToAnalyticsParameters(beer)
+        ))
+        
+        return beer
     }
     
     func getBeers() -> [Beer] {
@@ -70,6 +65,7 @@ final class BeerWorker: BeerWorkerProtocol {
     
     func edit(beer: Beer, data: [String: Any]) {
         _ = setDataToBeer(beer: beer, data: data)
+        saveContext()
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "beer_updated",
@@ -171,17 +167,35 @@ final class BeerWorker: BeerWorkerProtocol {
         
         if let value = data["value"] as? NSNumber {
             beer.value = Float(truncating: value)
+        } else if let value = data["value"] as? Float {
+            beer.value = value
         }
         
         if let amount = data["amount"] as? Int16 {
             beer.amount = amount
+        } else if let amount = data["amount"] as? NSNumber {
+            beer.amount = amount.int16Value
+        } else if let amount = data["amount"] as? String {
+            beer.amount = Int16(amount) ?? 0
         }
         
         if let type = data["type"] as? Int16 {
             beer.type = type
+        } else if let type = data["type"] as? NSNumber {
+            beer.type = type.int16Value
         }
         
         return beer
+    }
+
+    private func saveContext() {
+        guard let context = coreDataWorker.context, context.hasChanges else { return }
+
+        do {
+            try context.save()
+        } catch let error {
+            print("Could not save. \(error), \(String(describing: error._userInfo))")
+        }
     }
     
     private func beerToAnalyticsParameters(_ beer: Beer) -> [String: NSObject] {
