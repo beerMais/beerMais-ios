@@ -6,3 +6,4 @@ BeerMais/Property \lists/Dev/GoogleService-Info.plist
 *.xcuserstate
 project.xcworkspace/
 xcuserdata/
+*.xcuserdatad/
