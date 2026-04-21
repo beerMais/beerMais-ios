@@ -66,7 +66,7 @@ struct BeerDetailView: View {
                         TextField("price", text: $viewModel.price)
                             .keyboardType(.numberPad)
                             .padding()
-                            .onChange(of: viewModel.price) { newValue in
+                            .onChange(of: viewModel.price) { _, newValue in
                                 let digits = newValue.filter(\.isNumber)
                                 let doubleValue = (Double(digits) ?? 0) / 100.0
                                 let formatted = String(format: "%.2f", doubleValue)
@@ -101,7 +101,7 @@ struct BeerDetailView: View {
                     Text("detailsHelpText")
                 })
                 
-                let adSize = currentOrientationAnchoredAdaptiveBanner(width: UIScreen.main.bounds.width - 64)
+                let adSize = largeAnchoredAdaptiveBanner(width: UIScreen.main.bounds.width - 64)
                 BannerViewContainer(adSize)
                     .frame(width: adSize.size.width, height: adSize.size.height)
             }

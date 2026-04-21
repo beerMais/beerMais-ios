@@ -65,13 +65,10 @@
 		2D63AD4E2B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
 		2D63AD4F2B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
 		2D63AD502B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
-		2D63AD532B2154BC00C0BF4C /* AlertViewControllerSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD522B2154BB00C0BF4C /* AlertViewControllerSnapshot.swift */; };
 		2D63E33E2B1FE6AB00A41CC0 /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2D63E33D2B1FE6AB00A41CC0 /* InlineSnapshotTesting */; };
 		2D63E3402B1FE6AB00A41CC0 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 2D63E33F2B1FE6AB00A41CC0 /* SnapshotTesting */; };
-		2D63E3432B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63E3422B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift */; };
 		2D6A3E862F243ACE003ED4C3 /* icon-glass.icon in Resources */ = {isa = PBXBuildFile; fileRef = 2D6A3E852F243ACE003ED4C3 /* icon-glass.icon */; };
 		2D7557602B4B75B600497C51 /* RemoteConfigSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D75575F2B4B75B600497C51 /* RemoteConfigSpy.swift */; };
-		2D764DED2B3A492100BD9826 /* AboutViewControllerSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D764DEC2B3A492100BD9826 /* AboutViewControllerSnapshot.swift */; };
 		2D7881512E08D39D00EA97FB /* DonateView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7881502E08D38C00EA97FB /* DonateView+ViewModel.swift */; };
 		2D7881522E08D39D00EA97FB /* DonateView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7881502E08D38C00EA97FB /* DonateView+ViewModel.swift */; };
 		2D7881532E08D39D00EA97FB /* DonateView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7881502E08D38C00EA97FB /* DonateView+ViewModel.swift */; };
@@ -103,7 +100,6 @@
 		2DD484702B09295B00FE7277 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEBCA712B019903001DB86E /* LoadingView.swift */; };
 		2DD484712B09296000FE7277 /* SuccessFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEBCA672B018E75001DB86E /* SuccessFeedbackView.swift */; };
 		2DD484722B0929D100FE7277 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D13B01E2B02E47F00444F73 /* LaunchScreenViewController.swift */; };
-		2DD666A72B24FA1B004E6053 /* HomeViewControllerSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD666A62B24FA1B004E6053 /* HomeViewControllerSnapshot.swift */; };
 		2DD666AB2B24FB70004E6053 /* BeerWorkerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD666AA2B24FB70004E6053 /* BeerWorkerSpy.swift */; };
 		2DD7E2B621F6737E0084E17F /* SettingsP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7E2B421F6737D0084E17F /* SettingsP.swift */; };
 		2DE25EE02E1EEE6E001E53EB /* BeerView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE25EDF2E1EEE64001E53EB /* BeerView+ViewModel.swift */; };
@@ -268,11 +264,8 @@
 		2D4FCA062B4E1BEE00E8D0E3 /* RemoteConfigValueStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigValueStub.swift; sourceTree = "<group>"; };
 		2D616DEE22542091005E8BF7 /* VersionP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionP.swift; sourceTree = "<group>"; };
 		2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extension.swift"; sourceTree = "<group>"; };
-		2D63AD522B2154BB00C0BF4C /* AlertViewControllerSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewControllerSnapshot.swift; sourceTree = "<group>"; };
-		2D63E3422B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewControllerSnapshot.swift; sourceTree = "<group>"; };
 		2D6A3E852F243ACE003ED4C3 /* icon-glass.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = "icon-glass.icon"; sourceTree = "<group>"; };
 		2D75575F2B4B75B600497C51 /* RemoteConfigSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigSpy.swift; sourceTree = "<group>"; };
-		2D764DEC2B3A492100BD9826 /* AboutViewControllerSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewControllerSnapshot.swift; sourceTree = "<group>"; };
 		2D779F64244D1DA80010C769 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D779F66244D20830010C769 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D7881502E08D38C00EA97FB /* DonateView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DonateView+ViewModel.swift"; sourceTree = "<group>"; };
@@ -288,7 +281,6 @@
 		2DC015002E23524900B7BA9F /* BeerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerDetailView.swift; sourceTree = "<group>"; };
 		2DCE98A12EA474B8008E8F9B /* BeerDetailView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeerDetailView+ViewModel.swift"; sourceTree = "<group>"; };
 		2DD2DF072B4CB13100CE6C0B /* RemoteConfig+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteConfig+Extensions.swift"; sourceTree = "<group>"; };
-		2DD666A62B24FA1B004E6053 /* HomeViewControllerSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerSnapshot.swift; sourceTree = "<group>"; };
 		2DD666AA2B24FB70004E6053 /* BeerWorkerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerWorkerSpy.swift; sourceTree = "<group>"; };
 		2DD7E2B421F6737D0084E17F /* SettingsP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsP.swift; sourceTree = "<group>"; };
 		2DD8D82D224FCA4D004EE31C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -421,7 +413,6 @@
 			children = (
 				2D13244C2B0FEFC5002C2A59 /* AlertInteractorTests.swift */,
 				2D8F1E6D2B18106F00C7D55F /* AlertPresenterTests.swift */,
-				2D63AD522B2154BB00C0BF4C /* AlertViewControllerSnapshot.swift */,
 				2D13244A2B0FEDED002C2A59 /* AlertViewControllerSpy.swift */,
 			);
 			path = Alert;
@@ -575,14 +566,6 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
-		2D764DEB2B3A490D00BD9826 /* About */ = {
-			isa = PBXGroup;
-			children = (
-				2D764DEC2B3A492100BD9826 /* AboutViewControllerSnapshot.swift */,
-			);
-			path = About;
-			sourceTree = "<group>";
-		};
 		2D9AE0D92ECA8AD900044748 /* DeleteAll */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,14 +606,6 @@
 				2DA6131D2E1B3C0C0053E6C9 /* BeerView.swift */,
 			);
 			path = Beer;
-			sourceTree = "<group>";
-		};
-		2DD666A52B24FA00004E6053 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				2DD666A62B24FA1B004E6053 /* HomeViewControllerSnapshot.swift */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		2DD666A82B24FB58004E6053 /* Domain */ = {
@@ -734,10 +709,8 @@
 		87849E662820682400B6F61F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				2D764DEB2B3A490D00BD9826 /* About */,
 				2D1324492B0FEB68002C2A59 /* Alert */,
 				87849E672820684600B6F61F /* Details */,
-				2DD666A52B24FA00004E6053 /* Home */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -747,7 +720,6 @@
 			children = (
 				87849E682820685A00B6F61F /* DetailsTests.swift */,
 				87334DF92820743800EA5EF9 /* DetailsTestsFactory.swift */,
-				2D63E3422B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift */,
 				87334DF72820739C00EA5EF9 /* DetailsViewControllerSpy.swift */,
 			);
 			path = Details;
@@ -1121,16 +1093,13 @@
 			files = (
 				2DC015022E23524900B7BA9F /* BeerDetailView.swift in Sources */,
 				87BB695128206BD0005489A8 /* UIView+extensions.swift in Sources */,
-				2D63E3432B1FE6D200A41CC0 /* DetailsViewControllerSnapshot.swift in Sources */,
 				2DD484702B09295B00FE7277 /* LoadingView.swift in Sources */,
 				2D0B32172B0EDB3E002FA88C /* Beer.swift in Sources */,
-				2D63AD532B2154BC00C0BF4C /* AlertViewControllerSnapshot.swift in Sources */,
 				87BB695328206BD0005489A8 /* Int+extensions.swift in Sources */,
 				2DE25EE62E1EF56B001E53EB /* HomeView.swift in Sources */,
 				2D9AE0DB2ECA8AE000044748 /* DeleteAllView.swift in Sources */,
 				2D82B0B52F0A13A400C99B2F /* RewardedFullScreenAd.swift in Sources */,
 				87334E052820794300EA5EF9 /* AppDelegate.swift in Sources */,
-				2DD666A72B24FA1B004E6053 /* HomeViewControllerSnapshot.swift in Sources */,
 				2D45ABFD2B0AF24000DB682B /* BeerModel+Mock.swift in Sources */,
 				87334E1A2820E7C800EA5EF9 /* BeerDetailTests.swift in Sources */,
 				2D0C5E4B2E04B34F005ADCB6 /* AboutView.swift in Sources */,
@@ -1148,7 +1117,6 @@
 				2D45ABF72B0AE03D00DB682B /* BeerWorker.swift in Sources */,
 				87BB695428206BD0005489A8 /* UIStackView+extensions.swift in Sources */,
 				87334E032820790D00EA5EF9 /* StringExtensions.swift in Sources */,
-				2D764DED2B3A492100BD9826 /* AboutViewControllerSnapshot.swift in Sources */,
 				87BB695928206BD4005489A8 /* BannerViewContainer.swift in Sources */,
 				87334DF82820739C00EA5EF9 /* DetailsViewControllerSpy.swift in Sources */,
 				87334DFC282078DC00EA5EF9 /* AppP.swift in Sources */,
@@ -1745,7 +1713,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = exactVersion;
-				version = 12.7.0;
+				version = 12.11.0;
 			};
 		};
 		2D63E33C2B1FE6AB00A41CC0 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
@@ -1753,7 +1721,7 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
 			requirement = {
 				kind = exactVersion;
-				version = 1.18.7;
+				version = 1.19.2;
 			};
 		};
 		2D8F1E6F2B1812A000C7D55F /* XCRemoteSwiftPackageReference "BasicsKit" */ = {
@@ -1769,7 +1737,7 @@
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
 				kind = exactVersion;
-				version = 12.14.0;
+				version = 13.2.0;
 			};
 		};
 		2DEBCA602B018AFE001DB86E /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
@@ -1777,7 +1745,7 @@
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
 			requirement = {
 				kind = exactVersion;
-				version = 4.5.2;
+				version = 4.6.0;
 			};
 		};
 		2DEBCA6A2B0195DF001DB86E /* XCRemoteSwiftPackageReference "Amplitude-Swift" */ = {
@@ -1785,7 +1753,7 @@
 			repositoryURL = "https://github.com/amplitude/Amplitude-Swift";
 			requirement = {
 				kind = exactVersion;
-				version = 1.16.2;
+				version = 1.17.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
