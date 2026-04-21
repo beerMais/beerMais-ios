@@ -18,9 +18,7 @@ final class AppP {
     
     public static let amplitude: Amplitude = Amplitude(configuration: Configuration(
         apiKey: SettingsP.getAmplitudeKey(),
-        defaultTracking: DefaultTrackingOptions(
-            sessions: true
-        )
+        autocapture: .all
     ))
     
     public static let remoteConfig: RemoteConfigProtocol = RemoteConfig.remoteConfig()
