@@ -31,7 +31,8 @@ extension BeerDetailView {
             self.selectedBeer = selectedBeer
             
             self.brand = selectedBeer?.brand ?? ""
-            self.price = selectedBeer?.value.asString ?? ""
+            self.price = selectedBeer?.value.formatted(.number.precision(.fractionLength(2))) ?? ""
+
             self.size = selectedBeer?.amount.asString ?? ""
             self.sizeType = selectedBeer?.amount == 1000 ? "L" : "ml"
             
@@ -96,20 +97,17 @@ extension BeerDetailView {
         }
         
         func createOrSave() {
-            let amount = normalizedAmount
-            let data: [String : Any] = [
-                "amount": amount,
-                "brand": brand,
-                "value": price.parseStringValueToFloat,
-                "type": Int16(amount < 1000 ? 1 : 2)
-            ]
+            let data = BeerData(
+                brand: brand,
+                value: price.parseStringValueToFloat,
+                amount: normalizedAmount
+            )
             if let selectedBeer {
                 worker.edit(beer: selectedBeer, data: data)
             } else {
                 worker.createBeer(data: data)
             }
             
-            cleanUp()
             onFinish?()
         }
         
@@ -117,18 +115,10 @@ extension BeerDetailView {
             guard let selectedBeer else { return }
             worker.delete(beer: selectedBeer)
             
-            cleanUp()
             onFinish?()
         }
         
         // MARK: Private
-        
-        private func cleanUp() {
-            self.brand = ""
-            self.price = ""
-            self.size = ""
-            self.sizeSelection = .first
-        }
 
         private var normalizedAmount: Int16 {
             if sizeSelection == .fourth {

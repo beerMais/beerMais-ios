@@ -12,9 +12,9 @@ import WidgetKit
 import AmplitudeSwift
 
 protocol BeerWorkerProtocol {
-    @discardableResult func createBeer(data: [String: Any]) -> Beer?
+    @discardableResult func createBeer(data: BeerData) -> Beer?
     func getBeers() -> [Beer]
-    func edit(beer: Beer, data: [String: Any])
+    func edit(beer: Beer, data: BeerData)
     func deleteAllBeers()
     func delete(beer: Beer)
     
@@ -40,10 +40,11 @@ final class BeerWorker: BeerWorkerProtocol {
     
     // MARK: - BeerWorkerProtocol
     
-    @discardableResult func createBeer(data: [String: Any]) -> Beer? {
+    @discardableResult func createBeer(data: BeerData) -> Beer? {
         guard let context = coreDataWorker.context else { return nil }
         
-        let beer = setDataToBeer(beer: Beer(context: context), data: data)
+        var beer = Beer(context: context)
+        setDataToBeer(beer: &beer, data: data)
         
         saveContext()
         
@@ -63,8 +64,9 @@ final class BeerWorker: BeerWorkerProtocol {
         return orderBeers(beers)
     }
     
-    func edit(beer: Beer, data: [String: Any]) {
-        _ = setDataToBeer(beer: beer, data: data)
+    func edit(beer: Beer, data: BeerData) {
+        var beer = beer
+        setDataToBeer(beer: &beer, data: data)
         saveContext()
         
         AppP.amplitude.track(event: BaseEvent(
@@ -162,30 +164,11 @@ final class BeerWorker: BeerWorkerProtocol {
     
     // MARK: - Private methods
     
-    private func setDataToBeer(beer: Beer, data: [String: Any]) -> Beer {
-        beer.brand = data["brand"] as? String
-        
-        if let value = data["value"] as? NSNumber {
-            beer.value = Float(truncating: value)
-        } else if let value = data["value"] as? Float {
-            beer.value = value
-        }
-        
-        if let amount = data["amount"] as? Int16 {
-            beer.amount = amount
-        } else if let amount = data["amount"] as? NSNumber {
-            beer.amount = amount.int16Value
-        } else if let amount = data["amount"] as? String {
-            beer.amount = Int16(amount) ?? 0
-        }
-        
-        if let type = data["type"] as? Int16 {
-            beer.type = type
-        } else if let type = data["type"] as? NSNumber {
-            beer.type = type.int16Value
-        }
-        
-        return beer
+    private func setDataToBeer(beer: inout Beer, data: BeerData) {
+        beer.brand = data.brand
+        beer.value = data.value
+        beer.amount = data.amount
+        beer.type = data.type
     }
 
     private func saveContext() {

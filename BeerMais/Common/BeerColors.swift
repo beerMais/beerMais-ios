@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 final class BeerColors {
     static var blackWhite = UIColor(named: "black-white", in: .beerMais, compatibleWith: nil)!
     static var whiteBlack = UIColor(named: "white-black", in: .beerMais, compatibleWith: nil)!

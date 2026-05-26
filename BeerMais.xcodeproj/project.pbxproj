@@ -60,6 +60,7 @@
 		2D4C5207254F85CC00D0B2D0 /* BeerMais widgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2D4C51F7254F85CB00D0B2D0 /* BeerMais widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2D4C526E254FB26100D0B2D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D17012021D2B3CF0009A316 /* Assets.xcassets */; };
 		2D4FCA072B4E1BEF00E8D0E3 /* RemoteConfigValueStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4FCA062B4E1BEE00E8D0E3 /* RemoteConfigValueStub.swift */; };
+		2D5CE1C22FD624740074C70C /* icon-glass.icon in Resources */ = {isa = PBXBuildFile; fileRef = 2D6A3E852F243ACE003ED4C3 /* icon-glass.icon */; };
 		2D616DEF22542091005E8BF7 /* VersionP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D616DEE22542091005E8BF7 /* VersionP.swift */; };
 		2D63AD4D2B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
 		2D63AD4E2B21520E00C0BF4C /* Bundle+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D63AD4C2B21520E00C0BF4C /* Bundle+extension.swift */; };
@@ -122,7 +123,6 @@
 		870BACE728174E8500AEF61E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACE628174E8500AEF61E /* SceneDelegate.swift */; };
 		870BACEA2817502F00AEF61E /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACE92817502E00AEF61E /* UIView+extensions.swift */; };
 		870BACEC281762F700AEF61E /* BeerColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACEB281762F700AEF61E /* BeerColors.swift */; };
-		870BACEE281763DC00AEF61E /* RankBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACED281763DC00AEF61E /* RankBeerView.swift */; };
 		87334DF82820739C00EA5EF9 /* DetailsViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87334DF72820739C00EA5EF9 /* DetailsViewControllerSpy.swift */; };
 		87334DFA2820743800EA5EF9 /* DetailsTestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87334DF92820743800EA5EF9 /* DetailsTestsFactory.swift */; };
 		87334DFB282078DC00EA5EF9 /* SettingsP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7E2B421F6737D0084E17F /* SettingsP.swift */; };
@@ -159,8 +159,6 @@
 		87BB695728206BD4005489A8 /* BeerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87849E54281F80E200B6F61F /* BeerImage.swift */; };
 		87BB695828206BD4005489A8 /* BeerColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACEB281762F700AEF61E /* BeerColors.swift */; };
 		87BB695928206BD4005489A8 /* BannerViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD524A281E1EDD00F757E6 /* BannerViewContainer.swift */; };
-		87BB696028206BE1005489A8 /* RankBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACED281763DC00AEF61E /* RankBeerView.swift */; };
-		87BB696128206BE1005489A8 /* RankBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870BACED281763DC00AEF61E /* RankBeerView.swift */; };
 		87BB696428206BE6005489A8 /* BeerDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FE2039281A0DA200B61429 /* BeerDetailPresenter.swift */; };
 		87BB696728206BE6005489A8 /* BeerDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FE2039281A0DA200B61429 /* BeerDetailPresenter.swift */; };
 		87FE20372819F12100B61429 /* UIStackView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FE20362819F12100B61429 /* UIStackView+extensions.swift */; };
@@ -296,7 +294,6 @@
 		870BACE628174E8500AEF61E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		870BACE92817502E00AEF61E /* UIView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
 		870BACEB281762F700AEF61E /* BeerColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerColors.swift; sourceTree = "<group>"; };
-		870BACED281763DC00AEF61E /* RankBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankBeerView.swift; sourceTree = "<group>"; };
 		87334DF72820739C00EA5EF9 /* DetailsViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewControllerSpy.swift; sourceTree = "<group>"; };
 		87334DF92820743800EA5EF9 /* DetailsTestsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTestsFactory.swift; sourceTree = "<group>"; };
 		87334E162820E7C800EA5EF9 /* BeerDetailViewSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerDetailViewSpy.swift; sourceTree = "<group>"; };
@@ -397,12 +394,12 @@
 		2D0B32182B0EDB56002FA88C /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				2D6A3E852F243ACE003ED4C3 /* icon-glass.icon */,
 				2D17011621D2B3CE0009A316 /* AppDelegate.swift */,
 				2D17012021D2B3CF0009A316 /* Assets.xcassets */,
-				2D92A1F2222B71AF00690ED6 /* BeerMais Dev.entitlements */,
 				2D92A1F0222B70D200690ED6 /* BeerMais.entitlements */,
 				2D17011D21D2B3CE0009A316 /* BeerMais.xcdatamodeld */,
+				2D92A1F2222B71AF00690ED6 /* BeerMais Dev.entitlements */,
+				2D6A3E852F243ACE003ED4C3 /* icon-glass.icon */,
 				870BACE628174E8500AEF61E /* SceneDelegate.swift */,
 			);
 			path = Config;
@@ -476,7 +473,6 @@
 				2DD545BB2E22F5FD00BD9ABB /* Beer */,
 				87FE2038281A0D8900B61429 /* BeerDetail */,
 				8795839826C8892600F81B28 /* About */,
-				870BACED281763DC00AEF61E /* RankBeerView.swift */,
 				2D0C48612E04AB5200C5A674 /* MainView.swift */,
 			);
 			path = Views;
@@ -981,6 +977,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D5CE1C22FD624740074C70C /* icon-glass.icon in Resources */,
 				2D13B0232B02E7EF00444F73 /* LaunchScreen.storyboard in Resources */,
 				A18159C02597EA26004B2018 /* Localizable.strings in Resources */,
 				A18158BC2597D1D7004B2018 /* Assets.xcassets in Resources */,
@@ -1048,7 +1045,6 @@
 				870BACE728174E8500AEF61E /* SceneDelegate.swift in Sources */,
 				2D0C48622E04AB5600C5A674 /* MainView.swift in Sources */,
 				2DCE98A32EA474B8008E8F9B /* BeerDetailView+ViewModel.swift in Sources */,
-				870BACEE281763DC00AEF61E /* RankBeerView.swift in Sources */,
 				870BACDE2817485800AEF61E /* ViewProtocol.swift in Sources */,
 				2D63AD4D2B21520E00C0BF4C /* Bundle+extension.swift in Sources */,
 				870BACEA2817502F00AEF61E /* UIView+extensions.swift in Sources */,
@@ -1113,7 +1109,6 @@
 				2D0B321C2B0EDC83002FA88C /* CoreDataWorker.swift in Sources */,
 				87BB695028206BD0005489A8 /* String+extensions.swift in Sources */,
 				2D13244D2B0FEFC5002C2A59 /* AlertInteractorTests.swift in Sources */,
-				87BB696128206BE1005489A8 /* RankBeerView.swift in Sources */,
 				2D45ABF72B0AE03D00DB682B /* BeerWorker.swift in Sources */,
 				87BB695428206BD0005489A8 /* UIStackView+extensions.swift in Sources */,
 				87334E032820790D00EA5EF9 /* StringExtensions.swift in Sources */,
@@ -1157,7 +1152,6 @@
 				2DA6131F2E1B3C250053E6C9 /* BeerView.swift in Sources */,
 				87849E7828206A1C00B6F61F /* BeerColors.swift in Sources */,
 				87849E7B28206A1C00B6F61F /* String+extensions.swift in Sources */,
-				87BB696028206BE1005489A8 /* RankBeerView.swift in Sources */,
 				2DCE98A42EA474B8008E8F9B /* BeerDetailView+ViewModel.swift in Sources */,
 				2D0B321B2B0EDC83002FA88C /* CoreDataWorker.swift in Sources */,
 				87849E7528206A1C00B6F61F /* BannerViewContainer.swift in Sources */,
@@ -1279,7 +1273,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1287,6 +1281,7 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -1340,13 +1335,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1359,7 +1355,7 @@
 				CODE_SIGN_ENTITLEMENTS = BeerMais/Config/BeerMais.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1428,7 +1424,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.joseneves.BeerMais.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1441,7 +1437,7 @@
 				CODE_SIGN_ENTITLEMENTS = BeerMais/Config/BeerMais.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Property lists/Prod/Info.plist";
@@ -1509,7 +1505,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.joseneves.BeerMais.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1522,7 +1518,7 @@
 				CODE_SIGN_ENTITLEMENTS = "BeerMais widget/BeerMais widgetExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				INFOPLIST_FILE = "BeerMais widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1534,7 +1530,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.joseneves.BeerMais.debug.BeerMais-widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1547,7 +1543,7 @@
 				CODE_SIGN_ENTITLEMENTS = "BeerMais widget/BeerMais widgetExtension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
 				INFOPLIST_FILE = "BeerMais widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -1561,7 +1557,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1579,7 +1575,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.joseneves.BeerMaisTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1597,7 +1593,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.br.joseneves.BeerMaisTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1605,12 +1601,12 @@
 		A18158C62597D1D7004B2018 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "icon-glass";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "BeerMais Clip/BeerMais_Clip-debug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Property lists/Dev/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
@@ -1624,7 +1620,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG_APPCLIP;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1632,12 +1628,12 @@
 		A18158C72597D1D7004B2018 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "icon-glass";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "BeerMais Clip/BeerMais_Clip.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_TEAM = 2LEA6X25G9;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/BeerMais/Property lists/Prod/Info.plist";
@@ -1652,7 +1648,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPCLIP;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

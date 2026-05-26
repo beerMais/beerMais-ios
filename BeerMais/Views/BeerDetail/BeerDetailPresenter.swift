@@ -101,7 +101,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
             return
         }
         
-        beerWorker.edit(beer: beer, data: beerDataDict())
+        beerWorker.edit(beer: beer, data: currentBeerData())
     }
     
     func createBeer() {
@@ -109,7 +109,7 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
             return
         }
         
-        beerWorker.createBeer(data: beerDataDict())
+        beerWorker.createBeer(data: currentBeerData())
     }
     
     private func validateBeerAndGetResult() -> Bool {
@@ -120,14 +120,11 @@ final class BeerDetailPresenter: BeerDetailPresenterProtocol {
         return isValidAmount && isValidBrand && isValidValue
     }
     
-    private func beerDataDict() -> [String: Any] {
-        var data = [String: Any]()
-        data["amount"] = beerAmount
-        data["brand"] = beerBrand
-        data["value"] = beerValue
-        
-        data["type"] = Int16(beerAmount >= 1000 ? 2 : 1)
-        
-        return data
+    private func currentBeerData() -> BeerData {
+        BeerData(
+            brand: beerBrand,
+            value: beerValue,
+            amount: beerAmount
+        )
     }
 }

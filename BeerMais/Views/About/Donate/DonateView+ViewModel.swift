@@ -11,6 +11,7 @@ import Combine
 import StoreKit
 
 extension DonateView {
+    @MainActor
     final class ViewModel: ObservableObject {
         
         @Published var donates = [DonateProduct]()

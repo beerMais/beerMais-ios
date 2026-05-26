@@ -10,6 +10,7 @@ import SwiftUI
 
 import GoogleMobileAds
 
+@MainActor
 final class RewardedFullScreenAd: NSObject, ObservableObject, FullScreenContentDelegate {
     private var rewardedAd: RewardedAd?
     

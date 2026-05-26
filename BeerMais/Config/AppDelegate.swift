@@ -16,7 +16,7 @@ import FirebaseMessaging
 import GoogleMobileAds
 
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
 }
 
-extension AppDelegate: MessagingDelegate {
+extension AppDelegate: @preconcurrency MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         #if DEBUG
         print("Firebase registration token: \(fcmToken ?? "")")

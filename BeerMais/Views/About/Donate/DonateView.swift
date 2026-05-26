@@ -27,18 +27,20 @@ struct DonateView: View {
 #if !(DEBUG_APPCLIP || APPCLIP)
                         loadingView.show()
                         Task {
-                            let isSucceed = await viewModel.buyProduct(product.wrappedValue)
+                            let rewardedViewModel = RewardedFullScreenAd()
+                            let loadAdTask = Task {
+                                await rewardedViewModel.loadAd()
+                            }
                             
+                            let isSucceed = await viewModel.buyProduct(product.wrappedValue)
                             if isSucceed {
                                 loadingView.hide()
                                 successFeedbackView.show()
                             } else {
-                                let rewardedViewModel = RewardedFullScreenAd()
-                                await rewardedViewModel.loadAd()
+                                await loadAdTask.value
                                 
                                 loadingView.hide()
                                 rewardedViewModel.showAd()
-                                
                             }
                         }
 #else
