@@ -8,7 +8,7 @@
 
 import Foundation
 import StoreKit
-import AmplitudeSwift
+@preconcurrency import AmplitudeSwift
 import FirebaseRemoteConfig
 
 
@@ -21,7 +21,7 @@ final class AppP {
         autocapture: .all
     ))
     
-    public static let remoteConfig: RemoteConfigProtocol = RemoteConfig.remoteConfig()
+    @MainActor public static let remoteConfig: RemoteConfigProtocol = RemoteConfig.remoteConfig()
     
     static func launch() {
         
@@ -39,7 +39,7 @@ final class AppP {
         logAppLaunch()
     }
     
-    static func launchRemoteConfig() {
+    @MainActor static func launchRemoteConfig() {
         let settings = RemoteConfigSettings()
         
         #if DEBUG
@@ -61,39 +61,39 @@ final class AppP {
     static private func setInitialData() {
         let beerWorker = BeerWorker()
         
-        var beer1 = [String: Any]()
-        beer1["amount"] = Int16(350)
-        beer1["brand"] = "Budweiser"
-        beer1["value"] = 2.59
-        beer1["type"] = Int16(1)
+        var beer1 = BeerData(
+            brand: "Budweiser",
+            value: 2.59,
+            amount: 350
+        )
         beerWorker.createBeer(data: beer1)
         
-        var beer2 = [String: Any]()
-        beer2["amount"] = Int16(350)
-        beer2["brand"] = "Heineken"
-        beer2["value"] = 2.79
-        beer2["type"] = Int16(1)
+        var beer2 = BeerData(
+            brand: "Heineken",
+            value: 2.79,
+            amount: 350
+        )
         beerWorker.createBeer(data: beer2)
         
-        var beer3 = [String: Any]()
-        beer3["amount"] = Int16(269)
-        beer3["brand"] = "Budweiser"
-        beer3["value"] = 2.10
-        beer3["type"] = Int16(1)
+        var beer3 = BeerData(
+            brand: "Budweiser",
+            value: 2.1,
+            amount: 269
+        )
         beerWorker.createBeer(data: beer3)
         
-        var beer4 = [String: Any]()
-        beer4["amount"] = Int16(310)
-        beer4["brand"] = "Stella Artois"
-        beer4["value"] = 2.35
-        beer4["type"] = Int16(1)
+        var beer4 = BeerData(
+            brand: "Stella Artois",
+            value: 2.35,
+            amount: 310
+        )
         beerWorker.createBeer(data: beer4)
         
-        var beer5 = [String: Any]()
-        beer5["amount"] = Int16(1000)
-        beer5["brand"] = "Original"
-        beer5["value"] = 10.99
-        beer5["type"] = Int16(2)
+        var beer5 = BeerData(
+            brand: "Original",
+            value: 10.99,
+            amount: 1000
+        )
         beerWorker.createBeer(data: beer5)
     }
     

@@ -12,6 +12,7 @@ import UIKit
 import Lottie
 
 
+@MainActor
 final class LoadingView {
     
     private var topViewController: UIViewController?

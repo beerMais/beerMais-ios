@@ -27,7 +27,8 @@ extension BeerView {
         
         var image: Image {
             let imageName = switch beer?.type {
-            case 0: "icons8-beer-bottle-100"
+            case 1: "icons8-beer-can-100"
+            case 2: "icons8-beer-bottle-100"
             default: "icons8-beer-can-100"
             }
             

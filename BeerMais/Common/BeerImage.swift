@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUI
 
+@MainActor
 final class BeerImage {
     static var iconRounded = UIImage(named: "icon_rounded", in: .beerMais, with: nil)!
     static var iconBeerCan100 = UIImage(named: "icons8-beer-can-100", in: .beerMais, with: nil)!

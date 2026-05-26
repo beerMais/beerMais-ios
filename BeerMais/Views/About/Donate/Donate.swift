@@ -9,6 +9,7 @@
 import Foundation
 import StoreKit
 
+@MainActor
 final class DonateProduct: ObservableObject {
     let type: DonateType
     let name: String

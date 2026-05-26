@@ -19,15 +19,17 @@ public protocol CoreDataWorkerProtocol {
 
 final class CoreDataWorker: CoreDataWorkerProtocol {
     
-    static var shared: CoreDataWorkerProtocol = {
+    nonisolated(unsafe) static let shared: CoreDataWorkerProtocol = {
         CoreDataWorker()
     }()
     
     public var context: NSManagedObjectContext?
     
     init() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        self.context = appDelegate.persistentContainer.viewContext
+        self.context = MainActor.assumeIsolated {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
+            return appDelegate.persistentContainer.viewContext
+        }
     }
     
     func getData(entityName: String) -> [Any] {

@@ -9,7 +9,7 @@
 import Foundation
 
 extension Bundle {
-    static var beerMais: Bundle = {
+    static let beerMais: Bundle = {
         .init(for: Beer.self)
     }()
 }
