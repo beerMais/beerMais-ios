@@ -17,7 +17,7 @@ final class AppP {
     private static let APP_OPEN_COUNT = "APP_OPEN_COUNT"
     
     public static let amplitude: Amplitude = Amplitude(configuration: Configuration(
-        apiKey: SettingsP.getAmplitudeKey(),
+        apiKey: SettingsP().getAmplitudeKey(),
         autocapture: .all
     ))
     
@@ -61,35 +61,35 @@ final class AppP {
     static private func setInitialData() {
         let beerWorker = BeerWorker()
         
-        var beer1 = BeerData(
+        let beer1 = BeerData(
             brand: "Budweiser",
             value: 2.59,
             amount: 350
         )
         beerWorker.createBeer(data: beer1)
         
-        var beer2 = BeerData(
+        let beer2 = BeerData(
             brand: "Heineken",
             value: 2.79,
             amount: 350
         )
         beerWorker.createBeer(data: beer2)
         
-        var beer3 = BeerData(
+        let beer3 = BeerData(
             brand: "Budweiser",
             value: 2.1,
             amount: 269
         )
         beerWorker.createBeer(data: beer3)
         
-        var beer4 = BeerData(
+        let beer4 = BeerData(
             brand: "Stella Artois",
             value: 2.35,
             amount: 310
         )
         beerWorker.createBeer(data: beer4)
         
-        var beer5 = BeerData(
+        let beer5 = BeerData(
             brand: "Original",
             value: 10.99,
             amount: 1000
@@ -130,6 +130,33 @@ final class AppP {
             eventProperties: [
                 "interface_style": UITraitCollection.current.userInterfaceStyle == .dark ? "dark" : "light"
             ]
+        ))
+    }
+    
+    static func logError(
+        _ error: Error,
+        source: String,
+        operation: String,
+        properties: [String: Any] = [:]
+    ) {
+        let nsError = error as NSError
+        var eventProperties = properties
+        eventProperties["source"] = source
+        eventProperties["operation"] = operation
+        eventProperties["error_type"] = String(describing: type(of: error))
+        eventProperties["error_domain"] = nsError.domain
+        eventProperties["error_code"] = nsError.code
+        eventProperties["error_description"] = error.localizedDescription
+        if let failureReason = nsError.localizedFailureReason {
+            eventProperties["failure_reason"] = failureReason
+        }
+        if let recoverySuggestion = nsError.localizedRecoverySuggestion {
+            eventProperties["recovery_suggestion"] = recoverySuggestion
+        }
+        
+        AppP.amplitude.track(event: BaseEvent(
+            eventType: "error_occurred",
+            eventProperties: eventProperties
         ))
     }
     

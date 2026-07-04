@@ -36,25 +36,37 @@ final class CoreDataWorker: CoreDataWorkerProtocol {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         do {
             return try context?.fetch(fetchRequest) ?? []
-        } catch let error as NSError {
-            print("Get all data in \(entityName) error : \(error) \(error.userInfo)")
+        } catch {
+            AppP.logError(
+                error,
+                source: "CoreDataWorker",
+                operation: "getData",
+                properties: ["entityName": entityName]
+            )
+            
             return []
         }
     }
     
     func deleteData(entityName: String) {
+        guard let context else { return }
+
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        fetchRequest.returnsObjectsAsFaults = false
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        deleteRequest.resultType = .resultTypeObjectIDs
         
         do {
-            let results = try context?.fetch(fetchRequest) ?? []
-            for managedObject in results {
-                if let managedObjectData = managedObject as? NSManagedObject {
-                    context?.delete(managedObjectData)
-                }
-            }
-        } catch let error as NSError {
-            print("Deleted all data in \(entityName) error : \(error) \(error.userInfo)")
+            let result = try context.execute(deleteRequest) as? NSBatchDeleteResult
+            let objectIDs = result?.result as? [NSManagedObjectID] ?? []
+            let changes: [AnyHashable: Any] = [NSDeletedObjectsKey: objectIDs]
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [context])
+        } catch {
+            AppP.logError(
+                error,
+                source: "CoreDataWorker",
+                operation: "deleteData",
+                properties: ["entityName": entityName]
+            )
         }
     }
 }

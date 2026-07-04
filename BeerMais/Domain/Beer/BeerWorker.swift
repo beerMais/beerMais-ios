@@ -47,6 +47,7 @@ final class BeerWorker: BeerWorkerProtocol {
         setDataToBeer(beer: &beer, data: data)
         
         saveContext()
+        updateWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "beer_created",
@@ -68,6 +69,7 @@ final class BeerWorker: BeerWorkerProtocol {
         var beer = beer
         setDataToBeer(beer: &beer, data: data)
         saveContext()
+        updateWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "beer_updated",
@@ -88,6 +90,8 @@ final class BeerWorker: BeerWorkerProtocol {
     
     func delete(beer: Beer) {
         coreDataWorker.context?.delete(beer)
+        saveContext()
+        updateWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "beer_deleted",
@@ -96,9 +100,12 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     func orderBeers(_ beers: [Beer]) -> [Beer] {
-        beers.sorted(by: {
-            getValuePerML(beer: $0) < getValuePerML(beer: $1)
-        })
+        beers
+            .map { beer in
+                (beer: beer, valuePerML: getValuePerML(beer: beer))
+            }
+            .sorted { $0.valuePerML < $1.valuePerML }
+            .map(\.beer)
     }
     
     func getValuePerML(beer: Beer) -> Float {
@@ -115,50 +122,10 @@ final class BeerWorker: BeerWorkerProtocol {
     
     func calculateMostValuableBeer(beers: [Beer]) -> (Beer, Float?)? {
         guard beers.count >= 2, let mostValuableBeer = beers.first else {
-            cleandWidgetData()
             return nil
         }
         
-        let economy: Float? = beers.count > 1 ? calcEconomyBetweenBeers(beer1: mostValuableBeer, beer2: beers[1]) : nil
-        
-        // TODO: Please refactory this!
-        guard let defaults = UserDefaults(suiteName: "group.beerMais") else {
-            return (mostValuableBeer, economy)
-        }
-        
-        if let brand = mostValuableBeer.brand {
-            defaults.set(brand, forKey: "BRAND")
-        }
-        
-        let amountText: String
-        if mostValuableBeer.amount >= 1000 {
-            if mostValuableBeer.amount >= 1010 {
-                var amountString = String(format: "%.2f", Float(mostValuableBeer.amount) / 1000)
-                amountString = amountString.replacingOccurrences(of: ".", with: ",")
-                amountText = "\(amountString) L"
-            } else {
-                amountText = "1 L"
-            }
-        } else {
-            amountText = "\(mostValuableBeer.amount)ml"
-        }
-        defaults.set(amountText, forKey: "AMOUNT")
-        
-        defaults.set(
-            "R$ \(formatBeerValueToShow(value: mostValuableBeer.value))",
-            forKey: "VALUE"
-        )
-        defaults.set(String(mostValuableBeer.type), forKey: "TYPE")
-        defaults.set(String(beers.count), forKey: "BEERS_COUNT")
-    
-        if let economy {
-            defaults.set(
-                "R$ \(formatBeerValueToShow(value: economy))",
-                forKey: "ECONOMY"
-            )
-            reloadWidget()
-        }
-        
+        let economy = calcEconomyBetweenBeers(beer1: mostValuableBeer, beer2: beers[1])
         return (mostValuableBeer, economy)
     }
     
@@ -190,17 +157,67 @@ final class BeerWorker: BeerWorkerProtocol {
         return parameters
     }
     
+    private func updateWidgetData() {
+        let beers = getBeers()
+        guard let (mostValuableBeer, economy) = calculateMostValuableBeer(beers: beers),
+              let defaults = UserDefaults(suiteName: "group.beerMais") else {
+            cleandWidgetData()
+            return
+        }
+
+        var hasChanges = false
+        hasChanges = setWidgetValue(mostValuableBeer.brand, forKey: "BRAND", in: defaults) || hasChanges
+        hasChanges = setWidgetValue(amountText(for: mostValuableBeer), forKey: "AMOUNT", in: defaults) || hasChanges
+        hasChanges = setWidgetValue("R$ \(formatBeerValueToShow(value: mostValuableBeer.value))", forKey: "VALUE", in: defaults) || hasChanges
+        hasChanges = setWidgetValue(String(mostValuableBeer.type), forKey: "TYPE", in: defaults) || hasChanges
+        hasChanges = setWidgetValue(String(beers.count), forKey: "BEERS_COUNT", in: defaults) || hasChanges
+        let economyText = economy.map { "R$ \(formatBeerValueToShow(value: $0))" }
+        hasChanges = setWidgetValue(economyText, forKey: "ECONOMY", in: defaults) || hasChanges
+
+        if hasChanges {
+            reloadWidget()
+        }
+    }
+
+    private func amountText(for beer: Beer) -> String {
+        if beer.amount >= 1000 {
+            if beer.amount >= 1010 {
+                var amountString = String(format: "%.2f", Float(beer.amount) / 1000)
+                amountString = amountString.replacingOccurrences(of: ".", with: ",")
+                return "\(amountString) L"
+            } else {
+                return "1 L"
+            }
+        } else {
+            return "\(beer.amount)ml"
+        }
+    }
+
+    private func setWidgetValue(_ value: String?, forKey key: String, in defaults: UserDefaults) -> Bool {
+        guard let value else {
+            guard defaults.object(forKey: key) != nil else { return false }
+            defaults.removeObject(forKey: key)
+            return true
+        }
+
+        guard defaults.string(forKey: key) != value else { return false }
+        defaults.set(value, forKey: key)
+        return true
+    }
+    
     private func reloadWidget() {
         WidgetCenter.shared.reloadAllTimelines()
     }
     
     private func cleandWidgetData() {
-        if let defaults = UserDefaults(suiteName: "group.beerMais") {
-            for key in defaults.dictionaryRepresentation().keys {
-                defaults.removeObject(forKey: key)
-            }
-        }
+        guard let defaults = UserDefaults(suiteName: "group.beerMais") else { return }
+
+        let keys = ["BRAND", "AMOUNT", "VALUE", "TYPE", "BEERS_COUNT", "ECONOMY"]
+        let hasChanges = keys.contains { defaults.object(forKey: $0) != nil }
+        keys.forEach { defaults.removeObject(forKey: $0) }
         
-        reloadWidget()
+        if hasChanges {
+            reloadWidget()
+        }
     }
 }

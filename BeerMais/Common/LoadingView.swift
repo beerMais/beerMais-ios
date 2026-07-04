@@ -15,35 +15,29 @@ import Lottie
 @MainActor
 final class LoadingView {
     
-    private var topViewController: UIViewController?
+    private weak var keyWindow: UIWindow?
     private var backgroundView: UIView?
     private var animationView: LottieAnimationView?
     
     func show() {
+        guard animationView == nil || keyWindow == nil else { return }
         
-        guard animationView == nil || topViewController == nil else { return }
-        
-        let keyWindow = UIApplication.shared.connectedScenes
+        keyWindow = UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .flatMap { $0.windows }
             .first { $0.isKeyWindow }
 
-        guard var topViewController = keyWindow?.rootViewController else {
+        guard let keyWindow else {
             return
         }
         
-        while let presentedViewController = topViewController.presentedViewController {
-            topViewController = presentedViewController
-        }
-
-        self.topViewController = topViewController
-        
-        let backgroundView = UIView(frame: topViewController.view.frame)
+        let backgroundView = UIView(frame: keyWindow.bounds)
         backgroundView.backgroundColor = .clear
-        topViewController.view.addSubview(backgroundView)
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        keyWindow.addSubview(backgroundView)
         
         let animationView = LottieAnimationView(name: "loading")
-        animationView.frame = topViewController.view.frame
+        animationView.frame = keyWindow.bounds
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .autoReverse
         animationView.animationSpeed = 1
@@ -65,6 +59,11 @@ final class LoadingView {
         )
         
         NSLayoutConstraint.activate([
+            backgroundView.leadingAnchor.constraint(equalTo: keyWindow.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: keyWindow.trailingAnchor),
+            backgroundView.topAnchor.constraint(equalTo: keyWindow.topAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: keyWindow.bottomAnchor),
+            
             animationView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 48),
             animationView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -48),
             
@@ -89,9 +88,9 @@ final class LoadingView {
             },
             completion: { [weak self] _ in
                 self?.animationView?.stop()
-                self?.topViewController?.view.subviews.first(where: { $0 == self?.backgroundView })?.removeFromSuperview()
+                self?.backgroundView?.removeFromSuperview()
                 
-                self?.topViewController = nil
+                self?.keyWindow = nil
                 self?.backgroundView = nil
                 self?.animationView = nil
             }
