@@ -110,5 +110,11 @@ final class BeerWorkerTests: XCTestCase {
 
         XCTAssertEqual(sut.calculateMostValuableBeer(beers: [beer, beer2])?.0, beer)
         XCTAssertEqual(sut.calculateMostValuableBeer(beers: [beer2, beer])?.0, beer)
+        XCTAssertEqual(sut.calculateMostValuableBeer(beers: [beer, beer2])?.1, 1)
+    }
+
+    func testCalculateMostValuableBeer_WithFewerThanTwoBeers_ReturnsNil() {
+        XCTAssertNil(sut.calculateMostValuableBeer(beers: []))
+        XCTAssertNil(sut.calculateMostValuableBeer(beers: [Beer.mock()]))
     }
 }

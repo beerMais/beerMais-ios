@@ -11,6 +11,11 @@ import GoogleMobileAds
 
 struct DeleteAllView: View {
     @Environment(\.dismiss) private var dismiss
+    @StateObject private var viewModel: ViewModel
+
+    init(worker: BeerWorkerProtocol = BeerWorker()) {
+        _viewModel = StateObject(wrappedValue: ViewModel(worker: worker))
+    }
     
     var body: some View {
         NavigationStack {
@@ -27,7 +32,7 @@ struct DeleteAllView: View {
 
                 HStack {
                     let deleteButton = Button("delete") {
-                        BeerWorker().deleteAllBeers()
+                        viewModel.deleteAllBeers()
                         dismiss()
                     }
                     .buttonBorderShape(.roundedRectangle)
@@ -52,6 +57,20 @@ struct DeleteAllView: View {
                     }
                 }
             }
+        }
+    }
+}
+
+extension DeleteAllView {
+    final class ViewModel: ObservableObject {
+        private let worker: BeerWorkerProtocol
+
+        init(worker: BeerWorkerProtocol) {
+            self.worker = worker
+        }
+
+        func deleteAllBeers() {
+            worker.deleteAllBeers()
         }
     }
 }

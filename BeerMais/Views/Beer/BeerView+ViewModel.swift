@@ -38,11 +38,17 @@ extension BeerView {
         let isHighlighted: Bool
         
         private let index: Int?
-        private let worker = BeerWorker()
+        private let worker: BeerWorkerProtocol
         
-        init(beer: Beer? = nil, index: Int? = nil, isHighlighted: Bool = false) {
+        init(
+            beer: Beer? = nil,
+            index: Int? = nil,
+            isHighlighted: Bool = false,
+            worker: BeerWorkerProtocol = BeerWorker()
+        ) {
             self.index = index
             self.isHighlighted = isHighlighted
+            self.worker = worker
             
             if let beer {
                 self.beer = beer

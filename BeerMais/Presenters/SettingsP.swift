@@ -9,14 +9,20 @@
 import Foundation
 
 final class SettingsP {
-    private let settingsDictionary: [String: String] = {
+    private let settingsDictionary: [String: String]
+
+    init(settingsDictionary: [String: String]? = nil) {
+        self.settingsDictionary = settingsDictionary ?? Self.loadSettings()
+    }
+
+    private static func loadSettings() -> [String: String] {
         guard let path = Bundle.main.path(forResource: "Settings", ofType: "plist"),
               let dictionary = NSDictionary(contentsOfFile: path) as? [String: String] else {
             return [:]
         }
 
         return dictionary
-    }()
+    }
 
     func getAdMobId() -> String {
         settingsDictionary["AdMobID"] ?? ""

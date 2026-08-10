@@ -50,12 +50,12 @@ final class AppP {
         AppP.remoteConfig.fetchAndActivate()
     }
     
-    static func isFirstLaunch() -> Bool {
-        return UserDefaults.standard.bool(forKey: self.hasBeenLaunchedBeforeFlag)
+    static func isFirstLaunch(defaults: UserDefaults = .standard) -> Bool {
+        defaults.bool(forKey: self.hasBeenLaunchedBeforeFlag)
     }
     
-    static func setFirstLaunch() {
-        UserDefaults.standard.set(true, forKey: self.hasBeenLaunchedBeforeFlag)
+    static func setFirstLaunch(defaults: UserDefaults = .standard) {
+        defaults.set(true, forKey: self.hasBeenLaunchedBeforeFlag)
     }
     
     static private func setInitialData() {
@@ -97,19 +97,19 @@ final class AppP {
         beerWorker.createBeer(data: beer5)
     }
     
-    static func incrementAppOpenedCount() {
-        guard var appOpenCount = UserDefaults.standard.value(forKey: self.APP_OPEN_COUNT) as? Int else {
-            UserDefaults.standard.set(1, forKey: self.APP_OPEN_COUNT)
+    static func incrementAppOpenedCount(defaults: UserDefaults = .standard) {
+        guard var appOpenCount = defaults.value(forKey: self.APP_OPEN_COUNT) as? Int else {
+            defaults.set(1, forKey: self.APP_OPEN_COUNT)
             return
         }
         appOpenCount += 1
-        UserDefaults.standard.set(appOpenCount, forKey: self.APP_OPEN_COUNT)
-        self.checkAndAskForReview()
+        defaults.set(appOpenCount, forKey: self.APP_OPEN_COUNT)
+        self.checkAndAskForReview(defaults: defaults)
     }
     
-    static func checkAndAskForReview() {
-        guard let appOpenCount = UserDefaults.standard.value(forKey: self.APP_OPEN_COUNT) as? Int else {
-            UserDefaults.standard.set(1, forKey: self.APP_OPEN_COUNT)
+    static func checkAndAskForReview(defaults: UserDefaults = .standard) {
+        guard let appOpenCount = defaults.value(forKey: self.APP_OPEN_COUNT) as? Int else {
+            defaults.set(1, forKey: self.APP_OPEN_COUNT)
             return
         }
         
