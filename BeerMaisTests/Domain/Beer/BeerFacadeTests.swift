@@ -108,7 +108,7 @@ final class BeerWorkerTests: XCTestCase {
         beer2.value = 11.0
         beer2.amount = 1000
 
-        XCTAssertEqual(sut.calculateMostValuableBeer(beers: [beer, beer2]), beer)
-        XCTAssertEqual(sut.calculateMostValuableBeer(beers: [beer2, beer]), beer)
+        XCTAssertEqual(sut.calculateMostValuableBeer(beers: [beer, beer2])?.0, beer)
+        XCTAssertEqual(sut.calculateMostValuableBeer(beers: [beer2, beer])?.0, beer)
     }
 }

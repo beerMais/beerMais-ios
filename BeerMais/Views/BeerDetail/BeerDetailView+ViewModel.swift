@@ -25,10 +25,11 @@ extension BeerDetailView {
         var onFinish: (() -> Void)?
 
         private let selectedBeer: Beer?
-        private let worker = BeerWorker()
+        private let worker: BeerWorkerProtocol
         
-        init(selectedBeer: Beer?) {
+        init(selectedBeer: Beer?, worker: BeerWorkerProtocol = BeerWorker()) {
             self.selectedBeer = selectedBeer
+            self.worker = worker
             
             self.brand = selectedBeer?.brand ?? ""
             self.price = selectedBeer?.value.formatted(.number.precision(.fractionLength(2))) ?? ""
@@ -97,9 +98,16 @@ extension BeerDetailView {
         }
         
         func createOrSave() {
+            let normalizedBrand = brand.trimmingCharacters(in: .whitespaces)
+            let value = price.parseStringValueToFloat
+
+            guard !normalizedBrand.isEmpty, value > 0, normalizedAmount > 0 else {
+                return
+            }
+
             let data = BeerData(
-                brand: brand,
-                value: price.parseStringValueToFloat,
+                brand: normalizedBrand,
+                value: value,
                 amount: normalizedAmount
             )
             if let selectedBeer {

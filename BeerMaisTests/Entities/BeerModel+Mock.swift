@@ -11,11 +11,11 @@ import CoreData
 
 extension Beer {
     
-    static let managedObjectModel: NSManagedObjectModel = {
+    nonisolated(unsafe) static let managedObjectModel: NSManagedObjectModel = {
         NSManagedObjectModel.mergedModel(from: [Bundle(for: Beer.self)])!
     }()
     
-    static var inMemoryManagedObjectContext: NSPersistentContainer = {
+    nonisolated(unsafe) static var inMemoryManagedObjectContext: NSPersistentContainer = {
         let storeURL = NSPersistentContainer.defaultDirectoryURL().appendingPathComponent("store")
         let description = NSPersistentStoreDescription(url: storeURL)
         description.shouldMigrateStoreAutomatically = true

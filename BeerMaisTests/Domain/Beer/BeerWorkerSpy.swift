@@ -7,6 +7,7 @@
 //
 
 import Foundation
+@testable import BeerMais
 
 final class BeerWorkerSpy: BeerWorkerProtocol {
     
@@ -37,11 +38,11 @@ final class BeerWorkerSpy: BeerWorkerProtocol {
     var formatBeerValueToShowReturn: String = .random
     
     var calculateMostValuableBeerCalls: [CalculateMostValuableBeerCall] = []
-    var calculateMostValuableBeerReturn: Beer? = nil
+    var calculateMostValuableBeerReturn: (Beer, Float?)? = nil
     
     // MARK: - BeerWorkerProtocol
     
-    @discardableResult func createBeer(data: [String : Any]) -> Beer? {
+    @discardableResult func createBeer(data: BeerData) -> Beer? {
         createBeerCalls.append(.init(
             data: data,
             returnedValue: createBeerReturn
@@ -58,7 +59,7 @@ final class BeerWorkerSpy: BeerWorkerProtocol {
         return getBeersReturn
     }
     
-    func edit(beer: Beer, data: [String : Any]) {
+    func edit(beer: Beer, data: BeerData) {
         editCalls.append(.init(
             beer: beer,
             data: data
@@ -112,7 +113,7 @@ final class BeerWorkerSpy: BeerWorkerProtocol {
         return formatBeerValueToShowReturn
     }
     
-    func calculateMostValuableBeer(beers: [Beer]) -> Beer? {
+    func calculateMostValuableBeer(beers: [Beer]) -> (Beer, Float?)? {
         calculateMostValuableBeerCalls.append(.init(
             beers: beers,
             returnedValue: calculateMostValuableBeerReturn
@@ -124,7 +125,7 @@ final class BeerWorkerSpy: BeerWorkerProtocol {
     // MARK: - Call structs
     
     struct CreateBeerCall {
-        let data: [String : Any]
+        let data: BeerData
         let returnedValue: Beer?
     }
     
@@ -134,7 +135,7 @@ final class BeerWorkerSpy: BeerWorkerProtocol {
     
     struct EditCall {
         let beer: Beer
-        let data: [String : Any]
+        let data: BeerData
     }
     
     struct DeleteAllCall {}
@@ -166,6 +167,6 @@ final class BeerWorkerSpy: BeerWorkerProtocol {
     
     struct CalculateMostValuableBeerCall {
         let beers: [Beer]
-        let returnedValue: Beer?
+        let returnedValue: (Beer, Float?)?
     }
 }
