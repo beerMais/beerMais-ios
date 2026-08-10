@@ -110,18 +110,21 @@ extension BeerDetailView {
                 value: value,
                 amount: normalizedAmount
             )
+            let didSave: Bool
             if let selectedBeer {
-                worker.edit(beer: selectedBeer, data: data)
+                didSave = worker.edit(beer: selectedBeer, data: data)
             } else {
-                worker.createBeer(data: data)
+                didSave = worker.createBeer(data: data) != nil
             }
             
-            onFinish?()
+            if didSave {
+                onFinish?()
+            }
         }
         
         func delete() {
             guard let selectedBeer else { return }
-            worker.delete(beer: selectedBeer)
+            guard worker.delete(beer: selectedBeer) else { return }
             
             onFinish?()
         }

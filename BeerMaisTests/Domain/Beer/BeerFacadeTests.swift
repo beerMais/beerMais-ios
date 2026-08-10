@@ -59,6 +59,15 @@ final class BeerWorkerTests: XCTestCase {
         XCTAssertEqual(sut.getValuePerML(beer: beer), 0.01)
         XCTAssertEqual(sut.getValuePerML(beer: beer2), 0.011)
     }
+
+    func testGetValuePerML_WithZeroAmount_ReturnsInfinity() {
+        let beer = Beer.mock()
+        beer.value = 10
+        beer.amount = 0
+
+        XCTAssertEqual(sut.getValuePerML(beer: beer), .infinity)
+        XCTAssertEqual(sut.orderBeers([beer]).first, beer)
+    }
     
     func testCalcEconomyBetweenBeers() {
 

@@ -14,7 +14,7 @@ public protocol CoreDataWorkerProtocol {
     var context: NSManagedObjectContext? { get }
     
     func getData(entityName: String) -> [Any]
-    func deleteData(entityName: String)
+    @discardableResult func deleteData(entityName: String) -> Bool
 }
 
 final class CoreDataWorker: CoreDataWorkerProtocol {
@@ -48,8 +48,8 @@ final class CoreDataWorker: CoreDataWorkerProtocol {
         }
     }
     
-    func deleteData(entityName: String) {
-        guard let context else { return }
+    @discardableResult func deleteData(entityName: String) -> Bool {
+        guard let context else { return false }
 
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -60,6 +60,7 @@ final class CoreDataWorker: CoreDataWorkerProtocol {
             let objectIDs = result?.result as? [NSManagedObjectID] ?? []
             let changes: [AnyHashable: Any] = [NSDeletedObjectsKey: objectIDs]
             NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [context])
+            return true
         } catch {
             AppP.logError(
                 error,
@@ -67,6 +68,7 @@ final class CoreDataWorker: CoreDataWorkerProtocol {
                 operation: "deleteData",
                 properties: ["entityName": entityName]
             )
+            return false
         }
     }
 }

@@ -20,10 +20,13 @@ final class BeerWorkerSpy: BeerWorkerProtocol {
     var getBeersReturn: [Beer] = []
     
     var editCalls: [EditCall] = []
+    var editReturn = true
     
     var deleteAllCalls: [DeleteAllCall] = []
+    var deleteAllReturn = true
     
     var deleteCalls: [DeleteCall] = []
+    var deleteReturn = true
     
     var orderBeersCalls: [OrderBeersCall] = []
     var orderBeersReturn: [Beer] = []
@@ -59,21 +62,24 @@ final class BeerWorkerSpy: BeerWorkerProtocol {
         return getBeersReturn
     }
     
-    func edit(beer: Beer, data: BeerData) {
+    @discardableResult func edit(beer: Beer, data: BeerData) -> Bool {
         editCalls.append(.init(
             beer: beer,
             data: data
         ))
+        return editReturn
     }
     
-    func deleteAllBeers() {
+    @discardableResult func deleteAllBeers() -> Bool {
         deleteAllCalls.append(.init())
+        return deleteAllReturn
     }
     
-    func delete(beer: Beer) {
+    @discardableResult func delete(beer: Beer) -> Bool {
         deleteCalls.append(.init(
             beer: beer
         ))
+        return deleteReturn
     }
     
     func orderBeers(_ beers: [Beer]) -> [Beer] {

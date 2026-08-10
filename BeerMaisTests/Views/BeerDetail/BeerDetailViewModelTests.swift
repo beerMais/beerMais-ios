@@ -153,6 +153,34 @@ final class BeerDetailViewModelTests: XCTestCase {
         XCTAssertTrue(workerSpy.editCalls.isEmpty)
         XCTAssertFalse(finishCalled)
     }
+
+    func testCreateOrSave_WhenPersistenceFails_DoesNotInvokeOnFinish() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.brand = "Corona"
+        sut.price = "6.50"
+        workerSpy.createBeerReturn = nil
+        var finishCalled = false
+        sut.onFinish = { finishCalled = true }
+
+        sut.createOrSave()
+
+        XCTAssertEqual(workerSpy.createBeerCalls.count, 1)
+        XCTAssertFalse(finishCalled)
+    }
+
+    func testEdit_WhenPersistenceFails_DoesNotInvokeOnFinish() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: Beer.mock(), worker: workerSpy)
+        sut.brand = "Corona"
+        sut.price = "6.50"
+        workerSpy.editReturn = false
+        var finishCalled = false
+        sut.onFinish = { finishCalled = true }
+
+        sut.createOrSave()
+
+        XCTAssertEqual(workerSpy.editCalls.count, 1)
+        XCTAssertFalse(finishCalled)
+    }
     
     func testDelete_WhenBeerSelected_CallsWorkerDeleteAndInvokesOnFinish() {
         let beer = Beer.mock()
@@ -181,6 +209,19 @@ final class BeerDetailViewModelTests: XCTestCase {
         sut.delete()
         
         XCTAssertEqual(workerSpy.deleteCalls.count, 0)
+        XCTAssertFalse(finishCalled)
+    }
+
+    func testDelete_WhenPersistenceFails_DoesNotInvokeOnFinish() {
+        let beer = Beer.mock()
+        let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
+        workerSpy.deleteReturn = false
+        var finishCalled = false
+        sut.onFinish = { finishCalled = true }
+
+        sut.delete()
+
+        XCTAssertEqual(workerSpy.deleteCalls.count, 1)
         XCTAssertFalse(finishCalled)
     }
 }
@@ -249,6 +290,14 @@ final class DeleteAllViewModelTests: XCTestCase {
         sut.deleteAllBeers()
 
         XCTAssertEqual(worker.deleteAllCalls.count, 1)
+    }
+
+    func testDeleteAllBeers_WhenWorkerFails_ReturnsFalse() {
+        let worker = BeerWorkerSpy()
+        worker.deleteAllReturn = false
+        let sut = DeleteAllView.ViewModel(worker: worker)
+
+        XCTAssertFalse(sut.deleteAllBeers())
     }
 }
 

@@ -14,9 +14,9 @@ import AmplitudeSwift
 protocol BeerWorkerProtocol {
     @discardableResult func createBeer(data: BeerData) -> Beer?
     func getBeers() -> [Beer]
-    func edit(beer: Beer, data: BeerData)
-    func deleteAllBeers()
-    func delete(beer: Beer)
+    @discardableResult func edit(beer: Beer, data: BeerData) -> Bool
+    @discardableResult func deleteAllBeers() -> Bool
+    @discardableResult func delete(beer: Beer) -> Bool
     
     func orderBeers(_ beers: [Beer]) -> [Beer]
     func getValuePerML(beer: Beer) -> Float
@@ -46,7 +46,7 @@ final class BeerWorker: BeerWorkerProtocol {
         var beer = Beer(context: context)
         setDataToBeer(beer: &beer, data: data)
         
-        saveContext()
+        guard saveContext() else { return nil }
         updateWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
@@ -65,20 +65,21 @@ final class BeerWorker: BeerWorkerProtocol {
         return orderBeers(beers)
     }
     
-    func edit(beer: Beer, data: BeerData) {
+    @discardableResult func edit(beer: Beer, data: BeerData) -> Bool {
         var beer = beer
         setDataToBeer(beer: &beer, data: data)
-        saveContext()
+        guard saveContext() else { return false }
         updateWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "beer_updated",
             eventProperties: beerToAnalyticsParameters(beer)
         ))
+        return true
     }
     
-    func deleteAllBeers() {
-        coreDataWorker.deleteData(entityName: entityName)
+    @discardableResult func deleteAllBeers() -> Bool {
+        guard coreDataWorker.deleteData(entityName: entityName) else { return false }
         
         cleandWidgetData()
         
@@ -86,17 +87,19 @@ final class BeerWorker: BeerWorkerProtocol {
             eventType: "all_beers_deleted",
             eventProperties: nil
         ))
+        return true
     }
     
-    func delete(beer: Beer) {
+    @discardableResult func delete(beer: Beer) -> Bool {
         coreDataWorker.context?.delete(beer)
-        saveContext()
+        guard saveContext() else { return false }
         updateWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "beer_deleted",
             eventProperties: beerToAnalyticsParameters(beer)
         ))
+        return true
     }
     
     func orderBeers(_ beers: [Beer]) -> [Beer] {
@@ -109,7 +112,8 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     func getValuePerML(beer: Beer) -> Float {
-        beer.value / Float(beer.amount)
+        guard beer.amount > 0 else { return .infinity }
+        return beer.value / Float(beer.amount)
     }
     
     func calcEconomyBetweenBeers(beer1: Beer, beer2: Beer) -> Float {
@@ -138,13 +142,17 @@ final class BeerWorker: BeerWorkerProtocol {
         beer.type = data.type
     }
 
-    private func saveContext() {
-        guard let context = coreDataWorker.context, context.hasChanges else { return }
+    private func saveContext() -> Bool {
+        guard let context = coreDataWorker.context else { return false }
+        guard context.hasChanges else { return true }
 
         do {
             try context.save()
+            return true
         } catch let error {
-            print("Could not save. \(error), \(String(describing: error._userInfo))")
+            context.rollback()
+            AppP.logError(error, source: "BeerWorker", operation: "saveContext")
+            return false
         }
     }
     

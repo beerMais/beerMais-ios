@@ -32,8 +32,9 @@ struct DeleteAllView: View {
 
                 HStack {
                     let deleteButton = Button("delete") {
-                        viewModel.deleteAllBeers()
-                        dismiss()
+                        if viewModel.deleteAllBeers() {
+                            dismiss()
+                        }
                     }
                     .buttonBorderShape(.roundedRectangle)
                     if #available(iOS 26.0, *) {
@@ -69,7 +70,7 @@ extension DeleteAllView {
             self.worker = worker
         }
 
-        func deleteAllBeers() {
+        func deleteAllBeers() -> Bool {
             worker.deleteAllBeers()
         }
     }
