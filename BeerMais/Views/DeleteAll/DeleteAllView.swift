@@ -13,7 +13,7 @@ struct DeleteAllView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: ViewModel
 
-    init(worker: BeerWorkerProtocol = BeerWorker()) {
+    init(worker: BeerWorkerProtocol) {
         _viewModel = StateObject(wrappedValue: ViewModel(worker: worker))
     }
     

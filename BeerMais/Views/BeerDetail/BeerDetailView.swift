@@ -47,11 +47,12 @@ struct BeerDetailView: View {
     
     private let selectedBeer: Beer?
 
-    init(selectedBeer: Beer? = nil) {
+    init(selectedBeer: Beer? = nil, worker: BeerWorkerProtocol) {
         self.selectedBeer = selectedBeer
         self._viewModel = StateObject(
             wrappedValue: ViewModel(
-                selectedBeer: selectedBeer
+                selectedBeer: selectedBeer,
+                worker: worker
             )
         )
     }

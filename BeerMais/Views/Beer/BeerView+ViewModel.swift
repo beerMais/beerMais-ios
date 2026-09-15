@@ -44,7 +44,7 @@ extension BeerView {
             beer: Beer? = nil,
             index: Int? = nil,
             isHighlighted: Bool = false,
-            worker: BeerWorkerProtocol = BeerWorker()
+            worker: BeerWorkerProtocol
         ) {
             self.index = index
             self.isHighlighted = isHighlighted

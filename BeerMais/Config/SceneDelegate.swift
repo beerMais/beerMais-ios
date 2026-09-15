@@ -12,6 +12,7 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+    private let dependencies = AppDependencies()
 
     func scene(
         _ scene: UIScene,
@@ -20,10 +21,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
+
+            #if DEBUG
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+               appDelegate.isFirstLaunch {
+                AppP.seedInitialData(using: dependencies.beerWorker)
+            }
+            #endif
             
             let navigationController = UINavigationController()
             let main = UIHostingController(
-                rootView: MainView().interactiveDismissDisabled()
+                rootView: MainView()
+                    .environment(\.appDependencies, dependencies)
+                    .interactiveDismissDisabled()
             )
             
             if #available(iOS 26.0, *) {} else {

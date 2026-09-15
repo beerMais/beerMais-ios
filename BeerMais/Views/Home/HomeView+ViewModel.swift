@@ -14,9 +14,9 @@ extension HomeView {
         @Published var highlightedBeer: Beer? = nil
         @Published var economy: Float? = nil
         
-        private let worker: BeerWorkerProtocol
+        let worker: BeerWorkerProtocol
 
-        init(worker: BeerWorkerProtocol = BeerWorker()) {
+        init(worker: BeerWorkerProtocol) {
             self.worker = worker
         }
         

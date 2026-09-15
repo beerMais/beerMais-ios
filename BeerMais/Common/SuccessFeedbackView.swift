@@ -12,6 +12,7 @@ import UIKit
 import Lottie
 
 
+@MainActor
 final class SuccessFeedbackView {
     
     private var animationView: LottieAnimationView?
@@ -48,7 +49,9 @@ final class SuccessFeedbackView {
         animationView.play()
         
         _ = Timer.scheduledTimer(withTimeInterval: TimeInterval(secondsToStop), repeats: false, block: { [weak self] timer in
-            self?.stop()
+            Task { @MainActor [weak self] in
+                self?.stop()
+            }
             timer.invalidate()
         })
     }

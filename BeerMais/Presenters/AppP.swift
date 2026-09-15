@@ -23,20 +23,17 @@ final class AppP {
     
     @MainActor public static let remoteConfig: RemoteConfigProtocol = RemoteConfig.remoteConfig()
     
-    static func launch() {
-        
-        if (!self.isFirstLaunch()) {
+    @discardableResult static func launch() -> Bool {
+        let isFirstLaunch = !self.isFirstLaunch()
+
+        if isFirstLaunch {
             self.setFirstLaunch()
-            
             AppP.amplitude.setUserId(userId: nil)
-            
-            #if DEBUG
-                self.setInitialData()
-            #endif
         }
         
         self.incrementAppOpenedCount()
         logAppLaunch()
+        return isFirstLaunch
     }
     
     @MainActor static func launchRemoteConfig() {
@@ -57,44 +54,17 @@ final class AppP {
     static func setFirstLaunch(defaults: UserDefaults = .standard) {
         defaults.set(true, forKey: self.hasBeenLaunchedBeforeFlag)
     }
-    
-    static private func setInitialData() {
-        let beerWorker = BeerWorker()
-        
-        let beer1 = BeerData(
-            brand: "Budweiser",
-            value: 2.59,
-            amount: 350
-        )
-        beerWorker.createBeer(data: beer1)
-        
-        let beer2 = BeerData(
-            brand: "Heineken",
-            value: 2.79,
-            amount: 350
-        )
-        beerWorker.createBeer(data: beer2)
-        
-        let beer3 = BeerData(
-            brand: "Budweiser",
-            value: 2.1,
-            amount: 269
-        )
-        beerWorker.createBeer(data: beer3)
-        
-        let beer4 = BeerData(
-            brand: "Stella Artois",
-            value: 2.35,
-            amount: 310
-        )
-        beerWorker.createBeer(data: beer4)
-        
-        let beer5 = BeerData(
-            brand: "Original",
-            value: 10.99,
-            amount: 1000
-        )
-        beerWorker.createBeer(data: beer5)
+
+    static func seedInitialData(using beerWorker: BeerWorkerProtocol) {
+        #if DEBUG
+        [
+            BeerData(brand: "Budweiser", value: 2.59, amount: 350),
+            BeerData(brand: "Heineken", value: 2.79, amount: 350),
+            BeerData(brand: "Budweiser", value: 2.1, amount: 269),
+            BeerData(brand: "Stella Artois", value: 2.35, amount: 310),
+            BeerData(brand: "Original", value: 10.99, amount: 1000)
+        ].forEach { beerWorker.createBeer(data: $0) }
+        #endif
     }
     
     static func incrementAppOpenedCount(defaults: UserDefaults = .standard) {

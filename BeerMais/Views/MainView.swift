@@ -15,6 +15,7 @@ enum Tabs: Int {
 }
 
 struct MainView: View {
+    @Environment(\.appDependencies) private var dependencies
     @State private var activeTab = Tabs.home.rawValue
     @State private var isPresented = false
     @State private var deleteIsPresented = false
@@ -25,7 +26,7 @@ struct MainView: View {
             ZStack(alignment: .bottomTrailing) {
                 let tabView = TabView(selection: $activeTab) {
                     Tab("Calculadora", image: "icons8-math-50", value: Tabs.home.rawValue) {
-                        HomeView()
+                        HomeView(worker: dependencies.beerWorker)
                     }
                     Tab("Sobre", image: "icons8-about-50", value: Tabs.about.rawValue) {
                         AboutView()
@@ -42,7 +43,7 @@ struct MainView: View {
             }
         } else {
             TabView(selection: $activeTab) {
-                HomeView()
+                HomeView(worker: dependencies.beerWorker)
                     .tabItem {
                         Label {
                             Text("Calculadora")

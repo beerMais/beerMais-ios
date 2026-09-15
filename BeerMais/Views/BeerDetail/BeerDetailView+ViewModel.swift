@@ -27,7 +27,7 @@ extension BeerDetailView {
         private let selectedBeer: Beer?
         private let worker: BeerWorkerProtocol
         
-        init(selectedBeer: Beer?, worker: BeerWorkerProtocol = BeerWorker()) {
+        init(selectedBeer: Beer?, worker: BeerWorkerProtocol) {
             self.selectedBeer = selectedBeer
             self.worker = worker
             

@@ -29,24 +29,18 @@ final class BeerWorker: BeerWorkerProtocol {
     
     // MARK: - Private properties
     
-    private let entityName = "Beer"
-    private let coreDataWorker: CoreDataWorkerProtocol
+    private let repository: BeerRepository
     
     // MARK: - Initialization
     
-    init(coreDataWorker: CoreDataWorkerProtocol = CoreDataWorker.shared) {
-        self.coreDataWorker = coreDataWorker
+    init(repository: BeerRepository) {
+        self.repository = repository
     }
     
     // MARK: - BeerWorkerProtocol
     
     @discardableResult func createBeer(data: BeerData) -> Beer? {
-        guard let context = coreDataWorker.context else { return nil }
-        
-        var beer = Beer(context: context)
-        setDataToBeer(beer: &beer, data: data)
-        
-        guard saveContext() else { return nil }
+        guard let beer = repository.create(data: data) else { return nil }
         updateWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
@@ -58,17 +52,11 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     func getBeers() -> [Beer] {
-        guard let beers = coreDataWorker.getData(entityName: Beer.entityName) as? [Beer] else {
-            return []
-        }
-        
-        return orderBeers(beers)
+        return orderBeers(repository.fetchBeers())
     }
     
     @discardableResult func edit(beer: Beer, data: BeerData) -> Bool {
-        var beer = beer
-        setDataToBeer(beer: &beer, data: data)
-        guard saveContext() else { return false }
+        guard repository.update(beer: beer, data: data) else { return false }
         updateWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
@@ -79,7 +67,7 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     @discardableResult func deleteAllBeers() -> Bool {
-        guard coreDataWorker.deleteData(entityName: entityName) else { return false }
+        guard repository.deleteAll() else { return false }
         
         cleandWidgetData()
         
@@ -91,8 +79,7 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     @discardableResult func delete(beer: Beer) -> Bool {
-        coreDataWorker.context?.delete(beer)
-        guard saveContext() else { return false }
+        guard repository.delete(beer: beer) else { return false }
         updateWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
@@ -134,27 +121,6 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     // MARK: - Private methods
-    
-    private func setDataToBeer(beer: inout Beer, data: BeerData) {
-        beer.brand = data.brand
-        beer.value = data.value
-        beer.amount = data.amount
-        beer.type = data.type
-    }
-
-    private func saveContext() -> Bool {
-        guard let context = coreDataWorker.context else { return false }
-        guard context.hasChanges else { return true }
-
-        do {
-            try context.save()
-            return true
-        } catch let error {
-            context.rollback()
-            AppP.logError(error, source: "BeerWorker", operation: "saveContext")
-            return false
-        }
-    }
     
     private func beerToAnalyticsParameters(_ beer: Beer) -> [String: NSObject] {
         var parameters = [String: NSObject]()

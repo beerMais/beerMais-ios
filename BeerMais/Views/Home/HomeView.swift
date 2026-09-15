@@ -9,12 +9,19 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var viewModel = ViewModel()
-    @StateObject private var highlightedBeerViewModel = BeerView.ViewModel(isHighlighted: true)
+    @StateObject private var viewModel: ViewModel
+    @StateObject private var highlightedBeerViewModel: BeerView.ViewModel
     
     @State private var selectedBeer: Beer?
     @State private var isPresented = false
     @State private var deleteIsPresented = false
+
+    init(worker: BeerWorkerProtocol) {
+        _viewModel = StateObject(wrappedValue: ViewModel(worker: worker))
+        _highlightedBeerViewModel = StateObject(
+            wrappedValue: BeerView.ViewModel(isHighlighted: true, worker: worker)
+        )
+    }
     
     var body: some View {
         NavigationStack {
@@ -36,7 +43,7 @@ struct HomeView: View {
                         GridItem(.flexible())
                     ]) {
                         ForEach(Array(viewModel.beers.enumerated()), id: \.element) { index, beer in
-                            BeerView(viewModel: BeerView.ViewModel(beer: beer, index: index))
+                            BeerView(viewModel: BeerView.ViewModel(beer: beer, index: index, worker: viewModel.worker))
                                 .frame(height: 120)
                                 .onTapGesture { selectedBeer = beer }
                         }
@@ -78,7 +85,7 @@ struct HomeView: View {
                 viewModel.reload()
             },
             content: {
-                BeerDetailView()
+                BeerDetailView(worker: viewModel.worker)
                     .presentationDetents([.fraction(0.79)])
             }
         )
@@ -88,7 +95,7 @@ struct HomeView: View {
                 viewModel.reload()
             },
             content: {
-                DeleteAllView()
+                DeleteAllView(worker: viewModel.worker)
                     .presentationDetents([.medium])
             }
         )
@@ -102,7 +109,7 @@ struct HomeView: View {
             },
             content: {
                 if let beer = selectedBeer {
-                    BeerDetailView(selectedBeer: beer)
+                    BeerDetailView(selectedBeer: beer, worker: viewModel.worker)
                         .presentationDetents([.fraction(0.79)])
                 }
             }

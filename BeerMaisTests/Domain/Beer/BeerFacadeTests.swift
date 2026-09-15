@@ -15,7 +15,7 @@ final class BeerWorkerTests: XCTestCase {
     var sut: BeerWorker!
     
     override func setUp() {
-        sut = BeerWorker()
+        sut = BeerWorker(repository: BeerRepositorySpy())
     }
     
     override func tearDown() {
@@ -125,5 +125,21 @@ final class BeerWorkerTests: XCTestCase {
     func testCalculateMostValuableBeer_WithFewerThanTwoBeers_ReturnsNil() {
         XCTAssertNil(sut.calculateMostValuableBeer(beers: []))
         XCTAssertNil(sut.calculateMostValuableBeer(beers: [Beer.mock()]))
+    }
+}
+
+final class CoreDataBeerRepositoryTests: XCTestCase {
+    func testCRUDOperationsUseTheInjectedPersistenceController() {
+        let controller = PersistenceController(inMemory: true)
+        let repository = CoreDataBeerRepository(persistenceController: controller)
+        let data = BeerData(brand: "Lager", value: 5, amount: 350)
+
+        let beer = repository.create(data: data)
+
+        XCTAssertEqual(repository.fetchBeers(), [beer].compactMap { $0 })
+        XCTAssertTrue(repository.update(beer: try! XCTUnwrap(beer), data: BeerData(brand: "Pilsner", value: 6, amount: 473)))
+        XCTAssertEqual(repository.fetchBeers().first?.brand, "Pilsner")
+        XCTAssertTrue(repository.deleteAll())
+        XCTAssertTrue(repository.fetchBeers().isEmpty)
     }
 }

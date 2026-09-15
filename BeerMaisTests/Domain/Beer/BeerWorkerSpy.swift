@@ -9,6 +9,20 @@
 import Foundation
 @testable import BeerMais
 
+final class BeerRepositorySpy: BeerRepository {
+    var beers: [Beer] = []
+    var createReturn: Beer?
+    var updateReturn = true
+    var deleteReturn = true
+    var deleteAllReturn = true
+
+    func fetchBeers() -> [Beer] { beers }
+    func create(data: BeerData) -> Beer? { createReturn }
+    func update(beer: Beer, data: BeerData) -> Bool { updateReturn }
+    func delete(beer: Beer) -> Bool { deleteReturn }
+    func deleteAll() -> Bool { deleteAllReturn }
+}
+
 final class BeerWorkerSpy: BeerWorkerProtocol {
     
     // MARK: - Calls

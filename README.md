@@ -16,15 +16,19 @@ flowchart TB
         Clip["BeerMais Clip<br/>(App Clip)"]
     end
 
-    subgraph Shared["Shared Storage"]
-        AppGroup["App Group<br/>group.beerMais"]
-        CoreData["Core Data<br/>BeerMais.xcdatamodeld"]
+    subgraph Storage["Target-local storage"]
+        MainCoreData["Main app<br/>Core Data store"]
+        ClipCoreData["App Clip<br/>Core Data store"]
     end
 
-    Main --> CoreData
+    subgraph Shared["Shared storage"]
+        AppGroup["App Group<br/>group.beerMais"]
+    end
+
+    Main --> MainCoreData
     Main --> AppGroup
     Widget --> AppGroup
-    Clip --> Main
+    Clip --> ClipCoreData
 ```
 
 ## Layer architecture (main app)
@@ -52,6 +56,12 @@ flowchart TB
             Donate["DonateView + ViewModel"]
         end
 
+        subgraph Composition["Composition"]
+            Dependencies["AppDependencies<br/>(SwiftUI environment)"]
+            Persistence["PersistenceController"]
+            Repository["BeerRepository /<br/>CoreDataBeerRepository"]
+        end
+
         subgraph Presenters["Presenters / App Services"]
             AppP["AppP<br/>(launch, analytics, remote config)"]
             SettingsP["SettingsP<br/>(Settings.plist keys)"]
@@ -60,10 +70,9 @@ flowchart TB
     end
 
     subgraph Domain["Domain Layer"]
-        BeerWorker["BeerWorker<br/>(CRUD, sorting, economy calc)"]
+        BeerWorker["BeerWorker<br/>(CRUD orchestration,<br/>sorting, economy calc)"]
         BeerEntity["Beer (NSManagedObject)"]
         BeerData["BeerData (DTO)"]
-        CoreDataWorker["CoreDataWorker"]
     end
 
     subgraph Infrastructure["Infrastructure / External"]
@@ -77,7 +86,7 @@ flowchart TB
     end
 
     subgraph Storage["Persistence"]
-        CD["Core Data Stack<br/>(AppDelegate.persistentContainer)"]
+        CD["Core Data store"]
         UD["UserDefaults<br/>(launch flags, open count)"]
         AG["App Group UserDefaults<br/>(widget data)"]
     end
@@ -89,6 +98,12 @@ flowchart TB
     Launch --> MainView
     SD --> MainView
 
+    SD --> Dependencies
+    Dependencies --> Persistence
+    Dependencies --> Repository
+    Dependencies --> BeerWorker
+    Persistence --> CD
+    Repository --> Persistence
     MainView --> Home
     MainView --> About
     Home --> BeerCard
@@ -96,17 +111,15 @@ flowchart TB
     Home --> DeleteAll
     About --> Donate
 
+    MainView --> Dependencies
     Home --> BeerWorker
     BeerDetail --> BeerWorker
     DeleteAll --> BeerWorker
 
-    BeerWorker --> CoreDataWorker
+    BeerWorker --> Repository
     BeerWorker --> Amplitude
     BeerWorker --> WidgetKit
     BeerWorker --> AG
-    CoreDataWorker --> CD
-    CoreDataWorker --> AppP
-
     AppP --> Amplitude
     AppP --> Firebase
     AppP --> UD
@@ -117,7 +130,7 @@ flowchart TB
 
     BeerWorker --> BeerEntity
     BeerWorker --> BeerData
-    CoreDataWorker --> BeerEntity
+    Repository --> BeerEntity
 
     SettingsP --> AdMob
     SettingsP --> Amplitude
@@ -153,7 +166,8 @@ sequenceDiagram
     participant UI as SwiftUI Views
     participant VM as ViewModels / Presenter
     participant BW as BeerWorker
-    participant CDW as CoreDataWorker
+    participant BR as BeerRepository
+    participant PC as PersistenceController
     participant CD as Core Data
     participant AG as App Group UserDefaults
     participant WK as WidgetKit
@@ -162,8 +176,9 @@ sequenceDiagram
 
     UI->>VM: User action (create/edit/delete)
     VM->>BW: createBeer / edit / delete
-    BW->>CDW: persist / fetch / batch delete
-    CDW->>CD: NSManagedObjectContext
+    BW->>BR: persist / fetch / batch delete
+    BR->>PC: use view context
+    PC->>CD: NSManagedObjectContext
     BW->>AMP: track event (beer_created, etc.)
     BW->>BW: calculateMostValuableBeer()
     BW->>AG: write BRAND, AMOUNT, VALUE, ECONOMY...
@@ -179,7 +194,7 @@ sequenceDiagram
 | **Config** | `BeerMais/Config/` | `AppDelegate`, `SceneDelegate`, assets, entitlements, Core Data model |
 | **Views** | `BeerMais/Views/` | SwiftUI screens (`MainView`, `HomeView`, `BeerDetailView`, etc.) |
 | **Scenes** | `BeerMais/Scenes/` | UIKit launch screen |
-| **Domain** | `BeerMais/Domain/` | `Beer`, `BeerWorker`, `CoreDataWorker` |
+| **Domain** | `BeerMais/Domain/` | `Beer`, `BeerWorker`, `PersistenceController`, `BeerRepository`, `AppDependencies` |
 | **Presenters** | `BeerMais/Presenters/` | App-wide services (`AppP`, `SettingsP`, `VersionP`) |
 | **Common** | `BeerMais/Common/` | Reusable UI, ads, extensions |
 | **Libraries** | `BeerMais/Libraries/` | Firebase Remote Config abstractions |
@@ -200,8 +215,8 @@ sequenceDiagram
 
 ## Architecture notes
 
-1. **Primary pattern**: SwiftUI views + `ObservableObject` ViewModels calling `BeerWorker` directly.
-2. **Legacy UIKit**: `LaunchScreenViewController` bootstraps the app before presenting `MainView` (SwiftUI).
-3. **Single domain service**: `BeerWorker` owns business rules (price per ml, sorting, economy), persistence orchestration, analytics, and widget sync.
+1. **Primary pattern**: `SceneDelegate` builds `AppDependencies` and injects it into `MainView` through SwiftUI environment; feature ViewModels receive the configured `BeerWorker` explicitly.
+2. **Persistence boundary**: `PersistenceController` owns each target's Core Data container. `CoreDataBeerRepository` performs CRUD and batch-delete work; `BeerWorker` retains comparison rules and coordinates analytics/widget updates.
+3. **Legacy UIKit**: `LaunchScreenViewController` bootstraps the main app before presenting `MainView` (SwiftUI).
 4. **Cross-target sharing**: Widget data flows through **App Group** `UserDefaults`, not Core Data directly in the widget.
-5. **App Clip**: Reuses `MainView` without the launch animation wrapper.
+5. **App Clip**: Reuses `MainView` with its own dependency container and target-local Core Data store; it does not share the main app's Core Data database.
