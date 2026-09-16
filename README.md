@@ -6,7 +6,7 @@ Beer Mais — compare beer prices by cost per ml and find the best value.
 
 ## High-level targets
 
-The project has three app targets plus shared data via an App Group:
+The project has a main app, a widget extension, and an App Clip. The main app writes widget data to an App Group; the App Clip uses its own database and does not update the widget:
 
 ```mermaid
 flowchart TB
@@ -26,8 +26,8 @@ flowchart TB
     end
 
     Main --> MainCoreData
-    Main --> AppGroup
-    Widget --> AppGroup
+    Main -->|writes snapshot| AppGroup
+    AppGroup -->|reads snapshot| Widget
     Clip --> ClipCoreData
 ```
 
@@ -110,6 +110,10 @@ flowchart TB
     Home --> BeerDetail
     Home --> DeleteAll
     About --> Donate
+    About --> VersionP
+    Donate --> StoreKit
+    Launch --> Lottie
+    BeerCard --> BasicsKit
 
     MainView --> Dependencies
     Home --> BeerWorker
@@ -138,53 +142,77 @@ flowchart TB
 
 ## Navigation & screen flow
 
+The main app presents `MainView` after the launch animation. The App Clip opens `MainView` directly.
+
 ```mermaid
 flowchart LR
-    Start([App Launch]) --> AD[AppDelegate]
-    AD --> SD[SceneDelegate]
-    SD --> Launch[LaunchScreenViewController]
-    Launch --> Main[MainView]
+    Start(["App Launch"]) --> AD["AppDelegate"]
+    AD --> SD["SceneDelegate"]
+    SD --> Launch["LaunchScreenViewController"]
+    Launch --> Main["MainView"]
 
-    Main --> TabHome[Tab: Calculadora]
-    Main --> TabAbout[Tab: Sobre]
+    Main --> TabHome["Tab: Calculadora"]
+    Main --> TabAbout["Tab: Sobre"]
 
-    TabHome --> Home[HomeView]
-    Home --> Highlight[Highlighted BeerView<br/>(best value)]
-    Home --> Grid[Beer grid<br/>(BeerView cards)]
-    Home -->|"+"| Create[BeerDetailView<br/>(create sheet)]
-    Home -->|tap beer| Edit[BeerDetailView<br/>(edit sheet)]
-    Home -->|trash| Delete[DeleteAllView<br/>(confirm sheet)]
+    TabHome --> Home["HomeView"]
+    Home --> Highlight["Highlighted BeerView<br/>(best value)"]
+    Home --> Grid["Beer grid<br/>(BeerView cards)"]
+    Home -->|"+"| Create["BeerDetailView<br/>(create sheet)"]
+    Home -->|tap beer| Edit["BeerDetailView<br/>(edit sheet)"]
+    Home -->|trash| Delete["DeleteAllView<br/>(confirm sheet)"]
 
-    TabAbout --> About[AboutView]
-    About --> Donate[DonateView<br/>(StoreKit tip jar)]
+    TabAbout --> About["AboutView"]
+    About --> Donate["DonateView<br/>(StoreKit tip jar)"]
 ```
 
 ## Data flow (beer CRUD → widget)
 
+Successful mutations update widget data before analytics events are recorded. The main app also refreshes the snapshot when its scene becomes active. WidgetKit controls when requested timeline updates appear.
+
 ```mermaid
 sequenceDiagram
     participant UI as SwiftUI Views
-    participant VM as ViewModels / Presenter
+    participant VM as ViewModels
     participant BW as BeerWorker
-    participant BR as BeerRepository
-    participant PC as PersistenceController
-    participant CD as Core Data
+    participant BR as CoreDataBeerRepository
+    participant CD as Core Data view context
     participant AG as App Group UserDefaults
     participant WK as WidgetKit
     participant AMP as Amplitude
     participant W as Widget Extension
 
-    UI->>VM: User action (create/edit/delete)
-    VM->>BW: createBeer / edit / delete
-    BW->>BR: persist / fetch / batch delete
-    BR->>PC: use view context
-    PC->>CD: NSManagedObjectContext
-    BW->>AMP: track event (beer_created, etc.)
-    BW->>BW: calculateMostValuableBeer()
-    BW->>AG: write BRAND, AMOUNT, VALUE, ECONOMY...
-    BW->>WK: reloadAllTimelines()
-    W->>AG: read widget snapshot
-    W->>W: render BeerMais_widgetEntryView
+    Note over BR,CD: PersistenceController supplies the repository's context at initialization
+    UI->>VM: Create, edit, delete, or delete all
+    VM->>BW: Request mutation
+    BW->>BR: Persist changes or batch delete
+    BR->>CD: Save or execute deletion
+    CD-->>BR: Result
+    BR-->>BW: Success or failure
+    alt Persistence succeeds
+        opt Main app has widget storage configured
+            alt Delete all
+                BW->>AG: Clear snapshot
+            else Create, edit, or single delete
+                BW->>BR: Fetch current beers
+                BR-->>BW: Current beers
+                BW->>BW: Rank by price per litre
+                BW->>AG: Write snapshot, or clear when fewer than two beers remain
+            end
+            opt Snapshot changes
+                BW->>WK: reloadAllTimelines()
+            end
+        end
+        BW->>AMP: Track successful mutation
+        BW-->>VM: Success
+        VM-->>UI: Dismiss sheet
+        UI->>VM: Reload home list and highlighted card
+    else Persistence fails
+        BW-->>VM: Failure
+        VM-->>UI: Show error and keep sheet open
+    end
+    Note over WK,W: WidgetKit schedules timeline updates
+    W->>AG: Read saved snapshot
+    W->>W: Render BeerMais_widgetEntryView
 ```
 
 ## Folder structure
@@ -202,7 +230,7 @@ sequenceDiagram
 | **Widget** | `BeerMais widget/` | Home screen widget |
 | **Clip** | `BeerMais Clip/` | Lightweight App Clip entry → `MainView` |
 
-## External dependencies (SPM)
+## Dependencies (SPM and system frameworks)
 
 | Package | Used for |
 |---|---|
@@ -211,7 +239,7 @@ sequenceDiagram
 | **Amplitude-Swift** | Analytics & error tracking |
 | **lottie-spm** | Launch animation |
 | **BasicsKit** | Shared utilities (string/number parsing) |
-| **StoreKit** | In-app tips (donations) & review prompts |
+| **StoreKit** (Apple system framework) | In-app tips (donations) & review prompts |
 
 ## Architecture notes
 
@@ -219,4 +247,4 @@ sequenceDiagram
 2. **Persistence boundary**: `PersistenceController` owns each target's Core Data container. `CoreDataBeerRepository` performs CRUD and batch-delete work; `BeerWorker` retains comparison rules and coordinates analytics/widget updates.
 3. **Legacy UIKit**: `LaunchScreenViewController` bootstraps the main app before presenting `MainView` (SwiftUI).
 4. **Cross-target sharing**: Widget data flows through **App Group** `UserDefaults`, not Core Data directly in the widget.
-5. **App Clip**: Reuses `MainView` with its own dependency container and target-local Core Data store; it does not share the main app's Core Data database.
+5. **App Clip**: Reuses `MainView` with its own dependency container and target-local Core Data store; it does not share the main app's Core Data database or write widget snapshots.
