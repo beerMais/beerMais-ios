@@ -14,6 +14,7 @@ import AmplitudeSwift
 protocol BeerWorkerProtocol {
     @discardableResult func createBeer(data: BeerData) -> Beer?
     func getBeers() -> [Beer]
+    func refreshWidgetData()
     @discardableResult func edit(beer: Beer, data: BeerData) -> Bool
     @discardableResult func deleteAllBeers() -> Bool
     @discardableResult func delete(beer: Beer) -> Bool
@@ -30,18 +31,26 @@ final class BeerWorker: BeerWorkerProtocol {
     // MARK: - Private properties
     
     private let repository: BeerRepository
+    private let widgetDefaults: UserDefaults?
+    private let reloadWidget: () -> Void
     
     // MARK: - Initialization
     
-    init(repository: BeerRepository) {
+    init(
+        repository: BeerRepository,
+        widgetDefaults: UserDefaults? = nil,
+        reloadWidget: @escaping () -> Void = { WidgetCenter.shared.reloadAllTimelines() }
+    ) {
         self.repository = repository
+        self.widgetDefaults = widgetDefaults
+        self.reloadWidget = reloadWidget
     }
     
     // MARK: - BeerWorkerProtocol
     
     @discardableResult func createBeer(data: BeerData) -> Beer? {
         guard let beer = repository.create(data: data) else { return nil }
-        updateWidgetData()
+        refreshWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "beer_created",
@@ -57,7 +66,7 @@ final class BeerWorker: BeerWorkerProtocol {
     
     @discardableResult func edit(beer: Beer, data: BeerData) -> Bool {
         guard repository.update(beer: beer, data: data) else { return false }
-        updateWidgetData()
+        refreshWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "beer_updated",
@@ -69,7 +78,7 @@ final class BeerWorker: BeerWorkerProtocol {
     @discardableResult func deleteAllBeers() -> Bool {
         guard repository.deleteAll() else { return false }
         
-        cleandWidgetData()
+        clearWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "all_beers_deleted",
@@ -79,12 +88,13 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     @discardableResult func delete(beer: Beer) -> Bool {
+        let parameters = beerToAnalyticsParameters(beer)
         guard repository.delete(beer: beer) else { return false }
-        updateWidgetData()
+        refreshWidgetData()
         
         AppP.amplitude.track(event: BaseEvent(
             eventType: "beer_deleted",
-            eventProperties: beerToAnalyticsParameters(beer)
+            eventProperties: parameters
         ))
         return true
     }
@@ -94,7 +104,11 @@ final class BeerWorker: BeerWorkerProtocol {
             .map { beer in
                 (beer: beer, valuePerML: getValuePerML(beer: beer))
             }
-            .sorted { $0.valuePerML < $1.valuePerML }
+            .sorted {
+                if $0.valuePerML != $1.valuePerML { return $0.valuePerML < $1.valuePerML }
+                // Permanent IDs keep equal-price rankings stable across fetches and relaunches.
+                return $0.beer.objectID.uriRepresentation().absoluteString < $1.beer.objectID.uriRepresentation().absoluteString
+            }
             .map(\.beer)
     }
     
@@ -108,15 +122,16 @@ final class BeerWorker: BeerWorkerProtocol {
     }
     
     func formatBeerValueToShow(value: Float) -> String {
-        String(format: "%.2f", value).replacingOccurrences(of: ".", with: ",")
+        BeerDisplay.decimal(value)
     }
     
     func calculateMostValuableBeer(beers: [Beer]) -> (Beer, Float?)? {
-        guard beers.count >= 2, let mostValuableBeer = beers.first else {
+        let ranked = orderBeers(beers)
+        guard ranked.count >= 2, let mostValuableBeer = ranked.first else {
             return nil
         }
         
-        let economy = calcEconomyBetweenBeers(beer1: mostValuableBeer, beer2: beers[1])
+        let economy = calcEconomyBetweenBeers(beer1: mostValuableBeer, beer2: ranked[1])
         return (mostValuableBeer, economy)
     }
     
@@ -131,39 +146,25 @@ final class BeerWorker: BeerWorkerProtocol {
         return parameters
     }
     
-    private func updateWidgetData() {
+    func refreshWidgetData() {
+        guard let defaults = widgetDefaults else { return }
         let beers = getBeers()
-        guard let (mostValuableBeer, economy) = calculateMostValuableBeer(beers: beers),
-              let defaults = UserDefaults(suiteName: "group.beerMais") else {
-            cleandWidgetData()
+        guard let (mostValuableBeer, economy) = calculateMostValuableBeer(beers: beers) else {
+            clearWidgetData()
             return
         }
 
         var hasChanges = false
         hasChanges = setWidgetValue(mostValuableBeer.brand, forKey: "BRAND", in: defaults) || hasChanges
-        hasChanges = setWidgetValue(amountText(for: mostValuableBeer), forKey: "AMOUNT", in: defaults) || hasChanges
+        hasChanges = setWidgetValue(BeerDisplay.amount(mostValuableBeer.amount), forKey: "AMOUNT", in: defaults) || hasChanges
         hasChanges = setWidgetValue("R$ \(formatBeerValueToShow(value: mostValuableBeer.value))", forKey: "VALUE", in: defaults) || hasChanges
         hasChanges = setWidgetValue(String(mostValuableBeer.type), forKey: "TYPE", in: defaults) || hasChanges
         hasChanges = setWidgetValue(String(beers.count), forKey: "BEERS_COUNT", in: defaults) || hasChanges
-        let economyText = economy.map { "R$ \(formatBeerValueToShow(value: $0))" }
+        let economyText = economy.map { BeerDisplay.perLiter($0) }
         hasChanges = setWidgetValue(economyText, forKey: "ECONOMY", in: defaults) || hasChanges
 
         if hasChanges {
             reloadWidget()
-        }
-    }
-
-    private func amountText(for beer: Beer) -> String {
-        if beer.amount >= 1000 {
-            if beer.amount >= 1010 {
-                var amountString = String(format: "%.2f", Float(beer.amount) / 1000)
-                amountString = amountString.replacingOccurrences(of: ".", with: ",")
-                return "\(amountString) L"
-            } else {
-                return "1 L"
-            }
-        } else {
-            return "\(beer.amount)ml"
         }
     }
 
@@ -179,12 +180,8 @@ final class BeerWorker: BeerWorkerProtocol {
         return true
     }
     
-    private func reloadWidget() {
-        WidgetCenter.shared.reloadAllTimelines()
-    }
-    
-    private func cleandWidgetData() {
-        guard let defaults = UserDefaults(suiteName: "group.beerMais") else { return }
+    private func clearWidgetData() {
+        guard let defaults = widgetDefaults else { return }
 
         let keys = ["BRAND", "AMOUNT", "VALUE", "TYPE", "BEERS_COUNT", "ECONOMY"]
         let hasChanges = keys.contains { defaults.object(forKey: $0) != nil }
@@ -193,5 +190,25 @@ final class BeerWorker: BeerWorkerProtocol {
         if hasChanges {
             reloadWidget()
         }
+    }
+}
+
+// Strings used by cards and by the snapshot read by the widget.
+enum BeerDisplay {
+    static func decimal(_ value: Float) -> String {
+        String(format: "%.2f", locale: Locale(identifier: "en_US_POSIX"), value)
+            .replacingOccurrences(of: ".", with: ",")
+    }
+
+    static func perLiter(_ value: Float) -> String { "R$ \(decimal(value))/L" }
+
+    static func amount(_ milliliters: Int16) -> String {
+        guard milliliters >= 1000 else { return "\(milliliters)ml" }
+        // Preserve custom volumes exactly, including 1001 ml.
+        let liters = Int(milliliters) / 1000
+        let remainder = Int(milliliters) % 1000
+        guard remainder != 0 else { return "\(liters) L" }
+        let fraction = String(format: "%03d", remainder).replacingOccurrences(of: "0+$", with: "", options: .regularExpression)
+        return "\(liters),\(fraction) L"
     }
 }

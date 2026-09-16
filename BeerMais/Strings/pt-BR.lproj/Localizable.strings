@@ -27,3 +27,10 @@
 "add" = "Adicionar";
 "detailsHelpText" = "Selecione acima ou digite tocando no campo \"Tamanho\"";
 "appVersion" = "Versão";
+
+"beerOperationFailed" = "Não foi possível concluir";
+"beerBrandRequired" = "Informe o nome da cerveja.";
+"beerPriceInvalid" = "Informe um preço maior que zero.";
+"beerVolumeInvalid" = "Informe um volume inteiro entre 1 e 32767 ml.";
+"beerSaveFailed" = "Não foi possível salvar as alterações. Tente novamente.";
+"beerDeleteFailed" = "Não foi possível excluir as cervejas. Tente novamente.";

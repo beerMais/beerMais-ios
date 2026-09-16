@@ -68,6 +68,7 @@ struct BeerDetailView: View {
                             .keyboardType(.numberPad)
                             .padding()
                             .onChange(of: viewModel.price) { _, newValue in
+                                guard newValue.allSatisfy({ $0.isNumber || $0 == "." || $0 == "," }) else { return }
                                 let digits = newValue.filter(\.isNumber)
                                 let doubleValue = (Double(digits) ?? 0) / 100.0
                                 let formatted = String(format: "%.2f", doubleValue)
@@ -91,7 +92,7 @@ struct BeerDetailView: View {
                         
                         Picker("Segments", selection: $viewModel.sizeSelection) {
                             ForEach(Segment.allCases) { option in
-                                Text(option.name).tag(option)
+                                Text(option.name).tag(Optional(option))
                             }
                         }
                         .pickerStyle(.segmented)
@@ -124,6 +125,14 @@ struct BeerDetailView: View {
                         viewModel.createOrSave()
                     }
                 }
+            }
+            .alert("beerOperationFailed", isPresented: Binding(
+                get: { viewModel.errorMessage != nil },
+                set: { if !$0 { viewModel.errorMessage = nil } }
+            )) {
+                Button("OK", role: .cancel) { viewModel.errorMessage = nil }
+            } message: {
+                Text(viewModel.errorMessage ?? "")
             }
             .onTapGesture {
                 UIApplication.shared.endEditing()

@@ -20,7 +20,7 @@ struct Provider: TimelineProvider {
         in context: Context,
         completion: @escaping (BeerMaisEntry) -> ()
     ) {
-        completion(buildBeerMaisEntry())
+        completion(context.isPreview ? buildBeerMaisEntry() : currentEntry())
     }
 
     func getTimeline(
@@ -40,23 +40,22 @@ struct Provider: TimelineProvider {
             return
         }
         
-        let defaults = UserDefaults(suiteName: "group.beerMais")
-        completion(Timeline(
-            entries: [
-                BeerMaisEntry(
-                    date: Date(),
-                    brand: defaults?.string(forKey: "BRAND"),
-                    amount: defaults?.string(forKey: "AMOUNT"),
-                    value: defaults?.string(forKey: "VALUE"),
-                    type: defaults?.string(forKey: "TYPE"),
-                    economy: defaults?.string(forKey: "ECONOMY"),
-                    count: defaults?.integer(forKey: "BEERS_COUNT") ?? 0
-                )
-            ],
-            policy: .never
-        ))
+        completion(Timeline(entries: [currentEntry()], policy: .never))
     }
-    
+
+    private func currentEntry() -> BeerMaisEntry {
+        let defaults = UserDefaults(suiteName: "group.beerMais")
+        return BeerMaisEntry(
+            date: Date(),
+            brand: defaults?.string(forKey: "BRAND"),
+            amount: defaults?.string(forKey: "AMOUNT"),
+            value: defaults?.string(forKey: "VALUE"),
+            type: defaults?.string(forKey: "TYPE"),
+            economy: defaults?.string(forKey: "ECONOMY"),
+            count: defaults?.integer(forKey: "BEERS_COUNT") ?? 0
+        )
+    }
+
     private func buildBeerMaisEntry(
         brand: String? = nil,
         amount: String? = nil,

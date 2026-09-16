@@ -17,8 +17,20 @@ final class PersistenceController {
         container.viewContext
     }
 
-    init(modelName: String = "BeerMais", inMemory: Bool = false) {
-        container = NSPersistentContainer(name: modelName)
+    init(
+        modelName: String = "BeerMais",
+        inMemory: Bool = false,
+        managedObjectModel: NSManagedObjectModel? = nil,
+        storeURL: URL? = nil
+    ) {
+        if let managedObjectModel {
+            container = NSPersistentContainer(name: modelName, managedObjectModel: managedObjectModel)
+        } else {
+            container = NSPersistentContainer(name: modelName)
+        }
+        if let storeURL {
+            container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
+        }
 
         if inMemory {
             let description = NSPersistentStoreDescription()
@@ -27,6 +39,7 @@ final class PersistenceController {
         }
 
         container.persistentStoreDescriptions.forEach {
+            $0.shouldAddStoreAsynchronously = false
             $0.shouldMigrateStoreAutomatically = true
             $0.shouldInferMappingModelAutomatically = true
         }
@@ -66,7 +79,8 @@ final class CoreDataBeerRepository: BeerRepository {
     }
 
     @discardableResult func create(data: BeerData) -> Beer? {
-        let beer = Beer(context: context)
+        guard let entity = NSEntityDescription.entity(forEntityName: Beer.entityName, in: context) else { return nil }
+        let beer = Beer(entity: entity, insertInto: context)
         apply(data: data, to: beer)
         return save() ? beer : nil
     }
@@ -82,6 +96,17 @@ final class CoreDataBeerRepository: BeerRepository {
     }
 
     @discardableResult func deleteAll() -> Bool {
+        // Batch deletion is SQLite-only. Previews can use an in-memory store.
+        if context.persistentStoreCoordinator?.persistentStores.contains(where: { $0.type != NSSQLiteStoreType }) == true {
+            do {
+                try context.fetch(Beer.fetchRequest()).forEach { context.delete($0) }
+                return save()
+            } catch {
+                context.rollback()
+                AppP.logError(error, source: "CoreDataBeerRepository", operation: "deleteAll")
+                return false
+            }
+        }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Beer.entityName)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         deleteRequest.resultType = .resultTypeObjectIDs
@@ -124,14 +149,17 @@ struct AppDependencies: @unchecked Sendable {
     let beerRepository: BeerRepository
     let beerWorker: BeerWorkerProtocol
 
-    init(persistenceController: PersistenceController = PersistenceController()) {
+    init(
+        persistenceController: PersistenceController = PersistenceController(),
+        widgetDefaults: UserDefaults? = UserDefaults(suiteName: "group.beerMais")
+    ) {
         self.persistenceController = persistenceController
         let beerRepository = CoreDataBeerRepository(persistenceController: persistenceController)
         self.beerRepository = beerRepository
-        self.beerWorker = BeerWorker(repository: beerRepository)
+        self.beerWorker = BeerWorker(repository: beerRepository, widgetDefaults: widgetDefaults)
     }
 
-    static let preview = AppDependencies(persistenceController: PersistenceController(inMemory: true))
+    static let preview = AppDependencies(persistenceController: PersistenceController(inMemory: true), widgetDefaults: nil)
 }
 
 private struct AppDependenciesKey: EnvironmentKey {

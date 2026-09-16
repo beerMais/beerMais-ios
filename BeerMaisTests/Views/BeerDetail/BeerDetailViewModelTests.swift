@@ -29,7 +29,7 @@ final class BeerDetailViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.brand, "")
         XCTAssertEqual(sut.price, "")
-        XCTAssertEqual(sut.size, "")
+        XCTAssertEqual(sut.size, "269")
         XCTAssertEqual(sut.sizeType, "ml")
         XCTAssertEqual(sut.sizeSelection, .first)
     }
@@ -48,13 +48,13 @@ final class BeerDetailViewModelTests: XCTestCase {
         XCTAssertEqual(sut.sizeSelection, .second)
     }
     
-    func testInit_WhenSelectedBeerIs1L_SetsSizeTypeToL() {
+    func testInit_WhenSelectedBeerIs1L_UsesMilliliters() {
         let beer = Beer.mock()
         beer.amount = 1000
         
         let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
         
-        XCTAssertEqual(sut.sizeType, "L")
+        XCTAssertEqual(sut.sizeType, "ml")
         XCTAssertEqual(sut.sizeSelection, .fourth)
     }
     
@@ -62,23 +62,24 @@ final class BeerDetailViewModelTests: XCTestCase {
         let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
         
         sut.sizeSelection = .fourth
-        XCTAssertEqual(sut.size, "1L")
-        XCTAssertEqual(sut.sizeType, "L")
+        XCTAssertEqual(sut.size, "1000")
+        XCTAssertEqual(sut.sizeType, "ml")
         
         sut.sizeSelection = .second
-        XCTAssertEqual(sut.size, "350ml")
+        XCTAssertEqual(sut.size, "350")
         XCTAssertEqual(sut.sizeType, "ml")
     }
     
     func testSizeTextChange_UpdatesSizeSelection() {
         let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
         
-        sut.size = "473ml"
+        sut.size = "473"
         XCTAssertEqual(sut.sizeSelection, .third)
     }
     
     func testCreateOrSave_WhenCreatingNewBeer_CallsWorkerCreateBeerAndInvokesOnFinish() {
         let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        workerSpy.createBeerReturn = Beer.mock()
         sut.brand = "Corona"
         sut.price = "6.50"
         sut.sizeSelection = .second
@@ -100,6 +101,7 @@ final class BeerDetailViewModelTests: XCTestCase {
     
     func testCreateOrSave_WhenEditingExistingBeer_CallsWorkerEditAndInvokesOnFinish() {
         let beer = Beer.mock()
+        beer.amount = 269
         let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
         sut.brand = "Stella Artois"
         sut.price = "4.99"
@@ -141,6 +143,7 @@ final class BeerDetailViewModelTests: XCTestCase {
 
     func testCreateOrSave_WhenEditingWithInvalidInput_DoesNotPersistOrInvokeOnFinish() {
         let beer = Beer.mock()
+        beer.amount = 269
         let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
         sut.brand = "Corona"
         sut.price = "0.00"
@@ -169,7 +172,9 @@ final class BeerDetailViewModelTests: XCTestCase {
     }
 
     func testEdit_WhenPersistenceFails_DoesNotInvokeOnFinish() {
-        let sut = BeerDetailView.ViewModel(selectedBeer: Beer.mock(), worker: workerSpy)
+        let beer = Beer.mock()
+        beer.amount = 269
+        let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
         sut.brand = "Corona"
         sut.price = "6.50"
         workerSpy.editReturn = false
@@ -184,6 +189,7 @@ final class BeerDetailViewModelTests: XCTestCase {
     
     func testDelete_WhenBeerSelected_CallsWorkerDeleteAndInvokesOnFinish() {
         let beer = Beer.mock()
+        beer.amount = 269
         let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
         
         var finishCalled = false
@@ -214,6 +220,7 @@ final class BeerDetailViewModelTests: XCTestCase {
 
     func testDelete_WhenPersistenceFails_DoesNotInvokeOnFinish() {
         let beer = Beer.mock()
+        beer.amount = 269
         let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
         workerSpy.deleteReturn = false
         var finishCalled = false
@@ -335,5 +342,103 @@ final class ConfigurationAndDonationTests: XCTestCase {
         AppP.incrementAppOpenedCount(defaults: defaults)
         AppP.incrementAppOpenedCount(defaults: defaults)
         XCTAssertEqual(defaults.integer(forKey: "APP_OPEN_COUNT"), 2)
+    }
+}
+
+extension BeerDetailViewModelTests {
+    func testCustomVolumesSurviveOpeningAndSaving() {
+        for amount: Int16 in [269, 350, 473, 600, 1000, 1500, 32767] {
+            let beer = Beer.mock()
+            beer.brand = "Custom"
+            beer.value = 6.5
+            beer.amount = amount
+            let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
+            XCTAssertEqual(sut.size, String(amount))
+            sut.createOrSave()
+            XCTAssertEqual(workerSpy.editCalls.last?.data.amount, amount)
+            XCTAssertEqual(workerSpy.editCalls.last?.data.value, 6.5)
+        }
+    }
+
+    func testCustomVolumeOverridesOneLiterPreset() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.brand = "Custom"
+        sut.price = "6.50"
+        sut.sizeSelection = .fourth
+        sut.size = "600"
+        XCTAssertNil(sut.sizeSelection)
+        sut.createOrSave()
+        XCTAssertEqual(workerSpy.createBeerCalls.last?.data.amount, 600)
+    }
+
+    func testInvalidPricesShowErrorWithoutPersisting() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.brand = "Custom"
+        for price in ["", "0.00", "-5.00", "NaN", "abc5", String(repeating: "9", count: 100)] {
+            sut.price = price
+            sut.createOrSave()
+            XCTAssertNotNil(sut.errorMessage, price)
+        }
+        XCTAssertTrue(workerSpy.createBeerCalls.isEmpty)
+    }
+
+    func testInvalidVolumesShowErrorWithoutPersisting() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.brand = "Custom"
+        sut.price = "6.50"
+        for size in ["", "0", "-1", "32768", "1.5", "600ml"] {
+            sut.size = size
+            sut.createOrSave()
+            XCTAssertNotNil(sut.errorMessage, size)
+        }
+        XCTAssertTrue(workerSpy.createBeerCalls.isEmpty)
+    }
+
+    func testSaveAndDeleteFailuresShowError() {
+        let beer = Beer.mock()
+        beer.brand = "Custom"
+        beer.value = 5
+        beer.amount = 600
+        workerSpy.editReturn = false
+        workerSpy.deleteReturn = false
+        let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
+        sut.createOrSave()
+        XCTAssertNotNil(sut.errorMessage)
+        sut.errorMessage = nil
+        sut.delete()
+        XCTAssertNotNil(sut.errorMessage)
+    }
+}
+
+extension HomeViewModelTests {
+    func testReloadRefreshesSameWinnerAndEqualSavings() {
+        let repository = BeerRepositorySpy()
+        let first = Beer.mock()
+        first.brand = "First"; first.amount = 1000; first.value = 5
+        let second = Beer.mock()
+        second.brand = "Second"; second.amount = 1000; second.value = 7
+        repository.beers = [second, first]
+        let sut = HomeView.ViewModel(worker: BeerWorker(repository: repository))
+        sut.reload()
+        XCTAssertEqual(sut.highlightedBeerViewModel.brand, "First")
+        XCTAssertEqual(sut.highlightedBeerViewModel.beerEconomyValue, "R$ 2,00/L")
+
+        first.brand = "Renamed"
+        first.value = 10; first.amount = 2000
+        sut.reload()
+        XCTAssertEqual(sut.highlightedBeerViewModel.brand, "Renamed")
+        XCTAssertEqual(sut.highlightedBeerViewModel.beerValue, "R$ 10,00")
+        XCTAssertEqual(sut.highlightedBeerViewModel.amount, "2 L")
+        XCTAssertEqual(sut.highlightedBeerViewModel.beerEconomyValue, "R$ 2,00/L")
+
+        first.value = 18 // Second now wins, still saving R$ 2/L.
+        sut.reload()
+        XCTAssertEqual(sut.highlightedBeerViewModel.brand, "Second")
+        XCTAssertEqual(sut.highlightedBeerViewModel.beerEconomyValue, "R$ 2,00/L")
+
+        repository.beers = [second]
+        sut.reload()
+        XCTAssertNil(sut.highlightedBeerViewModel.beer)
+        XCTAssertEqual(sut.highlightedBeerViewModel.beerEconomyValue, "R$ 0,00/L")
     }
 }

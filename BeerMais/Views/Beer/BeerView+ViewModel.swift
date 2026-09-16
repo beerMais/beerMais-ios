@@ -64,7 +64,7 @@ extension BeerView {
             setBrand()
             setAmount()
             setValue()
-            setValuePerML()
+            if isHighlighted { setEconomy() } else { setValuePerML() }
         }
         
         private func economyUpdated() {
@@ -77,22 +77,9 @@ extension BeerView {
         }
         
         private func setAmount() {
-            let amount = beer?.amount ?? 350
-            
-            let amountText: String
-            if amount >= 1000 {
-                var amountString = String(format: "%.2f", Float(amount) / 1000)
-                amountString = amountString.replacingOccurrences(of: ".00", with: "")
-                amountString = amountString.replacingOccurrences(of: ".", with: ",")
-                    
-                amountText = "\(amountString) L"
-            } else {
-                amountText = "\(amount)ml"
-            }
-            
-            self.amount = amountText
+            amount = BeerDisplay.amount(beer?.amount ?? 350)
         }
-        
+
         private func setValue() {
             let valueString = worker.formatBeerValueToShow(value: beer?.value ?? 0)
             
@@ -111,8 +98,7 @@ extension BeerView {
         }
         
         private func setEconomy() {
-            guard let economy else { return }
-            beerEconomyValue = "R$ \(worker.formatBeerValueToShow(value: economy))/L"
+            beerEconomyValue = "R$ \(worker.formatBeerValueToShow(value: economy ?? 0))/L"
         }
     }
 }

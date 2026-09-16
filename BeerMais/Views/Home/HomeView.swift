@@ -10,7 +10,6 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel: ViewModel
-    @StateObject private var highlightedBeerViewModel: BeerView.ViewModel
     
     @State private var selectedBeer: Beer?
     @State private var isPresented = false
@@ -18,15 +17,12 @@ struct HomeView: View {
 
     init(worker: BeerWorkerProtocol) {
         _viewModel = StateObject(wrappedValue: ViewModel(worker: worker))
-        _highlightedBeerViewModel = StateObject(
-            wrappedValue: BeerView.ViewModel(isHighlighted: true, worker: worker)
-        )
     }
     
     var body: some View {
         NavigationStack {
             VStack {
-                BeerView(viewModel: highlightedBeerViewModel)
+                BeerView(viewModel: viewModel.highlightedBeerViewModel)
                     .frame(height: 120)
                     .padding(.horizontal)
                 
@@ -114,12 +110,6 @@ struct HomeView: View {
                 }
             }
         )
-        .onChange(of: viewModel.highlightedBeer) { _, newValue in
-            highlightedBeerViewModel.beer = newValue
-        }
-        .onChange(of: viewModel.economy) { _, newValue in
-            highlightedBeerViewModel.economy = newValue
-        }
         .onAppear {
             viewModel.reload()
         }

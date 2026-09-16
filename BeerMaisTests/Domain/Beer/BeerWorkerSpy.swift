@@ -57,6 +57,8 @@ final class BeerWorkerSpy: BeerWorkerProtocol {
     var calculateMostValuableBeerCalls: [CalculateMostValuableBeerCall] = []
     var calculateMostValuableBeerReturn: (Beer, Float?)? = nil
     
+    func refreshWidgetData() {}
+
     // MARK: - BeerWorkerProtocol
     
     @discardableResult func createBeer(data: BeerData) -> Beer? {

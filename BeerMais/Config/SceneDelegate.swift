@@ -14,6 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     private let dependencies = AppDependencies()
 
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        dependencies.beerWorker.refreshWidgetData()
+    }
+
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,

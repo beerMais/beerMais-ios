@@ -51,6 +51,14 @@ struct DeleteAllView: View {
                 BannerViewContainer(adSize)
                     .frame(width: adSize.size.width, height: adSize.size.height)
             }
+            .alert("beerOperationFailed", isPresented: Binding(
+                get: { viewModel.errorMessage != nil },
+                set: { if !$0 { viewModel.errorMessage = nil } }
+            )) {
+                Button("OK", role: .cancel) { viewModel.errorMessage = nil }
+            } message: {
+                Text(viewModel.errorMessage ?? "")
+            }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("backScreen") {
@@ -64,6 +72,7 @@ struct DeleteAllView: View {
 
 extension DeleteAllView {
     final class ViewModel: ObservableObject {
+        @Published var errorMessage: String?
         private let worker: BeerWorkerProtocol
 
         init(worker: BeerWorkerProtocol) {
@@ -71,7 +80,10 @@ extension DeleteAllView {
         }
 
         func deleteAllBeers() -> Bool {
-            worker.deleteAllBeers()
+            errorMessage = nil
+            let success = worker.deleteAllBeers()
+            if !success { errorMessage = "beerDeleteFailed".localized }
+            return success
         }
     }
 }

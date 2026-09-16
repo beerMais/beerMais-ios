@@ -12,7 +12,7 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    private let dependencies = AppDependencies()
+    private let dependencies = AppDependencies(widgetDefaults: nil)
 
     func scene(
         _ scene: UIScene,

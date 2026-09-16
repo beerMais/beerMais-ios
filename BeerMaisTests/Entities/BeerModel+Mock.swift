@@ -31,6 +31,7 @@ extension Beer {
     }()
 
     static func mock() -> Beer {
-        Beer(context: Self.inMemoryManagedObjectContext.viewContext)
+        let context = Self.inMemoryManagedObjectContext.viewContext
+        return Beer(entity: Self.managedObjectModel.entitiesByName["Beer"]!, insertInto: context)
     }
 }
