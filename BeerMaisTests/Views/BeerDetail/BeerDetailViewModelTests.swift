@@ -10,6 +10,7 @@ import Combine
 import XCTest
 import SwiftUI
 import UIKit
+import GoogleMobileAds
 @testable import BeerMais
 
 final class BeerDetailViewModelTests: XCTestCase {
@@ -570,6 +571,48 @@ extension BeerDetailViewModelTests {
 
 
 extension AdaptiveBeerLayoutTests {
+    func testAdaptiveBannerMatchesPaddedWidthAfterResize() async throws {
+        func content(width: CGFloat) -> some View {
+            AdaptiveBannerView()
+                .padding(12)
+                .frame(maxWidth: 560)
+                .padding(.horizontal, 16)
+                .frame(maxWidth: .infinity)
+                .frame(width: width)
+        }
+        let host = UIHostingController(rootView: content(width: 393))
+        let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 393, height: 852))
+        window.rootViewController = host
+        window.makeKeyAndVisible()
+        defer { window.isHidden = true }
+        func findBanner(in view: UIView) -> BannerView? {
+            if let banner = view as? BannerView { return banner }
+            return view.subviews.lazy.compactMap { findBanner(in: $0) }.first
+        }
+        var previousBanner: BannerView?
+        for (width, loadedHeight) in [(393.0, 50.0), (768.0, 90.0), (320.0, 70.0)] {
+            host.rootView = content(width: width)
+            host.view.setNeedsLayout()
+            host.view.layoutIfNeeded()
+            try await Task.sleep(for: .milliseconds(600))
+            host.view.layoutIfNeeded()
+            let banner = try XCTUnwrap(findBanner(in: host.view))
+            let expectedWidth = min(width - 32, 560) - 24
+            XCTAssertEqual(cgSize(for: banner.adSize).width, expectedWidth, accuracy: 1)
+            XCTAssertEqual(banner.bounds.width, expectedWidth, accuracy: 1)
+            XCTAssertFalse(banner === previousBanner, "A width change must replace the pending creative request")
+            if let previousBanner { XCTAssertNil(previousBanner.adSizeDelegate) }
+            let delegate = try XCTUnwrap(banner.adSizeDelegate)
+            // Exercise the SDK size callback without depending on a live ad response.
+            delegate.adView(banner, willChangeAdSizeTo: adSizeFor(cgSize: CGSize(width: expectedWidth, height: loadedHeight)))
+            try await Task.sleep(for: .milliseconds(100))
+            host.view.layoutIfNeeded()
+            XCTAssertEqual(banner.bounds.width, expectedWidth, accuracy: 1)
+            XCTAssertEqual(banner.bounds.height, loadedHeight, accuracy: 1)
+            previousBanner = banner
+        }
+    }
+
     func testVisiblePriceFieldFormatsEachKeystroke() async throws {
         let host = UIHostingController(rootView: BeerDetailView(worker: BeerWorkerSpy()))
         let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 393, height: 852))
@@ -586,7 +629,9 @@ extension AdaptiveBeerLayoutTests {
             return nil
         }
         let field = try XCTUnwrap(findPriceField(in: host.view))
-        field.becomeFirstResponder()
+        XCTAssertTrue(field.becomeFirstResponder())
+        try await Task.sleep(for: .milliseconds(100))
+        XCTAssertTrue(field.isFirstResponder)
         // This target runs without an app host. Dispatch registered control actions
         // directly because UIApplication does not route UIControl events here.
         func deliverEditingChange() throws {
@@ -605,12 +650,20 @@ extension AdaptiveBeerLayoutTests {
             try deliverEditingChange()
             try await Task.sleep(for: .milliseconds(100))
             XCTAssertEqual(field.text, expected)
+            XCTAssertTrue(field.isFirstResponder, "Typing \(digit) must keep the price keyboard open")
         }
         for expected in ["1,25", "0,12", "0,01", "0,00"] {
             field.deleteBackward()
             try deliverEditingChange()
             try await Task.sleep(for: .milliseconds(100))
             XCTAssertEqual(field.text, expected)
+            XCTAssertTrue(field.isFirstResponder, "Backspace must keep the price keyboard open")
         }
+        XCTAssertTrue(field.resignFirstResponder())
+        try await Task.sleep(for: .milliseconds(100))
+        XCTAssertFalse(field.isFirstResponder, "Dismissing the keyboard must survive a SwiftUI update")
+        XCTAssertTrue(field.becomeFirstResponder())
+        try await Task.sleep(for: .milliseconds(100))
+        XCTAssertTrue(field.isFirstResponder, "The price field must be focusable again after dismissal")
     }
 }

@@ -43,8 +43,10 @@ enum Segment: String, CaseIterable, Identifiable {
 struct BeerDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: ViewModel
-    private enum Field: Hashable { case brand, price, size }
+    private enum Field: Hashable { case brand, size }
     @FocusState private var focusedField: Field?
+    // UIKit owns price-field focus; FocusState only tracks the SwiftUI text fields.
+    @State private var isPriceFocused = false
     @State private var confirmsDeletion = false
     @ScaledMetric(relativeTo: .largeTitle) private var priceFontSize = 52
     @ScaledMetric(relativeTo: .subheadline) private var presetMinimumWidth = 76
@@ -83,12 +85,13 @@ struct BeerDetailView: View {
                                 .overlay {
                                     CentsPriceField(
                                         text: $viewModel.price,
-                                        isFocused: Binding(
-                                            get: { focusedField == .price },
-                                            set: { if $0 { focusedField = .price } else if focusedField == .price { focusedField = nil } }
-                                        ),
+                                        isFocused: $isPriceFocused,
                                         fontSize: priceFontSize
                                     )
+                                    .onTapGesture {
+                                        focusedField = nil
+                                        isPriceFocused = true
+                                    }
                                 }
                                 .layoutPriority(1)
                         }
@@ -113,7 +116,7 @@ struct BeerDetailView: View {
                             ForEach(Segment.allCases) { option in
                                 let button = Button {
                                     viewModel.sizeSelection = option
-                                    focusedField = nil
+                                    dismissKeyboard()
                                 } label: {
                                     Text(option.name)
                                         .font(.subheadline)
@@ -148,6 +151,10 @@ struct BeerDetailView: View {
                                     .keyboardType(.numberPad)
                                     .multilineTextAlignment(.trailing)
                                     .focused($focusedField, equals: .size)
+                                    .onTapGesture {
+                                        isPriceFocused = false
+                                        focusedField = .size
+                                    }
                                 Text(viewModel.sizeType).foregroundStyle(.secondary)
                             }
                             .padding(16)
@@ -157,8 +164,12 @@ struct BeerDetailView: View {
                                 TextField("brand", text: $viewModel.brand)
                                     .multilineTextAlignment(.trailing)
                                     .focused($focusedField, equals: .brand)
+                                    .onTapGesture {
+                                        isPriceFocused = false
+                                        focusedField = .brand
+                                    }
                                     .submitLabel(.done)
-                                    .onSubmit { focusedField = nil }
+                                    .onSubmit(dismissKeyboard)
                             }
                             .padding(16)
                         }
@@ -179,11 +190,19 @@ struct BeerDetailView: View {
             .navigationTitle(selectedBeer == nil ? "newDrink" : "editDrink")
             .navigationBarTitleDisplayMode(.inline)
             .scrollDismissesKeyboard(.interactively)
+            .contentShape(.rect)
+            .onTapGesture(perform: dismissKeyboard)
+            .onChange(of: focusedField) { _, field in
+                if field != nil { isPriceFocused = false }
+            }
+            .onChange(of: isPriceFocused) { _, isFocused in
+                if isFocused { focusedField = nil }
+            }
             .toolbar {
                 if selectedBeer != nil {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button("delete", systemImage: "trash", role: .destructive) {
-                            focusedField = nil
+                            dismissKeyboard()
                             confirmsDeletion = true
                         }
                         .labelStyle(.iconOnly)
@@ -197,13 +216,13 @@ struct BeerDetailView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(selectedBeer == nil ? "add" : "save") {
-                        focusedField = nil
+                        dismissKeyboard()
                         viewModel.createOrSave()
                     }
                 }
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
-                    Button("OK") { focusedField = nil }
+                    Button("OK", action: dismissKeyboard)
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("cancel") { dismiss() }
@@ -226,5 +245,10 @@ struct BeerDetailView: View {
                 dismiss()
             }
         }
+    }
+
+    private func dismissKeyboard() {
+        isPriceFocused = false
+        focusedField = nil
     }
 }
