@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import GoogleMobileAds
 
 enum Segment: String, CaseIterable, Identifiable {
     case first, second, third, fourth
@@ -44,6 +43,11 @@ enum Segment: String, CaseIterable, Identifiable {
 struct BeerDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: ViewModel
+    private enum Field: Hashable { case brand, price, size }
+    @FocusState private var focusedField: Field?
+    @State private var confirmsDeletion = false
+    @ScaledMetric(relativeTo: .largeTitle) private var priceFontSize = 52
+    @ScaledMetric(relativeTo: .subheadline) private var presetMinimumWidth = 76
     
     private let selectedBeer: Beer?
 
@@ -59,71 +63,150 @@ struct BeerDetailView: View {
 
     var body: some View {
         NavigationStack {
-            Form {
-                Section {
-                    VStack {
-                        TextField("brand", text: $viewModel.brand)
-                            .padding()
-                        TextField("price", text: $viewModel.price)
-                            .keyboardType(.numberPad)
-                            .padding()
-                            .onChange(of: viewModel.price) { _, newValue in
-                                guard newValue.allSatisfy({ $0.isNumber || $0 == "." || $0 == "," }) else { return }
-                                let digits = newValue.filter(\.isNumber)
-                                let doubleValue = (Double(digits) ?? 0) / 100.0
-                                let formatted = String(format: "%.2f", doubleValue)
-                                if formatted != newValue {
-                                    viewModel.price = formatted
+            ScrollView {
+                VStack(spacing: 16) {
+                    VStack(spacing: 6) {
+                        Text("priceQuestion")
+                            .foregroundStyle(.secondary)
+                        HStack(alignment: .firstTextBaseline, spacing: 6) {
+                            Text("R$")
+                                .font(.title.bold())
+                                .foregroundStyle(Color("primary"))
+                            // SwiftUI owns the text baseline and width; UIKit handles editing only.
+                            Text(viewModel.price.isEmpty ? "0,00" : viewModel.price)
+                                .font(.system(size: priceFontSize, weight: .bold))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.6)
+                                .padding(.trailing, 6)
+                                .hidden()
+                                .accessibilityHidden(true)
+                                .overlay {
+                                    CentsPriceField(
+                                        text: $viewModel.price,
+                                        isFocused: Binding(
+                                            get: { focusedField == .price },
+                                            set: { if $0 { focusedField = .price } else if focusedField == .price { focusedField = nil } }
+                                        ),
+                                        fontSize: priceFontSize
+                                    )
+                                }
+                                .layoutPriority(1)
+                        }
+                        if let rate = viewModel.pricePerLiter {
+                            Text(BeerDisplay.perLiter(rate))
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        } else {
+                            Text("pricePreviewHint")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("chooseSize")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: presetMinimumWidth), spacing: 8)], spacing: 8) {
+                            ForEach(Segment.allCases) { option in
+                                let button = Button {
+                                    viewModel.sizeSelection = option
+                                    focusedField = nil
+                                } label: {
+                                    Text(option.name)
+                                        .font(.subheadline)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.9)
+                                        .frame(maxWidth: .infinity, minHeight: 28)
+                                }
+                                .controlSize(.regular)
+                                .buttonBorderShape(.capsule)
+                                .tint(Color("primary"))
+                                .accessibilityAddTraits(viewModel.sizeSelection == option ? .isSelected : [])
+
+                                if #available(iOS 26.0, *) {
+                                    if viewModel.sizeSelection == option {
+                                        button.buttonStyle(.glassProminent)
+                                    } else {
+                                        button.buttonStyle(.glass)
+                                    }
+                                } else {
+                                    if viewModel.sizeSelection == option {
+                                        button.buttonStyle(.borderedProminent)
+                                    } else {
+                                        button.buttonStyle(.bordered)
+                                    }
                                 }
                             }
-                    }
-                }
-                
-                Section(content: {
-                    VStack {
-                        TextField("", text: $viewModel.size)
-                            .keyboardType(.numberPad)
-                            .padding()
-                            .overlay {
-                                Text(viewModel.sizeType)
-                                    .padding(.trailing)
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                            }
-                        
-                        Picker("Segments", selection: $viewModel.sizeSelection) {
-                            ForEach(Segment.allCases) { option in
-                                Text(option.name).tag(Optional(option))
-                            }
                         }
-                        .pickerStyle(.segmented)
+                        VStack(spacing: 0) {
+                            HStack(spacing: 12) {
+                                Text("size")
+                                TextField("size", text: $viewModel.size)
+                                    .keyboardType(.numberPad)
+                                    .multilineTextAlignment(.trailing)
+                                    .focused($focusedField, equals: .size)
+                                Text(viewModel.sizeType).foregroundStyle(.secondary)
+                            }
+                            .padding(16)
+                            Divider().padding(.horizontal, 16)
+                            HStack(spacing: 12) {
+                                Text("brand")
+                                TextField("brand", text: $viewModel.brand)
+                                    .multilineTextAlignment(.trailing)
+                                    .focused($focusedField, equals: .brand)
+                                    .submitLabel(.done)
+                                    .onSubmit { focusedField = nil }
+                            }
+                            .padding(16)
+                        }
+                        .background(.quaternary, in: .rect(cornerRadius: 18))
                     }
-                }, header: {
-                    Text("size")
-                }, footer: {
-                    Text("detailsHelpText")
-                })
-                
-                let adSize = largeAnchoredAdaptiveBanner(width: UIScreen.main.bounds.width - 64)
-                BannerViewContainer(adSize)
-                    .frame(width: adSize.size.width, height: adSize.size.height)
-            }
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("backScreen") {
-                        dismiss()
-                    }
+
+                    AdaptiveBannerView()
+                    .padding(12)
+                    .background(.quaternary, in: .rect(cornerRadius: 16))
+
+
                 }
+                .frame(maxWidth: 560)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .frame(maxWidth: .infinity)
+            }
+            .navigationTitle(selectedBeer == nil ? "newDrink" : "editDrink")
+            .navigationBarTitleDisplayMode(.inline)
+            .scrollDismissesKeyboard(.interactively)
+            .toolbar {
                 if selectedBeer != nil {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("delete") {
-                            viewModel.delete()
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("delete", systemImage: "trash", role: .destructive) {
+                            focusedField = nil
+                            confirmsDeletion = true
+                        }
+                        .labelStyle(.iconOnly)
+                        .confirmationDialog("deleteTitle", isPresented: $confirmsDeletion, titleVisibility: .visible) {
+                            Button("delete", role: .destructive, action: viewModel.delete)
+                            Button("cancel", role: .cancel) {}
+                        } message: {
+                            Text("deleteSingleBeerAlert")
                         }
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(selectedBeer == nil ? "add" : "save") {
+                        focusedField = nil
                         viewModel.createOrSave()
                     }
+                }
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("OK") { focusedField = nil }
+                }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("cancel") { dismiss() }
                 }
             }
             .alert("beerOperationFailed", isPresented: Binding(
@@ -134,25 +217,14 @@ struct BeerDetailView: View {
             } message: {
                 Text(viewModel.errorMessage ?? "")
             }
-            .onTapGesture {
-                UIApplication.shared.endEditing()
-            }
+
         }
+        .presentationDetents([.fraction(0.75), .large])
+        .presentationBackground(.regularMaterial)
         .onAppear {
             viewModel.onFinish = {
                 dismiss()
             }
         }
-    }
-}
-
-//#Preview {
-//    HomeView()
-//    BeerDetailView()
-//}
-
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

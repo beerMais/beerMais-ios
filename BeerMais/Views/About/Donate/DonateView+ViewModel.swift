@@ -34,41 +34,29 @@ extension DonateView {
             updatesListener?.cancel()
         }
         
-        func buyProduct(_ donateProduct: DonateProduct) async -> Bool {
+        func buyProduct(_ donateProduct: DonateProduct) async -> DonationOutcome {
             do {
                 guard let result = try await donateProduct.product?.purchase() else {
-                    print("product not available")
-                    return false
+                    return .failed
                 }
-                
                 switch result {
                 case let .success(.verified(transaction)):
-                    // Successful purhcase
                     await transaction.finish()
-                    return true
-                case let .success(.unverified(_, error)):
-                    // Successful purchase but transaction/receipt can't be verified
-                    // Could be a jailbroken phone
-                    print("Unverified purchase. Might be jailbroken. Error: \(error)")
-                    break
+                    return .success
+                case .success(.unverified):
+                    return .failed
                 case .pending:
-                    // Transaction waiting on SCA (Strong Customer Authentication) or
-                    // approval from Ask to Buy
-                    break
+                    return .pending
                 case .userCancelled:
-                    print("User Cancelled!")
-                    break
+                    return .cancelled
                 @unknown default:
-                    print("Failed to purchase the product!")
-                    break
+                    return .failed
                 }
             } catch {
-                print("Failed to purchase the product!")
+                return .failed
             }
-            
-            return false
         }
-        
+
         // MARK: - Private
         
         private func loadProducts() {

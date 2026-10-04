@@ -195,6 +195,13 @@ final class BeerWorker: BeerWorkerProtocol {
 
 // Strings used by cards and by the snapshot read by the widget.
 enum BeerDisplay {
+    static func centsInput(_ input: String) -> String? {
+        guard input.allSatisfy({ $0.isASCII && ($0.isNumber || $0 == "," || $0 == ".") }) else { return nil }
+        let digits = String(input.filter(\.isNumber).drop(while: { $0 == "0" }))
+        let padded = String(repeating: "0", count: max(0, 3 - digits.count)) + digits
+        return String(padded.dropLast(2)) + "," + padded.suffix(2)
+    }
+
     static func decimal(_ value: Float) -> String {
         String(format: "%.2f", locale: Locale(identifier: "en_US_POSIX"), value)
             .replacingOccurrences(of: ".", with: ",")

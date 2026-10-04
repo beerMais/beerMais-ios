@@ -1,151 +1,98 @@
-//
-//  BeerView.swift
-//  BeerMais
-//
-//  Created by José Neves on 06/07/25.
-//  Copyright © 2025 joseneves. All rights reserved.
-//
-
 import SwiftUI
-import BasicsKit
 
 struct BeerView: View {
     @ObservedObject private var viewModel: ViewModel
-    
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .subheadline) private var packageColumnWidth = 54
+
     init(viewModel: ViewModel) {
         _viewModel = ObservedObject(wrappedValue: viewModel)
     }
-    
-    var border: some View {
-        RoundedRectangle(cornerRadius: 22)
-            .stroke(
-                Color(UIColor(named: "economyBorder")!),
-                lineWidth: 1
-            )
-    }
-    
-    var backgroundColor: Color? {
-        if viewModel.isHighlighted && viewModel.beer != nil,
-           let uiColor = UIColor(named: "economyBackground") {
-            Color(uiColor)
-        } else {
-            Color(UIColor.tertiarySystemBackground)
-        }
-    }
-    
+
     private var container: some View {
-        ZStack {
-            VStack {
-                Text(viewModel.brand)
-                    .font(.system(size: 16))
-                    .fontWeight(.regular)
-                    .foregroundColor(Color(UIColor.label))
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 5)
-                    .frame(
-                        maxWidth: .infinity,
-                        maxHeight: 20,
-                        alignment: .center
-                    )
-                HStack {
-                    Spacer()
-                    VStack {
-                        viewModel.image
-                            .renderingMode(.template)
-                            .resizable()
-                            .padding(.bottom, -8)
-                            .scaledToFit()
-                            .frame(width: 50.0, height: 50.0)
-                            .foregroundColor(Color(
-                                UIColor(named: "black-white")!
-                            ))
-                        Text(viewModel.amount)
-                            .font(.system(size: 16))
-                            .foregroundColor(Color(UIColor.label))
-                    }
-                    Spacer()
-                    VStack {
-                        Text(viewModel.beerValue)
-                            .font(.system(size: 20))
-                            .fontWeight(.regular)
-                            .frame(maxWidth: .infinity,
-                                   maxHeight: 20,
-                                   alignment: .center)
-                            .foregroundColor(Color(UIColor.label))
-                        if !viewModel.isHighlighted {
-                            Text(viewModel.beerEconomyValue)
-                                .font(.system(size: 13))
-                                .fontWeight(.regular)
-                                .frame(maxWidth: .infinity,
-                                       maxHeight: 20,
-                                       alignment: .center)
-                                .foregroundColor(Color.gray)
-                        }
-                    }
-                    Spacer()
-                    if viewModel.isHighlighted {
-                        VStack {
-                            Text("saving")
-                                .font(.system(size: 20))
-                                .fontWeight(.regular)
-                                .frame(maxWidth: .infinity,
-                                       maxHeight: 20,
-                                       alignment: .center)
-                                .foregroundColor(Color(UIColor.label))
-                            Text(viewModel.beerEconomyValue)
-                                .font(.system(size: 20))
-                                .fontWeight(.regular)
-                                .frame(maxWidth: .infinity,
-                                       maxHeight: 20,
-                                       alignment: .center)
-                                .foregroundColor(Color(
-                                    UIColor(named: "economyBorder")!
-                                ))
-                        }
+        VStack(spacing: 10) {
+            let title = Text(viewModel.brand).font(.headline)
+            if dynamicTypeSize.isAccessibilitySize {
+                title.fixedSize(horizontal: false, vertical: true)
+            } else {
+                title.lineLimit(1).minimumScaleFactor(0.85)
+            }
+            let footer = Text(viewModel.isHighlighted ? "disclaimer".localized : viewModel.itemNumber.map(String.init) ?? "")
+                .font(.caption2)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 1)
+                .minimumScaleFactor(0.8)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+            let layout = dynamicTypeSize.isAccessibilitySize
+                ? AnyLayout(VStackLayout(spacing: 10))
+                : AnyLayout(HStackLayout(alignment: viewModel.isHighlighted ? .center : .bottom, spacing: 10))
+            layout {
+                VStack(spacing: 4) {
+                    viewModel.image
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 44, height: 44)
+                        .accessibilityHidden(true)
+                    Text(viewModel.amount)
+                        .font(.subheadline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                }
+                .frame(width: dynamicTypeSize.isAccessibilitySize ? nil : packageColumnWidth)
+                VStack(spacing: 6) {
+                    Text(viewModel.beerValue)
+                        .font(.title3)
+                        .monospacedDigit()
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                    if !viewModel.isHighlighted {
+                        Text(viewModel.beerEconomyValue)
+                            .font(.caption)
+                            .monospacedDigit()
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.75)
+                            .foregroundStyle(.secondary)
+                        footer
                     }
                 }
+                .frame(maxWidth: .infinity)
+                if viewModel.isHighlighted {
+                    VStack(spacing: 4) {
+                        Text("saving").font(.subheadline)
+                        Text(viewModel.beerEconomyValue)
+                            .font(.headline)
+                            .monospacedDigit()
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.75)
+                            .foregroundStyle(Color("economyBorder"))
+                        footer
+                    }
+                    .frame(maxWidth: .infinity)
+                }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .foregroundColor(backgroundColor)
-            
-            Text(viewModel.isHighlighted ? "disclaimer".localized : viewModel.itemNumber?.asString ?? "")
-                .font(.system(size: 10))
-                .fontWeight(.light)
-                .padding(.trailing, 6)
-                .padding(.bottom, 6)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                .foregroundColor(Color.gray)
+
         }
+        .multilineTextAlignment(.center)
+        .fixedSize(horizontal: false, vertical: true)
+        .padding(12)
+        .frame(maxWidth: .infinity)
+        .foregroundStyle(Color.primary)
+        .background(
+            viewModel.isHighlighted && viewModel.beer != nil
+                ? Color("economyBackground") : Color(uiColor: .tertiarySystemBackground),
+            in: RoundedRectangle(cornerRadius: 16)
+        )
+        .accessibilityElement(children: .combine)
     }
-    
+
     var body: some View {
         if #available(iOS 26.0, *) {
-            container
-                .glassEffect(.regular, in: .rect(cornerRadius: 16))
+            container.glassEffect(.regular, in: .rect(cornerRadius: 16))
         } else {
-            container
-                .overlay(border)
+            container.overlay {
+                RoundedRectangle(cornerRadius: 16).stroke(Color("economyBorder"), lineWidth: 1)
+            }
         }
     }
 }
-
-//#Preview(traits: .fixedLayout(width: 450, height: 160)) {
-//    BeerView(
-//        viewModel: BeerView.ViewModel(
-//            beer: BeerWorker().createBeer(data: [
-//                "amount": Int16(350),
-//                "brand": "Budweiser",
-//                "value": 2.59,
-//                "type": Int16(1)
-//            ])!,
-//            index: 1
-//        )
-//    )
-//    .padding(20)
-//    BeerView(
-//        viewModel: BeerView.ViewModel(
-//            isHighlighted: true
-//        )
-//    )
-//    .padding(20)
-//}

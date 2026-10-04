@@ -34,3 +34,29 @@
 "beerVolumeInvalid" = "Enter a whole volume between 1 and 32767 ml.";
 "beerSaveFailed" = "Your changes could not be saved. Please try again.";
 "beerDeleteFailed" = "The beers could not be deleted. Please try again.";
+
+"editBeerHint" = "Double-tap to edit this drink";
+"donationSuccess" = "Thank you for your support!";
+
+// UI actions and donation outcomes
+"calculatorTab" = "Calculator";
+"aboutTab" = "About";
+"deleteAll" = "Delete all";
+"createNew" = "Create new";
+"customSize" = "Custom";
+"cancel" = "Cancel";
+"deleteSingleBeerAlert" = "Delete this drink? This action cannot be undone.";
+"donationPending" = "Your donation is pending approval. Thank you for your support!";
+"donationFailed" = "Your donation could not be completed. Please try again.";
+"watchSupportAd" = "Watch an ad to support the app";
+"supportAdUnavailable" = "No ad is available right now. Please try again later.";
+"donationDescription" = "If Beer Mais has helped you save money when choosing drinks and you would like to support its maintenance, any contribution helps 🍻";
+"aboutDescription" = "This app began when three friends were comparing beer prices for a barbecue.\n\nBeer Mais can help you find the best value among any drinks, not just beer.\n\nThe green area highlights the best-value drink, and the list is sorted by the same criterion.\n\nIcons:\nhttps://icons8.com\nhttps://www.flaticon.com";
+
+// Price-first drink editor
+"priceQuestion" = "How much does it cost?";
+"pricePreviewHint" = "Enter a price to compare per litre";
+"chooseSize" = "Choose the size";
+"newDrink" = "New drink";
+"editDrink" = "Edit drink";
+"addToComparison" = "Add to comparison";

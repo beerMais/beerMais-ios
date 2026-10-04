@@ -8,6 +8,8 @@
 
 import Combine
 import XCTest
+import SwiftUI
+import UIKit
 @testable import BeerMais
 
 final class BeerDetailViewModelTests: XCTestCase {
@@ -28,7 +30,7 @@ final class BeerDetailViewModelTests: XCTestCase {
         let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
         
         XCTAssertEqual(sut.brand, "")
-        XCTAssertEqual(sut.price, "")
+        XCTAssertEqual(sut.price, "0,00")
         XCTAssertEqual(sut.size, "269")
         XCTAssertEqual(sut.sizeType, "ml")
         XCTAssertEqual(sut.sizeSelection, .first)
@@ -440,5 +442,175 @@ extension HomeViewModelTests {
         sut.reload()
         XCTAssertNil(sut.highlightedBeerViewModel.beer)
         XCTAssertEqual(sut.highlightedBeerViewModel.beerEconomyValue, "R$ 0,00/L")
+    }
+}
+
+// Hosting-level regression exercises SwiftUI sizing at accessibility text sizes.
+@MainActor
+final class AdaptiveBeerLayoutTests: XCTestCase {
+    func testPricesKeepConsistentCardHeightAtCompactAndWideWidths() throws {
+        for width in [172.0, 200.0, 300.0] {
+            var heights: [CGFloat] = []
+            for price in ["2,59", "10,99", "545,48"] {
+                let worker = BeerWorkerSpy()
+                worker.formatBeerValueToShowReturn = price
+                let beer = Beer.mock()
+                beer.brand = "Original"
+                beer.amount = 1000
+                let model = BeerView.ViewModel(beer: beer, index: 0, worker: worker)
+                let view = BeerView(viewModel: model)
+                    .environment(\.dynamicTypeSize, .large)
+                    .environment(\.colorScheme, .dark)
+                let host = UIHostingController(rootView: view)
+                let size = host.sizeThatFits(in: CGSize(width: width, height: 10_000))
+                XCTAssertLessThanOrEqual(size.width, width + 1)
+                heights.append(size.height)
+                let renderer = ImageRenderer(content: view.frame(width: width).padding(8).background(.black))
+                renderer.scale = 2
+                let data = try XCTUnwrap(renderer.uiImage?.pngData())
+                try data.write(to: URL(fileURLWithPath: "/tmp/beermais-card-\(Int(width))-\(price).png"))
+            }
+            XCTAssertEqual(try XCTUnwrap(heights.min()), try XCTUnwrap(heights.max()), accuracy: 1)
+        }
+    }
+
+    func testCardExpandsForAccessibilityTextInsteadOfClippingToFixedHeight() {
+        let worker = BeerWorkerSpy()
+        worker.formatBeerValueToShowReturn = "123,45"
+        let beer = Beer.mock()
+        beer.brand = "A long beverage brand that needs multiple lines"
+        beer.amount = 1000
+        let model = BeerView.ViewModel(beer: beer, index: 0, worker: worker)
+        let standard = UIHostingController(rootView: BeerView(viewModel: model).environment(\.dynamicTypeSize, .large))
+        let accessible = UIHostingController(rootView: BeerView(viewModel: model).environment(\.dynamicTypeSize, .accessibility3))
+        let proposal = CGSize(width: 180, height: 10_000)
+        let normalSize = standard.sizeThatFits(in: proposal)
+        let accessibleSize = accessible.sizeThatFits(in: proposal)
+        XCTAssertLessThanOrEqual(normalSize.width, proposal.width + 1)
+        XCTAssertLessThanOrEqual(accessibleSize.width, proposal.width + 1)
+        XCTAssertGreaterThan(accessibleSize.height, normalSize.height)
+        XCTAssertGreaterThan(accessibleSize.height, 120)
+    }
+
+}
+
+
+extension BeerDetailViewModelTests {
+    func testDecimalPriceInputPreservesValueWhenSaving() {
+        for input in ["12.5", "12,5", "12.50", "12,50", "12"] {
+            let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+            sut.brand = "Lager"
+            sut.price = input
+            sut.createOrSave()
+            XCTAssertEqual(workerSpy.createBeerCalls.last?.data.value, input == "12" ? 12 : 12.5)
+        }
+    }
+
+    func testInvalidPriceAfterValidPriceDoesNotSavePreviousValue() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.brand = "Lager"
+        sut.price = "12.50"
+        sut.price = "invalid"
+        sut.createOrSave()
+        XCTAssertTrue(workerSpy.createBeerCalls.isEmpty)
+        XCTAssertNotNil(sut.errorMessage)
+    }
+}
+
+
+extension BeerDetailViewModelTests {
+    func testPricePreviewTracksCustomVolumeAndRejectsInvalidInput() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.price = "2,59"
+        sut.size = "350"
+        XCTAssertEqual(sut.pricePerLiter ?? 0, 7.4, accuracy: 0.001)
+        sut.size = "600"
+        XCTAssertEqual(sut.pricePerLiter ?? 0, 4.316667, accuracy: 0.001)
+        sut.size = "0"
+        XCTAssertNil(sut.pricePerLiter)
+        sut.size = "350"
+        sut.price = "2.599"
+        XCTAssertNil(sut.pricePerLiter)
+        sut.price = "invalid"
+        XCTAssertNil(sut.pricePerLiter)
+    }
+}
+
+
+extension BeerDetailViewModelTests {
+    func testPriceInputShiftsDigitsIntoCentsAndSavesDisplayedAmount() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        XCTAssertEqual(sut.priceInput, "0,00")
+        for (digit, expected) in [("1", "0,01"), ("2", "0,12"), ("5", "1,25"), ("0", "12,50")] {
+            sut.priceInput += digit
+            XCTAssertEqual(sut.priceInput, expected)
+        }
+        sut.brand = "Lager"
+        sut.createOrSave()
+        XCTAssertEqual(workerSpy.createBeerCalls.last?.data.value, 12.5)
+        for expected in ["1,25", "0,12", "0,01", "0,00"] {
+            sut.priceInput = String(sut.priceInput.dropLast())
+            XCTAssertEqual(sut.priceInput, expected)
+        }
+        sut.priceInput = ""
+        XCTAssertEqual(sut.priceInput, "0,00")
+    }
+
+    func testExistingPriceUsesSameCommaFormatAndSupportsAppendingDigits() {
+        let beer = Beer.mock()
+        beer.value = 2.59
+        let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
+        XCTAssertEqual(sut.priceInput, "2,59")
+        sut.priceInput += "0"
+        XCTAssertEqual(sut.priceInput, "25,90")
+        sut.priceInput = "-5"
+        XCTAssertEqual(sut.priceInput, "25,90")
+    }
+}
+
+
+extension AdaptiveBeerLayoutTests {
+    func testVisiblePriceFieldFormatsEachKeystroke() async throws {
+        let host = UIHostingController(rootView: BeerDetailView(worker: BeerWorkerSpy()))
+        let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 393, height: 852))
+        window.rootViewController = host
+        window.makeKeyAndVisible()
+        defer { window.isHidden = true }
+        host.view.layoutIfNeeded()
+        try await Task.sleep(for: .milliseconds(300))
+        func findPriceField(in view: UIView) -> UITextField? {
+            if let field = view as? UITextField, field.placeholder == "0,00" { return field }
+            for child in view.subviews {
+                if let field = findPriceField(in: child) { return field }
+            }
+            return nil
+        }
+        let field = try XCTUnwrap(findPriceField(in: host.view))
+        field.becomeFirstResponder()
+        // This target runs without an app host. Dispatch registered control actions
+        // directly because UIApplication does not route UIControl events here.
+        func deliverEditingChange() throws {
+            var dispatched = false
+            for target in field.allTargets {
+                guard let receiver = target as? NSObject else { continue }
+                for action in field.actions(forTarget: receiver, forControlEvent: .editingChanged) ?? [] {
+                    receiver.perform(NSSelectorFromString(action), with: field)
+                    dispatched = true
+                }
+            }
+            XCTAssertTrue(dispatched)
+        }
+        for (digit, expected) in [("1", "0,01"), ("2", "0,12"), ("5", "1,25"), ("0", "12,50")] {
+            field.insertText(digit)
+            try deliverEditingChange()
+            try await Task.sleep(for: .milliseconds(100))
+            XCTAssertEqual(field.text, expected)
+        }
+        for expected in ["1,25", "0,12", "0,01", "0,00"] {
+            field.deleteBackward()
+            try deliverEditingChange()
+            try await Task.sleep(for: .milliseconds(100))
+            XCTAssertEqual(field.text, expected)
+        }
     }
 }

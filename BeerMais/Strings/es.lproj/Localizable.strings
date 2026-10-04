@@ -34,3 +34,29 @@
 "beerVolumeInvalid" = "Introduce un volumen entero entre 1 y 32767 ml.";
 "beerSaveFailed" = "No se pudieron guardar los cambios. Inténtalo de nuevo.";
 "beerDeleteFailed" = "No se pudieron eliminar las cervezas. Inténtalo de nuevo.";
+
+"editBeerHint" = "Toca dos veces para editar esta bebida";
+"donationSuccess" = "¡Gracias por tu apoyo!";
+
+// UI actions and donation outcomes
+"calculatorTab" = "Calculadora";
+"aboutTab" = "Acerca de";
+"deleteAll" = "Eliminar todas";
+"createNew" = "Crear nueva";
+"customSize" = "Personalizado";
+"cancel" = "Cancelar";
+"deleteSingleBeerAlert" = "¿Eliminar esta bebida? Esta acción no se puede deshacer.";
+"donationPending" = "Tu donación está pendiente de aprobación. ¡Gracias por tu apoyo!";
+"donationFailed" = "No se pudo completar tu donación. Inténtalo de nuevo.";
+"watchSupportAd" = "Ver un anuncio para apoyar la app";
+"supportAdUnavailable" = "No hay anuncios disponibles ahora. Inténtalo más tarde.";
+"donationDescription" = "Si Beer Mais te ha ayudado a ahorrar al elegir bebidas y quieres contribuir al mantenimiento de la app, cualquier aporte es de gran ayuda 🍻";
+"aboutDescription" = "La idea de esta app surgió cuando tres amigos comparaban precios de cerveza para una barbacoa.\n\nBeer Mais permite calcular la mejor relación calidad-precio entre cualquier tipo de bebida.\n\nEl área verde destaca la bebida con el mejor precio por volumen y ordena la lista según el mismo criterio.\n\nIconos:\nhttps://icons8.com\nhttps://www.flaticon.com";
+
+// Price-first drink editor
+"priceQuestion" = "¿Cuánto cuesta?";
+"pricePreviewHint" = "Introduce el precio para comparar por litro";
+"chooseSize" = "Elige el tamaño";
+"newDrink" = "Nueva bebida";
+"editDrink" = "Editar bebida";
+"addToComparison" = "Añadir a la comparación";

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel: ViewModel
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     
     @State private var selectedBeer: Beer?
     @State private var isPresented = false
@@ -21,39 +22,44 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                BeerView(viewModel: viewModel.highlightedBeerViewModel)
-                    .frame(height: 120)
-                    .padding(.horizontal)
-                
-                if viewModel.beers.count == 0 {
-                    VStack {
-                        Text("helpBeerText").font(.subheadline)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                
+            GeometryReader { geometry in
                 ScrollView {
-                    LazyVGrid(columns: [
-                        GridItem(.flexible()),
-                        GridItem(.flexible())
-                    ]) {
-                        ForEach(Array(viewModel.beers.enumerated()), id: \.element) { index, beer in
-                            BeerView(viewModel: BeerView.ViewModel(beer: beer, index: index, worker: viewModel.worker))
-                                .frame(height: 120)
-                                .onTapGesture { selectedBeer = beer }
+                    let wide = geometry.size.width >= 760 && !dynamicTypeSize.isAccessibilitySize
+                    let layout = wide ? AnyLayout(HStackLayout(alignment: .top, spacing: 20))
+                                      : AnyLayout(VStackLayout(spacing: 16))
+                    layout {
+                        BeerView(viewModel: viewModel.highlightedBeerViewModel)
+                            .frame(maxWidth: wide ? 300 : .infinity)
+                        VStack(spacing: 16) {
+                            if viewModel.beers.isEmpty {
+                                Text("helpBeerText")
+                                    .font(.subheadline)
+                                    .frame(maxWidth: .infinity, minHeight: 120)
+                            }
+                            LazyVGrid(columns: dynamicTypeSize.isAccessibilitySize
+                                      ? [GridItem(.flexible(), alignment: .top)]
+                                      : [GridItem(.adaptive(minimum: 172), spacing: 12, alignment: .top)], spacing: 12) {
+                                ForEach(Array(viewModel.beers.enumerated()), id: \.element) { index, beer in
+                                    Button {
+                                        selectedBeer = beer
+                                    } label: {
+                                        BeerView(viewModel: BeerView.ViewModel(beer: beer, index: index, worker: viewModel.worker))
+                                    }
+                                    .buttonStyle(.plain)
+                                    .accessibilityHint(Text("editBeerHint"))
+                                }
+                            }
                         }
+                        .frame(maxWidth: .infinity)
                     }
                     .padding()
                 }
-                .refreshable {
-                    viewModel.reload()
-                }
+                .refreshable { viewModel.reload() }
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Delete all", systemImage: "trash") {
+                    Button("deleteAll", systemImage: "trash") {
                         deleteIsPresented = true
                     }
                 }
@@ -63,12 +69,12 @@ struct HomeView: View {
                             .resizable()
                             .frame(width: 30, height: 30)
                         Text("appName".localized)
-                            .font(.system(size: 18, weight: .medium))
+                            .font(.headline)
                             .foregroundColor(Color(UIColor(named: "primary")!))
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Create new", systemImage: "plus") {
+                    Button("createNew", systemImage: "plus") {
                         isPresented = true
                     }
                     .tint(Color(UIColor(named: "primary")!))
@@ -82,7 +88,6 @@ struct HomeView: View {
             },
             content: {
                 BeerDetailView(worker: viewModel.worker)
-                    .presentationDetents([.fraction(0.79)])
             }
         )
         .sheet(
@@ -92,7 +97,7 @@ struct HomeView: View {
             },
             content: {
                 DeleteAllView(worker: viewModel.worker)
-                    .presentationDetents([.medium])
+                    .presentationDetents([.medium, .large])
             }
         )
         .sheet(
@@ -106,7 +111,6 @@ struct HomeView: View {
             content: {
                 if let beer = selectedBeer {
                     BeerDetailView(selectedBeer: beer, worker: viewModel.worker)
-                        .presentationDetents([.fraction(0.79)])
                 }
             }
         )

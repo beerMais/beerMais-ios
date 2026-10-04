@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BasicsKit
 @testable import BeerMais
 
 final class BeerRepositorySpy: BeerRepository {

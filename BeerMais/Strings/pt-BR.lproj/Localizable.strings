@@ -34,3 +34,29 @@
 "beerVolumeInvalid" = "Informe um volume inteiro entre 1 e 32767 ml.";
 "beerSaveFailed" = "Não foi possível salvar as alterações. Tente novamente.";
 "beerDeleteFailed" = "Não foi possível excluir as cervejas. Tente novamente.";
+
+"editBeerHint" = "Toque duas vezes para editar esta bebida";
+"donationSuccess" = "Obrigado pelo apoio!";
+
+// UI actions and donation outcomes
+"calculatorTab" = "Calculadora";
+"aboutTab" = "Sobre";
+"deleteAll" = "Apagar todas";
+"createNew" = "Adicionar bebida";
+"customSize" = "Personalizado";
+"cancel" = "Cancelar";
+"deleteSingleBeerAlert" = "Deseja apagar esta bebida? Essa ação não poderá ser desfeita.";
+"donationPending" = "Sua doação está aguardando aprovação. Obrigado pelo apoio!";
+"donationFailed" = "Não foi possível concluir sua doação. Tente novamente.";
+"watchSupportAd" = "Assistir a um anúncio para apoiar o app";
+"supportAdUnavailable" = "Nenhum anúncio está disponível agora. Tente novamente mais tarde.";
+"donationDescription" = "Se você já economizou usando o Beer Mais na hora de escolher a melhor bebida e deseja contribuir com a manutenção do app, qualquer valor é de grande ajuda 🍻";
+"aboutDescription" = "A ideia desse app nasceu quando 3 amigos estavam fazendo as contas para decidir qual cerveja compensaria comprar para um churrasco.\n\nNão tendo um foco apenas em cerveja, o Beer Mais pode ser usado para calcular o melhor custo-benefício entre quaisquer bebidas.\n\nA área em verde destaca a bebida de maior custo-benefício e ordena a lista utilizando o mesmo critério.\n\nÍcones:\nhttps://icons8.com\nhttps://www.flaticon.com";
+
+// Price-first drink editor
+"priceQuestion" = "Quanto custa?";
+"pricePreviewHint" = "Informe o preço para comparar por litro";
+"chooseSize" = "Escolha o tamanho";
+"newDrink" = "Nova bebida";
+"editDrink" = "Editar bebida";
+"addToComparison" = "Adicionar à comparação";

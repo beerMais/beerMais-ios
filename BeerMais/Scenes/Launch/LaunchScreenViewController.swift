@@ -14,7 +14,8 @@ import Lottie
 
 class LaunchScreenViewController: UIViewController {
     
-    private let completionHandler: () -> Void
+    private var completionHandler: (() -> Void)?
+    private var didStartAnimation = false
     private let animationView = LottieAnimationView(name: "loading")
     
     init(completionHandler: @escaping () -> Void) {
@@ -62,8 +63,13 @@ class LaunchScreenViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard !didStartAnimation else { return }
+        didStartAnimation = true
         animationView.play(completion: { [weak self] _ in
-            self?.completionHandler()
+            let completion = self?.completionHandler
+            self?.completionHandler = nil
+            completion?()
         })
     }
 }

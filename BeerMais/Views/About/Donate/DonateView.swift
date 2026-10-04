@@ -12,47 +12,80 @@ struct DonateView: View {
     
     @StateObject private var viewModel = ViewModel()
     
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @State private var isPurchasing = false
+    @State private var showsNotice = false
+    @State private var notice: LocalizedStringKey = "donationSuccess"
+    @State private var windowReference = DonationWindowReference()
 #if !(DEBUG_APPCLIP || APPCLIP)
-    private let successFeedbackView = SuccessFeedbackView()
-    private let loadingView = LoadingView()
+    @StateObject private var rewardedAd = RewardedFullScreenAd()
 #endif
-    
+
     var body: some View {
         VStack {
-            Text("Se você já economizou usando o Beer Mais na hora de escolher a melhor bebida e deseja contibuir com a manutenção do app, qualquer valor é de grande ajuda 🍻")
+            Text("donationDescription")
             
-            LazyHGrid(rows: [GridItem(.flexible())]) {
+            LazyVGrid(columns: dynamicTypeSize.isAccessibilitySize
+                      ? [GridItem(.flexible())]
+                      : [GridItem(.adaptive(minimum: 100), spacing: 12)], spacing: 12) {
                 ForEach($viewModel.donates, id: \.name) { product in
                     DonateProductView(product: product, action: {
-#if !(DEBUG_APPCLIP || APPCLIP)
-                        loadingView.show()
-                        Task {
-                            let rewardedViewModel = RewardedFullScreenAd()
-                            let loadAdTask = Task {
-                                await rewardedViewModel.loadAd()
-                            }
-                            
-                            let isSucceed = await viewModel.buyProduct(product.wrappedValue)
-                            if isSucceed {
-                                loadingView.hide()
-                                successFeedbackView.show()
-                            } else {
-                                await loadAdTask.value
-                                
-                                loadingView.hide()
-                                rewardedViewModel.showAd()
-                            }
-                        }
-#else
-                        Task {
-                            await viewModel.buyProduct(product.wrappedValue)
-                        }
-#endif
+                        purchase(product.wrappedValue)
                     })
                 }
             }
+#if !(DEBUG_APPCLIP || APPCLIP)
+            Button("watchSupportAd", action: watchSupportAd)
+                .frame(minHeight: 44)
+#endif
+        }
+        .disabled(isPurchasing)
+        .background(WindowReader { windowReference.window = $0 })
+        .overlay {
+            if isPurchasing {
+                ProgressView()
+                    .padding(24)
+                    .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+            }
+        }
+        .alert(notice, isPresented: $showsNotice) {}
+    }
+
+    private func purchase(_ product: DonateProduct) {
+        guard !isPurchasing else { return }
+        isPurchasing = true
+        Task { @MainActor in
+            defer { isPurchasing = false }
+            switch await viewModel.buyProduct(product) {
+            case .success: notice = "donationSuccess"
+            case .cancelled: return
+            case .pending: notice = "donationPending"
+            case .failed: notice = "donationFailed"
+            }
+            showsNotice = true
         }
     }
+
+#if !(DEBUG_APPCLIP || APPCLIP)
+    private func watchSupportAd() {
+        guard !isPurchasing else { return }
+        isPurchasing = true
+        Task { @MainActor in
+            defer { isPurchasing = false }
+            guard await rewardedAd.loadAd(),
+                  let root = windowReference.window?.rootViewController else {
+                notice = "supportAdUnavailable"
+                showsNotice = true
+                return
+            }
+            var presenter = root
+            while let presented = presenter.presentedViewController {
+                presenter = presented
+            }
+            rewardedAd.showAd(from: presenter)
+        }
+    }
+#endif
 }
 
 //#Preview {
@@ -82,19 +115,21 @@ struct DonateProductView: View {
             image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: UIScreen.main.bounds.width * 0.2)
+                .frame(maxWidth: 72, maxHeight: 72)
                 .clipped()
             
             Text(product.name)
-                .font(.system(size: 16))
+                .font(.body)
             if let priceFormatted = product.priceFormatted {
                 Text(priceFormatted)
-                    .font(.system(size: 16))
+                    .font(.body)
             }
             
             Spacer(minLength: 8)
         }
-        .frame(minWidth: UIScreen.main.bounds.width * 0.29)
+        .padding(8)
+        .frame(maxWidth: .infinity)
+        .fixedSize(horizontal: false, vertical: true)
     }
     
     var body: some View {
@@ -114,4 +149,32 @@ struct DonateProductView: View {
         }
         .tint(Color(UIColor.label))
     }
+}
+
+/// Reports this view's window instead of selecting an arbitrary connected scene.
+private struct WindowReader: UIViewRepresentable {
+    var onChange: (UIWindow?) -> Void
+
+    final class ReaderView: UIView {
+        var onChange: ((UIWindow?) -> Void)?
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            onChange?(window)
+        }
+    }
+
+    func makeUIView(context: Context) -> ReaderView {
+        let view = ReaderView()
+        view.onChange = { window in
+            DispatchQueue.main.async { onChange(window) }
+        }
+        return view
+    }
+
+    func updateUIView(_ uiView: ReaderView, context: Context) {}
+}
+
+@MainActor
+private final class DonationWindowReference {
+    weak var window: UIWindow?
 }

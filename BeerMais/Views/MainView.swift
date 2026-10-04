@@ -25,10 +25,10 @@ struct MainView: View {
         if #available(iOS 18.0, *) {
             ZStack(alignment: .bottomTrailing) {
                 let tabView = TabView(selection: $activeTab) {
-                    Tab("Calculadora", image: "icons8-math-50", value: Tabs.home.rawValue) {
+                    Tab("calculatorTab", image: "icons8-math-50", value: Tabs.home.rawValue) {
                         HomeView(worker: dependencies.beerWorker)
                     }
-                    Tab("Sobre", image: "icons8-about-50", value: Tabs.about.rawValue) {
+                    Tab("aboutTab", image: "icons8-about-50", value: Tabs.about.rawValue) {
                         AboutView()
                     }
                 }
@@ -46,7 +46,7 @@ struct MainView: View {
                 HomeView(worker: dependencies.beerWorker)
                     .tabItem {
                         Label {
-                            Text("Calculadora")
+                            Text("calculatorTab")
                         } icon: {
                             Image("icons8-math-50").renderingMode(.template)
                         }
@@ -55,7 +55,7 @@ struct MainView: View {
                 AboutView()
                     .tabItem {
                         Label {
-                            Text("Sobre")
+                            Text("aboutTab")
                         } icon: {
                             Image("icons8-about-50").renderingMode(.template)
                         }

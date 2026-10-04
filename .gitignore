@@ -7,3 +7,6 @@ BeerMais/Property \lists/Dev/GoogleService-Info.plist
 project.xcworkspace/
 xcuserdata/
 *.xcuserdatad/
+
+.agents/*
+skills-lock.json

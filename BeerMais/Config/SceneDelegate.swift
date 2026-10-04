@@ -39,20 +39,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     .environment(\.appDependencies, dependencies)
                     .interactiveDismissDisabled()
             )
-            
-            if #available(iOS 26.0, *) {} else {
+            main.isModalInPresentation = true
+            if #available(iOS 26.0, *) {
+                main.modalPresentationStyle = .pageSheet
+                main.sheetPresentationController?.detents = [.large()]
+            } else {
                 main.modalPresentationStyle = .overFullScreen
             }
-            
-            navigationController.viewControllers = [
-                LaunchScreenViewController(
-                    completionHandler: {
-                        navigationController.present(main, animated: true)
-                    }
-                )
-            ]
-            
+            let launch = LaunchScreenViewController { [weak navigationController] in
+                navigationController?.present(main, animated: true)
+            }
+            navigationController.viewControllers = [launch]
             window.rootViewController = navigationController
+
             self.window = window
             window.makeKeyAndVisible()
         }
