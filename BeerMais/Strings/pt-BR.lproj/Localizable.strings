@@ -60,3 +60,5 @@
 "newDrink" = "Nova bebida";
 "editDrink" = "Editar bebida";
 "addToComparison" = "Adicionar à comparação";
+
+"secondDrinkGuidance" = "Adicione outra bebida para comparar os preços por litro.";

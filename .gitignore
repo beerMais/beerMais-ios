@@ -10,3 +10,6 @@ xcuserdata/
 
 .agents/*
 skills-lock.json
+
+# Private growth planning and analytics
+/docs/growth-backlog.md

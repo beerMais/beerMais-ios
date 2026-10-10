@@ -667,3 +667,50 @@ extension AdaptiveBeerLayoutTests {
         XCTAssertTrue(field.isFirstResponder, "The price field must be focusable again after dismissal")
     }
 }
+
+
+extension BeerDetailViewModelTests {
+    @MainActor
+    func testFirstComparison_DeduplicatesAcrossRepeatedExposureAndReloadedDefaults() {
+        let suite = "GrowthTests-\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suite)!
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let firstLaunch = Date(timeIntervalSince1970: 1000)
+        defaults.set(firstLaunch, forKey: "growthFirstLaunchDate")
+        var events: [[String: Any]] = []
+        AppP.recordFirstComparison(defaults: defaults, now: firstLaunch.addingTimeInterval(60), enabled: true) { events.append($0) }
+        AppP.recordFirstComparison(defaults: UserDefaults(suiteName: suite)!, now: firstLaunch.addingTimeInterval(120), enabled: true) { events.append($0) }
+        XCTAssertEqual(events.count, 1)
+        XCTAssertEqual(events.first?["seconds_since_first_launch"] as? Double, 60)
+        XCTAssertEqual(events.first?["within_24_hours"] as? Bool, true)
+        XCTAssertNil(events.first?["brand"])
+        XCTAssertNil(events.first?["value"])
+    }
+
+    @MainActor
+    func testFirstComparison_ExcludesExistingInstallsAndDisabledMeasurement() {
+        let suite = "GrowthTests-\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suite)!
+        defer { defaults.removePersistentDomain(forName: suite) }
+        var count = 0
+        AppP.recordFirstComparison(defaults: defaults, now: Date(), enabled: true) { _ in count += 1 }
+        defaults.set(Date(), forKey: "growthFirstLaunchDate")
+        AppP.recordFirstComparison(defaults: defaults, now: Date(), enabled: false) { _ in count += 1 }
+        XCTAssertEqual(count, 0)
+        XCTAssertFalse(defaults.bool(forKey: "growthFirstComparisonRecorded"))
+    }
+
+    @MainActor
+    func testFirstComparison_After24HoursDoesNotCountAs24HourActivation() {
+        let suite = "GrowthTests-\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suite)!
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let firstLaunch = Date(timeIntervalSince1970: 1000)
+        defaults.set(firstLaunch, forKey: "growthFirstLaunchDate")
+        var within24Hours: Bool?
+        AppP.recordFirstComparison(defaults: defaults, now: firstLaunch.addingTimeInterval(86401), enabled: true) {
+            within24Hours = $0["within_24_hours"] as? Bool
+        }
+        XCTAssertEqual(within24Hours, false)
+    }
+}

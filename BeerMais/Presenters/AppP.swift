@@ -28,11 +28,14 @@ final class AppP {
 
         if isFirstLaunch {
             self.setFirstLaunch()
+            if growthMeasurementEnabled {
+                UserDefaults.standard.set(Date(), forKey: "growthFirstLaunchDate")
+            }
             AppP.amplitude.setUserId(userId: nil)
         }
         
         self.incrementAppOpenedCount()
-        logAppLaunch()
+        logAppLaunch(isFirstLaunch: isFirstLaunch)
         return isFirstLaunch
     }
     
@@ -94,11 +97,53 @@ final class AppP {
         
     }
     
-    static func logAppLaunch() {
+    private static var growthMeasurementEnabled: Bool {
+        #if DEBUG
+        return false
+        #else
+        return Bundle.main.bundleIdentifier == "br.com.joseneves.BeerMais.ios"
+            && ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil
+        #endif
+    }
+
+    // Presentation calls this only when a comparison is visible in an active scene.
+    @MainActor static func recordFirstComparison() {
+        recordFirstComparison(defaults: .standard, now: Date(), enabled: growthMeasurementEnabled) { properties in
+            amplitude.track(event: BaseEvent(eventType: "first_comparison_visible", eventProperties: properties))
+        }
+    }
+
+    @MainActor static func recordFirstComparison(
+        defaults: UserDefaults,
+        now: Date,
+        enabled: Bool,
+        track: ([String: Any]) -> Void
+    ) {
+        guard enabled,
+              let firstLaunch = defaults.object(forKey: "growthFirstLaunchDate") as? Date,
+              !defaults.bool(forKey: "growthFirstComparisonRecorded") else { return }
+        let elapsed = max(0, now.timeIntervalSince(firstLaunch))
+        defaults.set(true, forKey: "growthFirstComparisonRecorded")
+        track([
+            "seconds_since_first_launch": elapsed,
+            "within_24_hours": elapsed <= 86400,
+            "target": "main_app",
+            "guidance_variant": "second_drink_guidance",
+            "app_version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown",
+            "app_build": Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "unknown"
+        ])
+    }
+
+    static func logAppLaunch(isFirstLaunch: Bool = false) {
         AppP.amplitude.track(event: BaseEvent(
             eventType: "app_launch",
             eventProperties: [
-                "interface_style": UITraitCollection.current.userInterfaceStyle == .dark ? "dark" : "light"
+                "interface_style": UITraitCollection.current.userInterfaceStyle == .dark ? "dark" : "light",
+                "growth_first_launch": isFirstLaunch && growthMeasurementEnabled,
+                "growth_eligible": growthMeasurementEnabled && UserDefaults.standard.object(forKey: "growthFirstLaunchDate") != nil,
+                "guidance_variant": "second_drink_guidance",
+                "app_version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown",
+                "app_build": Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "unknown"
             ]
         ))
     }

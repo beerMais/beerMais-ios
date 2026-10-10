@@ -11,7 +11,9 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var viewModel: ViewModel
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.scenePhase) private var scenePhase
     
+    @State private var isHomeVisible = false
     @State private var selectedBeer: Beer?
     @State private var isPresented = false
     @State private var deleteIsPresented = false
@@ -48,6 +50,13 @@ struct HomeView: View {
                                     .buttonStyle(.plain)
                                     .accessibilityHint(Text("editBeerHint"))
                                 }
+                            }
+                            if viewModel.beers.count == 1 {
+                                Text("secondDrinkGuidance")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .fixedSize(horizontal: false, vertical: true)
                             }
                         }
                         .frame(maxWidth: .infinity)
@@ -115,8 +124,22 @@ struct HomeView: View {
             }
         )
         .onAppear {
+            isHomeVisible = true
             viewModel.reload()
+            recordComparisonExposure()
         }
+        .onDisappear { isHomeVisible = false }
+        .onChange(of: viewModel.highlightedBeer) {
+            recordComparisonExposure()
+        }
+        .onChange(of: scenePhase) {
+            recordComparisonExposure()
+        }
+    }
+
+    private func recordComparisonExposure() {
+        guard isHomeVisible, scenePhase == .active, viewModel.highlightedBeer != nil else { return }
+        AppP.recordFirstComparison()
     }
 }
 
