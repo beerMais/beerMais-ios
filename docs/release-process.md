@@ -41,3 +41,16 @@ Update `Release/<version>.md` and the persistent backlog with candidate version/
 ## Version-specific exception: 3.1.1
 
 On 2026-10-10 José explicitly authorized public review submission with automatic release for validated 3.1.1 (48). Save and verify the requested release mode before Add for Review, inspect the final submission contains only the intended version/build, submit, and verify Apple's explicit success confirmation. Apple confirmed “1 Item Submitted” for submission `9d69e477-a641-46d3-9ceb-cfe84e11267f`. This exception does not authorize future public submissions or automatic releases.
+
+## GitHub release format
+
+Use [3.1.0](https://github.com/beerMais/beerMais-ios/releases/tag/3.1.0) as the structural reference for future GitHub releases. Inspect the preceding release and use this Portuguese structure:
+
+1. Title: version number, matching the tag.
+2. `## O que mudou`: concise bullets describing actual changes.
+3. `## Validação`: app/widget/App Clip version and build, actual tests and environment when known, signed archive/signature verification, and migration status.
+4. Outstanding manual checks and accurate App Store status; GitHub publication does not imply App Store availability. Never copy old test counts or unperformed checks.
+5. `[Notas completas e checklist de lançamento](https://github.com/beerMais/beerMais-ios/blob/<tag>/Release/<version>.md)`.
+6. `**Changelog completo:** https://github.com/beerMais/beerMais-ios/compare/<previous-tag>...<tag>`.
+
+Verify the tag points to the intended commit and the published body matches prepared notes. Keep `docs/growth-backlog.md` local and ignored; never publish its contents or analytics. GitHub release creation does not authorize App Store release.
