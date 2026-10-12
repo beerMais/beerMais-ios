@@ -19,8 +19,8 @@ jobs:
     timeout-minutes: 45
     env:
       DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
-      BEERMAIS_DERIVED_DATA: ${{ runner.temp }}/BeerMais-DerivedData
-      BEERMAIS_TEST_RESULTS_DIR: ${{ runner.temp }}/BeerMais-test-results
+      BEERMAIS_DERIVED_DATA: ${{ github.workspace }}/.ci/DerivedData
+      BEERMAIS_TEST_RESULTS_DIR: ${{ github.workspace }}/.ci/test-results
     steps:
       - uses: actions/checkout@v4
         with:
