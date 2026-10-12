@@ -193,6 +193,32 @@ final class CoreDataBeerRepositoryTests: XCTestCase {
         XCTAssertTrue(repository.fetchBeers().isEmpty)
     }
 
+    func testEditingPackageSizePersistsTypeAndKeepsIdentity() throws {
+        let beer = try XCTUnwrap(repository.create(data: BeerData(brand: "Lager", value: 5, amount: 600)))
+        let objectID = beer.objectID
+        XCTAssertFalse(objectID.isTemporaryID)
+        XCTAssertEqual(beer.type, 1)
+
+        let liter = BeerData(brand: nil, value: 8, amount: 1000)
+        XCTAssertTrue(repository.update(beer: beer, data: liter))
+        // Repeating an unchanged edit must still report success.
+        XCTAssertTrue(repository.update(beer: beer, data: liter))
+        controller.viewContext.reset()
+        let persisted = try XCTUnwrap(repository.fetchBeers().first)
+        XCTAssertEqual(persisted.objectID, objectID)
+        XCTAssertNil(persisted.brand)
+        XCTAssertEqual(persisted.value, 8)
+        XCTAssertEqual(persisted.amount, 1000)
+        XCTAssertEqual(persisted.type, 2)
+
+        XCTAssertTrue(repository.update(beer: persisted, data: BeerData(brand: "Small", value: 3, amount: 350)))
+        controller.viewContext.reset()
+        let small = try XCTUnwrap(repository.fetchBeers().first)
+        XCTAssertEqual(small.objectID, objectID)
+        XCTAssertEqual(small.type, 1)
+        XCTAssertEqual(small.amount, 350)
+    }
+
     func testFailedSaveRollsBackChanges() throws {
         let model = try XCTUnwrap(Beer.managedObjectModel.copy() as? NSManagedObjectModel)
         model.entitiesByName["Beer"]?.attributesByName["brand"]?.isOptional = false
@@ -263,6 +289,60 @@ final class CoreDataBeerRepositoryTests: XCTestCase {
 }
 
 extension BeerWorkerTests {
+    func testWidgetRemovesStaleBrandForUnbrandedWinnerAndRefreshIsIdempotent() throws {
+        let suite = "BeerWidgetUnbrandedTests-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        defaults.set("Previous winner", forKey: "BRAND")
+        let winner = Beer.mock()
+        winner.brand = nil
+        winner.value = 5
+        winner.amount = 1000
+        winner.type = 2
+        let runnerUp = Beer.mock()
+        runnerUp.value = 8
+        runnerUp.amount = 1000
+        let repository = BeerRepositorySpy()
+        repository.beers = [runnerUp, winner]
+        var reloads = 0
+        let worker = BeerWorker(repository: repository, widgetDefaults: defaults, reloadWidget: { reloads += 1 })
+
+        worker.refreshWidgetData()
+        XCTAssertNil(defaults.object(forKey: "BRAND"))
+        XCTAssertEqual(defaults.string(forKey: "AMOUNT"), "1 L")
+        XCTAssertEqual(defaults.string(forKey: "VALUE"), "R$ 5,00")
+        XCTAssertEqual(defaults.string(forKey: "TYPE"), "2")
+        XCTAssertEqual(defaults.string(forKey: "BEERS_COUNT"), "2")
+        XCTAssertEqual(defaults.string(forKey: "ECONOMY"), "R$ 3,00/L")
+        XCTAssertEqual(reloads, 1)
+
+        worker.refreshWidgetData()
+        XCTAssertNil(defaults.object(forKey: "BRAND"))
+        XCTAssertEqual(reloads, 1)
+    }
+
+    func testWidgetClearsAllStaleFieldsWithTooFewBeersAndReloadsOnlyOnce() throws {
+        let suite = "BeerWidgetEmptyTests-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let keys = ["BRAND", "AMOUNT", "VALUE", "TYPE", "BEERS_COUNT", "ECONOMY"]
+        for key in keys { defaults.set("Stale", forKey: key) }
+        defaults.set("Keep", forKey: "Unrelated")
+        let repository = BeerRepositorySpy()
+        repository.beers = [Beer.mock()]
+        var reloads = 0
+        let worker = BeerWorker(repository: repository, widgetDefaults: defaults, reloadWidget: { reloads += 1 })
+
+        worker.refreshWidgetData()
+        for key in keys { XCTAssertNil(defaults.object(forKey: key), key) }
+        XCTAssertEqual(defaults.string(forKey: "Unrelated"), "Keep")
+        XCTAssertEqual(reloads, 1)
+        repository.beers = []
+        worker.refreshWidgetData()
+        XCTAssertTrue(worker.deleteAllBeers())
+        XCTAssertEqual(reloads, 1)
+    }
+
     func testRankingComparesUnitPriceAcrossDifferentPackageSizes() throws {
         let small = Beer.mock()
         small.value = 3

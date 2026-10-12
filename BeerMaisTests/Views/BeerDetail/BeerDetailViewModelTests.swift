@@ -7,6 +7,7 @@
 //
 
 import Combine
+import CoreData
 import XCTest
 import SwiftUI
 import UIKit
@@ -904,5 +905,108 @@ extension BeerDetailViewModelTests {
             within24Hours = $0["within_24_hours"] as? Bool
         }
         XCTAssertEqual(within24Hours, false)
+    }
+}
+
+
+extension BeerDetailViewModelTests {
+    func testValidationReportsFirstInvalidFieldAndClearsAfterCorrection() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.brand = " \n "
+        sut.price = "invalid"
+        sut.size = "0"
+        var finishes = 0
+        sut.onFinish = { finishes += 1 }
+
+        sut.createOrSave()
+        XCTAssertEqual(sut.errorMessage, "beerBrandRequired".localized)
+        sut.brand = "Lager"
+        sut.createOrSave()
+        XCTAssertEqual(sut.errorMessage, "beerPriceInvalid".localized)
+        sut.price = "6,00"
+        sut.createOrSave()
+        XCTAssertEqual(sut.errorMessage, "beerVolumeInvalid".localized)
+        XCTAssertTrue(workerSpy.createBeerCalls.isEmpty)
+        XCTAssertEqual(finishes, 0)
+
+        sut.size = "600"
+        workerSpy.createBeerReturn = Beer.mock()
+        sut.createOrSave()
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertEqual(workerSpy.createBeerCalls.count, 1)
+        XCTAssertEqual(finishes, 1)
+    }
+
+    func testPricePreviewRejectsOverflowAndRecoversWithValidPrice() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.size = "1"
+        // A finite price can still overflow when converted to a per-liter rate.
+        sut.price = "100000000000000000000000000000000000000"
+        XCTAssertNil(sut.pricePerLiter)
+        sut.price = "1,25"
+        XCTAssertEqual(sut.pricePerLiter, 1250)
+        sut.size = "32768"
+        XCTAssertNil(sut.pricePerLiter)
+        sut.size = "1000"
+        XCTAssertEqual(sut.pricePerLiter, 1.25)
+    }
+
+    func testPresetSelectionDoesNotDiscardCustomVolumeWhenCleared() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.size = "1500"
+        XCTAssertNil(sut.sizeSelection)
+        sut.sizeSelection = nil
+        XCTAssertEqual(sut.size, "1500")
+        for segment in Segment.allCases {
+            sut.sizeSelection = segment
+            XCTAssertEqual(sut.size, String(segment.amount))
+            XCTAssertEqual(sut.sizeSelection, segment)
+        }
+    }
+
+    @MainActor
+    func testCreateEditAndDeleteRefreshComparisonAfterPersistenceCompletes() throws {
+        let controller = PersistenceController(inMemory: true, managedObjectModel: Beer.managedObjectModel)
+        let repository = CoreDataBeerRepository(persistenceController: controller)
+        let worker = BeerWorker(repository: repository, reloadWidget: {})
+        let home = HomeView.ViewModel(worker: worker)
+        let existing = try XCTUnwrap(repository.create(data: BeerData(brand: "Existing", value: 7, amount: 1000)))
+        home.reload()
+        XCTAssertEqual(home.beers, [existing])
+        XCTAssertNil(home.highlightedBeer)
+
+        let editor = BeerDetailView.ViewModel(selectedBeer: nil, worker: worker)
+        editor.brand = " New Lager "
+        editor.price = "6,00"
+        editor.size = "1000"
+        var finishes = 0
+        editor.onFinish = { finishes += 1; home.reload() }
+        editor.createOrSave()
+
+        let created = try XCTUnwrap(home.beers.first)
+        XCTAssertEqual(home.beers.count, 2)
+        XCTAssertEqual(created.brand, "New Lager")
+        XCTAssertEqual(home.highlightedBeer, created)
+        XCTAssertEqual(home.highlightedBeerViewModel.beerEconomyValue, "R$ 1,00/L")
+        XCTAssertEqual(finishes, 1)
+
+        let editing = BeerDetailView.ViewModel(selectedBeer: created, worker: worker)
+        editing.price = "10,00"
+        editing.onFinish = { finishes += 1; home.reload() }
+        editing.createOrSave()
+
+        XCTAssertEqual(home.beers.count, 2, "Editing must preserve the original object instead of creating a duplicate")
+        XCTAssertEqual(home.highlightedBeer, existing)
+        XCTAssertEqual(home.highlightedBeerViewModel.beerEconomyValue, "R$ 3,00/L")
+        XCTAssertEqual(finishes, 2)
+
+        editing.delete()
+
+        XCTAssertEqual(home.beers, [existing])
+        XCTAssertNil(home.highlightedBeer)
+        XCTAssertNil(home.economy)
+        XCTAssertNil(home.highlightedBeerViewModel.beer)
+        XCTAssertEqual(home.highlightedBeerViewModel.beerEconomyValue, "R$ 0,00/L")
+        XCTAssertEqual(finishes, 3)
     }
 }
