@@ -4,20 +4,19 @@
 `.lines` strategy. Five committed UTF-8 baselines protect visible volume labels,
 currency and cents input, editor presets and custom volume previews, ranked card
 updates, and highlighted card presentation. Snapshot payloads omit managed object
-IDs and use explicit fixture values. Card tests use the existing worker spy;
-currency formatting is covered separately by the display snapshot.
+IDs and use explicit fixture values. Card tests use the real worker with a
+repository spy, so changes to volume exercise rate calculation and formatting
+without persistence or network calls.
 
 These are text presentation snapshots, not rendered UI images. They do not
 detect layout, clipping, typography, accessibility, or color regressions.
-No image baselines were generated because this workspace lacks Xcode and an iOS
-simulator. The initial text baselines were reviewed against source contracts;
-their first simulator run is still required.
+Image snapshots remain a follow-up; the committed baselines cover text only.
 
 Run on macOS with Xcode and an available simulator:
 
 ```sh
 xcodebuild test -project BeerMais.xcodeproj -scheme BeerMais \
-  -destination 'platform=iOS Simulator,name=iPhone 16' \
+  -destination 'platform=iOS Simulator,id=<SIMULATOR-UDID>' \
   -only-testing:BeerMaisTests/BeerPresentationSnapshotTests
 ```
 

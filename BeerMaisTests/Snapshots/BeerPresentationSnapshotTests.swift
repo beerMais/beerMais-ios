@@ -36,9 +36,7 @@ final class BeerPresentationSnapshotTests: XCTestCase {
     }
 
     func testRankedCardUpdatesAfterBeerChanges() {
-        let worker = BeerWorkerSpy()
-        worker.formatBeerValueToShowReturn = "6,50"
-        worker.getValuePerMLReturn = 0.0065
+        let worker = BeerWorker(repository: BeerRepositorySpy())
         let beer = Beer.mock()
         beer.brand = "Lager"
         beer.amount = 1000
@@ -52,8 +50,7 @@ final class BeerPresentationSnapshotTests: XCTestCase {
     }
 
     func testHighlightedCardShowsSavingsWithoutRank() {
-        let worker = BeerWorkerSpy()
-        worker.formatBeerValueToShowReturn = "1,75"
+        let worker = BeerWorker(repository: BeerRepositorySpy())
         let beer = Beer.mock()
         beer.brand = "Economy lager"
         beer.amount = 350

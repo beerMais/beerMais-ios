@@ -25,7 +25,7 @@ per-file coverage before choosing the next additions.
 ## Run and measure (macOS)
 
 Use Xcode with the project's required SDK, resolve Swift packages, and supply the
-local app configuration described in the README. List available simulators with
+local app configuration in `BeerMais/Property lists`. List available simulators with
 `xcrun simctl list devices available`, then replace the destination below with a
 compatible installed simulator. Use a fresh result-bundle path for every run.
 
@@ -58,8 +58,24 @@ light/dark mode and accessibility text sizes. Record and inspect actual images
 on that simulator before committing them; image baselines cannot be produced or
 verified in a Linux environment.
 
-## Validation limitation
+## Validation
 
-This workspace runs Linux and provides neither Swift nor Xcode. Repository and
-project consistency can be checked here, but XCTest execution, image rendering,
-and numerical coverage measurement require the macOS run above.
+The original implementation received static validation only. Run the macOS
+command above to validate the committed snapshots and measure coverage; retain
+the result bundle and record the simulator, SDK, test count, and failures with
+each measurement. A passing build alone does not establish passing tests.
+
+### PR #10 review — 2026-10-12
+
+The app, extensions, and test bundle compiled with Xcode 27.1 (iOS 27.1,
+iPhone Duo) and Xcode 27.0 (iOS 27.0, iPhone 18 Pro), using `BeerMais Dev`,
+coverage enabled, and serial test execution. Both simulator runs stalled before
+any XCTest result and were interrupted after more than five minutes in the
+runner. A sample of the 27.1 runner showed it loading the test bundle through
+`dlopen` and Objective-C image registration, before test execution.
+
+`git diff --check` passed. XCTest results, snapshot comparisons, and numerical
+coverage remain unverified. App installation/launch was also attempted but did
+not complete before the simulator commands were stopped. No before/after
+coverage improvement is claimed. Existing concurrency warnings in `AppP.swift`
+remain outside this test-only change.

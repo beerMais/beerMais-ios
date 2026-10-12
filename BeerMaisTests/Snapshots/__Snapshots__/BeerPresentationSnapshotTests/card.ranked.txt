@@ -10,6 +10,6 @@ Updated card
 brand: Custom lager
 volume: 1,5 L
 price: R$ 6,50
-rate: R$ 6,50/L
+rate: R$ 4,33/L
 rank: 2
 highlighted: false
