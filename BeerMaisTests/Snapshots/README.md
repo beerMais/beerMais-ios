@@ -41,8 +41,8 @@ in CI. Do not accept newly generated references without reviewing their output.
 The reference environment is Xcode 26.3, iOS 26.2, iPhone 17 Pro, Portuguese
 (Brazil), a 402×680-point canvas, and 2× image scale. Visual tests explicitly
 skip other iOS runtimes; behavioral/text tests still run. CI selects iOS 26.2
-and compares references with recording disabled. A 99.5% pixel-match threshold
-and 98% perceptual precision tolerate small antialiasing differences.
+and compares references with recording disabled. Every pixel is compared with
+98% perceptual precision to tolerate small antialiasing differences.
 
 PNG files live in `__Snapshots__/BeerVisualSnapshotTests`. GitHub Actions
 publishes a `visual-snapshots` artifact for viewing/downloading them; failures

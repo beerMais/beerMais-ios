@@ -57,8 +57,7 @@ final class BeerVisualSnapshotTests: XCTestCase {
                 let recording = ProcessInfo.processInfo.environment["BEERMAIS_RECORD_SNAPSHOTS"] == "1"
                 assertSnapshot(
                     of: host,
-                    as: .wait(for: 0.3, on: .image(drawHierarchyInKeyWindow: true,
-                                                  precision: 0.995, perceptualPrecision: 0.98,
+                    as: .wait(for: 0.3, on: .image(precision: 1, perceptualPrecision: 0.98,
                                                   size: CGSize(width: 402, height: 680), traits: traits)),
                     named: "\(name).\(dark ? "dark" : "light").\(accessible ? "accessibility" : "standard")",
                     record: recording ? .all : .never,
