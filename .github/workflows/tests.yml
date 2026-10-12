@@ -29,8 +29,8 @@ jobs:
       - name: Prepare isolated test build
         run: |
           xcodebuild -version
-          # The suite is hostless. Build the app and extensions using an inert
-          # Firebase resource; no private configuration is needed or downloaded.
+          # Test startup skips services. Build using an inert Firebase resource;
+          # no private configuration is needed or downloaded.
           python3 scripts/prepare-ci-tests.py
 
       - name: Run all tests with coverage
@@ -51,6 +51,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: visual-snapshots
-          path: BeerMaisTests/Snapshots/__Snapshots__/BeerVisualSnapshotTests
+          path: BeerMaisVisualTests/__Snapshots__/BeerVisualSnapshotTests
           if-no-files-found: warn
           retention-days: 14

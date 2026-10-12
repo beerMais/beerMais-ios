@@ -25,7 +25,7 @@ per-file coverage before choosing the next additions.
 ## Run and measure (macOS)
 
 From the repository, run `./scripts/run-tests.sh` for the full suite on
-`iPhone 18 Pro`, or pass another simulator name/UUID. The script uses the selected
+`iPhone 17 Pro` on iOS 26.2, or pass another simulator name/UUID. The script uses the selected
 Xcode, enables coverage, saves a unique result bundle and log, and prints coverage
 after successful tests. Run `./scripts/run-tests.sh --help` for overrides.
 
@@ -40,11 +40,20 @@ silently choosing new package versions. Logs and `.xcresult` bundles are retaine
 including failed runs; superseded runs are cancelled and jobs time out after
 45 minutes.
 
+Visual snapshots use the same pinned iOS 26.2 runtime and compare eight card PNGs
+in light/dark appearance at standard/accessibility text sizes. Other runtimes
+explicitly skip these image comparisons. Install iOS 26.2 in Xcode to run them
+locally. The `visual-snapshots` artifact contains the references for inspection.
+
+`BeerMaisVisualTests` is hosted in the app, using a blank test window and
+in-memory fixtures. App/scene startup skips service initialization and real
+persistence during DEBUG XCTest runs. The existing logic test target remains
+hostless.
+
 CI creates an inert Firebase plist only when the ignored development resource
 is missing. It neither requires production credentials nor changes existing
-developer configuration. The test bundle is hostless, so the app launch path
-does not run. The suite covers domain, persistence, widget, presentation state,
-and text contracts; it does not guarantee visual layout or live service behavior.
+developer configuration. The suite covers domain, persistence, widget, presentation state,
+and text/image contracts; it does not cover full-screen navigation or live service behavior.
 
 To enforce this gate before merging, require **Full test suite** in the repository
 branch protection/ruleset. Adding a workflow alone does not enforce merge rules.
@@ -82,11 +91,10 @@ Text snapshots protect display contracts without depending on simulator fonts or
 screen scale. Review baseline diffs as product changes, and rerun in comparison
 mode after recording an intentional change. Never enable recording by default.
 
-For a later visual-snapshot pass, pin simulator model, OS, locale, color scheme,
-and Dynamic Type size. Cover normal/highlighted cards and editor error states in
-light/dark mode and accessibility text sizes. Record and inspect actual images
-on that simulator before committing them; image baselines cannot be produced or
-verified in a Linux environment.
+`BeerVisualSnapshotTests` renders actual ranked/highlighted cards with real
+resources. References fix runtime, locale, color scheme, Dynamic Type, dimensions
+and scale. Review PNG changes before rerunning comparison mode. Editor error
+states and full-screen navigation remain outside this initial visual suite.
 
 ## Validation
 

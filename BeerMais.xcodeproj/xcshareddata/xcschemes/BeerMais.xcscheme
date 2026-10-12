@@ -31,6 +31,9 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference skipped = "NO">
+            <BuildableReference BuildableIdentifier = "primary" BlueprintIdentifier = "BCE300000000000000000001" BuildableName = "BeerMaisVisualTests.xctest" BlueprintName = "BeerMaisVisualTests" ReferencedContainer = "container:BeerMais.xcodeproj"/>
+         </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference

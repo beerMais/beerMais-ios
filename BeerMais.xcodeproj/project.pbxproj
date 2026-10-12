@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BCE30000000000000000000B /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = BCE30000000000000000000A /* SnapshotTesting */; };
 		BCE200000000000000000001 /* BeerVisualSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE200000000000000000002 /* BeerVisualSnapshotTests.swift */; };
 		BCE100000000000000000001 /* BeerPresentationSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE100000000000000000002 /* BeerPresentationSnapshotTests.swift */; };
 		58DCE9477ECD4D629765236D /* CentsPriceField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E463593BB3B344F8B9593032 /* CentsPriceField.swift */; };
@@ -221,6 +222,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BCE300000000000000000002 /* BeerMaisVisualTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BeerMaisVisualTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE200000000000000000002 /* BeerVisualSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerVisualSnapshotTests.swift; sourceTree = "<group>"; };
 		BCE100000000000000000002 /* BeerPresentationSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerPresentationSnapshotTests.swift; sourceTree = "<group>"; };
 		E463593BB3B344F8B9593032 /* CentsPriceField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentsPriceField.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BCE300000000000000000004 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (BCE30000000000000000000B /* SnapshotTesting in Frameworks */,); runOnlyForDeploymentPostprocessing = 0; };
 		2D1D3E5021F670C9008F51AC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -358,11 +361,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BCE30000000000000000000C /* BeerMaisVisualTests */ = {isa = PBXGroup; children = (BCE200000000000000000002 /* BeerVisualSnapshotTests.swift */,); path = BeerMaisVisualTests; sourceTree = "<group>"; };
 		BCE100000000000000000003 /* Snapshots */ = {
 			isa = PBXGroup;
 			children = (
 				BCE100000000000000000002 /* BeerPresentationSnapshotTests.swift */,
-				BCE200000000000000000002 /* BeerVisualSnapshotTests.swift */,
 			);
 			path = Snapshots;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				A18158AE2597D1D5004B2018 /* BeerMais Clip */,
 				87849E5E2820680700B6F61F /* BeerMaisTests */,
 				2D17011421D2B3CD0009A316 /* Products */,
+				BCE30000000000000000000C /* BeerMaisVisualTests */,
 				540576969A604AB673A2D23F /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -423,6 +427,7 @@
 		2D17011421D2B3CD0009A316 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				BCE300000000000000000002 /* BeerMaisVisualTests.xctest */,
 				2D1D3E5F21F670C9008F51AC /* BeerMais.app */,
 				2D4C51F7254F85CB00D0B2D0 /* BeerMais widgetExtension.appex */,
 				A18158AD2597D1D4004B2018 /* BeerMais Clip.app */,
@@ -740,6 +745,18 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BCE300000000000000000001 /* BeerMaisVisualTests */ = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = BCE300000000000000000006;
+            buildPhases = (BCE300000000000000000003, BCE300000000000000000004, BCE300000000000000000005,);
+            buildRules = ();
+            dependencies = (BCE300000000000000000009,);
+            name = BeerMaisVisualTests;
+            packageProductDependencies = (BCE30000000000000000000A,);
+            productName = BeerMaisVisualTests;
+            productReference = BCE300000000000000000002;
+            productType = "com.apple.product-type.bundle.unit-test";
+        };
 		2D1D3E4321F670C9008F51AC /* BeerMais */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D1D3E5C21F670C9008F51AC /* Build configuration list for PBXNativeTarget "BeerMais" */;
@@ -853,6 +870,7 @@
 				LastUpgradeCheck = 2600;
 				ORGANIZATIONNAME = joseneves;
 				TargetAttributes = {
+					BCE300000000000000000001 = {CreatedOnToolsVersion = 26.3; TestTargetID = 2D1D3E4321F670C9008F51AC;};
 					2D1D3E4321F670C9008F51AC = {
 						LastSwiftMigration = 1020;
 						SystemCapabilities = {
@@ -895,6 +913,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				BCE300000000000000000001 /* BeerMaisVisualTests */,
 				2D1D3E4321F670C9008F51AC /* BeerMais */,
 				2D4C51F6254F85CB00D0B2D0 /* BeerMais widgetExtension */,
 				A18158AC2597D1D4004B2018 /* BeerMais Clip */,
@@ -904,6 +923,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BCE300000000000000000005 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 		2D1D3E5221F670C9008F51AC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -989,6 +1009,7 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BCE300000000000000000003 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (BCE200000000000000000001 /* BeerVisualSnapshotTests.swift in Sources */,); runOnlyForDeploymentPostprocessing = 0; };
 		2D1D3E4521F670C9008F51AC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1049,7 +1070,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCE100000000000000000001 /* BeerPresentationSnapshotTests.swift in Sources */,
-				BCE200000000000000000001 /* BeerVisualSnapshotTests.swift in Sources */,
 				2DF3A9E22B0AE00700DB6891 /* BeerDetailViewModelTests.swift in Sources */,
 				2DC015022E23524900B7BA9F /* BeerDetailView.swift in Sources */,
 				F995F8CF5682461399D22EBB /* CentsPriceField.swift in Sources */,
@@ -1140,6 +1160,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BCE300000000000000000009 = {isa = PBXTargetDependency; target = 2D1D3E4321F670C9008F51AC; targetProxy = 87849E612820680700B6F61F; };
 		2D4C5206254F85CC00D0B2D0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2D4C51F6254F85CB00D0B2D0 /* BeerMais widgetExtension */;
@@ -1171,6 +1192,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+        BCE300000000000000000008 = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                BUNDLE_LOADER = "$(TEST_HOST)";
+                GENERATE_INFOPLIST_FILE = YES;
+                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+                LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks", "@loader_path/Frameworks",);
+                PRODUCT_BUNDLE_IDENTIFIER = br.com.joseneves.BeerMaisVisualTests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SWIFT_VERSION = 6.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeerMais.app/BeerMais";
+            };
+            name = Release;
+        };
+        BCE300000000000000000007 = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                BUNDLE_LOADER = "$(TEST_HOST)";
+                GENERATE_INFOPLIST_FILE = YES;
+                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+                LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks", "@loader_path/Frameworks",);
+                PRODUCT_BUNDLE_IDENTIFIER = br.com.joseneves.BeerMaisVisualTests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SWIFT_VERSION = 6.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BeerMais.app/BeerMais";
+            };
+            name = Debug;
+        };
 		2D17012621D2B3CF0009A316 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1609,6 +1660,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BCE300000000000000000006 = {isa = XCConfigurationList; buildConfigurations = (BCE300000000000000000007, BCE300000000000000000008,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
 		2D17010E21D2B3CD0009A316 /* Build configuration list for PBXProject "BeerMais" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1708,6 +1760,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BCE30000000000000000000A = {isa = XCSwiftPackageProductDependency; package = 2D63E33C2B1FE6AB00A41CC0; productName = SnapshotTesting; };
 		2D0C484F2E04975500C5A674 /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2D0C484E2E04975500C5A674 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

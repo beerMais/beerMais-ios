@@ -10,12 +10,14 @@ without persistence or network calls.
 
 These are text presentation snapshots, not rendered UI images. They do not
 detect layout, clipping, typography, accessibility, or color regressions.
-`BeerVisualSnapshotTests` additionally renders the real `BeerView` inside a
+`BeerMaisVisualTests/BeerVisualSnapshotTests` additionally renders the real `BeerView` inside a
 `UIHostingController`. Eight PNG references cover ranked/highlighted cards in
 light/dark appearance at standard and accessibility text sizes. Resources use
 the existing `Bundle.beerMais`, so icons, colors and translations are included
-even in the hostless XCTest process. These card renders do not start ads or
-network requests.
+in both test targets. The visual target is hosted in the real app so hierarchy
+rendering preserves material effects and dynamic colors. Test startup shows a
+blank window and skips services, notifications, analytics and persistent data;
+card fixtures use an in-memory repository.
 
 Run on macOS with Xcode and an available simulator:
 
@@ -44,7 +46,7 @@ skip other iOS runtimes; behavioral/text tests still run. CI selects iOS 26.2
 and compares references with recording disabled. Every pixel is compared with
 98% perceptual precision to tolerate small antialiasing differences.
 
-PNG files live in `__Snapshots__/BeerVisualSnapshotTests`. GitHub Actions
+PNG files live in `BeerMaisVisualTests/__Snapshots__/BeerVisualSnapshotTests`. GitHub Actions
 publishes a `visual-snapshots` artifact for viewing/downloading them; failures
 also attach reference/actual/difference images to the `.xcresult` bundle.
 

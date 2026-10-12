@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Supply only the missing Firebase resource for the hostless CI test build."""
+"""Supply only the missing Firebase resource for the isolated CI test build."""
 
 import os
 from pathlib import Path
@@ -31,7 +31,7 @@ def main():
             "IS_GCM_ENABLED": False,
             "IS_SIGNIN_ENABLED": False,
         }, resource)
-    print("Created inert Firebase resource for the hostless test build.")
+    print("Created inert Firebase resource for the isolated test build.")
 
 
 if __name__ == "__main__":

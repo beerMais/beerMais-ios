@@ -12,9 +12,10 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    private let dependencies = AppDependencies()
+    private lazy var dependencies = AppDependencies()
 
     func sceneDidBecomeActive(_ scene: UIScene) {
+        guard !AppDelegate.isRunningTests else { return }
         dependencies.beerWorker.refreshWidgetData()
     }
 
@@ -25,6 +26,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
+
+            if AppDelegate.isRunningTests {
+                window.rootViewController = UIViewController()
+                self.window = window
+                window.makeKeyAndVisible()
+                return
+            }
 
             #if DEBUG
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
