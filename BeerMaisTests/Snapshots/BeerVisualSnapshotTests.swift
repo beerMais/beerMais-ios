@@ -49,6 +49,16 @@ final class BeerVisualSnapshotTests: XCTestCase {
                     .background(Color(uiColor: dark ? .black : .white))
                     .transaction { $0.animation = nil }
                 let host = UIHostingController(rootView: root)
+                // Hierarchy rendering preserves SwiftUI materials and dynamic
+                // foreground colors that CALayer-only rendering can omit.
+                let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 402, height: 680))
+                window.overrideUserInterfaceStyle = dark ? .dark : .light
+                window.rootViewController = UIViewController()
+                window.makeKeyAndVisible()
+                defer {
+                    window.isHidden = true
+                    window.rootViewController = nil
+                }
                 let traits = UITraitCollection(traitsFrom: [
                     UITraitCollection(displayScale: 2),
                     UITraitCollection(userInterfaceStyle: dark ? .dark : .light),
@@ -57,7 +67,8 @@ final class BeerVisualSnapshotTests: XCTestCase {
                 let recording = ProcessInfo.processInfo.environment["BEERMAIS_RECORD_SNAPSHOTS"] == "1"
                 assertSnapshot(
                     of: host,
-                    as: .wait(for: 0.3, on: .image(precision: 1, perceptualPrecision: 0.98,
+                    as: .wait(for: 0.3, on: .image(drawHierarchyInKeyWindow: true,
+                                                  precision: 1, perceptualPrecision: 0.98,
                                                   size: CGSize(width: 402, height: 680), traits: traits)),
                     named: "\(name).\(dark ? "dark" : "light").\(accessible ? "accessibility" : "standard")",
                     record: recording ? .all : .never,
