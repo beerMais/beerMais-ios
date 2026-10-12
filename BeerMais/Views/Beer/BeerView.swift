@@ -59,13 +59,13 @@ struct BeerView: View {
                 .frame(maxWidth: .infinity)
                 if viewModel.isHighlighted {
                     VStack(spacing: 4) {
-                        Text("saving").font(.subheadline)
+                        Text("saving", bundle: .beerMais).font(.subheadline)
                         Text(viewModel.beerEconomyValue)
                             .font(.headline)
                             .monospacedDigit()
                             .lineLimit(1)
                             .minimumScaleFactor(0.75)
-                            .foregroundStyle(Color("economyBorder"))
+                            .foregroundStyle(Color("economyBorder", bundle: .beerMais))
                         footer
                     }
                     .frame(maxWidth: .infinity)
@@ -80,7 +80,7 @@ struct BeerView: View {
         .foregroundStyle(Color.primary)
         .background(
             viewModel.isHighlighted && viewModel.beer != nil
-                ? Color("economyBackground") : Color(uiColor: .tertiarySystemBackground),
+                ? Color("economyBackground", bundle: .beerMais) : Color(uiColor: .tertiarySystemBackground),
             in: RoundedRectangle(cornerRadius: 16)
         )
         .accessibilityElement(children: .combine)
@@ -91,7 +91,7 @@ struct BeerView: View {
             container.glassEffect(.regular, in: .rect(cornerRadius: 16))
         } else {
             container.overlay {
-                RoundedRectangle(cornerRadius: 16).stroke(Color("economyBorder"), lineWidth: 1)
+                RoundedRectangle(cornerRadius: 16).stroke(Color("economyBorder", bundle: .beerMais), lineWidth: 1)
             }
         }
     }

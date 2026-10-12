@@ -3,7 +3,7 @@ set -euo pipefail
 
 if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
     echo "Usage: $0 [simulator-name-or-uuid]"
-    echo "Runs all BeerMais Dev tests with coverage (default: iPhone 18 Pro)."
+    echo "Runs all BeerMais Dev tests with coverage (default: iPhone 17 Pro, iOS 26.2)."
     echo "Uses the selected Xcode; override with DEVELOPER_DIR."
     echo "Override the build cache with BEERMAIS_DERIVED_DATA."
     echo "Set BEERMAIS_TEST_RESULTS_DIR to a parent directory for unique run artifacts."
@@ -22,11 +22,11 @@ if [[ ! -d "${DEVELOPER_DIR}" ]]; then
     exit 1
 fi
 
-SIMULATOR_TARGET="${1:-iPhone 18 Pro}"
+SIMULATOR_TARGET="${1:-iPhone 17 Pro}"
 if [[ "${SIMULATOR_TARGET}" =~ ^[[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12}$ ]]; then
     DESTINATION="platform=iOS Simulator,id=${SIMULATOR_TARGET}"
 else
-    DESTINATION="platform=iOS Simulator,name=${SIMULATOR_TARGET}"
+    DESTINATION="platform=iOS Simulator,name=${SIMULATOR_TARGET},OS=26.2"
 fi
 
 cd -- "${PROJECT_DIR}"

@@ -23,6 +23,8 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
+      language = "pt-BR"
+      region = "BR"
       codeCoverageEnabled = "YES"
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"

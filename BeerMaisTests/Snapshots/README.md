@@ -10,7 +10,12 @@ without persistence or network calls.
 
 These are text presentation snapshots, not rendered UI images. They do not
 detect layout, clipping, typography, accessibility, or color regressions.
-Image snapshots remain a follow-up; the committed baselines cover text only.
+`BeerVisualSnapshotTests` additionally renders the real `BeerView` inside a
+`UIHostingController`. Eight PNG references cover ranked/highlighted cards in
+light/dark appearance at standard and accessibility text sizes. Resources use
+the existing `Bundle.beerMais`, so icons, colors and translations are included
+even in the hostless XCTest process. These card renders do not start ads or
+network requests.
 
 Run on macOS with Xcode and an available simulator:
 
@@ -31,8 +36,26 @@ For an intentional presentation change, change the affected assertion's
 diff, then restore `record: false` and rerun. Keep automatic recording disabled
 in CI. Do not accept newly generated references without reviewing their output.
 
-For future visual snapshots, render the actual SwiftUI views with
-`UIHostingController` and SnapshotTesting's `.image` strategy on a pinned iOS
-runtime and simulator. Fix screen dimensions, locale, light/dark appearance and
-Dynamic Type; inject workers that avoid ad and network side effects. Record and
-review real PNG baselines on that simulator before enabling these tests in CI.
+## Visual references
+
+The reference environment is Xcode 26.3, iOS 26.2, iPhone 17 Pro, Portuguese
+(Brazil), a 402×680-point canvas, and 2× image scale. Visual tests explicitly
+skip other iOS runtimes; behavioral/text tests still run. CI selects iOS 26.2
+and compares references with recording disabled. A 99.5% pixel-match threshold
+and 98% perceptual precision tolerate small antialiasing differences.
+
+PNG files live in `__Snapshots__/BeerVisualSnapshotTests`. GitHub Actions
+publishes a `visual-snapshots` artifact for viewing/downloading them; failures
+also attach reference/actual/difference images to the `.xcresult` bundle.
+
+For an intentional visual change on the reference runtime:
+
+```sh
+TEST_RUNNER_BEERMAIS_RECORD_SNAPSHOTS=1 ./scripts/run-tests.sh
+```
+
+Recording deliberately fails the assertions. Review every changed PNG, unset
+the variable, and rerun comparison mode before committing. Missing references
+fail without automatically creating or accepting baselines in comparison mode.
+Editor screens, alerts, and full-screen navigation are not covered by these
+initial card snapshots.

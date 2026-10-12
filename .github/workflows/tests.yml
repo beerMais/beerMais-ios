@@ -34,7 +34,8 @@ jobs:
           python3 scripts/prepare-ci-tests.py
 
       - name: Run all tests with coverage
-        run: ./scripts/run-tests.sh "iPhone 17 Pro"
+        # Bootstrap reference recording; removed after reviewing the generated PNGs.
+        run: TEST_RUNNER_BEERMAIS_RECORD_SNAPSHOTS=1 ./scripts/run-tests.sh "iPhone 17 Pro"
 
       - name: Upload test results and logs
         if: always()
@@ -42,5 +43,14 @@ jobs:
         with:
           name: test-results
           path: ${{ env.BEERMAIS_TEST_RESULTS_DIR }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Upload visual snapshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-snapshots
+          path: BeerMaisTests/Snapshots/__Snapshots__/BeerVisualSnapshotTests
           if-no-files-found: warn
           retention-days: 14

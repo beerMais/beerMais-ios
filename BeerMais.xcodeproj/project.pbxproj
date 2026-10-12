@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BCE200000000000000000001 /* BeerVisualSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE200000000000000000002 /* BeerVisualSnapshotTests.swift */; };
 		BCE100000000000000000001 /* BeerPresentationSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE100000000000000000002 /* BeerPresentationSnapshotTests.swift */; };
 		58DCE9477ECD4D629765236D /* CentsPriceField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E463593BB3B344F8B9593032 /* CentsPriceField.swift */; };
 		F995F8CF5682461399D22EBB /* CentsPriceField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E463593BB3B344F8B9593032 /* CentsPriceField.swift */; };
@@ -220,6 +221,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BCE200000000000000000002 /* BeerVisualSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerVisualSnapshotTests.swift; sourceTree = "<group>"; };
 		BCE100000000000000000002 /* BeerPresentationSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerPresentationSnapshotTests.swift; sourceTree = "<group>"; };
 		E463593BB3B344F8B9593032 /* CentsPriceField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentsPriceField.swift; sourceTree = "<group>"; };
 		2D0B32132B0EDB3E002FA88C /* Beer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				BCE100000000000000000002 /* BeerPresentationSnapshotTests.swift */,
+				BCE200000000000000000002 /* BeerVisualSnapshotTests.swift */,
 			);
 			path = Snapshots;
 			sourceTree = "<group>";
@@ -1046,6 +1049,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCE100000000000000000001 /* BeerPresentationSnapshotTests.swift in Sources */,
+				BCE200000000000000000001 /* BeerVisualSnapshotTests.swift in Sources */,
 				2DF3A9E22B0AE00700DB6891 /* BeerDetailViewModelTests.swift in Sources */,
 				2DC015022E23524900B7BA9F /* BeerDetailView.swift in Sources */,
 				F995F8CF5682461399D22EBB /* CentsPriceField.swift in Sources */,
