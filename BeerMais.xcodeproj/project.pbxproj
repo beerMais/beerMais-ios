@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BCE100000000000000000001 /* BeerPresentationSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE100000000000000000002 /* BeerPresentationSnapshotTests.swift */; };
 		58DCE9477ECD4D629765236D /* CentsPriceField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E463593BB3B344F8B9593032 /* CentsPriceField.swift */; };
 		F995F8CF5682461399D22EBB /* CentsPriceField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E463593BB3B344F8B9593032 /* CentsPriceField.swift */; };
 		4F82F013A5554895A122C45B /* CentsPriceField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E463593BB3B344F8B9593032 /* CentsPriceField.swift */; };
@@ -219,6 +220,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BCE100000000000000000002 /* BeerPresentationSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerPresentationSnapshotTests.swift; sourceTree = "<group>"; };
 		E463593BB3B344F8B9593032 /* CentsPriceField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentsPriceField.swift; sourceTree = "<group>"; };
 		2D0B32132B0EDB3E002FA88C /* Beer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 		2D0B32192B0EDC83002FA88C /* CoreDataWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWorker.swift; sourceTree = "<group>"; };
@@ -354,6 +356,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BCE100000000000000000003 /* Snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				BCE100000000000000000002 /* BeerPresentationSnapshotTests.swift */,
+			);
+			path = Snapshots;
+			sourceTree = "<group>";
+		};
 		2D0B32102B0EDAFF002FA88C /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,6 +671,7 @@
 		87849E5E2820680700B6F61F /* BeerMaisTests */ = {
 			isa = PBXGroup;
 			children = (
+				BCE100000000000000000003 /* Snapshots */,
 				2D75575D2B4B759300497C51 /* Libraries */,
 				2DD666A82B24FB58004E6053 /* Domain */,
 				2D45ABFB2B0AF22000DB682B /* Entities */,
@@ -1034,6 +1045,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCE100000000000000000001 /* BeerPresentationSnapshotTests.swift in Sources */,
 				2DF3A9E22B0AE00700DB6891 /* BeerDetailViewModelTests.swift in Sources */,
 				2DC015022E23524900B7BA9F /* BeerDetailView.swift in Sources */,
 				F995F8CF5682461399D22EBB /* CentsPriceField.swift in Sources */,

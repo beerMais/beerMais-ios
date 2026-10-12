@@ -263,6 +263,53 @@ final class CoreDataBeerRepositoryTests: XCTestCase {
 }
 
 extension BeerWorkerTests {
+    func testRankingComparesUnitPriceAcrossDifferentPackageSizes() throws {
+        let small = Beer.mock()
+        small.value = 3
+        small.amount = 250
+        let medium = Beer.mock()
+        medium.value = 5
+        medium.amount = 500
+        let large = Beer.mock()
+        large.value = 9
+        large.amount = 1000
+
+        XCTAssertEqual(sut.orderBeers([small, large, medium]), [large, medium, small])
+        let result = try XCTUnwrap(sut.calculateMostValuableBeer(beers: [small, large, medium]))
+        XCTAssertEqual(result.0, large)
+        XCTAssertEqual(try XCTUnwrap(result.1), 1, accuracy: 0.00001)
+    }
+
+    func testNonPositiveVolumesRankAfterValidPackages() {
+        let valid = Beer.mock()
+        valid.value = 5
+        valid.amount = 500
+        let zero = Beer.mock()
+        zero.value = 0
+        zero.amount = 0
+        let negative = Beer.mock()
+        negative.value = 1
+        negative.amount = -350
+
+        XCTAssertEqual(sut.getValuePerML(beer: negative), .infinity)
+        let ranked = sut.orderBeers([zero, negative, valid])
+        XCTAssertEqual(ranked.first, valid)
+        XCTAssertEqual(Set(ranked.dropFirst()), Set([zero, negative]))
+    }
+
+    func testEqualUnitPricesOfferNoSavingsDespiteDifferentStickerPrices() throws {
+        let small = Beer.mock()
+        small.value = 2
+        small.amount = 250
+        let large = Beer.mock()
+        large.value = 8
+        large.amount = 1000
+
+        XCTAssertEqual(sut.calcEconomyBetweenBeers(beer1: small, beer2: large), 0)
+        let result = try XCTUnwrap(sut.calculateMostValuableBeer(beers: [large, small]))
+        XCTAssertEqual(try XCTUnwrap(result.1), 0)
+    }
+
     func testFailedMutationsDoNotPublishWidgetChanges() throws {
         let suite = "BeerWidgetFailureTests-\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
@@ -297,5 +344,63 @@ extension BeerWorkerTests {
         XCTAssertEqual(BeerDisplay.amount(1001), "1,001 L")
         XCTAssertEqual(BeerDisplay.amount(1500), "1,5 L")
         XCTAssertEqual(BeerDisplay.perLiter(2), "R$ 2,00/L")
+    }
+}
+
+final class BeerDataAndDisplayTests: XCTestCase {
+    func testPackageTypeChangesWhenEditingVolumeAcrossOneLiter() {
+        var data = BeerData(brand: "Custom", value: 7.5, amount: 999)
+        XCTAssertEqual(data.type, 1)
+        data.amount = 1000
+        XCTAssertEqual(data.type, 2)
+        data.amount = 1500
+        XCTAssertEqual(data.type, 2)
+        data.amount = 600
+        XCTAssertEqual(data.type, 1)
+        XCTAssertEqual(data.brand, "Custom")
+        XCTAssertEqual(data.value, 7.5)
+    }
+
+    func testInitialPackageTypeAtOneLiterBoundary() {
+        XCTAssertEqual(BeerData(value: 5, amount: 999).type, 1)
+        let liter = BeerData(value: 5, amount: 1000)
+        XCTAssertEqual(liter.type, 2)
+        XCTAssertNil(liter.brand)
+    }
+
+    func testCentsInputNormalizesPastedPricesAndLeadingZeros() {
+        let cases = [
+            ("", "0,00"), ("0", "0,00"), ("000", "0,00"),
+            ("5", "0,05"), ("50", "0,50"), ("00501", "5,01"),
+            ("1.234,56", "1234,56"), ("12.34", "12,34")
+        ]
+        for (input, expected) in cases {
+            XCTAssertEqual(BeerDisplay.centsInput(input), expected, "Input: \(input)")
+        }
+    }
+
+    func testCentsInputRejectsCurrencyWhitespaceAndNonASCIIDigits() {
+        for input in ["R$ 5,00", " 500", "500\n", "-500", "5a00", "٥٠٠", "５００"] {
+            XCTAssertNil(BeerDisplay.centsInput(input), "Input: \(input)")
+        }
+    }
+
+    func testVolumeFormattingPreservesCustomPrecisionAndMaximumVolume() {
+        let cases: [(Int16, String)] = [
+            (999, "999ml"), (1010, "1,01 L"), (1100, "1,1 L"),
+            (2000, "2 L"), (32767, "32,767 L")
+        ]
+        for (amount, expected) in cases {
+            XCTAssertEqual(BeerDisplay.amount(amount), expected)
+        }
+    }
+
+    func testPriceFormattingRoundsToCentsAndKeepsTrailingZeros() {
+        XCTAssertEqual(BeerDisplay.decimal(0), "0,00")
+        XCTAssertEqual(BeerDisplay.decimal(1.2), "1,20")
+        XCTAssertEqual(BeerDisplay.decimal(1.236), "1,24")
+        XCTAssertEqual(BeerDisplay.decimal(1.234), "1,23")
+        XCTAssertEqual(BeerDisplay.perLiter(0), "R$ 0,00/L")
+        XCTAssertEqual(BeerDisplay.perLiter(-1.25), "R$ -1,25/L")
     }
 }

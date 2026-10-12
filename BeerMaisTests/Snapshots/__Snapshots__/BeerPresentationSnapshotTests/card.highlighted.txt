@@ -1,0 +1,7 @@
+Highlighted card
+brand: Economy lager
+volume: 350ml
+price: R$ 1,75
+rate: R$ 1,75/L
+rank: none
+highlighted: true

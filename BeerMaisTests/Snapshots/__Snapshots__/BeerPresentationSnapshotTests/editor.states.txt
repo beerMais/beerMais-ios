@@ -1,0 +1,41 @@
+New drink
+brand: []
+price: 0,00
+volume: 269 ml
+preset: 269ml
+price per liter: unavailable
+
+Preset 269ml
+brand: []
+price: 0,00
+volume: 269 ml
+preset: 269ml
+price per liter: unavailable
+
+Preset 350ml
+brand: []
+price: 0,00
+volume: 350 ml
+preset: 350ml
+price per liter: unavailable
+
+Preset 473ml
+brand: []
+price: 0,00
+volume: 473 ml
+preset: 473ml
+price per liter: unavailable
+
+Preset 1L
+brand: []
+price: 0,00
+volume: 1000 ml
+preset: 1L
+price per liter: unavailable
+
+Custom volume
+brand: [Custom lager]
+price: 6,50
+volume: 1500 ml
+preset: custom
+price per liter: R$ 4,33/L
