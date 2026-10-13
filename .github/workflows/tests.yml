@@ -34,8 +34,7 @@ jobs:
           python3 scripts/prepare-ci-tests.py
 
       - name: Run all tests with coverage
-        # Bootstrap reference recording; removed after reviewing the generated PNGs.
-        run: TEST_RUNNER_BEERMAIS_RECORD_SNAPSHOTS=1 ./scripts/run-tests.sh "iPhone 17 Pro"
+        run: ./scripts/run-tests.sh "iPhone 17 Pro"
 
       - name: Upload test results and logs
         if: always()

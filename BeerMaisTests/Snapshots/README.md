@@ -61,3 +61,13 @@ the variable, and rerun comparison mode before committing. Missing references
 fail without automatically creating or accepting baselines in comparison mode.
 Editor screens, alerts, and full-screen navigation are not covered by these
 initial card snapshots.
+
+## Preview
+
+Normal card in dark appearance:
+
+![Ranked card](../../BeerMaisVisualTests/__Snapshots__/BeerVisualSnapshotTests/card.ranked-dark-standard.png)
+
+Highlighted card with accessibility text:
+
+![Highlighted accessibility card](../../BeerMaisVisualTests/__Snapshots__/BeerVisualSnapshotTests/card.highlighted-dark-accessibility.png)
