@@ -1,0 +1,55 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  full-suite:
+    name: Full test suite
+    runs-on: macos-15
+    timeout-minutes: 45
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+      BEERMAIS_DERIVED_DATA: ${{ github.workspace }}/.ci/DerivedData
+      BEERMAIS_TEST_RESULTS_DIR: ${{ github.workspace }}/.ci/test-results
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Prepare isolated test build
+        run: |
+          xcodebuild -version
+          # Test startup skips services. Build using an inert Firebase resource;
+          # no private configuration is needed or downloaded.
+          python3 scripts/prepare-ci-tests.py
+
+      - name: Run all tests with coverage
+        run: ./scripts/run-tests.sh "iPhone 17 Pro"
+
+      - name: Upload test results and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: ${{ env.BEERMAIS_TEST_RESULTS_DIR }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Upload visual snapshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-snapshots
+          path: BeerMaisVisualTests/__Snapshots__/BeerVisualSnapshotTests
+          if-no-files-found: warn
+          retention-days: 14

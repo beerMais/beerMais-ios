@@ -32,7 +32,7 @@ extension BeerView {
             default: "icons8-beer-can-100"
             }
             
-            return Image(imageName)
+            return Image(imageName, bundle: .beerMais)
         }
         
         let isHighlighted: Bool

@@ -7,6 +7,7 @@
 //
 
 import Combine
+import CoreData
 import XCTest
 import SwiftUI
 import UIKit
@@ -237,6 +238,51 @@ final class BeerDetailViewModelTests: XCTestCase {
 }
 
 final class HomeViewModelTests: XCTestCase {
+    func testInit_DoesNotLoadUntilReloadAndStartsWithoutHighlight() {
+        let worker = BeerWorkerSpy()
+        worker.formatBeerValueToShowReturn = "0,00"
+        let sut = HomeView.ViewModel(worker: worker)
+
+        XCTAssertTrue(sut.beers.isEmpty)
+        XCTAssertNil(sut.highlightedBeer)
+        XCTAssertNil(sut.economy)
+        XCTAssertNil(sut.highlightedBeerViewModel.beer)
+        XCTAssertTrue(worker.getBeersCalls.isEmpty)
+        XCTAssertTrue(worker.calculateMostValuableBeerCalls.isEmpty)
+    }
+
+    func testReload_WhenCollectionIsEmptiedThenRepopulated_RefreshesHighlight() {
+        let worker = BeerWorkerSpy()
+        worker.formatBeerValueToShowReturn = "0,00"
+        let beer = Beer.mock()
+        worker.getBeersReturn = [beer]
+        worker.calculateMostValuableBeerReturn = (beer, 2)
+        let sut = HomeView.ViewModel(worker: worker)
+        sut.reload()
+
+        worker.getBeersReturn = []
+        worker.calculateMostValuableBeerReturn = nil
+        sut.reload()
+
+        XCTAssertTrue(sut.beers.isEmpty)
+        XCTAssertNil(sut.highlightedBeer)
+        XCTAssertNil(sut.economy)
+        XCTAssertNil(sut.highlightedBeerViewModel.beer)
+        XCTAssertNil(sut.highlightedBeerViewModel.economy)
+
+        worker.getBeersReturn = [beer]
+        worker.calculateMostValuableBeerReturn = (beer, nil)
+        sut.reload()
+
+        XCTAssertEqual(sut.beers, [beer])
+        XCTAssertEqual(sut.highlightedBeer, beer)
+        XCTAssertEqual(sut.highlightedBeerViewModel.beer, beer)
+        XCTAssertNil(sut.economy)
+        XCTAssertNil(sut.highlightedBeerViewModel.economy)
+        XCTAssertEqual(worker.getBeersCalls.count, 3)
+        XCTAssertEqual(worker.calculateMostValuableBeerCalls.map(\.beers), [[beer], [], [beer]])
+    }
+
     func testReload_UpdatesAndClearsHighlightState() {
         let worker = BeerWorkerSpy()
         let firstBeer = Beer.mock()
@@ -262,6 +308,81 @@ final class HomeViewModelTests: XCTestCase {
 }
 
 final class BeerViewModelTests: XCTestCase {
+    func testReplacingBeer_RefreshesAllDisplayFieldsAndPreservesPosition() {
+        let repository = BeerRepositorySpy()
+        let first = Beer.mock()
+        first.brand = "First"
+        first.amount = 350
+        first.value = 7
+        let replacement = Beer.mock()
+        replacement.brand = "Replacement"
+        replacement.amount = 1000
+        replacement.value = 6
+        let sut = BeerView.ViewModel(beer: first, index: 0, worker: BeerWorker(repository: repository))
+
+        sut.beer = replacement
+
+        XCTAssertEqual(sut.brand, "Replacement")
+        XCTAssertEqual(sut.amount, "1 L")
+        XCTAssertEqual(sut.beerValue, "R$ 6,00")
+        XCTAssertEqual(sut.beerEconomyValue, "R$ 6,00/L")
+        XCTAssertEqual(sut.itemNumber, 1)
+
+        sut.beer = nil
+
+        XCTAssertEqual(sut.brand, "brand".localized)
+        XCTAssertEqual(sut.amount, "350ml")
+        XCTAssertEqual(sut.beerValue, "R$ 0,00")
+        XCTAssertEqual(sut.beerEconomyValue, "R$ 0,00/L")
+        XCTAssertEqual(sut.itemNumber, 1)
+    }
+
+    func testZeroVolumeOrPrice_DoesNotRequestDivisionFromWorker() {
+        let cases: [(Int16, Float)] = [(0, 5), (350, 0)]
+        for (amount, value) in cases {
+            let worker = BeerWorkerSpy()
+            worker.formatBeerValueToShowReturn = "0,00"
+            let beer = Beer.mock()
+            beer.amount = amount
+            beer.value = value
+
+            let sut = BeerView.ViewModel(beer: beer, worker: worker)
+
+            XCTAssertTrue(worker.getValuePerMLCalls.isEmpty)
+            XCTAssertEqual(worker.formatBeerValueToShowCalls.last?.value, 0)
+            XCTAssertEqual(sut.beerEconomyValue, "R$ 0,00/L")
+            XCTAssertNil(sut.itemNumber)
+        }
+    }
+
+    func testEconomyChanges_OnNormalBeer_DoNotOverwritePricePerLiter() {
+        let worker = BeerWorkerSpy()
+        worker.formatBeerValueToShowReturn = "7,00"
+        let beer = Beer.mock()
+        beer.amount = 1000
+        beer.value = 7
+        worker.getValuePerMLReturn = 0.007
+        let sut = BeerView.ViewModel(beer: beer, worker: worker)
+        let formattingCalls = worker.formatBeerValueToShowCalls.count
+
+        sut.economy = 99
+        sut.economy = nil
+
+        XCTAssertEqual(sut.beerEconomyValue, "R$ 7,00/L")
+        XCTAssertEqual(worker.formatBeerValueToShowCalls.count, formattingCalls)
+    }
+
+    func testHighlightedEconomy_WhenCleared_ResetsToZero() {
+        let worker = BeerWorker(repository: BeerRepositorySpy())
+        let sut = BeerView.ViewModel(isHighlighted: true, worker: worker)
+        sut.economy = 2.5
+        XCTAssertEqual(sut.beerEconomyValue, "R$ 2,50/L")
+
+        sut.economy = nil
+
+        XCTAssertEqual(sut.beerEconomyValue, "R$ 0,00/L")
+    }
+
     func testNormalBeer_FormatsBeerValuesAndPosition() {
         let worker = BeerWorkerSpy()
         worker.formatBeerValueToShowReturn = "5,00"
@@ -349,6 +470,78 @@ final class ConfigurationAndDonationTests: XCTestCase {
 }
 
 extension BeerDetailViewModelTests {
+    func testCreate_WhenBrandContainsSurroundingWhitespace_PersistsTrimmedBrand() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.brand = " \n Craft Lager \t"
+        sut.price = "5,50"
+        sut.size = "1"
+        workerSpy.createBeerReturn = Beer.mock()
+
+        sut.createOrSave()
+
+        XCTAssertEqual(workerSpy.createBeerCalls.count, 1)
+        XCTAssertEqual(workerSpy.createBeerCalls.first?.data.brand, "Craft Lager")
+        XCTAssertEqual(workerSpy.createBeerCalls.first?.data.amount, 1)
+        XCTAssertNil(sut.errorMessage)
+    }
+
+    func testCreate_WhenValidationErrorIsCorrected_ClearsErrorAndFinishes() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.price = "5,50"
+        var finishes = 0
+        sut.onFinish = { finishes += 1 }
+        sut.createOrSave()
+        XCTAssertEqual(sut.errorMessage, "beerBrandRequired".localized)
+
+        sut.brand = "Lager"
+        workerSpy.createBeerReturn = Beer.mock()
+        sut.createOrSave()
+
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertEqual(workerSpy.createBeerCalls.count, 1)
+        XCTAssertEqual(finishes, 1)
+    }
+
+    func testEdit_WhenFailedSaveIsRetriedSuccessfully_ClearsErrorAndFinishesOnce() {
+        let beer = Beer.mock()
+        beer.brand = "Lager"
+        beer.amount = 350
+        beer.value = 5
+        let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
+        var finishes = 0
+        sut.onFinish = { finishes += 1 }
+        workerSpy.editReturn = false
+        sut.createOrSave()
+        XCTAssertEqual(sut.errorMessage, "beerSaveFailed".localized)
+        XCTAssertEqual(finishes, 0)
+
+        workerSpy.editReturn = true
+        sut.createOrSave()
+
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertEqual(workerSpy.editCalls.count, 2)
+        XCTAssertEqual(finishes, 1)
+        XCTAssertTrue(workerSpy.createBeerCalls.isEmpty)
+    }
+
+    func testDelete_WhenFailedDeleteIsRetriedSuccessfully_ClearsErrorAndFinishesOnce() {
+        let beer = Beer.mock()
+        let sut = BeerDetailView.ViewModel(selectedBeer: beer, worker: workerSpy)
+        var finishes = 0
+        sut.onFinish = { finishes += 1 }
+        workerSpy.deleteReturn = false
+        sut.delete()
+        XCTAssertEqual(sut.errorMessage, "beerDeleteFailed".localized)
+        XCTAssertEqual(finishes, 0)
+
+        workerSpy.deleteReturn = true
+        sut.delete()
+
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertEqual(workerSpy.deleteCalls.count, 2)
+        XCTAssertEqual(finishes, 1)
+    }
+
     func testCustomVolumesSurviveOpeningAndSaving() {
         for amount: Int16 in [269, 350, 473, 600, 1000, 1500, 32767] {
             let beer = Beer.mock()
@@ -712,5 +905,108 @@ extension BeerDetailViewModelTests {
             within24Hours = $0["within_24_hours"] as? Bool
         }
         XCTAssertEqual(within24Hours, false)
+    }
+}
+
+
+extension BeerDetailViewModelTests {
+    func testValidationReportsFirstInvalidFieldAndClearsAfterCorrection() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.brand = " \n "
+        sut.price = "invalid"
+        sut.size = "0"
+        var finishes = 0
+        sut.onFinish = { finishes += 1 }
+
+        sut.createOrSave()
+        XCTAssertEqual(sut.errorMessage, "beerBrandRequired".localized)
+        sut.brand = "Lager"
+        sut.createOrSave()
+        XCTAssertEqual(sut.errorMessage, "beerPriceInvalid".localized)
+        sut.price = "6,00"
+        sut.createOrSave()
+        XCTAssertEqual(sut.errorMessage, "beerVolumeInvalid".localized)
+        XCTAssertTrue(workerSpy.createBeerCalls.isEmpty)
+        XCTAssertEqual(finishes, 0)
+
+        sut.size = "600"
+        workerSpy.createBeerReturn = Beer.mock()
+        sut.createOrSave()
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertEqual(workerSpy.createBeerCalls.count, 1)
+        XCTAssertEqual(finishes, 1)
+    }
+
+    func testPricePreviewRejectsOverflowAndRecoversWithValidPrice() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.size = "1"
+        // A finite price can still overflow when converted to a per-liter rate.
+        sut.price = "100000000000000000000000000000000000000"
+        XCTAssertNil(sut.pricePerLiter)
+        sut.price = "1,25"
+        XCTAssertEqual(sut.pricePerLiter, 1250)
+        sut.size = "32768"
+        XCTAssertNil(sut.pricePerLiter)
+        sut.size = "1000"
+        XCTAssertEqual(sut.pricePerLiter, 1.25)
+    }
+
+    func testPresetSelectionDoesNotDiscardCustomVolumeWhenCleared() {
+        let sut = BeerDetailView.ViewModel(selectedBeer: nil, worker: workerSpy)
+        sut.size = "1500"
+        XCTAssertNil(sut.sizeSelection)
+        sut.sizeSelection = nil
+        XCTAssertEqual(sut.size, "1500")
+        for segment in Segment.allCases {
+            sut.sizeSelection = segment
+            XCTAssertEqual(sut.size, String(segment.amount))
+            XCTAssertEqual(sut.sizeSelection, segment)
+        }
+    }
+
+    @MainActor
+    func testCreateEditAndDeleteRefreshComparisonAfterPersistenceCompletes() throws {
+        let controller = PersistenceController(inMemory: true, managedObjectModel: Beer.managedObjectModel)
+        let repository = CoreDataBeerRepository(persistenceController: controller)
+        let worker = BeerWorker(repository: repository, reloadWidget: {})
+        let home = HomeView.ViewModel(worker: worker)
+        let existing = try XCTUnwrap(repository.create(data: BeerData(brand: "Existing", value: 7, amount: 1000)))
+        home.reload()
+        XCTAssertEqual(home.beers, [existing])
+        XCTAssertNil(home.highlightedBeer)
+
+        let editor = BeerDetailView.ViewModel(selectedBeer: nil, worker: worker)
+        editor.brand = " New Lager "
+        editor.price = "6,00"
+        editor.size = "1000"
+        var finishes = 0
+        editor.onFinish = { finishes += 1; home.reload() }
+        editor.createOrSave()
+
+        let created = try XCTUnwrap(home.beers.first)
+        XCTAssertEqual(home.beers.count, 2)
+        XCTAssertEqual(created.brand, "New Lager")
+        XCTAssertEqual(home.highlightedBeer, created)
+        XCTAssertEqual(home.highlightedBeerViewModel.beerEconomyValue, "R$ 1,00/L")
+        XCTAssertEqual(finishes, 1)
+
+        let editing = BeerDetailView.ViewModel(selectedBeer: created, worker: worker)
+        editing.price = "10,00"
+        editing.onFinish = { finishes += 1; home.reload() }
+        editing.createOrSave()
+
+        XCTAssertEqual(home.beers.count, 2, "Editing must preserve the original object instead of creating a duplicate")
+        XCTAssertEqual(home.highlightedBeer, existing)
+        XCTAssertEqual(home.highlightedBeerViewModel.beerEconomyValue, "R$ 3,00/L")
+        XCTAssertEqual(finishes, 2)
+
+        editing.delete()
+
+        XCTAssertEqual(home.beers, [existing])
+        XCTAssertNil(home.highlightedBeer)
+        XCTAssertNil(home.economy)
+        XCTAssertNil(home.highlightedBeerViewModel.beer)
+        XCTAssertEqual(home.highlightedBeerViewModel.beerEconomyValue, "R$ 0,00/L")
+        XCTAssertEqual(finishes, 3)
     }
 }

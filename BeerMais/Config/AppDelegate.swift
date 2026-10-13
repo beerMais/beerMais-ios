@@ -18,10 +18,20 @@ import GoogleMobileAds
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private(set) var isFirstLaunch = false
 
+    static var isRunningTests: Bool {
+        #if DEBUG
+        return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+            || NSClassFromString("XCTestCase") != nil
+        #else
+        return false
+        #endif
+    }
+
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        guard !Self.isRunningTests else { return true }
         isFirstLaunch = AppP.launch()
         FirebaseApp.configure()
         MobileAds.shared.start()
