@@ -17,8 +17,8 @@ fi
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd -- "${SCRIPT_DIR}/.." && pwd)"
-export DEVELOPER_DIR="${DEVELOPER_DIR:-/Applications/Xcode.27.1.app/Contents/Developer}"
-SIMULATOR_TARGET="${1:-${DUO_ID:-4FFEA079-27DE-42D7-99CD-586544826EA2}}"
+export DEVELOPER_DIR="${DEVELOPER_DIR:-$(xcode-select -p)}"
+SIMULATOR_TARGET="${1:-${DUO_ID:-iPhone Duo}}"
 # Keep package checkouts out of /tmp, where cleanup can leave stale package state.
 DERIVED_DATA="${BEERMAIS_DERIVED_DATA:-${HOME}/Library/Developer/Xcode/DerivedData/BeerMais-Dev}"
 
@@ -56,6 +56,7 @@ xcodebuild \
     -project "${PROJECT_DIR}/BeerMais.xcodeproj" \
     -scheme "BeerMais Dev" \
     -configuration Debug \
+    -jobs 2 \
     -destination "platform=iOS Simulator,id=${SIMULATOR_ID}" \
     -derivedDataPath "${DERIVED_DATA}" \
     CODE_SIGNING_ALLOWED=NO \

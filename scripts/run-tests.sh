@@ -45,6 +45,7 @@ if xcodebuild test \
     -project "${PROJECT_DIR}/BeerMais.xcodeproj" \
     -scheme "BeerMais Dev" \
     -configuration Debug \
+    -jobs 2 \
     -destination "${DESTINATION}" \
     -derivedDataPath "${DERIVED_DATA}" \
     -resultBundlePath "${RESULT_BUNDLE}" \
