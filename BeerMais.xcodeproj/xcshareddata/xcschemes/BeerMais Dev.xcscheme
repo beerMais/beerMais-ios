@@ -23,16 +23,23 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      language = "pt-BR"
-      region = "BR"
-      codeCoverageEnabled = "YES"
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      language = "pt-BR"
+      region = "BR"
+      codeCoverageEnabled = "YES">
       <Testables>
-         <TestableReference skipped = "NO">
-            <BuildableReference BuildableIdentifier = "primary" BlueprintIdentifier = "BCE300000000000000000001" BuildableName = "BeerMaisVisualTests.xctest" BlueprintName = "BeerMaisVisualTests" ReferencedContainer = "container:BeerMais.xcodeproj"/>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BCE300000000000000000001"
+               BuildableName = "BeerMaisVisualTests.xctest"
+               BlueprintName = "BeerMaisVisualTests"
+               ReferencedContainer = "container:BeerMais.xcodeproj">
+            </BuildableReference>
          </TestableReference>
          <TestableReference
             skipped = "NO">

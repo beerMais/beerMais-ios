@@ -53,7 +53,7 @@ also attach reference/actual/difference images to the `.xcresult` bundle.
 For an intentional visual change on the reference runtime:
 
 ```sh
-TEST_RUNNER_BEERMAIS_RECORD_SNAPSHOTS=1 ./scripts/run-tests.sh
+BEERMAIS_SIMULATOR_OS=26.2 TEST_RUNNER_BEERMAIS_RECORD_SNAPSHOTS=1 ./scripts/run-tests.sh "iPhone 17 Pro"
 ```
 
 Recording deliberately fails the assertions. Review every changed PNG, unset

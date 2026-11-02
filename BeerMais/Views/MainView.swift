@@ -16,53 +16,27 @@ enum Tabs: Int {
 
 struct MainView: View {
     @Environment(\.appDependencies) private var dependencies
-    @State private var activeTab = Tabs.home.rawValue
-    @State private var isPresented = false
-    @State private var deleteIsPresented = false
+    @State private var activeTab = Tabs.home
     
     var body: some View {
         
-        if #available(iOS 18.0, *) {
-            ZStack(alignment: .bottomTrailing) {
-                let tabView = TabView(selection: $activeTab) {
-                    Tab("calculatorTab", image: "icons8-math-50", value: Tabs.home.rawValue) {
-                        HomeView(worker: dependencies.beerWorker)
-                    }
-                    Tab("aboutTab", image: "icons8-about-50", value: Tabs.about.rawValue) {
-                        AboutView()
-                    }
+        ZStack(alignment: .bottomTrailing) {
+            let tabView = TabView(selection: $activeTab) {
+                Tab("calculatorTab", image: "icons8-math-50", value: Tabs.home) {
+                    HomeView(worker: dependencies.beerWorker)
                 }
-                .tint(Color(UIColor(named: "primary")!))
-                
-                if #available(iOS 26.0, *) {
-                    tabView
-                        .tabBarMinimizeBehavior(.onScrollDown)
-                } else {
-                    tabView
+                Tab("aboutTab", image: "icons8-about-50", value: Tabs.about) {
+                    AboutView()
                 }
             }
-        } else {
-            TabView(selection: $activeTab) {
-                HomeView(worker: dependencies.beerWorker)
-                    .tabItem {
-                        Label {
-                            Text("calculatorTab")
-                        } icon: {
-                            Image("icons8-math-50").renderingMode(.template)
-                        }
-                    }
-                    .tag(Tabs.home.rawValue)
-                AboutView()
-                    .tabItem {
-                        Label {
-                            Text("aboutTab")
-                        } icon: {
-                            Image("icons8-about-50").renderingMode(.template)
-                        }
-                    }
-                    .tag(Tabs.about.rawValue)
+            .tint(Color("primary"))
+
+            if #available(iOS 26.0, *) {
+                tabView
+                    .tabBarMinimizeBehavior(.onScrollDown)
+            } else {
+                tabView
             }
-            .tint(Color(UIColor(named: "primary")!))
         }
     }
 }

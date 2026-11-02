@@ -4,6 +4,8 @@ Beer Mais — compare beer prices by cost per ml and find the best value.
 
 [App Store](https://apps.apple.com/br/app/beer-mais/id1450659497)
 
+Minimum supported OS for the next build: **iOS 18.0**, including the widget and App Clip.
+
 ## High-level targets
 
 The project has a main app, a widget extension, and an App Clip. The main app writes widget data to an App Group; the App Clip uses its own database and does not update the widget:

@@ -18,14 +18,14 @@ struct AboutView: View {
                         .frame(width: 50, height: 50)
                     Text("appName".localized)
                         .font(.title2.weight(.medium))
-                        .foregroundColor(Color(UIColor(named: "primary")!))
+                        .foregroundStyle(Color("primary"))
                 }
             
                 //MARK: - Description
             
                 Text("aboutDescription")
                     .font(.body)
-                    .tint(Color(UIColor(named: "primary")!))
+                    .tint(Color("primary"))
             
                 //MARK: - Donate
             

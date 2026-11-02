@@ -12,6 +12,7 @@ struct HomeView: View {
     @StateObject private var viewModel: ViewModel
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.scenePhase) private var scenePhase
+    @ScaledMetric(relativeTo: .subheadline) private var minimumCardWidth = 150
     
     @State private var isHomeVisible = false
     @State private var selectedBeer: Beer?
@@ -31,6 +32,7 @@ struct HomeView: View {
                                       : AnyLayout(VStackLayout(spacing: 16))
                     layout {
                         BeerView(viewModel: viewModel.highlightedBeerViewModel)
+                            .frame(maxWidth: wide ? 300 : 420)
                             .frame(maxWidth: wide ? 300 : .infinity)
                         VStack(spacing: 16) {
                             if viewModel.beers.isEmpty {
@@ -40,7 +42,7 @@ struct HomeView: View {
                             }
                             LazyVGrid(columns: dynamicTypeSize.isAccessibilitySize
                                       ? [GridItem(.flexible(), alignment: .top)]
-                                      : [GridItem(.adaptive(minimum: 172), spacing: 12, alignment: .top)], spacing: 12) {
+                                      : [GridItem(.adaptive(minimum: minimumCardWidth), spacing: 12, alignment: .top)], spacing: 12) {
                                 ForEach(Array(viewModel.beers.enumerated()), id: \.element) { index, beer in
                                     Button {
                                         selectedBeer = beer
@@ -79,14 +81,14 @@ struct HomeView: View {
                             .frame(width: 30, height: 30)
                         Text("appName".localized)
                             .font(.headline)
-                            .foregroundColor(Color(UIColor(named: "primary")!))
+                            .foregroundStyle(Color("primary"))
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("createNew", systemImage: "plus") {
                         isPresented = true
                     }
-                    .tint(Color(UIColor(named: "primary")!))
+                    .tint(Color("primary"))
                 }
             }
         }
@@ -109,20 +111,11 @@ struct HomeView: View {
                     .presentationDetents([.medium, .large])
             }
         )
-        .sheet(
-            isPresented: Binding(
-                get: { selectedBeer != nil },
-                set: { if !$0 { selectedBeer = nil } }
-            ),
-            onDismiss: {
-                viewModel.reload()
-            },
-            content: {
-                if let beer = selectedBeer {
-                    BeerDetailView(selectedBeer: beer, worker: viewModel.worker)
-                }
-            }
-        )
+        .sheet(item: $selectedBeer, onDismiss: {
+            viewModel.reload()
+        }) { beer in
+            BeerDetailView(selectedBeer: beer, worker: viewModel.worker)
+        }
         .onAppear {
             isHomeVisible = true
             viewModel.reload()

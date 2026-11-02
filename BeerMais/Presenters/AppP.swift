@@ -23,7 +23,7 @@ final class AppP {
     
     @MainActor public static let remoteConfig: RemoteConfigProtocol = RemoteConfig.remoteConfig()
     
-    @discardableResult static func launch() -> Bool {
+    @MainActor @discardableResult static func launch() -> Bool {
         let isFirstLaunch = !self.isFirstLaunch()
 
         if isFirstLaunch {
@@ -70,7 +70,7 @@ final class AppP {
         #endif
     }
     
-    static func incrementAppOpenedCount(defaults: UserDefaults = .standard) {
+    @MainActor static func incrementAppOpenedCount(defaults: UserDefaults = .standard) {
         guard var appOpenCount = defaults.value(forKey: self.APP_OPEN_COUNT) as? Int else {
             defaults.set(1, forKey: self.APP_OPEN_COUNT)
             return
@@ -80,7 +80,7 @@ final class AppP {
         self.checkAndAskForReview(defaults: defaults)
     }
     
-    static func checkAndAskForReview(defaults: UserDefaults = .standard) {
+    @MainActor static func checkAndAskForReview(defaults: UserDefaults = .standard) {
         guard let appOpenCount = defaults.value(forKey: self.APP_OPEN_COUNT) as? Int else {
             defaults.set(1, forKey: self.APP_OPEN_COUNT)
             return
@@ -175,9 +175,9 @@ final class AppP {
         ))
     }
     
-    func requestReview() {
+    @MainActor func requestReview() {
         if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-            SKStoreReviewController.requestReview(in: scene)
+            AppStore.requestReview(in: scene)
         }
     }
 }

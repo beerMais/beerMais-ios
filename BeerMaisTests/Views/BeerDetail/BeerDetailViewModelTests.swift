@@ -454,7 +454,7 @@ final class ConfigurationAndDonationTests: XCTestCase {
         XCTAssertNil(DonateType.getByProductId("unknown"))
     }
 
-    func testAppLaunchState_UsesProvidedDefaults() {
+    @MainActor func testAppLaunchState_UsesProvidedDefaults() {
         let suiteName = "AppPTests-\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         defer { UserDefaults().removePersistentDomain(forName: suiteName) }

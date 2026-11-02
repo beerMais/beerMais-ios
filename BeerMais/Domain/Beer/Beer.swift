@@ -10,7 +10,8 @@
 import Foundation
 import CoreData
 
-public final class Beer: NSManagedObject {
+public final class Beer: NSManagedObject, Identifiable {
+    public var id: NSManagedObjectID { objectID }
     
     static let entityName = "Beer"
     
