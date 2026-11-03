@@ -15,10 +15,10 @@ concurrency:
 jobs:
   full-suite:
     name: Full test suite
-    runs-on: macos-15
+    runs-on: xcode-27
     timeout-minutes: 45
     env:
-      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_27.1.app/Contents/Developer
       BEERMAIS_SIMULATOR_OS: '26.2'
       BEERMAIS_DERIVED_DATA: ${{ github.workspace }}/.ci/DerivedData
       BEERMAIS_TEST_RESULTS_DIR: ${{ github.workspace }}/.ci/test-results
@@ -33,6 +33,12 @@ jobs:
           # Test startup skips services. Build using an inert Firebase resource;
           # no private configuration is needed or downloaded.
           python3 scripts/prepare-ci-tests.py
+
+      - name: Install reference simulator runtime
+        run: |
+          # This runner reads project.xcproj; PNG references still require iOS 26.2.
+          xcodebuild -downloadPlatform iOS -buildVersion 26.2 -architectureVariant arm64
+          xcrun simctl create "iPhone 17 Pro" com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro com.apple.CoreSimulator.SimRuntime.iOS-26-2
 
       - name: Run all tests with coverage
         run: ./scripts/run-tests.sh "iPhone 17 Pro"

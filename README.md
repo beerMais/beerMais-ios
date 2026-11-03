@@ -6,6 +6,8 @@ Beer Mais — compare beer prices by cost per ml and find the best value.
 
 Minimum supported OS for the next build: **iOS 18.0**, including the widget and App Clip.
 
+Open `BeerMais.xcodeproj` with **Xcode 27 or later**. Its configuration uses the JSON `.xcproj` format; see [project format and rollback notes](docs/xcode-project-format.md).
+
 ## High-level targets
 
 The project has a main app, a widget extension, and an App Clip. The main app writes widget data to an App Group; the App Clip uses its own database and does not update the widget:
